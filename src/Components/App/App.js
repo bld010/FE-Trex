@@ -31,10 +31,15 @@ export default class App extends Component {
         </ScrollView>
   
         <View style={styles.footer}>
-
-          <Text style={styles.footerText}>Trips</Text>
-          <Text style={styles.footerText}>Safety</Text>
-          <Text style={styles.footerText}>Followers</Text>
+          <TouchableOpacity>
+            <Text style={styles.footerText}>Trips</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.footerText}>Safety</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.footerText}>Followers</Text>
+          </TouchableOpacity>
         </View>
         
       </View>
