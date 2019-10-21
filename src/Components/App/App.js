@@ -15,9 +15,9 @@ export default class App extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>COOLNAMEHERE</Text>
+        <Text style={styles.header}>Ariva</Text>
         <ScrollView>
-          <Text style={styles.text}>Welcome to Trex</Text>
+          <Text style={styles.text}>Welcome to Ariva</Text>
           
             <Text style={styles.text}>I am a ...</Text>
             <TouchableOpacity>
