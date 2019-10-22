@@ -27,7 +27,6 @@ export default class App extends Component {
               <Text style={styles.button}>Follower</Text>
             </TouchableOpacity>
 
-
         </ScrollView>
   
         <View style={styles.footer}>
