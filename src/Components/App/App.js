@@ -29,7 +29,7 @@ export default class App extends Component {
             <TouchableOpacity>
               <Text style={styles.button}>Follower</Text>
             </TouchableOpacity> */}
-            <Disclaimer />
+            <LegForm />
 
 
         </ScrollView>
