@@ -35,13 +35,15 @@ export default class TripForm extends Component {
       <Header />
 
         <ScrollView>
+
           <View>
-            <Text style={styles.header}>Add A New Trip</Text>
+            <Text style={styles.title}>Add A New Trip</Text>
           </View>
+
           <View style={styles.form}>
             <TextInput
               style={styles.input}
-              placeholder="Trip Name"
+              placeholder='Trip Name'
               onChangeText={(name) => this.setState({name})}
               value={this.state.name}
             />
@@ -49,30 +51,35 @@ export default class TripForm extends Component {
           <View style={styles.form}>
             <TextInput
               style={styles.input}
-              placeholder="Departure Date"
+              placeholder='Departure Date'
               onChangeText={(departureDate) => this.setState({departureDate})}
               value={this.state.departureDate}
+              keyboardType='phone-pad'
+
             />
           </View>
           <View style={styles.form}>
             <TextInput
               style={styles.input}
-              placeholder="Return Date"
+              placeholder='Return Date'
               onChangeText={(returnDate) => this.setState({returnDate})}
               value={this.state.returnDate}
+              keyboardType='phone-pad'
             />    
           </View>
-          <View style={styles.header}>
+
+          <View style={styles.container}>
             <TouchableOpacity>
-              <Text style={styles.button}>Add A Leg + </Text>
+              <Text style={styles.addLegButton}>Add A Leg + </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.footer}>
+
+          <View style={styles.container}>
             <TouchableOpacity>
-               <Text style={styles.footerText}>Cancel</Text>
+               <Text style={styles.button}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity>
-              <Text style={styles.footerText}>Save</Text>
+              <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
           </View>
 
@@ -86,44 +93,37 @@ export default class TripForm extends Component {
 
 const styles = StyleSheet.create({
   form: {
-    height: 60,
-    backgroundColor: '#ffffff',
-  },
-  input: {
     height: 40,
+    width: 350,
     backgroundColor: '#ffffff',
+    padding: 10,
+    margin: 10,
   },
   container: {
     flex: 1,
     backgroundColor: '#000000',
     alignItems: 'stretch',
     justifyContent: 'flex-start'
-    
   }, 
-  text: {
-    color: 'white',
-    marginVertical: 40,
+  title: {
     textAlign: 'center',
     fontSize: 30,
-    width: 'auto'
-  },
-  header: {
-    backgroundColor: '#1C4263',
     color: 'white',
-    paddingTop: 60,
-    paddingLeft: 10,
-    // height: 'auto',,
+    paddingVertical: 10
+  },
+  text: {
+    color: 'white',
     textAlign: 'center',
-    top: 0,
-    fontSize: 50,
-  }, 
+    paddingVertical: 10,
+    fontSize: 20
+  },
   button: {
     borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: 'solid',
-    width: 'auto',
-    height: 60,
+    width: 200,
+    height: 'auto',
     margin: 20,
     fontSize: 30,
     padding: 10,
@@ -131,15 +131,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#1C4263'
   },
-  footer: {
+
+  saveTripButton: {
     backgroundColor: '#1C4263',
-    flexDirection: 'row',
-    padding: 30,
-    justifyContent: 'space-around'
-  }, 
-  footerText: {
+    borderWidth: 1,
+    borderColor: 'white', 
     color: 'white',
-    marginBottom: 20,
-    fontSize: 20
+    borderRadius: 8
+  }, 
+  addLegButton: {
+    backgroundColor: '#1C4263',
+    borderWidth: 1,
+    borderColor: 'white', 
+    color: 'white',
+    borderRadius: 8
   }
 });
+

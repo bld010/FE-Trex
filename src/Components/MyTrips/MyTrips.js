@@ -20,12 +20,13 @@ export default class MyTrips extends Component {
       {name: 'Southeast Asia'}
     ]
   }
-
+  
   generateTripsElements = (list) => {
+    const {navigate} = this.props.navigation;
     return list.map(trip => {
       return (
       <TouchableOpacity style={styles.tripButton}>
-        <Text style={styles.text} key={trip.name}>{trip.name}</Text>
+        <Text onPress={() => navigate('Trip')} style={styles.text} key={trip.name}>{trip.name}</Text>
       </TouchableOpacity>
       )
     })
@@ -36,7 +37,7 @@ export default class MyTrips extends Component {
   
   render() {
     const {navigate} = this.props.navigation;
-    
+
     this.tripsElements = this.generateTripsElements(this.tripsList)
 
     return(

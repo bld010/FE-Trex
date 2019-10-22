@@ -6,11 +6,19 @@ import {
   ScrollView,
   TouchableOpacity 
 } from 'react-native';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+
 
 export default class Trip extends Component {
 
-render() {
+  render() {
+    const {navigate} = this.props.navigation;
     return (
+      <View style={styles.container}>
+
+      <Header />
+
         <ScrollView>
           <Text style={styles.text}>South America</Text>
           <TouchableOpacity>
@@ -40,6 +48,9 @@ render() {
             <Text style={styles.footerText}>All of the Lodging Details</Text>
           </View>
         </ScrollView>
+
+        <Footer navigate={navigate} />
+        </View>
     );
   }
 }
