@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Dashboard from '../Dashboard/Dashboard'
+import LegForm from '../LegForm/LegForm'
+import Disclaimer from '../Disclaimer/Disclaimer'
 import { 
   StyleSheet, 
   Text, 
@@ -17,15 +20,16 @@ export default class App extends Component {
       <View style={styles.container}>
         <Text style={styles.header}>Ariva</Text>
         <ScrollView>
-          <Text style={styles.text}>Welcome to Ariva</Text>
+          {/* <Text style={styles.text}>Welcome to Ariva</Text> */}
           
-            <Text style={styles.text}>I am a ...</Text>
+            {/* <Text style={styles.text}>I am a ...</Text>
             <TouchableOpacity>
               <Text style={styles.button}>Wanderer</Text>
             </TouchableOpacity>
             <TouchableOpacity>
               <Text style={styles.button}>Follower</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <Disclaimer />
 
 
         </ScrollView>

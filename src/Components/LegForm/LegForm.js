@@ -4,7 +4,8 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from "react-native";
 
 export default class LegForm extends Component {
@@ -14,9 +15,31 @@ export default class LegForm extends Component {
   }
   render() {
     return (
-      <View>
-      <Text>hello</Text>
-      </View>
+        <ScrollView>
+  <View style={styles.inputContainer}>
+    <TextInput
+      style={styles.textInput}
+      placeholder="Your name"
+      maxLength={20}
+    />
+  </View>
+</ScrollView>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  inputContainer: {
+    backgroundColor: 'white',
+    marginTop: 15
+  },
+  textInput: {
+    borderColor: '#CCCCCC',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    height: 50,
+    fontSize: 25,
+    paddingLeft: 20,
+    paddingRight: 20
+  }
+});
