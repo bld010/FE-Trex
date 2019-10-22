@@ -1,4 +1,10 @@
-//header - Add A Trip
+//header button - back
+//header button - link - logo
+//header button - logo 
+
+
+
+//text - Add A Trip
 
 //label - Name
 //input - Name
@@ -18,3 +24,4 @@
 //conditional rendering
 //if (trip has a leg)
 //Text - Leg Name
+//button - leg name
