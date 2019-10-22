@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Map from '../Map/Map'
 import { 
   StyleSheet, 
   Text, 
@@ -10,7 +11,7 @@ import { 
 export default class Dashboard extends Component {
   render() {
     return (
-      <Text style={styles.text}>Hey</Text>
+      <Map />
     )
   }
 }
