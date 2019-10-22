@@ -6,27 +6,67 @@ import {
   ScrollView,
   TouchableOpacity 
 } from 'react-native';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 
 export default class MyTrips extends Component {
 
+  constructor(props) {
+    super(props)
+    this.tripsElements = [],
+    this.tripsList = [
+      {name: 'South America'},
+      {name: 'Madagascar'},
+      {name: 'Southeast Asia'}
+    ]
+  }
 
-//conditionally rendering 
-//if(trips exist)
-//link - Trip Name
-//text - Trip Name
+  generateTripsElements = (list) => {
+    return list.map(trip => {
+      return (
+      <TouchableOpacity style={styles.tripButton}>
+        <Text style={styles.text} key={trip.name}>{trip.name}</Text>
+      </TouchableOpacity>
+      )
+    })
+  }
 
-render() {
-    return (
+  componentDidMount = () => {
+  }
+  
+  render() {
+    const {navigate} = this.props.navigation;
+    
+    this.tripsElements = this.generateTripsElements(this.tripsList)
+
+    return(
+      
+      <View style={styles.container}>
+
+        <Header />
+
         <ScrollView>
-          <TouchableOpacity>
-            <Text style={styles.button}>Add A Trip + </Text>
+          <Text style={styles.title}>My Trips</Text>
+          <View>
+            {this.tripsElements.length > 0 && this.tripsElements}
+          </View>
+          <TouchableOpacity style={styles.addTripButton}>
+            <Text style={styles.text}>Add a New Trip</Text>
           </TouchableOpacity>
         </ScrollView>
-    );
+  
+        <Footer navigate={navigate} />
+        
+    </View>
+
+    )
   }
 }
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 30
+  }, 
   container: {
     flex: 1,
     backgroundColor: '#000000',
@@ -36,44 +76,27 @@ const styles = StyleSheet.create({
   }, 
   text: {
     color: 'white',
-    marginVertical: 40,
     textAlign: 'center',
-    fontSize: 30,
-    width: 'auto'
-  },
-  header: {
-    backgroundColor: '#1C4263',
-    color: 'white',
-    paddingTop: 60,
-    paddingLeft: 10,
-    // height: 'auto',,
-    textAlign: 'center',
-    top: 0,
-    fontSize: 50,
-  }, 
-  button: {
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 8,
-    borderStyle: 'solid',
-    width: 'auto',
-    height: 60,
-    margin: 20,
-    fontSize: 30,
-    padding: 10,
-    color: 'white',
-    textAlign: 'center',
-    backgroundColor: '#1C4263'
-  },
-  footer: {
-    backgroundColor: '#1C4263',
-    flexDirection: 'row',
-    padding: 30,
-    justifyContent: 'space-around'
-  }, 
-  footerText: {
-    color: 'white',
-    marginBottom: 20,
+    paddingVertical: 10,
     fontSize: 20
+  },
+  title: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'white',
+    paddingVertical: 10
+  },
+  tripButton: {
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8,
+    marginVertical: 10
+  },
+  addTripButton: {
+    backgroundColor: '#1C4263',
+    borderWidth: 1,
+    borderColor: 'white', 
+    color: 'white',
+    borderRadius: 8
   }
-});
+})
