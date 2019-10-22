@@ -7,9 +7,11 @@ import {
   TextInput,
   TouchableOpacity 
 } from 'react-native';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 
 export default class TripForm extends Component {
-  constructor() {
+  constructor(props) {
     super()
     this.state = {
       name: '',
@@ -18,14 +20,20 @@ export default class TripForm extends Component {
     }
   }
 
-
-//conditional rendering
-//if (trip has a leg)
-//Text - Leg Name
-//button - leg name
-
+  
+  
+  //conditional rendering
+  //if (trip has a leg)
+  //Text - Leg Name
+  //button - leg name
+  
   render() {
+    const {navigate} = this.props.navigation;
     return (
+      <View style={styles.container}>
+
+      <Header />
+
         <ScrollView>
           <View>
             <Text style={styles.header}>Add A New Trip</Text>
@@ -68,7 +76,9 @@ export default class TripForm extends Component {
             </TouchableOpacity>
           </View>
 
-        </ScrollView>
+        </ScrollView>        
+        <Footer navigate={navigate} />
+      </View>
     );
   }
 }

@@ -51,11 +51,12 @@ export default class MyTrips extends Component {
             {this.tripsElements.length > 0 && this.tripsElements}
           </View>
           <TouchableOpacity style={styles.addTripButton}>
-            <Text style={styles.text}>Add a New Trip</Text>
+            <Text style={styles.text} onPress={() => navigate('TripForm')}>Add a New Trip</Text>
           </TouchableOpacity>
         </ScrollView>
   
         <Footer navigate={navigate} />
+
         
     </View>
 
