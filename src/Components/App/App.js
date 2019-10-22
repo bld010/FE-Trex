@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import MyTrips from '../MyTrips/MyTrips';
+import Trip from '../Trip/Trip';
+import TripForm from '../TripForm/TripForm'
 import { 
   StyleSheet, 
   Text, 
@@ -17,16 +20,15 @@ export default class App extends Component {
       <View style={styles.container}>
         <Text style={styles.header}>Ariva</Text>
         <ScrollView>
-          <Text style={styles.text}>Welcome to Ariva</Text>
-          
-            <Text style={styles.text}>I am a ...</Text>
-            <TouchableOpacity>
-              <Text style={styles.button}>Wanderer</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.button}>Follower</Text>
-            </TouchableOpacity>
-
+          {/* <Text style={styles.text}>Welcome to Ariva</Text>
+          <Text style={styles.text}>I am a ...</Text>
+          <TouchableOpacity>
+            <Text style={styles.button}>Wanderer</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.button}>Follower</Text>
+          </TouchableOpacity> */}
+          <TripForm/>
         </ScrollView>
   
         <View style={styles.footer}>
@@ -42,9 +44,8 @@ export default class App extends Component {
         </View>
         
       </View>
-    );
-
-    }
+    )
+  }
 }
 
 const styles = StyleSheet.create({
