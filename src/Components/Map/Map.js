@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderStyle: 'solid',
     color: 'white',
-    height: 500,
-    marginVertical: 160,
+    height: 400,
+    marginVertical: 10,
     textAlign: 'center',
     fontSize: 20,
     width: 'auto'

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Map from '../Map/Map'
+import Weather from '../Weather/Weather'
 import { 
   StyleSheet, 
   Text, 
@@ -11,7 +12,15 @@ import { 
 export default class Dashboard extends Component {
   render() {
     return (
-      <Map />
+  <ScrollView>
+  <View>
+    <Weather />
+  </View>
+  <View>
+    <Map />
+  </View>
+  </ScrollView>
+      
     )
   }
 }
