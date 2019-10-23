@@ -20,12 +20,13 @@ export default class MyTrips extends Component {
       {name: 'Southeast Asia'}
     ]
   }
-
+  
   generateTripsElements = (list) => {
+    const {navigate} = this.props.navigation;
     return list.map(trip => {
       return (
       <TouchableOpacity style={styles.tripButton}>
-        <Text style={styles.text} key={trip.name}>{trip.name}</Text>
+        <Text onPress={() => navigate('Trip')} style={styles.text} key={trip.name}>{trip.name}</Text>
       </TouchableOpacity>
       )
     })
@@ -36,7 +37,7 @@ export default class MyTrips extends Component {
   
   render() {
     const {navigate} = this.props.navigation;
-    
+
     this.tripsElements = this.generateTripsElements(this.tripsList)
 
     return(
@@ -51,11 +52,12 @@ export default class MyTrips extends Component {
             {this.tripsElements.length > 0 && this.tripsElements}
           </View>
           <TouchableOpacity style={styles.addTripButton}>
-            <Text style={styles.text}>Add a New Trip</Text>
+            <Text style={styles.text} onPress={() => navigate('TripForm')}>Add a New Trip</Text>
           </TouchableOpacity>
         </ScrollView>
   
         <Footer navigate={navigate} />
+
         
     </View>
 
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'white', 
     color: 'white',
-    borderRadius: 8
+    borderRadius: 8,
+    backgroundColor: '#1C4263'
   }
 })
