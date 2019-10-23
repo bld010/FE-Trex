@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 import {
   StyleSheet,
   Text,
@@ -9,8 +11,8 @@ import {
 } from "react-native";
 
 export default class LegForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       startLegDest: '',
       endLegDest: '',
@@ -24,7 +26,10 @@ export default class LegForm extends Component {
   }
 
   render() {
+    const {navigate} = props.navigation;
     return (
+      <View>
+        <Header />
       <ScrollView>
         <View style={styles.inputContainer}>
           <TextInput
@@ -73,6 +78,8 @@ export default class LegForm extends Component {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <Footer navigate={navigate} />
+      </View>
     );
   }
 }
