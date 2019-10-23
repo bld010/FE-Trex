@@ -10,8 +10,7 @@ const RootStack = createStackNavigator({
   MyTrips: { screen: MyTrips},
   TripForm: {screen: TripForm},
   Trip: {screen: Trip}
+
 })
 
-const App = createAppContainer(RootStack)
-
-export default App;
+export default createAppContainer(RootStack)

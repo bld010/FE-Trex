@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer'
 
 export default class Home extends Component {
 
@@ -35,20 +36,7 @@ export default class Home extends Component {
 
         </ScrollView>
   
-        <View style={styles.footer}>
-          <TouchableOpacity
-          
-          onPress={() => navigate('MyTrips')}
-          >
-            <Text style={styles.footerText}>Trips</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.footerText}>Safety</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.footerText}>Followers</Text>
-          </TouchableOpacity>
-        </View>
+       <Footer navigate={navigate} />
         
     </View>
     )
