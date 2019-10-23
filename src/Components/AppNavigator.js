@@ -4,7 +4,7 @@ import Home from './Home/Home';
 import MyTrips from './MyTrips/MyTrips';
 import TripForm from './TripForm/TripForm';
 import Trip from './Trip/Trip';
-import { LegForm } from './LegForm/LegForm';
+import  LegForm  from './LegForm/LegForm';
 import { MyFollowers } from './MyFollowers/MyFollowers';
 import FollowerForm from './FollowerForm/FollowerForm'
 import { SafetyInfo } from './SafetyInfo/SafetyInfo'

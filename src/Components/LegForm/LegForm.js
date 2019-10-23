@@ -1,41 +1,69 @@
 import React, { Component } from "react";
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 import {
   StyleSheet,
   Text,
   View,
   ScrollView,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  Keyboard
 } from "react-native";
 
 export default class LegForm extends Component {
-  constructor() {
-    super();
-    this.state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      startLegDest: '',
+      endLegDest: '',
+      startLegDate: '',
+      endLegDate: ''
+    };
   }
+
+  handleInputs = () => {
+    this.setState({ [e.target.name] : e.target.value })
+  }
+
   render() {
+    const {navigate} = this.props.navigation;
     return (
+      <View>
+        <Header />
       <ScrollView>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.textInput}
             placeholder="Start Destination"
             maxLength={20}
+            onBlur={Keyboard.dismiss}
+            value={this.state.startLegDest}
+            onChange={this.handleInputs}
           />
           <TextInput
             style={styles.textInput}
             placeholder="End Destination"
             maxLength={20}
+            onBlur={Keyboard.dismiss}
+            value={this.state.endLegDest}
+            onChange={this.handleInputs}
           />
           <TextInput
             style={styles.textInput}
             placeholder="Start Date"
             maxLength={20}
+            onBlur={Keyboard.dismiss}
+            value={this.state.startLegDate}
+            onChange={this.handleInputs}
           />
           <TextInput
             style={styles.textInput}
             placeholder="End Date"
             maxLength={20}
+            onBlur={Keyboard.dismiss}
+            value={this.state.endLegDate}
+            onChange={this.handleInputs}
           />
           <TouchableOpacity>
             <Text style={styles.button}>Add Transportation</Text>
@@ -51,6 +79,8 @@ export default class LegForm extends Component {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <Footer navigate={navigate} />
+      </View>
     );
   }
 }
