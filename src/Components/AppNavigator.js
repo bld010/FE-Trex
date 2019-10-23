@@ -8,6 +8,8 @@ import  LegForm  from './LegForm/LegForm';
 import { MyFollowers } from './MyFollowers/MyFollowers';
 import FollowerForm from './FollowerForm/FollowerForm'
 import { SafetyInfo } from './SafetyInfo/SafetyInfo'
+import AddLodgingInfo from './AddLodgingInfo/AddLodgingInfo'
+import AddTransportInfo from './AddTransportInfo/AddTransportInfo'
 
 const RootStack = createStackNavigator({
   Home: { screen: Home },
@@ -17,7 +19,9 @@ const RootStack = createStackNavigator({
   LegForm: {screen: LegForm},
   MyFollowers: {screen: MyFollowers},
   FollowerForm: {screen: FollowerForm},
-  SafetyInfo: {screen: SafetyInfo}
+  SafetyInfo: {screen: SafetyInfo},
+  AddLodgingInfo: {screen: AddLodgingInfo},
+  AddTransportInfo: {screen: AddTransportInfo}
 })
 
 export default createAppContainer(RootStack)

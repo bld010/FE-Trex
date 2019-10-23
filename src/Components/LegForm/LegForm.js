@@ -29,7 +29,7 @@ export default class LegForm extends Component {
   render() {
     const {navigate} = this.props.navigation;
     return (
-      <View>
+      <View style={styles.container}>
         <Header />
       <ScrollView>
         <View style={styles.inputContainer}>
@@ -66,10 +66,10 @@ export default class LegForm extends Component {
             onChange={this.handleInputs}
           />
           <TouchableOpacity>
-            <Text style={styles.button}>Add Transportation</Text>
+            <Text style={styles.button} onPress={() => navigate('AddTransportInfo')}>Add Transportation</Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.button}>Add Lodging</Text>
+            <Text style={styles.button} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text style={styles.button}>Edit</Text>
@@ -86,6 +86,12 @@ export default class LegForm extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000000',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start'
+  },
   inputContainer: {
     marginTop: 15
   },
