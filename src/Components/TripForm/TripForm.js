@@ -1,0 +1,162 @@
+import React, { Component } from 'react';
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  ScrollView,
+  TextInput,
+  TouchableOpacity 
+} from 'react-native';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+
+export default class TripForm extends Component {
+  constructor(props) {
+    super()
+    this.state = {
+      name: '',
+      departureDate: '',
+      returnDate: ''
+    }
+  }
+
+  
+  
+  //conditional rendering
+  //if (trip has a leg)
+  //Text - Leg Name
+  //button - leg name
+  
+  render() {
+    const {navigate} = this.props.navigation;
+    return (
+      <View style={styles.container}>
+
+      <Header />
+
+        <ScrollView>
+
+          <View>
+            <Text style={styles.title}>Add A New Trip</Text>
+          </View>
+
+          <View style={styles.form}>
+            <TextInput
+              style={styles.input}
+              placeholder='Trip Name'
+              onChangeText={(name) => this.setState({name})}
+              value={this.state.name}
+            />
+          </View>
+          <View style={styles.form}>
+            <TextInput
+              style={styles.input}
+              placeholder='Departure Date'
+              onChangeText={(departureDate) => this.setState({departureDate})}
+              value={this.state.departureDate}
+              keyboardType='phone-pad'
+
+            />
+          </View>
+          <View style={styles.form}>
+            <TextInput
+              style={styles.input}
+              placeholder='Return Date'
+              onChangeText={(returnDate) => this.setState({returnDate})}
+              value={this.state.returnDate}
+              keyboardType='phone-pad'
+            />    
+          </View>
+
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.button}>
+              <Text onPress={() => navigate('LegForm')} style={styles.text}>Add A Leg + </Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.sideBySideContainer}>
+            <TouchableOpacity style={styles.sideBySideButton}>
+               <Text style={styles.text}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.sideBySideButton}>
+              <Text style={styles.text}>Save</Text>
+            </TouchableOpacity>
+          </View>
+
+        </ScrollView>        
+        <Footer navigate={navigate} />
+      </View>
+    );
+  }
+}
+
+
+const styles = StyleSheet.create({
+  
+  title: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'white',
+    paddingVertical: 10
+  },
+  input: {
+    borderRadius: 8,
+  },
+  form: {
+    height: 40,
+    width: 350,
+    backgroundColor: '#ffffff',
+    padding: 10,
+    margin: 10,
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 20,
+    color: 'white',
+    paddingVertical: 10,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#000000',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start'
+  }, 
+  sideBySideContainer: {
+    flex: 1,
+    backgroundColor: '#000000',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+    // justifyContent: 'flex-start'
+  },
+  button: {
+    borderColor: '#768DA1',
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: 'solid',
+    width: 'auto',
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: 'white',
+    textAlign: 'center',
+    backgroundColor: '#1C4263',
+    alignItems: 'stretch'
+  },
+  sideBySideButton: {
+    width: 170,
+    borderColor: '#768DA1',
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: 'solid',
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: 'white',
+    textAlign: 'center',
+    backgroundColor: '#1C4263',
+    alignItems: 'stretch'
+  }
+});
+
