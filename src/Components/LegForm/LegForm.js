@@ -7,7 +7,8 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  Keyboard
 } from "react-native";
 
 export default class LegForm extends Component {
@@ -26,7 +27,7 @@ export default class LegForm extends Component {
   }
 
   render() {
-    const {navigate} = props.navigation;
+    const {navigate} = this.props.navigation;
     return (
       <View>
         <Header />
