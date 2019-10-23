@@ -23,12 +23,17 @@ export default class Footer extends Component {
             >
               <Text style={styles.footerText}>Trips</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+            onPress={() => this.props.navigate('SafetyInfo')}
+            >
               <Text style={styles.footerText}>Safety</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+            
+            onPress={() => this.props.navigate('MyFollowers')}>
               <Text style={styles.footerText}>Followers</Text>
             </TouchableOpacity>
+
           </View>
     )
   }

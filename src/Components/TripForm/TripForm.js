@@ -70,7 +70,7 @@ export default class TripForm extends Component {
 
           <View style={styles.container}>
             <TouchableOpacity style={styles.button}>
-              <Text style={styles.text}>Add A Leg + </Text>
+              <Text onPress={() => navigate('LegForm')} style={styles.text}>Add A Leg + </Text>
             </TouchableOpacity>
           </View>
 
