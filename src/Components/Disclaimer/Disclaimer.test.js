@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { LegForm } from './LegForm';
+import { Disclaimer } from './Disclaimer';
 
-describe('LegForm', () => {
+describe('Disclaimer', () => {
   it('should return true', () => {
     expect(true).toEqual(true)
   })
