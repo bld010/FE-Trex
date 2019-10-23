@@ -69,17 +69,17 @@ export default class TripForm extends Component {
           </View>
 
           <View style={styles.container}>
-            <TouchableOpacity>
-              <Text style={styles.addLegButton}>Add A Leg + </Text>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.text}>Add A Leg + </Text>
             </TouchableOpacity>
           </View>
 
-          <View style={styles.container}>
-            <TouchableOpacity>
-               <Text style={styles.button}>Cancel</Text>
+          <View style={styles.sideBySideContainer}>
+            <TouchableOpacity style={styles.sideBySideButton}>
+               <Text style={styles.text}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.button}>Save</Text>
+            <TouchableOpacity style={styles.sideBySideButton}>
+              <Text style={styles.text}>Save</Text>
             </TouchableOpacity>
           </View>
 
@@ -92,6 +92,16 @@ export default class TripForm extends Component {
 
 
 const styles = StyleSheet.create({
+  
+  title: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'white',
+    paddingVertical: 10
+  },
+  input: {
+    borderRadius: 8,
+  },
   form: {
     height: 40,
     width: 350,
@@ -99,52 +109,54 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
   },
+  text: {
+    textAlign: 'center',
+    fontSize: 20,
+    color: 'white',
+    paddingVertical: 10,
+  },
   container: {
     flex: 1,
     backgroundColor: '#000000',
     alignItems: 'stretch',
     justifyContent: 'flex-start'
   }, 
-  title: {
-    textAlign: 'center',
-    fontSize: 30,
-    color: 'white',
-    paddingVertical: 10
-  },
-  text: {
-    color: 'white',
-    textAlign: 'center',
-    paddingVertical: 10,
-    fontSize: 20
+  sideBySideContainer: {
+    flex: 1,
+    backgroundColor: '#000000',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+    // justifyContent: 'flex-start'
   },
   button: {
-    borderColor: 'white',
+    borderColor: '#768DA1',
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: 'solid',
-    width: 200,
-    height: 'auto',
+    width: 'auto',
+    height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
     color: 'white',
     textAlign: 'center',
-    backgroundColor: '#1C4263'
+    backgroundColor: '#1C4263',
+    alignItems: 'stretch'
   },
-
-  saveTripButton: {
-    backgroundColor: '#1C4263',
+  sideBySideButton: {
+    width: 170,
+    borderColor: '#768DA1',
     borderWidth: 1,
-    borderColor: 'white', 
+    borderRadius: 8,
+    borderStyle: 'solid',
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
     color: 'white',
-    borderRadius: 8
-  }, 
-  addLegButton: {
+    textAlign: 'center',
     backgroundColor: '#1C4263',
-    borderWidth: 1,
-    borderColor: 'white', 
-    color: 'white',
-    borderRadius: 8
+    alignItems: 'stretch'
   }
 });
 
