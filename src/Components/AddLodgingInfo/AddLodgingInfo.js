@@ -4,7 +4,8 @@ import { 
     Text, 
     View, 
     ScrollView,
-    TouchableOpacity 
+    TouchableOpacity,
+    Keyboard 
   } from 'react-native';
 
 export default class AddLodgingInfo extends Component {
