@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 import { 
     StyleSheet, 
     Text, 
     View, 
     ScrollView,
     TouchableOpacity,
-    Keyboard 
+    Keyboard,
+    TextInput 
   } from 'react-native';
 
 export default class AddLodgingInfo extends Component {
@@ -25,7 +28,10 @@ export default class AddLodgingInfo extends Component {
   }
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
+      <View style={styles.container}>
+        <Header />
       <ScrollView>
         <View style={styles.inputContainer}>
           <TextInput
@@ -73,11 +79,19 @@ export default class AddLodgingInfo extends Component {
           </TouchableOpacity>
           </View>
           </ScrollView>
+          <Footer navigate={navigate} />
+          </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000000',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start'
+  },
   inputContainer: {
     marginTop: 15
   },

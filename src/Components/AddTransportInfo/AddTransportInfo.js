@@ -1,16 +1,19 @@
 import React, { Component } from "react";
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer'
 import {
   StyleSheet,
   Text,
   View,
   ScrollView,
   TouchableOpacity,
-  Keyboard
+  Keyboard,
+  TextInput
 } from "react-native";
 
 export default class AddTransportInfo extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       startTrans: '',
       endTrans: '',
@@ -23,7 +26,10 @@ export default class AddTransportInfo extends Component {
   }
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
+      <View style={styles.container}>
+        <Header />
       <ScrollView>
         <View style={styles.inputContainer}>
           <TextInput
@@ -55,11 +61,19 @@ export default class AddTransportInfo extends Component {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <Footer navigate={navigate}/>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000000',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start'
+  },
   inputContainer: {
     marginTop: 15
   },
