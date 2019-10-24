@@ -84,7 +84,7 @@ export default class LegForm extends Component {
         />
         <DatePicker
           style={{width: 200}}
-          date={this.state.startDate} //initial date from state
+          date={this.state.endDate} //initial date from state
           mode="date" //The enum of date, datetime and time
           placeholder="select date"
           format="YYYY-MM-DD"

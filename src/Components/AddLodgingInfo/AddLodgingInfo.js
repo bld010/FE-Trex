@@ -1,96 +1,123 @@
-import React, { Component } from 'react';
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
-import { 
-    StyleSheet, 
-    Text, 
-    View, 
-    ScrollView,
-    TouchableOpacity,
-    Keyboard,
-    TextInput 
-  } from 'react-native';
+import React, { Component } from "react";
+import DatePicker from "react-native-datepicker";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Keyboard,
+  TextInput
+} from "react-native";
 
 export default class AddLodgingInfo extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      countryLodge: '',
-      cityLodge: '',
-      lodgeName: '',
-      startLodge: '',
-      endLodge: ''
-    }
-  }
-
-  handleInputs = () => {
-    this.setState({ [e.target.name] : e.target.value })
+      countryLodge: "",
+      cityLodge: "",
+      lodgeName: "",
+      startLodge: "",
+      endLodge: ""
+    };
   }
 
   render() {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Header />
-      <ScrollView>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Country"
-            maxLength={20}
-            onBlur={Keyboard.dismiss}
-            value={this.state.countryLodge}
-            onChange={this.handleInputs}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="City"
-            maxLength={20}
-            onBlur={Keyboard.dismiss}
-            value={this.state.cityLodge}
-            onChange={this.handleInputs}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Start Date"
-            maxLength={20}
-            onBlur={Keyboard.dismiss}
-            value={this.state.lodgeName}
-            onChange={this.handleInputs}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Start Date"
-            maxLength={20}
-            onBlur={Keyboard.dismiss}
-            value={this.state.startLodge}
-            onChange={this.handleInputs}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="End Date"
-            maxLength={20}
-            onBlur={Keyboard.dismiss}
-            value={this.state.endLodge}
-            onChange={this.handleInputs}
-          />
-          <TouchableOpacity>
-            <Text style={styles.button}>Save</Text>
-          </TouchableOpacity>
+        <ScrollView>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Country"
+              maxLength={20}
+              onBlur={Keyboard.dismiss}
+              value={this.state.countryLodge}
+              onChangeText={countryLodge => this.setState({ countryLodge })}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="City"
+              maxLength={20}
+              onBlur={Keyboard.dismiss}
+              value={this.state.cityLodge}
+              onChangeText={cityLodge => this.setState({ cityLodge })}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Lodging Name"
+              maxLength={20}
+              onBlur={Keyboard.dismiss}
+              value={this.state.lodgeName}
+              onChangeText={lodgeName => this.setState({ lodgeName })}
+            />
+            <DatePicker
+              style={{ width: 200 }}
+              date={this.state.startLodge} //initial date from state
+              mode="date" //The enum of date, datetime and time
+              placeholder="select date"
+              format="YYYY-MM-DD"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              customStyles={{
+                dateIcon: {
+                  position: "absolute",
+                  left: 0,
+                  top: 4,
+                  marginLeft: 0
+                },
+                dateInput: {
+                  marginLeft: 36
+                }
+              }}
+              onDateChange={date => {
+                this.setState({ startLodge: date });
+              }}
+            />
+            <DatePicker
+              style={{ width: 200 }}
+              date={this.state.endLodge} //initial date from state
+              mode="date" //The enum of date, datetime and time
+              placeholder="select date"
+              format="YYYY-MM-DD"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              customStyles={{
+                dateIcon: {
+                  position: "absolute",
+                  left: 0,
+                  top: 4,
+                  marginLeft: 0
+                },
+                dateInput: {
+                  marginLeft: 36
+                }
+              }}
+              onDateChange={date => {
+                this.setState({ endLodge: date });
+              }}
+            />
+            <TouchableOpacity>
+              <Text style={styles.button}>Save</Text>
+            </TouchableOpacity>
           </View>
-          </ScrollView>
-          <Footer navigate={navigate} />
-          </View>
-    )
+        </ScrollView>
+        <Footer navigate={navigate} />
+      </View>
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start'
+    backgroundColor: "#000000",
+    alignItems: "stretch",
+    justifyContent: "flex-start"
   },
   inputContainer: {
     marginTop: 15

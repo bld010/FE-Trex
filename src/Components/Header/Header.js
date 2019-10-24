@@ -24,7 +24,7 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
   top: {
-    backgroundColor: 'black',
+    backgroundColor: '#1C4263',
     flex: 0
   },
   header: {
@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     textAlign: 'center',
     fontSize: 50,
-    height: 70,
+    height: 60,
   }
 })

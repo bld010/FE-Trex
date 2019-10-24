@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start'
+    // alignItems: 'stretch',
+    // justifyContent: 'flex-start'
   }, 
   text: {
     color: 'white',
