@@ -34,7 +34,7 @@ export default class Trip extends Component {
 
   render() {
     const {navigate} = this.props.navigation;
-    let { name, startDate, endDate } = this.props.navigation.getParam('trip')
+    let { name, startDate, endDate } = this.state.trip
     return (
       <View style={styles.container}>
 
@@ -43,7 +43,7 @@ export default class Trip extends Component {
         <ScrollView>
 
           <View style={styles.tripHeader}>
-            <Text style={styles.text}>{this.state.trip.name}</Text>
+            <Text style={styles.text}>{name}</Text>
             <TouchableOpacity>
               <Text style={styles.editTripButton}>Edit Trip</Text>
             </TouchableOpacity>
@@ -51,31 +51,13 @@ export default class Trip extends Component {
 
           </View>
           <View style={styles.footer}>
-            <Text style={styles.footerText}>{this.state.trip.startDate} - {this.state.trip.endDate}</Text>
+            <Text style={styles.footerText}>{startDate} - {endDate}</Text>
           </View>
 
           <View>
             {this.generateLegElements()}
           </View>
-
-          {/* <View style={styles.footer}>
-            <Text style={styles.footerText}>Leg 1: </Text>
-            <Text style={styles.footerText}>Argentina</Text>
-            <TouchableOpacity>
-              <Text styles={styles.button}>Edit Leg</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>11/8/19</Text>
-            <Text style={styles.footerText}>-</Text>
-            <Text style={styles.footerText}>11/15/19</Text>
-          </View>
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>Transportation:</Text>
-            <Text style={styles.footerText}>All of the Transportation Details</Text>
-            <Text style={styles.footerText}>Lodging: </Text>
-            <Text style={styles.footerText}>All of the Lodging Details</Text>
-          </View> */}
+          
         </ScrollView>
 
         <Footer navigate={navigate} />

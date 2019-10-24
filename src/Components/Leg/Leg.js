@@ -11,20 +11,21 @@ import Header from '../Header/Header';
 
 
 export const Leg = (props) => {
-console.log(props)
   const {navigate} = props.navigation;
-  let { name, startDate, endDate} = props.navigation.getParam('leg')
+  let { startLocation, endLocation, startDate, endDate} = props.navigation.getParam('leg')
+  let leg = props.navigation.getParam('leg')
   return (
       <View style={styles.container}>
 
-      {/* <Header /> */}
+      <Header />
 
         <ScrollView>
 
-          <View style={styles.tripHeader}>
-            <Text style={styles.text}>{name}</Text>
+          <View style={styles.legHeader}>
+            <Text style={styles.text}>{startLocation}</Text>
+            <Text style={styles.text}>{endLocation}</Text>
             <TouchableOpacity>
-              <Text onPress={() => navigate('LegForm', {name, startDate, endDate})} style={styles.editTripButton}>Edit Leg</Text>
+              <Text onPress={() => navigate('LegForm', { leg })} style={styles.editLegButton}>Edit Leg</Text>
             </TouchableOpacity>
 
 
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
     
   }, 
-  tripHeader: {
+  legHeader: {
     flex: 1,
     flexDirection: 'row',
     padding: 20,
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginVertical: 10,
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 10,
     width: 'auto'
   },
   header: {
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     top: 0,
     fontSize: 50,
   }, 
-  editTripButton: {
+  editLegButton: {
     borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
