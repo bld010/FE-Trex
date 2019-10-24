@@ -11,15 +11,16 @@ import {
 } from 'react-native';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import { postNewTrip } from '../../util/apiCalls';
 
 export default class TripForm extends Component {
   constructor(props) {
-    super()
+    super(props)
     this.state = {
       name: '',
       startDate: '',
       endDate: '', 
-      user: this.props.navigation.getParam('user')
+      userId: this.props.navigation.getParam('userId')
     }
   }
   
@@ -27,6 +28,27 @@ export default class TripForm extends Component {
   //if (trip has a leg)
   //Text - Leg Name
   //button - leg name
+
+  handleNewTripSave = () => {
+
+    let { name, startDate, endDate, userId } = this.state;
+
+    let tripInfo = {
+      name,
+      startDate,
+      endDate,
+      userId
+    }
+
+    try {
+      postNewTrip(tripInfo)
+    } 
+    catch (error) {
+      console.log('There was an error creating your trip')
+      console.log(error.message)
+    }
+  }
+  
   
   render() {
     const {navigate} = this.props.navigation;
@@ -103,7 +125,7 @@ export default class TripForm extends Component {
             <TouchableOpacity style={styles.sideBySideButton}>
                <Text style={styles.text}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.sideBySideButton}>
+            <TouchableOpacity style={styles.sideBySideButton} onPress={() => postNewTrip(this.state)}>
               <Text style={styles.text}>Save</Text>
             </TouchableOpacity>
           </View>

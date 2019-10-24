@@ -25,26 +25,24 @@ export const fetchMyTrips = async (user_id) => {
   }
 }
 
-export const postNewTrip = async (user_id) => {
+export const postNewTrip = async (tripInfo) => {
 
-  let trip = {
-    name,
-    startDate,
-    endDate,
-    userId: user_Id
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
   }
+  let { name, startDate, endDate, userId } = tripInfo;  
 
   let queryParams = `
   mutation {
-    createTrip(input: {name: "Austraila!", userId: 1, startDate: "", endDate: "Dec 1st"}) {
+    createTrip(input: {name: "${name}", startDate: "${startDate}", endDate: "${endDate}", userId: ${userId}}) {
       trip {
-        name
-        startDate
-        endDate
+        id
       }
     }
-  }
-}`
+  }`
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
@@ -55,7 +53,8 @@ export const postNewTrip = async (user_id) => {
     }
 
     let data = await resp.json();
-    let trip_id
+    return data.data.createTrip.trip.id
+  
   } catch (error) {
     throw error
   }
