@@ -47,8 +47,8 @@ export default class AddTransportInfo extends Component {
             />
             <DatePicker
               style={{ width: 200 }}
-              date={this.state.dateTrans} //initial date from state
-              mode="date" //The enum of date, datetime and time
+              date={this.state.dateTrans}
+              mode="date"
               placeholder="select date"
               format="YYYY-MM-DD"
               confirmBtnText="Confirm"

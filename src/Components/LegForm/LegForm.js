@@ -25,17 +25,13 @@ export default class LegForm extends Component {
     };
   }
 
-  handleInputs = () => {
-    this.setState({ [e.target.name] : e.target.value })
-  }
-
-  returnDateToday = () => {
-    let today = new Date();
-    let year = today.getFullYear();
-    let month = String(today.getMonth() + 1).padStart(2, '0');
-    let day = today.getDate()
-    return `${year}/${month}/${day}`
-  }
+  // returnDateToday = () => {
+  //   let today = new Date();
+  //   let year = today.getFullYear();
+  //   let month = String(today.getMonth() + 1).padStart(2, '0');
+  //   let day = today.getDate()
+  //   return `${year}/${month}/${day}`
+  // }
 
   render() {
     const {navigate} = this.props.navigation;
@@ -50,7 +46,7 @@ export default class LegForm extends Component {
             maxLength={20}
             onBlur={Keyboard.dismiss}
             value={this.state.startLegDest}
-            onChange={this.handleInputs}
+            onChangeText={startLegDest => this.setState({ startLegDest })}
           />
           <TextInput
             style={styles.textInput}
@@ -58,7 +54,7 @@ export default class LegForm extends Component {
             maxLength={20}
             onBlur={Keyboard.dismiss}
             value={this.state.endLegDest}
-            onChange={this.handleInputs}
+            onChangeText={endLegDest => this.setState({ endLegDest })}
           />
           <Text>Start Date:</Text>
           <DatePicker
@@ -84,8 +80,8 @@ export default class LegForm extends Component {
         />
         <DatePicker
           style={{width: 200}}
-          date={this.state.endDate} //initial date from state
-          mode="date" //The enum of date, datetime and time
+          date={this.state.endDate}
+          mode="date" 
           placeholder="select date"
           format="YYYY-MM-DD"
           confirmBtnText="Confirm"

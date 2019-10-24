@@ -57,8 +57,8 @@ export default class AddLodgingInfo extends Component {
             />
             <DatePicker
               style={{ width: 200 }}
-              date={this.state.startLodge} //initial date from state
-              mode="date" //The enum of date, datetime and time
+              date={this.state.startLodge}
+              mode="date"
               placeholder="select date"
               format="YYYY-MM-DD"
               confirmBtnText="Confirm"
@@ -80,8 +80,8 @@ export default class AddLodgingInfo extends Component {
             />
             <DatePicker
               style={{ width: 200 }}
-              date={this.state.endLodge} //initial date from state
-              mode="date" //The enum of date, datetime and time
+              date={this.state.endLodge}
+              mode="date"
               placeholder="select date"
               format="YYYY-MM-DD"
               confirmBtnText="Confirm"
