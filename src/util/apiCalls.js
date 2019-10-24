@@ -9,6 +9,7 @@ export const fetchMyTrips = async (user_id) => {
   let queryParams = `{
     user(id: ${user_id}) {
       trips {
+        id
         name
         startDate
         endDate
@@ -23,7 +24,7 @@ export const fetchMyTrips = async (user_id) => {
     if (!resp.ok) {
       throw new Error('There was an error fetching your trips')
     }
-    
+
     let data = await resp.json();
     let trips = data.data.user.trips;
     
