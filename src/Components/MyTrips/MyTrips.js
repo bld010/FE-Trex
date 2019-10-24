@@ -8,37 +8,44 @@ import {
 } from 'react-native';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import { fetchMyTrips } from '../../util/apiCalls';
 
 export default class MyTrips extends Component {
 
   constructor(props) {
-    super(props)
-    this.tripsElements = [],
-    this.tripsList = [
-      {name: 'South America'},
-      {name: 'Madagascar'},
-      {name: 'Southeast Asia'}
-    ]
+    super(props);
+    this.state = {
+      user: {id: 1},
+      trips: [],
+      error: ''
+    }
   }
   
-  generateTripsElements = (list) => {
+  generateTripsElements = () => {
     const {navigate} = this.props.navigation;
-    return list.map(trip => {
+    return this.state.trips.map(trip => {
       return (
-      <TouchableOpacity style={styles.tripButton}>
-        <Text onPress={() => navigate('Trip')} style={styles.text} key={trip.name}>{trip.name}</Text>
+        <TouchableOpacity key={trip.name} style={styles.tripButton}>
+        <Text onPress={() => navigate('Trip', {trip})} style={styles.text} key={trip.name}>{trip.name}</Text>
       </TouchableOpacity>
       )
     })
   }
+  
+  
+  componentDidMount = async  () => {
+    try {
+      let trips = await fetchMyTrips(this.state.user.id)
+      this.setState({ trips })
 
-  componentDidMount = () => {
+    } catch (error) {
+      this.setState({error: 'There was an error fetching your trips.'})
+    }
   }
   
   render() {
     const {navigate} = this.props.navigation;
-
-    this.tripsElements = this.generateTripsElements(this.tripsList)
+    const { trips, error} = this.state
 
     return(
       
@@ -49,7 +56,9 @@ export default class MyTrips extends Component {
         <ScrollView>
           <Text style={styles.title}>My Trips</Text>
           <View>
-            {this.tripsElements.length > 0 && this.tripsElements}
+            {trips.length > 0 && this.generateTripsElements()}
+            {error !== '' && <Text style={styles.text}>{error}</Text>}
+            {trips.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
           </View>
           <TouchableOpacity style={styles.addTripButton}>
             <Text style={styles.text} onPress={() => navigate('TripForm')}>Add a New Trip</Text>
