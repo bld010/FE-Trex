@@ -13,18 +13,12 @@ import Footer from '../Footer/Footer'
 export default class Home extends Component {
 
   render() {
-
       const {navigate} = this.props.navigation;
-
     return (
-
       <View style={styles.container}>
-
         <Header />
-
         <ScrollView>
           <Text style={styles.text}>Welcome to Ariva</Text>
-          
             <Text style={styles.text}>I am a ...</Text>
             <TouchableOpacity>
               <Text style={styles.button}>Wanderer</Text>
@@ -47,8 +41,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start'
+    // alignItems: 'stretch',
+    // justifyContent: 'flex-start'
   }, 
   text: {
     color: 'white',

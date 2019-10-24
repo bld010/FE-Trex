@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer'
+import DatePicker from "react-native-datepicker";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import {
   StyleSheet,
   Text,
@@ -15,53 +16,64 @@ export default class AddTransportInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startTrans: '',
-      endTrans: '',
-      dateTrans: ''
+      startTrans: "",
+      endTrans: "",
+      dateTrans: ""
     };
   }
 
-  handleInputs = () => {
-    this.setState({ [e.target.name] : e.target.value })
-  }
-
   render() {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Header />
-      <ScrollView>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Start Destination"
-            maxLength={20}
-            onBlur={Keyboard.dismiss}
-            value={this.state.startTrans}
-            onChange={this.handleInputs}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="End Destination"
-            maxLength={20}
-            onBlur={Keyboard.dismiss}
-            value={this.state.endTrans}
-            onChange={this.handleInputs}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Date"
-            maxLength={20}
-            onBlur={Keyboard.dismiss}
-            value={this.state.dateTrans}
-            onChange={this.handleInputs}
-          />
-          <TouchableOpacity>
-            <Text style={styles.button}>Save</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-      <Footer navigate={navigate}/>
+        <ScrollView>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Start Destination"
+              maxLength={20}
+              onBlur={Keyboard.dismiss}
+              value={this.state.startTrans}
+              onChangeText={startTrans => this.setState({ startTrans })}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="End Destination"
+              maxLength={20}
+              onBlur={Keyboard.dismiss}
+              value={this.state.endTrans}
+              onChangeText={endTrans => this.setState({ endTrans })}
+            />
+            <DatePicker
+              style={{ width: 200 }}
+              date={this.state.dateTrans}
+              mode="date"
+              placeholder="select date"
+              format="YYYY-MM-DD"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              customStyles={{
+                dateIcon: {
+                  position: "absolute",
+                  left: 0,
+                  top: 4,
+                  marginLeft: 0
+                },
+                dateInput: {
+                  marginLeft: 36
+                }
+              }}
+              onDateChange={date => {
+                this.setState({ dateTrans: date });
+              }}
+            />
+            <TouchableOpacity>
+              <Text style={styles.button}>Save</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+        <Footer navigate={navigate} />
       </View>
     );
   }
@@ -70,9 +82,9 @@ export default class AddTransportInfo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start'
+    backgroundColor: "#000000",
+    alignItems: "stretch",
+    justifyContent: "flex-start"
   },
   inputContainer: {
     marginTop: 15
