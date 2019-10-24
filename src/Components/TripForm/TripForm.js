@@ -17,8 +17,8 @@ export default class TripForm extends Component {
     super()
     this.state = {
       name: '',
-      departureDate: '',
-      returnDate: '', 
+      startDate: '',
+      endDate: '', 
       user: this.props.navigation.getParam('user')
     }
   }
@@ -52,7 +52,7 @@ export default class TripForm extends Component {
           </View>
           <DatePicker
           style={{width: 200}}
-          date={this.state.departureDate} //initial date from state
+          date={this.state.startDate} //initial date from state
           mode="date" //The enum of date, datetime and time
           placeholder="select date"
           format="YYYY-MM-DD"
@@ -69,11 +69,11 @@ export default class TripForm extends Component {
               marginLeft: 36
             }
           }}
-          onDateChange={(date) => {this.setState({departureDate: date})}}
+          onDateChange={(date) => {this.setState({startDate: date})}}
         />
           <DatePicker
           style={{width: 200}}
-          date={this.state.returnDate} //initial date from state
+          date={this.state.endDate} //initial date from state
           mode="date" //The enum of date, datetime and time
           placeholder="select date"
           format="YYYY-MM-DD"
@@ -90,7 +90,7 @@ export default class TripForm extends Component {
               marginLeft: 36
             }
           }}
-          onDateChange={(date) => {this.setState({returnDate: date})}}
+          onDateChange={(date) => {this.setState({endDate: date})}}
         />
 
           <View style={styles.container}>
