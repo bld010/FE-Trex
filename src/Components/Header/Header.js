@@ -3,7 +3,8 @@ import {
   StyleSheet, 
   Text, 
   View, 
-  TouchableOpacity
+  TouchableOpacity,
+  SafeAreaView
 } from 'react-native';
 
 export default class Header extends Component {
@@ -13,19 +14,25 @@ export default class Header extends Component {
 
   render() {
     return(
+      <>
+      <SafeAreaView style={styles.top}/>
       <Text style={styles.header}>Ariva</Text>
+      </>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  top: {
+    backgroundColor: 'black',
+    flex: 0
+  },
   header: {
     backgroundColor: '#1C4263',
     color: 'white',
-    // paddingTop: 60,
     paddingLeft: 10,
     textAlign: 'center',
-    top: 0,
     fontSize: 50,
+    height: 70,
   }
 })
