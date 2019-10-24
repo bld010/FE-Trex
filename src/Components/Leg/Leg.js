@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { 
   StyleSheet, 
   Text, 
@@ -10,19 +10,11 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
 
-export default class Leg extends Component {
+export const Leg = (props) => {
 
-  constructor(props) {
-    super(props)
-    // this.state = {
-    //   leg: this.props.navigation.getParam('leg')
-    // }
-  }
-
-  render() {
-    const {navigate} = this.props.navigation;
-    let { name, startDate, endDate } = this.props.navigation.getParam('leg')
-    return (
+  const {navigate} = props.navigation;
+  let { name, startDate, endDate } = props.navigation.getParam('leg')
+  return (
       <View style={styles.container}>
 
       {/* <Header /> */}
@@ -45,8 +37,7 @@ export default class Leg extends Component {
 
         <Footer navigate={navigate} />
         </View>
-    );
-  }
+    )
 }
 
 

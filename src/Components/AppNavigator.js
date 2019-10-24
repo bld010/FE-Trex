@@ -10,7 +10,7 @@ import FollowerForm from './FollowerForm/FollowerForm';
 import { SafetyInfo } from './SafetyInfo/SafetyInfo';
 import AddLodgingInfo from './AddLodgingInfo/AddLodgingInfo';
 import AddTransportInfo from './AddTransportInfo/AddTransportInfo';
-import Leg from './Leg/Leg';
+import { Leg } from './Leg/Leg';
 
 const RootStack = createStackNavigator({
   Home: { screen: Home },
