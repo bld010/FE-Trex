@@ -8,37 +8,47 @@ import {
 } from 'react-native';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import { fetchMyTrips } from '../../util/apiCalls';
 
 export default class MyTrips extends Component {
 
   constructor(props) {
-    super(props)
-    this.tripsElements = [],
-    this.tripsList = [
-      {name: 'South America'},
-      {name: 'Madagascar'},
-      {name: 'Southeast Asia'}
-    ]
+    super(props);
+    this.state = {
+      user: {id: 1},
+      trips: [],
+      error: ''
+    }
   }
   
-  generateTripsElements = (list) => {
+  generateTripsElements = () => {
     const {navigate} = this.props.navigation;
-    return list.map(trip => {
+    return this.state.trips.map(trip => {
       return (
-      <TouchableOpacity style={styles.tripButton}>
+        <TouchableOpacity key={trip.name} style={styles.tripButton}>
         <Text onPress={() => navigate('Trip')} style={styles.text} key={trip.name}>{trip.name}</Text>
       </TouchableOpacity>
       )
     })
   }
+  
+  
+  componentDidMount = async  () => {
+    
 
-  componentDidMount = () => {
+    try {
+      let trips = await fetchMyTrips(this.state.user.id)
+      this.setState({ trips })
+      console.log(this.state)
+
+    } catch (error) {
+      this.setState({error: 'There was an error fetching your trips.'})
+      console.log(this.state)
+    }
   }
   
   render() {
     const {navigate} = this.props.navigation;
-
-    this.tripsElements = this.generateTripsElements(this.tripsList)
 
     return(
       
@@ -49,7 +59,7 @@ export default class MyTrips extends Component {
         <ScrollView>
           <Text style={styles.title}>My Trips</Text>
           <View>
-            {this.tripsElements.length > 0 && this.tripsElements}
+            {this.state.trips.length > 0 && this.generateTripsElements()}
           </View>
           <TouchableOpacity style={styles.addTripButton}>
             <Text style={styles.text} onPress={() => navigate('TripForm')}>Add a New Trip</Text>
