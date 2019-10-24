@@ -31,20 +31,22 @@ export default class Trip extends Component {
 
           <View style={styles.tripHeader}>
             <Text style={styles.text}>{this.state.trip.name}</Text>
+            
             <TouchableOpacity>
               <Text style={styles.editTripButton}>Edit Trip</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.container}>
-            <TouchableOpacity style={styles.button}>
-              <Text onPress={() => navigate('LegForm')} style={styles.text}>Add A Leg + </Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.footer}>
             <Text style={styles.footerText}>{this.state.trip.startDate} - {this.state.trip.endDate}</Text>
           </View>
+          
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.button}>
+              <Text onPress={() => navigate('LegForm')} style={styles.text}>Add A Leg + </Text>
+            </TouchableOpacity>
+          </View>
+
 
         </ScrollView>
 
@@ -63,6 +65,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
     
   }, 
+  button: {
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: 'white',
+    marginVertical: 10,
+    backgroundColor: '#1C4263'
+  },
   tripHeader: {
     flex: 1,
     flexDirection: 'row',
