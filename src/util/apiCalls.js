@@ -6,17 +6,8 @@ export const fetchMyTrips = async (user_id) => {
     }
   }
 
-  let queryParams = `{
-    user(id: ${user_id}) {
-      trips {
-        id
-        name
-        startDate
-        endDate
-      }
-    }
-  }
-  `
+  let queryParams = `{user(id: ${user_id}) {trips {id, name, startDate, endDate}}}`
+
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
   try {
@@ -27,11 +18,10 @@ export const fetchMyTrips = async (user_id) => {
 
     let data = await resp.json();
     let trips = data.data.user.trips;
-    
     return trips;
 
   } catch (error) {
-    throw new Error (error.message)
+    throw error
   }
 }
 
