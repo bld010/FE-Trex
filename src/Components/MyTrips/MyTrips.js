@@ -62,7 +62,7 @@ export default class MyTrips extends Component {
             {trips.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
           </View>
           <TouchableOpacity style={styles.addTripButton}>
-            <Text style={styles.text} onPress={() => navigate('TripForm', {user: this.state.user})}>Add a New Trip</Text>
+            <Text style={styles.text} onPress={() => navigate('TripForm', {userId: this.state.user.id})}>Add a New Trip</Text>
           </TouchableOpacity>
         </ScrollView>
   
