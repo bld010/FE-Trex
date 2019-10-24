@@ -38,7 +38,7 @@ export default class Trip extends Component {
     return (
       <View style={styles.container}>
 
-      {/* <Header /> */}
+      <Header />
 
         <ScrollView>
 

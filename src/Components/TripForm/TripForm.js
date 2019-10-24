@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import DatePicker from 'react-native-datepicker';
 import { 
   StyleSheet, 
   Text, 
   View, 
   ScrollView,
   TextInput,
-  TouchableOpacity 
+  TouchableOpacity,
+  Keyboard 
 } from 'react-native';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
@@ -19,8 +21,6 @@ export default class TripForm extends Component {
       returnDate: ''
     }
   }
-
-  
   
   //conditional rendering
   //if (trip has a leg)
@@ -46,27 +46,51 @@ export default class TripForm extends Component {
               placeholder='Trip Name'
               onChangeText={(name) => this.setState({name})}
               value={this.state.name}
+              onBlur={Keyboard.dismiss}
             />
           </View>
-          <View style={styles.form}>
-            <TextInput
-              style={styles.input}
-              placeholder='Departure Date'
-              onChangeText={(departureDate) => this.setState({departureDate})}
-              value={this.state.departureDate}
-              keyboardType='phone-pad'
-
-            />
-          </View>
-          <View style={styles.form}>
-            <TextInput
-              style={styles.input}
-              placeholder='Return Date'
-              onChangeText={(returnDate) => this.setState({returnDate})}
-              value={this.state.returnDate}
-              keyboardType='phone-pad'
-            />    
-          </View>
+          <DatePicker
+          style={{width: 200}}
+          date={this.state.departureDate} //initial date from state
+          mode="date" //The enum of date, datetime and time
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+          }}
+          onDateChange={(date) => {this.setState({departureDate: date})}}
+        />
+          <DatePicker
+          style={{width: 200}}
+          date={this.state.returnDate} //initial date from state
+          mode="date" //The enum of date, datetime and time
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+          }}
+          onDateChange={(date) => {this.setState({returnDate: date})}}
+        />
 
           <View style={styles.container}>
             <TouchableOpacity style={styles.button}>
