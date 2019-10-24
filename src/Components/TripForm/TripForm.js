@@ -29,7 +29,7 @@ export default class TripForm extends Component {
   //Text - Leg Name
   //button - leg name
 
-  handleNewTripSave = () => {
+  handleNewTripSave = async () => {
 
     let { name, startDate, endDate, userId } = this.state;
 
@@ -41,7 +41,8 @@ export default class TripForm extends Component {
     }
 
     try {
-      postNewTrip(tripInfo)
+      let newTrip = await postNewTrip(tripInfo);
+      this.props.navigation.navigate('Trip', {trip: newTrip})
     } 
     catch (error) {
       console.log('There was an error creating your trip')
@@ -115,17 +116,13 @@ export default class TripForm extends Component {
           onDateChange={(date) => {this.setState({endDate: date})}}
         />
 
-          <View style={styles.container}>
-            <TouchableOpacity style={styles.button}>
-              <Text onPress={() => navigate('LegForm')} style={styles.text}>Add A Leg + </Text>
-            </TouchableOpacity>
-          </View>
+          
 
           <View style={styles.sideBySideContainer}>
             <TouchableOpacity style={styles.sideBySideButton}>
                <Text style={styles.text}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.sideBySideButton} onPress={() => postNewTrip(this.state)}>
+            <TouchableOpacity style={styles.sideBySideButton} onPress={this.handleNewTripSave}>
               <Text style={styles.text}>Save</Text>
             </TouchableOpacity>
           </View>
