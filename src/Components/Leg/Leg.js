@@ -10,31 +10,18 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
 
-export default class Trip extends Component {
+export default class Leg extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      trip: this.props.navigation.getParam('trip')
-    }
-  }
-
-  generateLegElements = () => {
-    if (this.state.trip.legs.length> 0) {
-      const {navigate} = this.props.navigation;
-      return this.state.trip.legs.map(leg => {
-        return (
-          <TouchableOpacity key={leg.name} style={styles.tripButton}>
-          <Text onPress={() => navigate('Leg', {leg})} style={styles.text} key={leg.name}>{leg.name}</Text>
-        </TouchableOpacity>
-        )
-      })
-    }
+    // this.state = {
+    //   leg: this.props.navigation.getParam('leg')
+    // }
   }
 
   render() {
     const {navigate} = this.props.navigation;
-    let { name, startDate, endDate } = this.props.navigation.getParam('trip')
+    let { name, startDate, endDate } = this.props.navigation.getParam('leg')
     return (
       <View style={styles.container}>
 
@@ -43,39 +30,17 @@ export default class Trip extends Component {
         <ScrollView>
 
           <View style={styles.tripHeader}>
-            <Text style={styles.text}>{this.state.trip.name}</Text>
+            <Text style={styles.text}>{name}</Text>
             <TouchableOpacity>
-              <Text style={styles.editTripButton}>Edit Trip</Text>
+              <Text style={styles.editTripButton}>Edit Leg</Text>
             </TouchableOpacity>
 
 
           </View>
           <View style={styles.footer}>
-            <Text style={styles.footerText}>{this.state.trip.startDate} - {this.state.trip.endDate}</Text>
+            <Text style={styles.footerText}>{startDate} - {endDate}</Text>
           </View>
 
-          <View>
-            {this.generateLegElements()}
-          </View>
-
-          {/* <View style={styles.footer}>
-            <Text style={styles.footerText}>Leg 1: </Text>
-            <Text style={styles.footerText}>Argentina</Text>
-            <TouchableOpacity>
-              <Text styles={styles.button}>Edit Leg</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>11/8/19</Text>
-            <Text style={styles.footerText}>-</Text>
-            <Text style={styles.footerText}>11/15/19</Text>
-          </View>
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>Transportation:</Text>
-            <Text style={styles.footerText}>All of the Transportation Details</Text>
-            <Text style={styles.footerText}>Lodging: </Text>
-            <Text style={styles.footerText}>All of the Lodging Details</Text>
-          </View> */}
         </ScrollView>
 
         <Footer navigate={navigate} />
