@@ -39,6 +39,9 @@ export const postNewTrip = async (tripInfo) => {
   mutation {
     createTrip(input: {name: "${name}", startDate: "${startDate}", endDate: "${endDate}", userId: ${userId}}) {
       trip {
+        name
+        startDate
+        endDate
         id
       }
     }
@@ -53,7 +56,7 @@ export const postNewTrip = async (tripInfo) => {
     }
 
     let data = await resp.json();
-    return data.data.createTrip.trip.id
+    return data.data.createTrip.trip
   
   } catch (error) {
     throw error

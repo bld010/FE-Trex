@@ -36,6 +36,11 @@ export default class Trip extends Component {
             </TouchableOpacity>
           </View>
 
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.button}>
+              <Text onPress={() => navigate('LegForm')} style={styles.text}>Add A Leg + </Text>
+            </TouchableOpacity>
+          </View>
 
           <View style={styles.footer}>
             <Text style={styles.footerText}>{this.state.trip.startDate} - {this.state.trip.endDate}</Text>
