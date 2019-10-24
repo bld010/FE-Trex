@@ -20,6 +20,10 @@ export const fetchMyTrips = async (user_id) => {
 
   try {
     let resp = await fetch(url, options)
+    if (!resp.ok) {
+      throw new Error('There was an error fetching your trips')
+    }
+    
     let data = await resp.json();
     let trips = data.data.user.trips;
     
