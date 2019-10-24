@@ -34,32 +34,13 @@ export default class Trip extends Component {
             <TouchableOpacity>
               <Text style={styles.editTripButton}>Edit Trip</Text>
             </TouchableOpacity>
-
-
           </View>
+
+
           <View style={styles.footer}>
             <Text style={styles.footerText}>{this.state.trip.startDate} - {this.state.trip.endDate}</Text>
           </View>
 
-
-          {/* <View style={styles.footer}>
-            <Text style={styles.footerText}>Leg 1: </Text>
-            <Text style={styles.footerText}>Argentina</Text>
-            <TouchableOpacity>
-              <Text styles={styles.button}>Edit Leg</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>11/8/19</Text>
-            <Text style={styles.footerText}>-</Text>
-            <Text style={styles.footerText}>11/15/19</Text>
-          </View>
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>Transportation:</Text>
-            <Text style={styles.footerText}>All of the Transportation Details</Text>
-            <Text style={styles.footerText}>Lodging: </Text>
-            <Text style={styles.footerText}>All of the Lodging Details</Text>
-          </View> */}
         </ScrollView>
 
         <Footer navigate={navigate} />

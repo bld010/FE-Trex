@@ -18,7 +18,8 @@ export default class TripForm extends Component {
     this.state = {
       name: '',
       departureDate: '',
-      returnDate: ''
+      returnDate: '', 
+      user: this.props.navigation.getParam('user')
     }
   }
   
