@@ -45,6 +45,7 @@ export default class MyTrips extends Component {
   
   render() {
     const {navigate} = this.props.navigation;
+    const { trips, error} = this.state
 
     return(
       
@@ -55,8 +56,9 @@ export default class MyTrips extends Component {
         <ScrollView>
           <Text style={styles.title}>My Trips</Text>
           <View>
-            {this.state.trips.length > 0 && this.generateTripsElements()}
-            {this.state.error !== '' && <Text style={styles.text}>{this.state.error}</Text>}
+            {trips.length > 0 && this.generateTripsElements()}
+            {error !== '' && <Text style={styles.text}>{error}</Text>}
+            {trips.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
           </View>
           <TouchableOpacity style={styles.addTripButton}>
             <Text style={styles.text} onPress={() => navigate('TripForm')}>Add a New Trip</Text>
