@@ -35,17 +35,7 @@ export const postNewTrip = async (tripInfo) => {
   }
   let { name, startDate, endDate, userId } = tripInfo;  
 
-  let queryParams = `
-  mutation {
-    createTrip(input: {name: "${name}", startDate: "${startDate}", endDate: "${endDate}", userId: ${userId}}) {
-      trip {
-        name
-        startDate
-        endDate
-        id
-      }
-    }
-  }`
+  let queryParams = `mutation {createTrip(input: {name: "${name}", startDate: "${startDate}", endDate: "${endDate}", userId: ${userId}}) {trip {name startDate endDate id}}}`
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
