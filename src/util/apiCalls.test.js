@@ -1,5 +1,6 @@
 import {
-  fetchMyTrips
+  fetchMyTrips,
+  postNewTrip
 } from './apiCalls';
 
 describe('apiCalls', () => {
@@ -107,6 +108,25 @@ describe('apiCalls', () => {
 
     })
   })
+
+  describe('postNewTrip', () => {
+    it('should call fetch with proper url and query params', () => {
+
+    })
+
+    it('should return a trip object when successful (HAPPY)', () => {
+
+    })
+
+    it('should return an error if response status is not ok (SAD)', () => {
+
+    })
+
+    it('should return an error if the fetch fails (SAD)', () => {
+      
+    })
+  })
+
 
 })
 
