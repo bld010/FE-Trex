@@ -34,16 +34,12 @@ export default class MyTrips extends Component {
   
   
   componentDidMount = async  () => {
-    
-
     try {
       let trips = await fetchMyTrips(this.state.user.id)
       this.setState({ trips })
-      console.log(this.state)
 
     } catch (error) {
       this.setState({error: 'There was an error fetching your trips.'})
-      console.log(this.state)
     }
   }
   
@@ -60,6 +56,7 @@ export default class MyTrips extends Component {
           <Text style={styles.title}>My Trips</Text>
           <View>
             {this.state.trips.length > 0 && this.generateTripsElements()}
+            {this.state.error !== '' && <Text style={styles.text}>{this.state.error}</Text>}
           </View>
           <TouchableOpacity style={styles.addTripButton}>
             <Text style={styles.text} onPress={() => navigate('TripForm')}>Add a New Trip</Text>
