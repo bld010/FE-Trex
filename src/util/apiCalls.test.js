@@ -16,6 +16,7 @@ describe('apiCalls', () => {
       global.fetch = mockFetch;
 
       queryParams = `{user(id: 1) {trips {id, name, startDate, endDate legs{name startDate endDate}}}}`
+
   
       url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
       
