@@ -47,7 +47,7 @@ export default class LegForm extends Component {
             placeholder="Start Destination"
             maxLength={20}
             onBlur={Keyboard.dismiss}
-            value={this.state.startLegDest}
+            value={this.state.existingLeg.startLocation || this.state.startLegDest}
             onChangeText={startLegDest => this.setState({ startLegDest })}
           />
           <TextInput
@@ -55,13 +55,13 @@ export default class LegForm extends Component {
             placeholder="End Destination"
             maxLength={20}
             onBlur={Keyboard.dismiss}
-            value={this.state.endLegDest}
+            value={this.state.existingLeg.endLocation || this.state.endLegDest}
             onChangeText={endLegDest => this.setState({ endLegDest })}
           />
           <Text>Start Date:</Text>
           <DatePicker
           style={{width: 200}}
-          date={this.state.startDate} //initial date from state
+          date={this.state.existingLeg.startDate || this.state.startDate} //initial date from state
           mode="date" //The enum of date, datetime and time
           placeholder="select date"
           format="YYYY-MM-DD"
@@ -82,7 +82,7 @@ export default class LegForm extends Component {
         />
         <DatePicker
           style={{width: 200}}
-          date={this.state.endDate}
+          date={this.state.existingLeg.endDate || this.state.endDate}
           mode="date" 
           placeholder="select date"
           format="YYYY-MM-DD"
