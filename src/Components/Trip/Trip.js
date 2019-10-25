@@ -16,21 +16,18 @@ export default class Trip extends Component {
     super(props)
     this.state = {
       trip: this.props.navigation.getParam('trip')
-      
     }
   }
 
   generateLegElements = () => {
-    if (this.state.trip.legs) {
-      const {navigate} = this.props.navigation;
-      return this.state.trip.legs.map(leg => {
-        return (
-          <TouchableOpacity key={leg.name} style={styles.tripButton}>
-          <Text onPress={() => navigate('Leg', {leg})} style={styles.text} key={leg.name}>{leg.name}</Text>
-        </TouchableOpacity>
-        )
-      })
-    }
+    const {navigate} = this.props.navigation;
+    return this.state.trip.legs.map(leg => {
+      return (
+        <TouchableOpacity key={leg.name} style={styles.tripButton}>
+        <Text onPress={() => navigate('Leg', {leg})} style={styles.text} key={leg.name}>{leg.name}</Text>
+      </TouchableOpacity>
+      )
+    })
   }
 
   render() {
@@ -51,11 +48,11 @@ export default class Trip extends Component {
           </View>
 
           <View style={styles.footer}>
-            <Text style={styles.footerText}>{startDate} - {endDate}</Text>
+            <Text style={styles.footerText}>{startDate} thru {endDate}</Text>
           </View>
 
           <View>
-            {this.generateLegElements()}
+            {this.state.trip.legs && this.generateLegElements()}
           </View>
 
 

@@ -20,7 +20,7 @@ export default class TripForm extends Component {
       name: '',
       startDate: '',
       endDate: '', 
-      userId: this.props.navigation.getParam('userId')
+      userId: this.props.navigation.getParam('userId'),
     }
   }
 

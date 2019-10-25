@@ -31,7 +31,7 @@ export const Leg = (props) => {
 
           </View>
           <View style={styles.footer}>
-            <Text style={styles.footerText}>{startDate} - {endDate}</Text>
+            <Text style={styles.footerText}>{startDate} thru {endDate}</Text>
           </View>
 
         </ScrollView>
