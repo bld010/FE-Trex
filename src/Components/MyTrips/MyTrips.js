@@ -16,6 +16,7 @@ export default class MyTrips extends Component {
     super(props);
     this.state = {
       user: {id: 1},
+      // we will need to pass this user object dyanmically
       trips: [],
       error: ''
     }
@@ -61,7 +62,7 @@ export default class MyTrips extends Component {
             {trips.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
           </View>
           <TouchableOpacity style={styles.addTripButton}>
-            <Text style={styles.text} onPress={() => navigate('TripForm')}>Add a New Trip</Text>
+            <Text style={styles.text} onPress={() => navigate('TripForm', {userId: this.state.user.id})}>Add a New Trip</Text>
           </TouchableOpacity>
         </ScrollView>
   

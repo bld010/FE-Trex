@@ -16,11 +16,12 @@ export default class Trip extends Component {
     super(props)
     this.state = {
       trip: this.props.navigation.getParam('trip')
+      
     }
   }
 
   generateLegElements = () => {
-    if (this.state.trip.legs.length> 0) {
+    if (this.state.trip.legs) {
       const {navigate} = this.props.navigation;
       return this.state.trip.legs.map(leg => {
         return (
@@ -47,9 +48,8 @@ export default class Trip extends Component {
             <TouchableOpacity>
               <Text style={styles.editTripButton}>Edit Trip</Text>
             </TouchableOpacity>
-
-
           </View>
+
           <View style={styles.footer}>
             <Text style={styles.footerText}>{startDate} - {endDate}</Text>
           </View>
@@ -57,6 +57,14 @@ export default class Trip extends Component {
           <View>
             {this.generateLegElements()}
           </View>
+
+
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.button}>
+              <Text onPress={() => navigate('LegForm')} style={styles.text}>Add A Leg + </Text>
+            </TouchableOpacity>
+          </View>
+
           
         </ScrollView>
 
@@ -75,6 +83,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
     
   }, 
+  button: {
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: 'white',
+    marginVertical: 10,
+    backgroundColor: '#1C4263'
+  },
   tripHeader: {
     flex: 1,
     flexDirection: 'row',
