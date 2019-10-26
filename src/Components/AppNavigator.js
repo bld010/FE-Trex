@@ -12,6 +12,9 @@ import { SafetyInfo } from './SafetyInfo/SafetyInfo';
 import AddLodgingInfo from './AddLodgingInfo/AddLodgingInfo';
 import AddTransportInfo from './AddTransportInfo/AddTransportInfo';
 import { Leg } from './Leg/Leg';
+import FollowerDashboard from './FollowerDashboard/FollowerDashboard';
+import DefaultFollowerMessages from './DefaultFollowerMessages/DefaultFollowerMessages';
+import MyWandererTrips from './MyWanderersTrips/MyWanderersTrips'
 
 const RootStack = createStackNavigator({
   Home: {
@@ -19,8 +22,6 @@ const RootStack = createStackNavigator({
     navigationOptions: {
       headerBackTitle: 'Home',
       headerTransparent: true,
-      // headerStyle: { backgroundColor: 'black' },
-      // headerTitleStyle: { color: 'white' },
       headerBackTitleStyle: { color: 'white'}
     }
   },
@@ -103,7 +104,39 @@ const RootStack = createStackNavigator({
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }
-  }
+  },
+  Leg: {
+    screen: Leg,
+    navigationOptions: {
+      headerBackTitle: 'Leg',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
+  FollowerDashboard: {
+    screen: FollowerDashboard,
+    navigationOptions: {
+      headerBackTitle: 'Follower Dashboard',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
+  DefaultFollowerMessages: {
+    screen: DefaultFollowerMessages,
+    navigationOptions: {
+      headerBackTitle: 'Follower Messages',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
+  MyWandererTrips: {
+    screen: MyWandererTrips,
+    navigationOptions: {
+      headerBackTitle: 'Follower Messages',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
 });
 
 export default createAppContainer(RootStack);
