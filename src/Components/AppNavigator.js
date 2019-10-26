@@ -6,6 +6,7 @@ import MyTrips from './MyTrips/MyTrips';
 import TripForm from './TripForm/TripForm';
 import Trip from './Trip/Trip';
 import LegForm from './LegForm/LegForm';
+import Dashboard from './Dashboard/Dashboard';
 import { MyFollowers } from './MyFollowers/MyFollowers';
 import FollowerForm from './FollowerForm/FollowerForm';
 import { SafetyInfo } from './SafetyInfo/SafetyInfo';
@@ -102,6 +103,14 @@ const RootStack = createStackNavigator({
       headerBackTitle: 'Leg',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
+    }
+  }, 
+  Dashboard: {
+    screen: Dashboard,
+    navigationOptions: {
+      headerBackTitle: 'My Dashboard',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white' }
     }
   }
 });

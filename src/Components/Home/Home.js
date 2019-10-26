@@ -7,6 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer'
 
@@ -20,11 +21,11 @@ export default class Home extends Component {
         <ScrollView>
           <Text style={styles.text}>Welcome to Ariva</Text>
             <Text style={styles.text}>I am a ...</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigate('Dashboard')}>
               <Text style={styles.button}>Wanderer</Text>
             </TouchableOpacity>
             <TouchableOpacity>
-              <Text style={styles.button}>Follower</Text>
+              <Text style={styles.button} >Follower</Text>
             </TouchableOpacity>
 
 
