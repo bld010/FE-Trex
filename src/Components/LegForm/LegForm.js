@@ -29,7 +29,6 @@ export default class LegForm extends Component {
   }
 
   componentDidMount = () => {
-    console.log('from the edit form route', this.state.tripId)
     if (this.state.leg) {
       let { startDate, endDate, startLocation, endLocation } = this.state.leg
       this.setState({
@@ -61,9 +60,11 @@ export default class LegForm extends Component {
 
     try {
       let newLeg = await postNewLeg(newLegInfo);
+      console.log(newLeg)
       this.props.navigation.navigate('Leg', {leg: newLeg})
     }
     catch (error) {
+      console.log(error)
       this.setState({ error: 'There was an error creating your leg'})
     }
   }
@@ -81,7 +82,7 @@ export default class LegForm extends Component {
 
     try {
       let editedLeg = await patchLeg(editedLegInfo)
-      this.props.navigation.navigate('Leg', {leg: newLeg})
+      this.props.navigation.navigate('Leg', {leg: editedLeg})
     }
     catch (error) {
       this.setState({error: 'There was an error editing your leg'})
