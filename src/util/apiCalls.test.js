@@ -1,6 +1,7 @@
 import {
   fetchMyTrips,
-  postNewTrip
+  postNewTrip,
+  patchTrip
 } from './apiCalls';
 
 describe('apiCalls', () => {
@@ -112,7 +113,6 @@ describe('apiCalls', () => {
   describe('postNewTrip', () => {
 
     let mockFetch;
-    let queryParams;
     let url;
     let options;
     let mockTripInfo;
@@ -210,6 +210,107 @@ describe('apiCalls', () => {
     })
   })
 
+
+  describe('patchTrip', () => {
+
+    let mockFetch;
+    let url;
+    let options;
+    let mockTripInfo;
+
+    beforeEach(() => {
+      mockFetch = jest.fn()
+      global.fetch = mockFetch;
+
+      mockTripInfo = {
+        name: "Venezuela",
+        startDate: "2019-08-02",
+        endDate: "2018-08-22", 
+        id: 4
+      }
+
+      let queryParams = `mutation {updateTrip(input: {name: "Venezuela", startDate: "2019-08-02", endDate: "2018-08-22", id: 4}) {trip {name startDate endDate id}}}`
+      
+      url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+      
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      } 
+    })
+
+    it('should call fetch with the correct url and options', async() => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                  updateTrip: {
+                    trip: {}
+                  }
+                }
+              }
+            )}
+          })
+        })
+
+        await patchTrip(mockTripInfo)
+
+        expect(mockFetch).toHaveBeenCalledWith(url, options)
+    })
+
+    it('should return the updated trip when successful (HAPPY)', async () => {
+
+      let newMockTripInfo = mockTripInfo = {
+        name: "Colorado Springs",
+        startDate: "2019-08-02",
+        endDate: "2018-08-22", 
+        id: 4
+      }
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                  updateTrip: {
+                    trip: newMockTripInfo
+                  }
+                }
+              }
+            )}
+          })
+        })
+
+
+        await expect(patchTrip(newMockTripInfo)).resolves.toEqual(newMockTripInfo)
+    })
+
+    it('should return an error if the response is not ok (SAD)', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+          })
+        })
+
+        await expect(patchTrip(mockTripInfo)).rejects.toEqual(Error('There was an error editing your trip'))
+    })
+
+    it('should return an error if the fetch fails (SAD)', async () => {
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error editing your trip'))
+        })
+
+        await expect(patchTrip(mockTripInfo)).rejects.toEqual(Error('There was an error editing your trip'))
+    
+    })
+  })
 
 })
 
