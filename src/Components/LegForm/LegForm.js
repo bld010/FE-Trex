@@ -80,7 +80,6 @@ export default class LegForm extends Component {
       tripId,
       id
     }
-    console.log(editedLegInfo)
     try {
       let editedLeg = await patchLeg(editedLegInfo)
       this.props.navigation.navigate('Trip', {tripId})
@@ -89,6 +88,17 @@ export default class LegForm extends Component {
       this.setState({error: 'There was an error editing your leg'})
     }
   }
+
+
+  removeLeg = async () => {
+    try {
+      let deletedLeg = await deleteLeg(this.state.leg.id);
+      this.props.navigation.navigate('Trip', {tripId: this.state.tripId});
+    } catch (error) {
+      this.setState({ error: 'There was an error deleting your leg'})
+    }
+  }
+
 
   render() {
     const {navigate} = this.props.navigation;
@@ -171,6 +181,13 @@ export default class LegForm extends Component {
           <TouchableOpacity onPress={this.handleNewLegSave}>
             <Text style={styles.button}>Save</Text>
           </TouchableOpacity>
+          {this.props.navigation.getParam('leg') && 
+          <TouchableOpacity style={styles.deleteButton} onPress={this.removeLeg}>
+          <Text styles={styles.text}>Delete Leg</Text>
+          </TouchableOpacity>
+          }
+
+
         </View>
       </ScrollView>
       <WandererFooter navigate={navigate} />
@@ -188,6 +205,25 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: 15
+  }, 
+  text: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'white',
+    paddingVertical: 10,
+  },
+  deleteButton: {
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    width: "auto",
+    height: 60,
+    margin: 20,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "red"
   },
   textInput: {
     backgroundColor: "white",

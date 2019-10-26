@@ -118,8 +118,6 @@ export const deleteTrip = async (tripId) => {
 }
 
 
-
-
 export const postNewLeg = async (legInfo) => {
 
   let options = {
@@ -174,4 +172,37 @@ export const patchLeg = async (legInfo) => {
   } catch (error) {
     throw error
   }
+}
+
+
+
+
+export const deleteLeg = async (legId) => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+
+  let queryParams = `mutation {removeLeg(input: {id: "${legId}"}) {leg {name}}}`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error deleting your leg')
+    }
+
+    let data = await resp.json();
+    return data.data.removeLeg.leg
+
+  } catch (error) {
+    throw error
+  }
+
 }
