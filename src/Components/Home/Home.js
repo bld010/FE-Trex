@@ -7,8 +7,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer'
+import WandererHeader from '../WandererHeader/WandererHeader';
+import WandererFooter from '../WandererFooter/WandererFooter'
 
 export default class Home extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export default class Home extends Component {
       const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Header />
+        <WandererHeader />
         <ScrollView>
           <Text style={styles.text}>Welcome to Ariva</Text>
             <Text style={styles.text}>I am a ...</Text>
@@ -36,7 +36,7 @@ export default class Home extends Component {
 
         </ScrollView>
   
-       <Footer navigate={navigate} />
+       <WandererFooter navigate={navigate} />
         
     </View>
     )

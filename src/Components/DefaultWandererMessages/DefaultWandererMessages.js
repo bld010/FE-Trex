@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
+import WandererFooter from "../WandererFooter/WandererFooter";
+import WandererHeader from "../WandererHeader/WandererHeader";
 import {
   StyleSheet,
   Text,
@@ -20,7 +20,7 @@ export default class DefaultWandererMessages extends Component {
     return (
       <View>
       <View>
-        <Header />
+        <WandererHeader />
       </View>
       <View style={styles.container}>
         <TouchableOpacity>
@@ -37,7 +37,7 @@ export default class DefaultWandererMessages extends Component {
         </TouchableOpacity>
       </View>
       <View>
-        <Footer />
+        <WandererFooter />
       </View>
       </View>
     );
