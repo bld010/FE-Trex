@@ -75,7 +75,6 @@ export const patchTrip = async (tripInfo) => {
     }
 
     let data = await resp.json();
-    console.log(data)
     return data.data.updateTrip.trip
   
   } catch (error) {

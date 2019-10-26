@@ -47,10 +47,11 @@ export default class TripForm extends Component {
   handleNewTripSave = async () => {
 
     if (!this.props.navigation.getParam('trip')) {
-      this.createNewTrip()
+      this.createNewTrip();
     } else {
       this.editTrip()
     }
+
   }
 
   createNewTrip = async () => {
@@ -86,7 +87,7 @@ export default class TripForm extends Component {
 
     try {
       let editedTrip = await patchTrip(editedTripInfo);
-      this.props.navigation.navigate('Trip', {trip: editedTrip})
+      this.props.navigation.navigate('Trip', {trip: editedTrip, userId: this.state.userId})
     }
     catch (error) {
       this.setState({ error: 'There was an error editing your trip'})
