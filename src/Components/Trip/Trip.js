@@ -15,13 +15,25 @@ export default class Trip extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      userId: this.props.navigation.getParam('userId'),
       trip: this.props.navigation.getParam('trip')
     }
   }
 
+  generateLegElements = () => {
+    const {navigate} = this.props.navigation;
+    return this.state.trip.legs.map(leg => {
+      return (
+        <TouchableOpacity key={leg.name} style={styles.tripButton}>
+        <Text onPress={() => navigate('Leg', {leg})} style={styles.text} key={leg.name}>{leg.name}</Text>
+      </TouchableOpacity>
+      )
+    })
+  }
+
   render() {
     const {navigate} = this.props.navigation;
-    let { name, startDate, endDate } = this.props.navigation.getParam('trip')
+    let { name, startDate, endDate } = this.state.trip
     return (
       <View style={styles.container}>
 
@@ -30,24 +42,28 @@ export default class Trip extends Component {
         <ScrollView>
 
           <View style={styles.tripHeader}>
-            <Text style={styles.text}>{this.state.trip.name}</Text>
-            
+            <Text style={styles.text}>{name}</Text>
             <TouchableOpacity>
-              <Text style={styles.editTripButton}>Edit Trip</Text>
+              <Text style={styles.editTripButton} onPress={() => navigate('TripForm', {trip: this.state.trip, userId: this.state.userId})}>Edit Trip</Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.footer}>
-            <Text style={styles.footerText}>{this.state.trip.startDate} - {this.state.trip.endDate}</Text>
+            <Text style={styles.footerText}>{startDate} thru {endDate}</Text>
           </View>
-          
+
+          <View>
+            {this.state.trip.legs && this.generateLegElements()}
+          </View>
+
+
           <View style={styles.container}>
             <TouchableOpacity style={styles.button}>
               <Text onPress={() => navigate('LegForm')} style={styles.text}>Add A Leg + </Text>
             </TouchableOpacity>
           </View>
 
-
+          
         </ScrollView>
 
         <Footer navigate={navigate} />
