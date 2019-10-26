@@ -26,14 +26,6 @@ export default class LegForm extends Component {
     };
   }
 
-  // returnDateToday = () => {
-    //   let today = new Date();
-    //   let year = today.getFullYear();
-    //   let month = String(today.getMonth() + 1).padStart(2, '0');
-    //   let day = today.getDate()
-    //   return `${year}/${month}/${day}`
-    // }
-    
     render() {
     const {navigate} = this.props.navigation;
     console.log(this.state.existingLeg)
