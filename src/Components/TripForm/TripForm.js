@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import { postNewTrip } from '../../util/apiCalls';
+import { postNewTrip, patchTrip } from '../../util/apiCalls';
 
 export default class TripForm extends Component {
   constructor(props) {
@@ -22,7 +22,8 @@ export default class TripForm extends Component {
       startDate: '',
       endDate: '', 
       userId: this.props.navigation.getParam('userId'),
-      trip: this.props.navigation.getParam('trip') || null
+      trip: this.props.navigation.getParam('trip') || null,
+      error: ''
     }
   }
   
@@ -45,40 +46,55 @@ export default class TripForm extends Component {
 
   handleNewTripSave = async () => {
 
+    if (!this.props.navigation.getParam('trip')) {
+      this.createNewTrip()
+    } else {
+      this.editTrip()
+    }
+  }
+
+  createNewTrip = async () => {
+
     let { name, startDate, endDate, userId } = this.state;
 
-    let tripInfo = {
+    let newTripInfo = {
       name,
       startDate,
       endDate,
       userId
     }
 
-    if (!this.props.navigation.getParam('trip')) {
-      this.createNewTrip(tripInfo)
-    } else {
-      this.editTrip(tripInfo)
-    }
-  }
-
-  createNewTrip = async (tripInfo) => {
     try {
-      let newTrip = await postNewTrip(tripInfo);
-      this.props.navigation.navigate('Trip', {trip: newTrip})
+      let newTrip = await postNewTrip(newTripInfo);
+      this.props.navigation.navigate('Trip', {trip: newTrip, userId: this.state.userId})
     } 
     catch (error) {
-      console.log('There was an error creating your trip')
-      console.log(error.message)
+      this.setState({ error: 'There was an error creating your trip'})
     }
   }
   
-  editTrip = () => {
-    console.log('editing trip')
+  editTrip = async () => {
+
+    let { name, startDate, endDate, trip } = this.state;
+
+    let editedTripInfo = {
+      name,
+      startDate,
+      endDate,
+      id: trip.id
+    }
+
+    try {
+      let editedTrip = await patchTrip(editedTripInfo);
+      this.props.navigation.navigate('Trip', {trip: editedTrip})
+    }
+    catch (error) {
+      this.setState({ error: 'There was an error editing your trip'})
+    }
   }
 
   
   render() {
-    console.log(this.state)
     const {navigate} = this.props.navigation;
 
 
@@ -149,13 +165,15 @@ export default class TripForm extends Component {
           
 
           <View style={styles.sideBySideContainer}>
-            <TouchableOpacity style={styles.sideBySideButton}>
+            <TouchableOpacity style={styles.sideBySideButton} onPress={() => navigate('MyTrips')}>
                <Text style={styles.text}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.sideBySideButton} onPress={this.handleNewTripSave}>
               <Text style={styles.text}>Save</Text>
             </TouchableOpacity>
           </View>
+
+          {this.state.error !== '' && <Text style={styles.text}>{this.state.error}</Text>}
 
         </ScrollView>        
         <Footer navigate={navigate} />
