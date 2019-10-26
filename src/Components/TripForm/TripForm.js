@@ -16,6 +16,7 @@ import { postNewTrip } from '../../util/apiCalls';
 export default class TripForm extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       name: '',
       startDate: '',
@@ -30,6 +31,18 @@ export default class TripForm extends Component {
   //Text - Leg Name
   //button - leg name
 
+  componentDidMount = () => {
+    if (this.state.trip) {
+
+      let { name, startDate, endDate } = this.state.trip
+      this.setState({
+        name,
+        startDate,
+        endDate
+      })
+    }
+  }
+
   handleNewTripSave = async () => {
 
     let { name, startDate, endDate, userId } = this.state;
@@ -41,6 +54,14 @@ export default class TripForm extends Component {
       userId
     }
 
+    if (!this.props.navigation.getParam('trip')) {
+      this.createNewTrip(tripInfo)
+    } else {
+      this.editTrip(tripInfo)
+    }
+  }
+
+  createNewTrip = async (tripInfo) => {
     try {
       let newTrip = await postNewTrip(tripInfo);
       this.props.navigation.navigate('Trip', {trip: newTrip})
@@ -51,9 +72,16 @@ export default class TripForm extends Component {
     }
   }
   
+  editTrip = () => {
+    console.log('editing trip')
+  }
+
   
   render() {
+    console.log(this.state)
     const {navigate} = this.props.navigation;
+
+
     return (
       <View style={styles.container}>
 
@@ -62,19 +90,14 @@ export default class TripForm extends Component {
         <ScrollView>
 
           <View>
-            {this.state.trip === null && 
-              <Text style={styles.title}>Add A New Trip</Text>
-            }
-
-            {this.state.trip && 
-              <Text style={styles.title}>Edit Trip</Text>
-            }
+            {this.state.trip === null && <Text style={styles.title}>Add A New Trip</Text>}
+            {this.state.trip && <Text style={styles.title}>Edit Trip</Text>}
           </View>
 
           <View style={styles.form}>
             <TextInput
               style={styles.input}
-              placeholder='Trip Name'
+              placeholder={this.state.trip && this.state.name || 'Trip Name'}
               onChangeText={(name) => this.setState({name})}
               value={this.state.name}
               onBlur={Keyboard.dismiss}
