@@ -9,8 +9,8 @@ import {
   TouchableOpacity,
   Keyboard 
 } from 'react-native';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from '../WandererHeader/WandererHeader';
 import { postNewTrip, patchTrip, deleteTrip } from '../../util/apiCalls';
 
 export default class TripForm extends Component {

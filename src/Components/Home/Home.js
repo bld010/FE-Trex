@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import WandererHeader from '../WandererHeader/WandererHeader';
-import WandererFooter from '../WandererFooter/WandererFooter'
+import WandererFooter from '../WandererFooter/WandererFooter';
 
 export default class Home extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export default class Home extends Component {
         <ScrollView>
           <Text style={styles.text}>Welcome to Ariva</Text>
             <Text style={styles.text}>I am a ...</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigate('WandererDashboard')}>
               <Text style={styles.button}>Wanderer</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigate('FollowerDashboard')}>
