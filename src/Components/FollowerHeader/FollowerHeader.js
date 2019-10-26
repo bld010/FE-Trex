@@ -24,11 +24,11 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
   top: {
-    backgroundColor: '#1C4263',
+    backgroundColor: '#84183B',
     flex: 0
   },
   header: {
-    backgroundColor: '#1C4263',
+    backgroundColor: '#84183B',
     color: 'white',
     paddingLeft: 10,
     textAlign: 'center',

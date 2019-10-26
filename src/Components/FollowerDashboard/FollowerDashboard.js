@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Home from '../Home/Home'
 import {
   StyleSheet,
   Text,
@@ -10,15 +11,18 @@ import {
 } from "react-native";
 
 export default class FollowerDashboard extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
 
     }
   }
   render() {
+    const {navigate} = this.props.navigation;
     return (
-      <Text>Display Wanderers that user follows</Text>
+      <View>
+        <Text>Display Wanderers that user follows</Text>
+      </View>
     )
   }
 }

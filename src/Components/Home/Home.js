@@ -11,6 +11,12 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer'
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props) 
+      this.state = {
+
+      }
+  }
 
   render() {
       const {navigate} = this.props.navigation;
@@ -23,7 +29,7 @@ export default class Home extends Component {
             <TouchableOpacity>
               <Text style={styles.button}>Wanderer</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigate('FollowerDashboard')}>
               <Text style={styles.button}>Follower</Text>
             </TouchableOpacity>
 
