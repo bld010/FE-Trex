@@ -20,14 +20,9 @@ export default class TripForm extends Component {
       name: '',
       startDate: '',
       endDate: '', 
-      userId: this.props.navigation.getParam('userId')
+      userId: this.props.navigation.getParam('userId'),
     }
   }
-  
-  //conditional rendering
-  //if (trip has a leg)
-  //Text - Leg Name
-  //button - leg name
 
   handleNewTripSave = async () => {
 

@@ -16,6 +16,7 @@ export default class LegForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      existingLeg: this.props.navigation.getParam('leg'),
       startLegDest: '',
       endLegDest: '',
       startLegDate: '',
@@ -26,15 +27,16 @@ export default class LegForm extends Component {
   }
 
   // returnDateToday = () => {
-  //   let today = new Date();
-  //   let year = today.getFullYear();
-  //   let month = String(today.getMonth() + 1).padStart(2, '0');
-  //   let day = today.getDate()
-  //   return `${year}/${month}/${day}`
-  // }
-
-  render() {
+    //   let today = new Date();
+    //   let year = today.getFullYear();
+    //   let month = String(today.getMonth() + 1).padStart(2, '0');
+    //   let day = today.getDate()
+    //   return `${year}/${month}/${day}`
+    // }
+    
+    render() {
     const {navigate} = this.props.navigation;
+    console.log(this.state.existingLeg)
     return (
       <View style={styles.container}>
         <Header />

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { 
   StyleSheet, 
   Text, 
@@ -10,65 +10,35 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
 
-export default class Trip extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      trip: this.props.navigation.getParam('trip')
-    }
-  }
-
-  generateLegElements = () => {
-    const {navigate} = this.props.navigation;
-    return this.state.trip.legs.map(leg => {
-      return (
-        <TouchableOpacity key={leg.name} style={styles.tripButton}>
-        <Text onPress={() => navigate('Leg', {leg})} style={styles.text} key={leg.name}>{leg.name}</Text>
-      </TouchableOpacity>
-      )
-    })
-  }
-
-  render() {
-    const {navigate} = this.props.navigation;
-    let { name, startDate, endDate } = this.state.trip
-    return (
+export const Leg = (props) => {
+  const {navigate} = props.navigation;
+  let { startLocation, endLocation, startDate, endDate} = props.navigation.getParam('leg')
+  let leg = props.navigation.getParam('leg')
+  return (
       <View style={styles.container}>
 
       <Header />
 
         <ScrollView>
 
-          <View style={styles.tripHeader}>
-            <Text style={styles.text}>{name}</Text>
+          <View style={styles.legHeader}>
+            <Text style={styles.text}>{startLocation}</Text>
+            <Text style={styles.text}>{endLocation}</Text>
             <TouchableOpacity>
-              <Text style={styles.editTripButton}>Edit Trip</Text>
+              <Text onPress={() => navigate('LegForm', { leg })} style={styles.editLegButton}>Edit Leg</Text>
             </TouchableOpacity>
-          </View>
 
+
+          </View>
           <View style={styles.footer}>
             <Text style={styles.footerText}>{startDate} thru {endDate}</Text>
           </View>
 
-          <View>
-            {this.state.trip.legs && this.generateLegElements()}
-          </View>
-
-
-          <View style={styles.container}>
-            <TouchableOpacity style={styles.button}>
-              <Text onPress={() => navigate('LegForm')} style={styles.text}>Add A Leg + </Text>
-            </TouchableOpacity>
-          </View>
-
-          
         </ScrollView>
 
         <Footer navigate={navigate} />
         </View>
-    );
-  }
+    )
 }
 
 
@@ -80,14 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
     
   }, 
-  button: {
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: 'white',
-    marginVertical: 10,
-    backgroundColor: '#1C4263'
-  },
-  tripHeader: {
+  legHeader: {
     flex: 1,
     flexDirection: 'row',
     padding: 20,
@@ -100,7 +63,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginVertical: 10,
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 10,
     width: 'auto'
   },
   header: {
@@ -113,7 +76,7 @@ const styles = StyleSheet.create({
     top: 0,
     fontSize: 50,
   }, 
-  editTripButton: {
+  editLegButton: {
     borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,

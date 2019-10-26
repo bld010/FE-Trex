@@ -1,15 +1,17 @@
-import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
-import Home from "./Home/Home";
-import MyTrips from "./MyTrips/MyTrips";
-import TripForm from "./TripForm/TripForm";
-import Trip from "./Trip/Trip";
-import LegForm from "./LegForm/LegForm";
-import { MyFollowers } from "./MyFollowers/MyFollowers";
-import FollowerForm from "./FollowerForm/FollowerForm";
-import { SafetyInfo } from "./SafetyInfo/SafetyInfo";
-import AddLodgingInfo from "./AddLodgingInfo/AddLodgingInfo";
-import AddTransportInfo from "./AddTransportInfo/AddTransportInfo";
+
+import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+import Home from './Home/Home';
+import MyTrips from './MyTrips/MyTrips';
+import TripForm from './TripForm/TripForm';
+import Trip from './Trip/Trip';
+import LegForm from './LegForm/LegForm';
+import { MyFollowers } from './MyFollowers/MyFollowers';
+import FollowerForm from './FollowerForm/FollowerForm';
+import { SafetyInfo } from './SafetyInfo/SafetyInfo';
+import AddLodgingInfo from './AddLodgingInfo/AddLodgingInfo';
+import AddTransportInfo from './AddTransportInfo/AddTransportInfo';
+import { Leg } from './Leg/Leg';
 
 const RootStack = createStackNavigator({
   Home: {
@@ -90,6 +92,14 @@ const RootStack = createStackNavigator({
     screen: AddTransportInfo,
     navigationOptions: {
       headerBackTitle: 'Add Transportation',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
+  Leg: {
+    screen: Leg,
+    navigationOptions: {
+      headerBackTitle: 'Leg',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }

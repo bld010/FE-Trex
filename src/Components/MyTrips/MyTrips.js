@@ -47,9 +47,9 @@ export default class MyTrips extends Component {
   render() {
     const {navigate} = this.props.navigation;
     const { trips, error} = this.state
+    console.log(trips)
 
     return(
-      
       <View style={styles.container}>
 
         <Header />
