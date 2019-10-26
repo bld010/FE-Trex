@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
 import {
   StyleSheet,
   Text,
@@ -18,9 +16,6 @@ export default class DefaultWandererMessages extends Component {
   }
   render() {
     return (
-      <View>
-        <Header />
-      </View>
       <View style={styles.container}>
         <TouchableOpacity>
           <Text style={styles.button}>Default Message 1</Text>
@@ -35,9 +30,6 @@ export default class DefaultWandererMessages extends Component {
           <Text style={styles.button}>Default Message 4</Text>
         </TouchableOpacity>
       </View>
-      <View>
-        <Footer />
-      </View>
     );
   }
 }
@@ -45,7 +37,7 @@ export default class DefaultWandererMessages extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    backgroundColor: 'white',
     alignItems: 'stretch',
     justifyContent: 'flex-start'
   },
@@ -53,7 +45,7 @@ const styles = StyleSheet.create({
     marginTop: 15
   },
   textInput: {
-    backgroundColor: "white",
+    backgroundColor: "black",
     borderColor: "#CCCCCC",
     borderTopWidth: 1,
     borderBottomWidth: 1,
@@ -75,6 +67,6 @@ const styles = StyleSheet.create({
     padding: 10,
     color: "white",
     textAlign: "center",
-    backgroundColor: "#1C4263"
+    backgroundColor: "#84183B"
   }
 });
