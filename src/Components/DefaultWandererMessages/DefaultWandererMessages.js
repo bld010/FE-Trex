@@ -19,6 +19,7 @@ export default class DefaultWandererMessages extends Component {
   render() {
     return (
       <View>
+      <View>
         <Header />
       </View>
       <View style={styles.container}>
@@ -37,6 +38,7 @@ export default class DefaultWandererMessages extends Component {
       </View>
       <View>
         <Footer />
+      </View>
       </View>
     );
   }

@@ -9,7 +9,7 @@ import {
   Keyboard
 } from "react-native";
 
-export default class DefaultWandererMessages extends Component {
+export default class DefaultFollowerMessages extends Component {
   constructor() {
     super();
     this.state = {};
