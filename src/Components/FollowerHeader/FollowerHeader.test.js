@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { FollowerHeader } from './FolloerHeader';
+import { FollowerHeader } from './FollowerHeader';
 
 describe('FollowerHeader', () => {
   it('should return true', () => {

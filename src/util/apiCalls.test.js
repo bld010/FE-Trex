@@ -19,7 +19,7 @@ describe('apiCalls', () => {
       mockFetch = jest.fn()
       global.fetch = mockFetch;
 
-      queryParams = `{user(id: 1) {trips {id, name, startDate, endDate legs{name startDate endDate startLocation endLocation id}}}}`
+      queryParams = `{user(id: 1) {trips {id, name, startDate, endDate legs{name startDate endDate id startLocation endLocation tripId}}}}`
 
   
       url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
@@ -359,7 +359,7 @@ describe('postNewLeg', () => {
           return (
             { data: {
                 createLeg: {
-                  leg: {}
+                  leg:{}
                 }
               }
             }
