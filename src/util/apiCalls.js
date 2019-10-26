@@ -149,29 +149,29 @@ export const postNewLeg = async (legInfo) => {
 }
 
 
-// export const patchLeg = async (legInfo) => {
-//   let options = {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     }
-//   }
+export const patchLeg = async (legInfo) => {
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
 
-//   let { startLocation, endLocation, startDate, endDate, tripId, id } = legInfo; 
+  let { startLocation, endLocation, startDate, endDate, tripId, id } = legInfo; 
 
-//   let queryParams = `mutation {updateLeg(input: {id: ${id} name: "${startLocation}" startDate: "${startDate}", endDate: "${endDate}", startLocation: "${startLocation}", endLocation: "${endLocation}", tripId: ${tripId}}) {leg {startDate endDate startLocation endLocation id tripId}}}`
+  let queryParams = `mutation {updateLeg(input: {id: ${id}, name: "${startLocation}", startDate: "${startDate}", endDate: "${endDate}", startLocation: "${startLocation}", endLocation: "${endLocation}", tripId: ${tripId}}) {leg{startDate endDate startLocation endLocation id tripId}}}`
   
-//   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
-//   try {
-//     let resp = await fetch(url,options)
-//     if (!resp.ok) {
-//       throw new Error('There was an error editing your leg')
-//     }
-//     let data = await resp.json();
-//     return data.data.updateLeg.leg
+  try {
+    let resp = await fetch(url,options)
+    if (!resp.ok) {
+      throw new Error('There was an error editing your leg')
+    }
+    let data = await resp.json();
+    return data.data.updateLeg.leg
   
-//   } catch (error) {
-//     throw error
-//   }
-// }
+  } catch (error) {
+    throw error
+  }
+}
