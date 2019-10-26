@@ -8,8 +8,8 @@ import {
   TouchableOpacity ,
   Keyboard
 } from 'react-native';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from '../WandererHeader/WandererHeader';
 
 export default class FollowerForm extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ export default class FollowerForm extends Component {
     return (
       <View style={styles.container}>
 
-      <Header />
+      <WandererHeader />
 
         <ScrollView>
 
@@ -74,7 +74,7 @@ export default class FollowerForm extends Component {
           </TouchableOpacity>
           </View>
         </ScrollView>        
-        <Footer navigate={navigate} />
+        <WandererFooter navigate={navigate} />
       </View>
     );
   }

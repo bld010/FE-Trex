@@ -7,7 +7,7 @@ import {
   SafeAreaView
 } from 'react-native';
 
-export default class Header extends Component {
+export default class WandererHeader extends Component {
   constructor(props) {
     super(props)
   }

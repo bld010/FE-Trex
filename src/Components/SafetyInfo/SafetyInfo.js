@@ -6,8 +6,8 @@ import {
   ScrollView,
   TouchableOpacity 
 } from 'react-native';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from '../WandererHeader/WandererHeader';
 
 export function SafetyInfo(props) {
 
@@ -16,9 +16,11 @@ export function SafetyInfo(props) {
 
     return (
       <View style={styles.container}>
-        <Header/>
+        <WandererHeader/>
+        <ScrollView>
         <Text style={styles.title}>HOLA</Text>
-        <Footer navigate={navigate}/>
+        </ScrollView>
+        <WandererFooter navigate={navigate}/>
       </View>
     )
 }
