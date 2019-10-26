@@ -106,7 +106,7 @@ export default class TripForm extends Component {
     return (
       <View style={styles.container}>
 
-      <Header />
+      <WandererHeader />
 
         <ScrollView>
 
@@ -187,7 +187,7 @@ export default class TripForm extends Component {
           {this.state.error !== '' && <Text style={styles.text}>{this.state.error}</Text>}
 
         </ScrollView>        
-        <Footer navigate={navigate} />
+        <WandererFooter navigate={navigate} />
       </View>
     );
   }

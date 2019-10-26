@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AppNavigator from '../AppNavigator';
+// import Dashboard from '../Dashboard/'
 
 export default class App extends Component {
 

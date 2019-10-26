@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { App } from './App';
+import { DefaultWandererMessages } from './DefaultWandererMessages';
 
-describe('App', () => {
+describe('DefaultWandererMessages', () => {
   it('should return true', () => {
     expect(true).toEqual(true)
   })

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { App } from './App';
+import { MessageHistory } from './MessageHistory';
 
-describe('App', () => {
+describe('MessageHistory', () => {
   it('should return true', () => {
     expect(true).toEqual(true)
   })

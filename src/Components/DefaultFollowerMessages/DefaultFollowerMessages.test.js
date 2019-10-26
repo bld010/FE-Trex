@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { Footer } from './Footer';
+import { DefaultFollowerMessages } from './DefaultFollowerMessages';
 
-describe('Footer', () => {
+describe('DefaultFollowerMessages', () => {
   it('should return true', () => {
     expect(true).toEqual(true)
   })

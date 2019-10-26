@@ -6,8 +6,8 @@ import {
   ScrollView,
   TouchableOpacity 
 } from 'react-native';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from '../WandererHeader/WandererHeader';
 import { fetchMyTrips } from '../../util/apiCalls';
 import { withNavigationFocus } from 'react-navigation';
 
@@ -60,7 +60,7 @@ class MyTrips extends Component {
     return(
       <View style={styles.container}>
 
-        <Header />
+        <WandererHeader />
 
         <ScrollView>
           <Text style={styles.title}>My Trips</Text>
@@ -74,7 +74,7 @@ class MyTrips extends Component {
           </TouchableOpacity>
         </ScrollView>
   
-        <Footer navigate={navigate} />
+        <WandererFooter navigate={navigate} />
 
         
     </View>

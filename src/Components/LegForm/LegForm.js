@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DatePicker from 'react-native-datepicker';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from '../WandererHeader/WandererHeader';
 import {
   StyleSheet,
   Text,
@@ -26,20 +26,12 @@ export default class LegForm extends Component {
     };
   }
 
-  // returnDateToday = () => {
-    //   let today = new Date();
-    //   let year = today.getFullYear();
-    //   let month = String(today.getMonth() + 1).padStart(2, '0');
-    //   let day = today.getDate()
-    //   return `${year}/${month}/${day}`
-    // }
-    
     render() {
     const {navigate} = this.props.navigation;
     console.log(this.state.existingLeg)
     return (
       <View style={styles.container}>
-        <Header />
+        <WandererHeader />
       <ScrollView>
         <View style={styles.inputContainer}>
           <TextInput
@@ -115,7 +107,7 @@ export default class LegForm extends Component {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <Footer navigate={navigate} />
+      <WandererFooter navigate={navigate} />
       </View>
     );
   }

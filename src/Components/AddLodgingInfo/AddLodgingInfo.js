@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DatePicker from "react-native-datepicker";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import WandererHeader from "../WandererHeader/WandererHeader";
+import WandererFooter from "../WandererFooter/WandererFooter";
 import {
   StyleSheet,
   Text,
@@ -28,7 +28,7 @@ export default class AddLodgingInfo extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Header />
+        <WandererHeader />
         <ScrollView>
           <View style={styles.inputContainer}>
             <TextInput
@@ -106,7 +106,7 @@ export default class AddLodgingInfo extends Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-        <Footer navigate={navigate} />
+        <WandererFooter navigate={navigate} />
       </View>
     );
   }
