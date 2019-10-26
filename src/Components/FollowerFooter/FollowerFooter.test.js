@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { App } from './App';
+import { FollowerFooter } from './FollowerFooter';
 
-describe('App', () => {
+describe('FollowerFooter', () => {
   it('should return true', () => {
     expect(true).toEqual(true)
   })

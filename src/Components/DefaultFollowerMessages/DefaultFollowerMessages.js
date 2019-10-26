@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import WandererFooter from "../WandererFooter/WandererFooter";
-import WandererHeader from "../WandererHeader/WandererHeader";
+import FollowerHeader from '../FollowerHeader/FollowerHeader';
+import FollowerFooter from '../FollowerFooter/FollowerFooter'
 import {
   StyleSheet,
   Text,
@@ -11,18 +11,17 @@ import {
   Keyboard
 } from "react-native";
 
-export default class DefaultWandererMessages extends Component {
+export default class DefaultFollowerMessages extends Component {
   constructor() {
     super();
     this.state = {};
   }
   render() {
+    const {navigate} = this.props.navigation;
     return (
-      <View>
-      <View>
-        <WandererHeader />
-      </View>
       <View style={styles.container}>
+        <FollowerHeader />
+        <ScrollView>
         <TouchableOpacity>
           <Text style={styles.button}>Default Message 1</Text>
         </TouchableOpacity>
@@ -35,10 +34,8 @@ export default class DefaultWandererMessages extends Component {
         <TouchableOpacity>
           <Text style={styles.button}>Default Message 4</Text>
         </TouchableOpacity>
-      </View>
-      <View>
-        <WandererFooter />
-      </View>
+        </ScrollView>
+        <FollowerFooter navigate={navigate}/>
       </View>
     );
   }
@@ -47,23 +44,9 @@ export default class DefaultWandererMessages extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    backgroundColor: 'white',
     alignItems: 'stretch',
     justifyContent: 'flex-start'
-  },
-  inputContainer: {
-    marginTop: 15
-  },
-  textInput: {
-    backgroundColor: "white",
-    borderColor: "#CCCCCC",
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    height: 50,
-    fontSize: 25,
-    marginTop: 15,
-    paddingLeft: 20,
-    paddingRight: 20
   },
   button: {
     borderColor: "white",
@@ -77,6 +60,6 @@ const styles = StyleSheet.create({
     padding: 10,
     color: "white",
     textAlign: "center",
-    backgroundColor: "#1C4263"
+    backgroundColor: "#84183B"
   }
 });

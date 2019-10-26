@@ -6,8 +6,8 @@ import {
   ScrollView,
   TouchableOpacity 
 } from 'react-native';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from '../WandererHeader/WandererHeader';
 import { fetchMyTrips } from '../../util/apiCalls';
 import { withNavigationFocus } from 'react-navigation';
 
@@ -38,6 +38,7 @@ class MyTrips extends Component {
   componentDidMount = async  () => {
     try {
       let trips = await fetchMyTrips(this.state.user.id)
+      console.log('trips', trips)
       this.setState({ trips })
 
     } catch (error) {
@@ -55,12 +56,11 @@ class MyTrips extends Component {
   render() {
     const {navigate} = this.props.navigation;
     const { trips, error} = this.state
-    console.log(trips)
 
     return(
       <View style={styles.container}>
 
-        <Header />
+        <WandererHeader />
 
         <ScrollView>
           <Text style={styles.title}>My Trips</Text>
@@ -74,7 +74,7 @@ class MyTrips extends Component {
           </TouchableOpacity>
         </ScrollView>
   
-        <Footer navigate={navigate} />
+        <WandererFooter navigate={navigate} />
 
         
     </View>

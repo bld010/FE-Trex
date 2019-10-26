@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { App } from './App';
+import {WandererDashboard} from './WandererDashboard';
 
-describe('App', () => {
+describe('WandererDashboard', () => {
   it('should return true', () => {
     expect(true).toEqual(true)
   })

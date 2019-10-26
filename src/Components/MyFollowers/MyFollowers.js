@@ -6,8 +6,8 @@ import {
   ScrollView,
   TouchableOpacity 
 } from 'react-native';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from '../WandererHeader/WandererHeader';
 
 export function MyFollowers(props) {
 
@@ -16,7 +16,7 @@ export function MyFollowers(props) {
 
     return (
       <View style={styles.container}>
-        <Header />
+        <WandererHeader />
         <ScrollView>
           <Text style={styles.title}>My Followers</Text>
           {/* <View>
@@ -26,7 +26,7 @@ export function MyFollowers(props) {
             <Text style={styles.text} onPress={() => navigate('FollowerForm')}>Add a New Follower</Text>
           </TouchableOpacity>
         </ScrollView>
-        <Footer navigate={navigate} />
+        <WandererFooter navigate={navigate} />
     </View>
     )
 }

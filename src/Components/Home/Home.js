@@ -7,31 +7,36 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer'
+import WandererHeader from '../WandererHeader/WandererHeader';
+import WandererFooter from '../WandererFooter/WandererFooter';
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props) 
+      this.state = {
+
+      }
+  }
 
   render() {
       const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Header />
+        <WandererHeader />
         <ScrollView>
           <Text style={styles.text}>Welcome to Ariva</Text>
             <Text style={styles.text}>I am a ...</Text>
-            <TouchableOpacity onPress={() => navigate('Dashboard')}>
+            <TouchableOpacity onPress={() => navigate('WandererDashboard')}>
               <Text style={styles.button}>Wanderer</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.button} >Follower</Text>
+            <TouchableOpacity onPress={() => navigate('FollowerDashboard')}>
+              <Text style={styles.button}>Follower</Text>
             </TouchableOpacity>
 
 
         </ScrollView>
   
-       <Footer navigate={navigate} />
+       <WandererFooter navigate={navigate} />
         
     </View>
     )
@@ -42,8 +47,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start'
   }, 
   text: {
     color: 'white',

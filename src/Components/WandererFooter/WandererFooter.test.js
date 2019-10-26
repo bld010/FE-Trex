@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { Header } from './Header';
+import { WandererFooter } from './WandererFooter';
 
-describe('Header', () => {
+describe('WandererFooter', () => {
   it('should return true', () => {
     expect(true).toEqual(true)
   })

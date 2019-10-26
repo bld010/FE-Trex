@@ -9,22 +9,21 @@ import { 
   TouchableOpacity 
 } from 'react-native';
 
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import WandererHeader from '../WandererHeader/WandererHeader';
+import WandererFooter from '../WandererFooter/WandererFooter';
 
-
-export default class Dashboard extends Component {
+export default class WandererDashboard extends Component {
   render() {
   const {navigate} = this.props.navigation;
 
     return (
   <View style={styles.container}>
-    <Header />
+    <WandererHeader />
     <ScrollView>
       <Weather />
       <Map />
     </ScrollView>
-    <Footer navigate={navigate}/>
+    <WandererFooter navigate={navigate}/>
   </View>
       
     )

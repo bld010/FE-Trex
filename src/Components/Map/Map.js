@@ -9,8 +9,7 @@ import {
   TextInput,
   Dimensions
 } from "react-native";
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+
 
 export default class Map extends Component {
   constructor() {

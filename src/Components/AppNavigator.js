@@ -6,13 +6,16 @@ import MyTrips from './MyTrips/MyTrips';
 import TripForm from './TripForm/TripForm';
 import Trip from './Trip/Trip';
 import LegForm from './LegForm/LegForm';
-import Dashboard from './Dashboard/Dashboard';
 import { MyFollowers } from './MyFollowers/MyFollowers';
 import FollowerForm from './FollowerForm/FollowerForm';
 import { SafetyInfo } from './SafetyInfo/SafetyInfo';
 import AddLodgingInfo from './AddLodgingInfo/AddLodgingInfo';
 import AddTransportInfo from './AddTransportInfo/AddTransportInfo';
 import { Leg } from './Leg/Leg';
+import FollowerDashboard from './FollowerDashboard/FollowerDashboard';
+import DefaultFollowerMessages from './DefaultFollowerMessages/DefaultFollowerMessages';
+import MyWandererTrips from './MyWanderersTrips/MyWanderersTrips';
+import WandererDashboard from './WandererDashboard/WandererDashboard';
 
 const RootStack = createStackNavigator({
   Home: {
@@ -20,9 +23,15 @@ const RootStack = createStackNavigator({
     navigationOptions: {
       headerBackTitle: 'Home',
       headerTransparent: true,
-      // headerStyle: { backgroundColor: 'black' },
-      // headerTitleStyle: { color: 'white' },
       headerBackTitleStyle: { color: 'white'}
+    }
+  },
+  WandererDashboard: {
+    screen: WandererDashboard,
+    navigationOptions: {
+      headerBackTitle: 'Dashboard',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white' }
     }
   },
   MyTrips: {
@@ -104,15 +113,31 @@ const RootStack = createStackNavigator({
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }
-  }, 
-  Dashboard: {
-    screen: Dashboard,
+  },
+  FollowerDashboard: {
+    screen: FollowerDashboard,
     navigationOptions: {
-      headerBackTitle: 'My Dashboard',
+      headerBackTitle: 'Follower Dashboard',
       headerTransparent: true,
-      headerBackTitleStyle: { color: 'white' }
+      headerBackTitleStyle: { color: 'white'} 
     }
-  }
+  },
+  DefaultFollowerMessages: {
+    screen: DefaultFollowerMessages,
+    navigationOptions: {
+      headerBackTitle: 'Follower Messages',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
+  MyWandererTrips: {
+    screen: MyWandererTrips,
+    navigationOptions: {
+      headerBackTitle: 'Follower Messages',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
 });
 
 export default createAppContainer(RootStack);
