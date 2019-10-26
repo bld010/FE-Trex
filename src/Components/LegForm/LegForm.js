@@ -16,6 +16,7 @@ export default class LegForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      existingLeg: this.props.navigation.getParam('leg'),
       startLegDest: '',
       endLegDest: '',
       startLegDate: '',
@@ -25,8 +26,9 @@ export default class LegForm extends Component {
     };
   }
 
-  render() {
+    render() {
     const {navigate} = this.props.navigation;
+    console.log(this.state.existingLeg)
     return (
       <View style={styles.container}>
         <Header />
