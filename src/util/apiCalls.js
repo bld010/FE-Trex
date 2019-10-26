@@ -81,3 +81,33 @@ export const patchTrip = async (tripInfo) => {
     throw error
   }
 }
+
+
+export const postNewLeg = async (legInfo) => {
+  console.log('in the post new leg', legInfo)
+  // let options = {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   }
+  // }
+  // let { startLocation, endLocation, startDate, endDate, tripId } = tripInfo;  
+
+  // let queryParams = `mutation {createLeg(input: {startDate: "${startDate}", endDate: "${endDate}", startLocation: "${startLocation}", endLocation: "${endLocation}" tripId: ${tripId}}) {leg {startDate endDate startLocation endLocation id}}}`
+
+  // let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  // try {
+  //   let resp = await fetch(url,options)
+  //   if (!resp.ok) {
+  //     throw new Error('There was an error creating your leg')
+  //   }
+
+  //   let data = await resp.json();
+  //   return data.data.createLeg.leg
+  
+  // } catch (error) {
+  //   throw error
+  // }
+
+}

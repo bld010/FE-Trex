@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import DatePicker from 'react-native-datepicker';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
 import {
   StyleSheet,
   Text,
@@ -11,44 +9,113 @@ import {
   TextInput,
   Keyboard
 } from "react-native";
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import { postNewLeg, patchLeg, deleteLeg } from '../../util/apiCalls';
 
 export default class LegForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      existingLeg: this.props.navigation.getParam('leg'),
-      startLegDest: '',
-      endLegDest: '',
-      startLegDate: '',
-      endLegDate: '',
+      startLocation: '',
+      endLocation: '',
       startDate: '',
       endDate: '',
+      tripId: this.props.navigation.getParam('tripId'),
+      leg: this.props.navigation.getParam('leg') || null,
+      error: ''
     };
   }
 
-    render() {
+  componentDidMount = () => {
+    console.log('from the edit form route', this.state.tripId)
+    if (this.state.leg) {
+      let { startDate, endDate, startLocation, endLocation } = this.state.leg
+      this.setState({
+        startLocation,
+        startDate,
+        endLocation,
+        endDate
+      })
+    }
+  }
+
+  handleNewLegSave = async () => {
+    if(!this.props.navigation.getParam('leg')) {
+      this.createNewLeg()
+    } else {
+      this.editLeg()
+    }
+  }
+
+  createNewLeg = async () => {
+    let {startLocation, endLocation, startDate, endDate, tripId} = this.state;
+    let newLegInfo = {
+      startLocation,
+      endLocation,
+      startDate,
+      endDate,
+      tripId
+    }
+
+    try {
+      let newLeg = await postNewLeg(newLegInfo);
+      this.props.navigation.navigate('Leg', {leg: newLeg})
+    }
+    catch (error) {
+      this.setState({ error: 'There was an error creating your leg'})
+    }
+  }
+
+  editLeg = async () => {
+    let {startLegDest, endLegDest, startLegDate, endLegDate} = this.state;
+
+    let editedLegInfo = { 
+      startLegDest,
+      endLegDest,
+      startLegDate,
+      endLegDate,
+      id: tripId
+    }
+
+    try {
+      let editedLeg = await patchLeg(editedLegInfo)
+      this.props.navigation.navigate('Leg', {leg: newLeg})
+    }
+    catch (error) {
+      this.setState({error: 'There was an error editing your leg'})
+    }
+  }
+
+  render() {
     const {navigate} = this.props.navigation;
-    console.log(this.state.existingLeg)
     return (
       <View style={styles.container}>
         <Header />
-      <ScrollView>
+        <ScrollView>
+
+        <View>
+            {this.state.leg === null && <Text style={styles.title}>Add A New Leg</Text>}
+            {this.state.leg && <Text style={styles.title}>Edit Leg</Text>}
+          </View>
+
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.textInput}
             placeholder="Start Destination"
             maxLength={20}
             onBlur={Keyboard.dismiss}
-            value={this.state.startLegDest}
-            onChangeText={startLegDest => this.setState({ startLegDest })}
+            value={this.state.startLocation}
+            onChangeText={startLocation => this.setState({ startLocation })}
           />
           <TextInput
             style={styles.textInput}
             placeholder="End Destination"
             maxLength={20}
             onBlur={Keyboard.dismiss}
-            value={this.state.endLegDest}
-            onChangeText={endLegDest => this.setState({ endLegDest })}
+            value={this.state.endLocation}
+            onChangeText={endLocation => this.setState({ endLocation })}
           />
           <Text>Start Date:</Text>
           <DatePicker
@@ -102,7 +169,7 @@ export default class LegForm extends Component {
           <TouchableOpacity>
             <Text style={styles.button}>Edit</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.handleNewLegSave}>
             <Text style={styles.button}>Save</Text>
           </TouchableOpacity>
         </View>

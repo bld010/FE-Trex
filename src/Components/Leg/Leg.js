@@ -13,6 +13,7 @@ import Header from '../Header/Header';
 export const Leg = (props) => {
   const {navigate} = props.navigation;
   let { startLocation, endLocation, startDate, endDate} = props.navigation.getParam('leg')
+  let  tripId  = props.navigation.getParam('tripId')
   let leg = props.navigation.getParam('leg')
   return (
       <View style={styles.container}>
@@ -25,7 +26,7 @@ export const Leg = (props) => {
             <Text style={styles.text}>{startLocation}</Text>
             <Text style={styles.text}>{endLocation}</Text>
             <TouchableOpacity>
-              <Text onPress={() => navigate('LegForm', { leg })} style={styles.editLegButton}>Edit Leg</Text>
+              <Text onPress={() => navigate('LegForm', { leg, tripId })} style={styles.editLegButton}>Edit Leg</Text>
             </TouchableOpacity>
 
 
