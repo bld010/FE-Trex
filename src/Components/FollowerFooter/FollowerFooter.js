@@ -19,6 +19,11 @@ export default class Footer extends Component {
         >
           <Text style={styles.footerText}>Messages</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => this.props.navigate("MyWandererTrips")}
+        >
+          <Text style={styles.footerText}>Wanderer Trips</Text>
+        </TouchableOpacity>
       </View>
     );
   }

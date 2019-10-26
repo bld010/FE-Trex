@@ -13,7 +13,8 @@ import AddLodgingInfo from './AddLodgingInfo/AddLodgingInfo';
 import AddTransportInfo from './AddTransportInfo/AddTransportInfo';
 import { Leg } from './Leg/Leg';
 import FollowerDashboard from './FollowerDashboard/FollowerDashboard';
-import DefaultFollowerMessages from './DefaultFollowerMessages/DefaultFollowerMessages'
+import DefaultFollowerMessages from './DefaultFollowerMessages/DefaultFollowerMessages';
+import MyWandererTrips from './MyWanderersTrips/MyWanderersTrips'
 
 const RootStack = createStackNavigator({
   Home: {
@@ -122,6 +123,14 @@ const RootStack = createStackNavigator({
   },
   DefaultFollowerMessages: {
     screen: DefaultFollowerMessages,
+    navigationOptions: {
+      headerBackTitle: 'Follower Messages',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
+  MyWandererTrips: {
+    screen: MyWandererTrips,
     navigationOptions: {
       headerBackTitle: 'Follower Messages',
       headerTransparent: true,

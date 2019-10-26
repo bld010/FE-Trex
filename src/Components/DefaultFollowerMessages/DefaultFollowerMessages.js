@@ -21,6 +21,7 @@ export default class DefaultFollowerMessages extends Component {
     return (
       <View style={styles.container}>
         <FollowerHeader />
+        <ScrollView>
         <TouchableOpacity>
           <Text style={styles.button}>Default Message 1</Text>
         </TouchableOpacity>
@@ -33,6 +34,7 @@ export default class DefaultFollowerMessages extends Component {
         <TouchableOpacity>
           <Text style={styles.button}>Default Message 4</Text>
         </TouchableOpacity>
+        </ScrollView>
         <FollowerFooter navigate={navigate}/>
       </View>
     );
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     width: "auto",
     height: 60,
-    margin: 31,
+    margin: 20,
     fontSize: 30,
     padding: 10,
     color: "white",
