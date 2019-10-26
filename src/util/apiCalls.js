@@ -63,7 +63,6 @@ export const patchTrip = async (tripInfo) => {
     }
   }
   let { name, startDate, endDate, id } = tripInfo;  
-  console.log('tripInfo', tripInfo)
 
   let queryParams = `mutation {updateTrip(input: {name: "${name}", startDate: "${startDate}", endDate: "${endDate}", id: ${id}}) {trip {name startDate endDate id}}}`
 
@@ -77,7 +76,6 @@ export const patchTrip = async (tripInfo) => {
     }
 
     let data = await resp.json();
-    console.log(data.data.updateTrip.trip)
     return data.data.updateTrip.trip
   
   } catch (error) {
@@ -178,7 +176,6 @@ export const patchLeg = async (legInfo) => {
 
 
 export const deleteLeg = async (legId) => {
-
   let options = {
     method: 'POST',
     headers: {

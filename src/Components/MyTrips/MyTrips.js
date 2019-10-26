@@ -38,7 +38,6 @@ class MyTrips extends Component {
   componentDidMount = async  () => {
     try {
       let trips = await fetchMyTrips(this.state.user.id)
-      console.log('trips', trips)
       this.setState({ trips })
 
     } catch (error) {
