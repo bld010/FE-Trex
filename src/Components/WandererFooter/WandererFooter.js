@@ -6,7 +6,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-export default class Footer extends Component {
+export default class WandererFooter extends Component {
 
   constructor(props) {
     super(props)

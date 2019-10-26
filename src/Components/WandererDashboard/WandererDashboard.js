@@ -9,7 +9,7 @@ import { 
   TouchableOpacity 
 } from 'react-native';
 
-export default class Dashboard extends Component {
+export default class WandererDashboard extends Component {
   render() {
     return (
   <ScrollView>

@@ -7,7 +7,7 @@ import {
   SafeAreaView
 } from 'react-native';
 
-export default class Header extends Component {
+export default class WandererHeader extends Component {
   constructor(props) {
     super(props)
   }
@@ -16,7 +16,7 @@ export default class Header extends Component {
     return(
       <>
       <SafeAreaView style={styles.top}/>
-      <Text style={styles.header}>Ariva</Text>
+      <Text style={styles.header}>Trex</Text>
       </>
     )
   }

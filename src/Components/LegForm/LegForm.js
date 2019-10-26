@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DatePicker from 'react-native-datepicker';
+
 import {
   StyleSheet,
   Text,
@@ -9,8 +10,8 @@ import {
   TextInput,
   Keyboard
 } from "react-native";
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from '../WandererHeader/WandererHeader';
 import { postNewLeg, patchLeg, deleteLeg } from '../../util/apiCalls';
 
 export default class LegForm extends Component {
@@ -93,15 +94,15 @@ export default class LegForm extends Component {
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Header />
+
+        <WandererHeader />
         <ScrollView>
 
         <View>
             {this.state.leg === null && <Text style={styles.title}>Add A New Leg</Text>}
             {this.state.leg && <Text style={styles.title}>Edit Leg</Text>}
           </View>
-
-        <View style={styles.inputContainer}>
+      <View style={styles.inputContainer}>
           <TextInput
             style={styles.textInput}
             placeholder="Start Destination"
@@ -172,7 +173,7 @@ export default class LegForm extends Component {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <Footer navigate={navigate} />
+      <WandererFooter navigate={navigate} />
       </View>
     );
   }

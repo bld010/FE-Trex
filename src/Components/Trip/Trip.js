@@ -6,8 +6,8 @@ import {
   ScrollView,
   TouchableOpacity 
 } from 'react-native';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from '../WandererHeader/WandererHeader';
 
 
 export default class Trip extends Component {
@@ -39,7 +39,7 @@ export default class Trip extends Component {
     return (
       <View style={styles.container}>
 
-      <Header />
+      <WandererHeader />
 
         <ScrollView>
 
@@ -68,7 +68,7 @@ export default class Trip extends Component {
           
         </ScrollView>
 
-        <Footer navigate={navigate} />
+        <WandererFooter navigate={navigate} />
         </View>
     );
   }

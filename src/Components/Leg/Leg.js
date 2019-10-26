@@ -6,8 +6,8 @@ import {
   ScrollView,
   TouchableOpacity 
 } from 'react-native';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from '../WandererHeader/WandererHeader';
 
 
 export const Leg = (props) => {
@@ -18,7 +18,7 @@ export const Leg = (props) => {
   return (
       <View style={styles.container}>
 
-      <Header />
+      <WandererHeader />
 
         <ScrollView>
 
@@ -37,7 +37,7 @@ export const Leg = (props) => {
 
         </ScrollView>
 
-        <Footer navigate={navigate} />
+        <WandererFooter navigate={navigate} />
         </View>
     )
 }
