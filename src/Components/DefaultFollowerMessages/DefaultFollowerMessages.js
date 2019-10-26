@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import FollowerHeader from '../FollowerHeader/FollowerHeader';
+import FollowerFooter from '../FollowerFooter/FollowerFooter'
 import {
   StyleSheet,
   Text,
@@ -15,8 +17,10 @@ export default class DefaultFollowerMessages extends Component {
     this.state = {};
   }
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
+        <FollowerHeader />
         <TouchableOpacity>
           <Text style={styles.button}>Default Message 1</Text>
         </TouchableOpacity>
@@ -29,6 +33,7 @@ export default class DefaultFollowerMessages extends Component {
         <TouchableOpacity>
           <Text style={styles.button}>Default Message 4</Text>
         </TouchableOpacity>
+        <FollowerFooter navigate={navigate}/>
       </View>
     );
   }
@@ -41,20 +46,6 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'flex-start'
   },
-  inputContainer: {
-    marginTop: 15
-  },
-  textInput: {
-    backgroundColor: "black",
-    borderColor: "#CCCCCC",
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    height: 50,
-    fontSize: 25,
-    marginTop: 15,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
   button: {
     borderColor: "white",
     borderWidth: 1,
@@ -62,7 +53,7 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     width: "auto",
     height: 60,
-    margin: 20,
+    margin: 31,
     fontSize: 30,
     padding: 10,
     color: "white",
