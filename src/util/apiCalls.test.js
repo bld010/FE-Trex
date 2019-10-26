@@ -323,7 +323,7 @@ describe('postNewLeg', () => {
   let mockFetch;
   let url;
   let options;
-  let mockTripInfo;
+  let mockLegInfo;
 
   beforeEach(() => {
     mockFetch = jest.fn()
@@ -370,56 +370,53 @@ describe('postNewLeg', () => {
       await postNewLeg(mockLegInfo)
 
       expect(mockFetch).toHaveBeenCalledWith(url, options)
+  })
+
+  it('should return a leg object when successful (HAPPY)', async () => {
+
+    mockFetch.mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => { 
+          return (
+            { data: {
+                createLeg: {
+                  leg: {...mockLegInfo, id: 4}
+                }
+              }
+            }
+          )}
+        })
+      })
+
+      let expected = {...mockLegInfo, id: 4}
+
+      await expect(postNewLeg(mockLegInfo)).resolves.toEqual(expected)
+
+  })
+
+  it('should return an error if response status is not ok (SAD)', async () => {
+
+    mockFetch.mockImplementation(() => {
+      return Promise.resolve({
+        ok: false
+        })
+      })
+
+    await expect(postNewLeg(mockLegInfo)).rejects.toEqual(Error('There was an error creating your leg'))
+
+  })
+
+  it('should return an error if the fetch fails (SAD)', async () => {
+
+    mockFetch.mockImplementation(() => {
+      return Promise.reject(Error('There was an error creating your leg'))
+    })
+
+    await expect(postNewLeg(mockLegInfo)).rejects.toEqual(Error('There was an error creating your leg'))
 
   })
 })
-
-//   it('should return a trip object when successful (HAPPY)', async () => {
-
-//     mockFetch.mockImplementation(() => {
-//       return Promise.resolve({
-//         ok: true,
-//         json: () => { 
-//           return (
-//             { data: {
-//                 createTrip: {
-//                   trip: {...mockTripInfo, id: 12}
-//                 }
-//               }
-//             }
-//           )}
-//         })
-//       })
-
-//       let expected = {...mockTripInfo, id: 12}
-
-//       await expect(postNewTrip(mockTripInfo)).resolves.toEqual(expected)
-
-//   })
-
-//   it('should return an error if response status is not ok (SAD)', async () => {
-
-//     mockFetch.mockImplementation(() => {
-//       return Promise.resolve({
-//         ok: false
-//         })
-//       })
-
-//     await expect(postNewTrip(mockTripInfo)).rejects.toEqual(Error('There was an error creating your trip'))
-
-//   })
-
-//   it('should return an error if the fetch fails (SAD)', async () => {
-
-//     mockFetch.mockImplementation(() => {
-//       return Promise.reject(Error('There was an error creating your trip'))
-//     })
-
-//     await expect(postNewTrip(mockTripInfo)).rejects.toEqual(Error('There was an error creating your trip'))
-
-
-//   })
-// })
 
 
 // describe('patchTrip', () => {
