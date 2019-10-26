@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { MyTrips } from './MyTrips';
+import { Leg } from './Leg';
 
-describe('MyTrips', () => {
+describe('Leg', () => {
   it('should return true', () => {
     expect(true).toEqual(true)
   })

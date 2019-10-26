@@ -26,11 +26,6 @@ export default class TripForm extends Component {
       error: ''
     }
   }
-  
-  //conditional rendering
-  //if (trip has a leg)
-  //Text - Leg Name
-  //button - leg name
 
   componentDidMount = () => {
     if (this.state.trip) {
