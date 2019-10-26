@@ -12,7 +12,8 @@ import { SafetyInfo } from './SafetyInfo/SafetyInfo';
 import AddLodgingInfo from './AddLodgingInfo/AddLodgingInfo';
 import AddTransportInfo from './AddTransportInfo/AddTransportInfo';
 import { Leg } from './Leg/Leg';
-import FollowerDashboard from './FollowerDashboard/FollowerDashboard'
+import FollowerDashboard from './FollowerDashboard/FollowerDashboard';
+import DefaultFollowerMessages from './DefaultFollowerMessages/DefaultFollowerMessages'
 
 const RootStack = createStackNavigator({
   Home: {
@@ -115,6 +116,14 @@ const RootStack = createStackNavigator({
     screen: FollowerDashboard,
     navigationOptions: {
       headerBackTitle: 'Follower Dashboard',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
+  DefaultFollowerMessages: {
+    screen: DefaultFollowerMessages,
+    navigationOptions: {
+      headerBackTitle: 'Follower Messages',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }

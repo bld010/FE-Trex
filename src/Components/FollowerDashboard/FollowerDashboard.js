@@ -19,13 +19,14 @@ export default class FollowerDashboard extends Component {
     }
   }
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
           <FollowerHeader />
       <ScrollView>
         <Text style={styles.text}>Display Wanderers that user follows</Text>
       </ScrollView>
-        <FollowerFooter />
+        <FollowerFooter navigate={navigate}/>
       </View>
     )
   }
