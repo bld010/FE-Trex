@@ -14,7 +14,8 @@ import AddTransportInfo from './AddTransportInfo/AddTransportInfo';
 import { Leg } from './Leg/Leg';
 import FollowerDashboard from './FollowerDashboard/FollowerDashboard';
 import DefaultFollowerMessages from './DefaultFollowerMessages/DefaultFollowerMessages';
-import MyWandererTrips from './MyWanderersTrips/MyWanderersTrips'
+import MyWandererTrips from './MyWanderersTrips/MyWanderersTrips';
+import WandererDashboard from './WandererDashboard/WandererDashboard';
 
 const RootStack = createStackNavigator({
   Home: {
@@ -23,6 +24,14 @@ const RootStack = createStackNavigator({
       headerBackTitle: 'Home',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'}
+    }
+  },
+  WandererDashboard: {
+    screen: WandererDashboard,
+    navigationOptions: {
+      headerBackTitle: 'Dashboard',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white' }
     }
   },
   MyTrips: {
@@ -93,14 +102,6 @@ const RootStack = createStackNavigator({
     screen: AddTransportInfo,
     navigationOptions: {
       headerBackTitle: 'Add Transportation',
-      headerTransparent: true,
-      headerBackTitleStyle: { color: 'white'} 
-    }
-  },
-  Leg: {
-    screen: Leg,
-    navigationOptions: {
-      headerBackTitle: 'Leg',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }
