@@ -62,7 +62,7 @@ class MyTrips extends Component {
 
         <Header />
 
-        <ScrollView>
+        <View>
           <Text style={styles.title}>My Trips</Text>
           <View>
             {trips.length > 0 && this.generateTripsElements()}
@@ -72,7 +72,7 @@ class MyTrips extends Component {
           <TouchableOpacity style={styles.addTripButton}>
             <Text style={styles.text} onPress={() => navigate('TripForm', {userId: this.state.user.id})}>Add a New Trip</Text>
           </TouchableOpacity>
-        </ScrollView>
+        </View>
   
         <Footer navigate={navigate} />
 

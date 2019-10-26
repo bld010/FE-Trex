@@ -9,6 +9,8 @@ import {
   TextInput,
   Dimensions
 } from "react-native";
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 export default class Map extends Component {
   constructor() {
@@ -32,30 +34,26 @@ export default class Map extends Component {
     
     render() {
       
-      if (this.state.location) {
-      
   
-        console.log('in if block', this.state.location.coords)
-
-        
-      }
-      
       return (
-        <View style={styles.container}>
-      {this.state.location !== null && 
-      <MapView 
-        region={{
-          latitude: this.state.location.coords.latitude,
-          longitude: this.state.location.coords.longitude,
-          latitudeDelta: 0.0422,
-          longitudeDelta: 0.0421
-        }} 
-        showsUserLocation={true} 
-        style={styles.mapStyle}>
-      </MapView>
+        <>
+          {this.state.location !== null && 
+            <MapView 
+              region={{
+                latitude: this.state.location.coords.latitude,
+                longitude: this.state.location.coords.longitude,
+                latitudeDelta: 0.0422,
+                longitudeDelta: 0.0421
+              }} 
+              showsUserLocation={true} 
+              style={styles.mapStyle}>
+            </MapView>
+          }
 
-      }
-      </View>
+      </>
+
+       
+      
     );
   }
 }
@@ -63,11 +61,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "black",
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: "stretch",
+    justifyContent: "flex-start",
   },
   mapStyle: {
     width: Dimensions.get("window").width,
-    height: 300
+    height: 400,
   }
 });

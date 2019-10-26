@@ -9,17 +9,23 @@ import { 
   TouchableOpacity 
 } from 'react-native';
 
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+
+
 export default class Dashboard extends Component {
   render() {
+  const {navigate} = this.props.navigation;
+
     return (
-  <ScrollView>
-  <View>
-    <Weather />
+  <View style={styles.container}>
+    <Header />
+    <ScrollView>
+      <Weather />
+      <Map />
+    </ScrollView>
+    <Footer navigate={navigate}/>
   </View>
-  <View>
-    <Map />
-  </View>
-  </ScrollView>
       
     )
   }
@@ -32,5 +38,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
     width: 'auto'
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#000000',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start'
+    
   }
+
 });
