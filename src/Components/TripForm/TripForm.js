@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import { postNewTrip, patchTrip } from '../../util/apiCalls';
+import { postNewTrip, patchTrip, deleteTrip } from '../../util/apiCalls';
 
 export default class TripForm extends Component {
   constructor(props) {
@@ -86,6 +86,15 @@ export default class TripForm extends Component {
     }
     catch (error) {
       this.setState({ error: 'There was an error editing your trip'})
+    }
+  }
+
+  removeTrip = async () => {
+    try {
+      let deletedTrip = await deleteTrip(this.state.trip.id);
+      this.props.navigation.navigate('MyTrips');
+    } catch (error) {
+      this.setState({ error: 'There was an error deleting your trip'})
     }
   }
 
@@ -169,6 +178,12 @@ export default class TripForm extends Component {
             </TouchableOpacity>
           </View>
 
+          {this.props.navigation.getParam('trip') && 
+          <TouchableOpacity style={styles.deleteButton} onPress={this.removeTrip}>
+              <Text style={styles.text}>Delete Trip</Text>
+            </TouchableOpacity>
+          }
+
           {this.state.error !== '' && <Text style={styles.text}>{this.state.error}</Text>}
 
         </ScrollView>        
@@ -186,6 +201,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: 'white',
     paddingVertical: 10
+  },
+  deleteButton: {
+    color: 'white',
+    backgroundColor: 'red',
+    borderWidth: 1,
+    borderColor: 'white'
   },
   input: {
     borderRadius: 8,
