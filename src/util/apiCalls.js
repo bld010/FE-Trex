@@ -6,7 +6,7 @@ export const fetchMyTrips = async (user_id) => {
     }
   }
 
-  let queryParams = `{user(id: ${user_id}) {trips {id, name, startDate, endDate legs{name startDate endDate startLocation endLocation}}}}`
+  let queryParams = `{user(id: ${user_id}) {trips {id, name, startDate, endDate legs{name startDate endDate id tripId startLocation endLocation}}}}`
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
@@ -63,21 +63,54 @@ export const patchTrip = async (tripInfo) => {
     }
   }
   let { name, startDate, endDate, id } = tripInfo;  
+  console.log('tripInfo', tripInfo)
 
   let queryParams = `mutation {updateTrip(input: {name: "${name}", startDate: "${startDate}", endDate: "${endDate}", id: ${id}}) {trip {name startDate endDate id}}}`
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
   try {
-    let resp = await fetch(url,options)
+    let resp = await fetch(url, options);
+
     if (!resp.ok) {
       throw new Error('There was an error editing your trip')
     }
 
     let data = await resp.json();
+    console.log(data.data.updateTrip.trip)
     return data.data.updateTrip.trip
   
   } catch (error) {
     throw error
   }
+}
+
+export const deleteTrip = async (tripId) => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+
+  let queryParams = `mutation {removeTrip(input: {id: "${tripId}"}) {trip {name}}}`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error deleting your trip')
+    }
+
+    let data = await resp.json();
+    return data.data.removeTrip.trip
+
+  } catch (error) {
+    throw error
+  }
+
 }
