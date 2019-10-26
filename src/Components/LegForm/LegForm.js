@@ -60,29 +60,29 @@ export default class LegForm extends Component {
 
     try {
       let newLeg = await postNewLeg(newLegInfo);
-      console.log(newLeg)
-      this.props.navigation.navigate('Leg', {leg: newLeg})
+      this.props.navigation.navigate('Trip', {tripId})
     }
     catch (error) {
-      console.log(error)
       this.setState({ error: 'There was an error creating your leg'})
     }
   }
 
   editLeg = async () => {
-    let {startLegDest, endLegDest, startLegDate, endLegDate} = this.state;
+    let id = this.state.leg.id
+    let {startLocation, endLocation, startDate, endDate, tripId} = this.state;
 
     let editedLegInfo = { 
-      startLegDest,
-      endLegDest,
-      startLegDate,
-      endLegDate,
-      id: tripId
+      startLocation,
+      endLocation,
+      startDate,
+      endDate,
+      tripId,
+      id
     }
-
+    console.log(editedLegInfo)
     try {
       let editedLeg = await patchLeg(editedLegInfo)
-      this.props.navigation.navigate('Leg', {leg: editedLeg})
+      this.props.navigation.navigate('Trip', {tripId})
     }
     catch (error) {
       this.setState({error: 'There was an error editing your leg'})
@@ -166,9 +166,6 @@ export default class LegForm extends Component {
           </TouchableOpacity>
           <TouchableOpacity>
             <Text style={styles.button} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.button}>Edit</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.handleNewLegSave}>
             <Text style={styles.button}>Save</Text>
