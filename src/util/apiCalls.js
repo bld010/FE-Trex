@@ -53,3 +53,31 @@ export const postNewTrip = async (tripInfo) => {
   }
 
 }
+
+
+export const patchTrip = async (tripInfo) => {
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  let { name, startDate, endDate, id } = tripInfo;  
+
+  let queryParams = `mutation {updateTrip(input: {name: "${name}", startDate: "${startDate}", endDate: "${endDate}", id: ${id}}) {trip {name startDate endDate id}}}`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url,options)
+    if (!resp.ok) {
+      throw new Error('There was an error editing your trip')
+    }
+
+    let data = await resp.json();
+    return data.data.updateTrip.trip
+  
+  } catch (error) {
+    throw error
+  }
+}

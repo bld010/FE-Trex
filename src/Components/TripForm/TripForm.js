@@ -11,24 +11,49 @@ import {
 } from 'react-native';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import { postNewTrip } from '../../util/apiCalls';
+import { postNewTrip, patchTrip } from '../../util/apiCalls';
 
 export default class TripForm extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       name: '',
       startDate: '',
       endDate: '', 
       userId: this.props.navigation.getParam('userId'),
+      trip: this.props.navigation.getParam('trip') || null,
+      error: ''
+    }
+  }
+
+  componentDidMount = () => {
+    if (this.state.trip) {
+
+      let { name, startDate, endDate } = this.state.trip
+      this.setState({
+        name,
+        startDate,
+        endDate
+      })
     }
   }
 
   handleNewTripSave = async () => {
 
+    if (!this.props.navigation.getParam('trip')) {
+      this.createNewTrip();
+    } else {
+      this.editTrip()
+    }
+
+  }
+
+  createNewTrip = async () => {
+
     let { name, startDate, endDate, userId } = this.state;
 
-    let tripInfo = {
+    let newTripInfo = {
       name,
       startDate,
       endDate,
@@ -36,18 +61,39 @@ export default class TripForm extends Component {
     }
 
     try {
-      let newTrip = await postNewTrip(tripInfo);
-      this.props.navigation.navigate('Trip', {trip: newTrip})
+      let newTrip = await postNewTrip(newTripInfo);
+      this.props.navigation.navigate('Trip', {trip: newTrip, userId: this.state.userId})
     } 
     catch (error) {
-      console.log('There was an error creating your trip')
-      console.log(error.message)
+      this.setState({ error: 'There was an error creating your trip'})
     }
   }
   
+  editTrip = async () => {
+
+    let { name, startDate, endDate, trip } = this.state;
+
+    let editedTripInfo = {
+      name,
+      startDate,
+      endDate,
+      id: trip.id
+    }
+
+    try {
+      let editedTrip = await patchTrip(editedTripInfo);
+      this.props.navigation.navigate('Trip', {trip: editedTrip, userId: this.state.userId})
+    }
+    catch (error) {
+      this.setState({ error: 'There was an error editing your trip'})
+    }
+  }
+
   
   render() {
     const {navigate} = this.props.navigation;
+
+
     return (
       <View style={styles.container}>
 
@@ -56,13 +102,14 @@ export default class TripForm extends Component {
         <ScrollView>
 
           <View>
-            <Text style={styles.title}>Add A New Trip</Text>
+            {this.state.trip === null && <Text style={styles.title}>Add A New Trip</Text>}
+            {this.state.trip && <Text style={styles.title}>Edit Trip</Text>}
           </View>
 
           <View style={styles.form}>
             <TextInput
               style={styles.input}
-              placeholder='Trip Name'
+              placeholder={this.state.trip && this.state.name || 'Trip Name'}
               onChangeText={(name) => this.setState({name})}
               value={this.state.name}
               onBlur={Keyboard.dismiss}
@@ -114,13 +161,15 @@ export default class TripForm extends Component {
           
 
           <View style={styles.sideBySideContainer}>
-            <TouchableOpacity style={styles.sideBySideButton}>
+            <TouchableOpacity style={styles.sideBySideButton} onPress={() => navigate('MyTrips')}>
                <Text style={styles.text}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.sideBySideButton} onPress={this.handleNewTripSave}>
               <Text style={styles.text}>Save</Text>
             </TouchableOpacity>
           </View>
+
+          {this.state.error !== '' && <Text style={styles.text}>{this.state.error}</Text>}
 
         </ScrollView>        
         <Footer navigate={navigate} />

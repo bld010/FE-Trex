@@ -15,6 +15,7 @@ export default class Trip extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      userId: this.props.navigation.getParam('userId'),
       trip: this.props.navigation.getParam('trip')
     }
   }
@@ -43,7 +44,7 @@ export default class Trip extends Component {
           <View style={styles.tripHeader}>
             <Text style={styles.text}>{name}</Text>
             <TouchableOpacity>
-              <Text style={styles.editTripButton}>Edit Trip</Text>
+              <Text style={styles.editTripButton} onPress={() => navigate('TripForm', {trip: this.state.trip, userId: this.state.userId})}>Edit Trip</Text>
             </TouchableOpacity>
           </View>
 
