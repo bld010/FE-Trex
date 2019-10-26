@@ -11,14 +11,16 @@ import {
 } from 'react-native';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import { postNewTrip } from '../../util/apiCalls';
 
 export default class TripForm extends Component {
   constructor(props) {
-    super()
+    super(props)
     this.state = {
       name: '',
-      departureDate: '',
-      returnDate: ''
+      startDate: '',
+      endDate: '', 
+      userId: this.props.navigation.getParam('userId')
     }
   }
   
@@ -26,6 +28,28 @@ export default class TripForm extends Component {
   //if (trip has a leg)
   //Text - Leg Name
   //button - leg name
+
+  handleNewTripSave = async () => {
+
+    let { name, startDate, endDate, userId } = this.state;
+
+    let tripInfo = {
+      name,
+      startDate,
+      endDate,
+      userId
+    }
+
+    try {
+      let newTrip = await postNewTrip(tripInfo);
+      this.props.navigation.navigate('Trip', {trip: newTrip})
+    } 
+    catch (error) {
+      console.log('There was an error creating your trip')
+      console.log(error.message)
+    }
+  }
+  
   
   render() {
     const {navigate} = this.props.navigation;
@@ -51,7 +75,7 @@ export default class TripForm extends Component {
           </View>
           <DatePicker
           style={{width: 200}}
-          date={this.state.departureDate} //initial date from state
+          date={this.state.startDate} //initial date from state
           mode="date" //The enum of date, datetime and time
           placeholder="select date"
           format="YYYY-MM-DD"
@@ -68,11 +92,11 @@ export default class TripForm extends Component {
               marginLeft: 36
             }
           }}
-          onDateChange={(date) => {this.setState({departureDate: date})}}
+          onDateChange={(date) => {this.setState({startDate: date})}}
         />
           <DatePicker
           style={{width: 200}}
-          date={this.state.returnDate} //initial date from state
+          date={this.state.endDate} //initial date from state
           mode="date" //The enum of date, datetime and time
           placeholder="select date"
           format="YYYY-MM-DD"
@@ -89,20 +113,16 @@ export default class TripForm extends Component {
               marginLeft: 36
             }
           }}
-          onDateChange={(date) => {this.setState({returnDate: date})}}
+          onDateChange={(date) => {this.setState({endDate: date})}}
         />
 
-          <View style={styles.container}>
-            <TouchableOpacity style={styles.button}>
-              <Text onPress={() => navigate('LegForm')} style={styles.text}>Add A Leg + </Text>
-            </TouchableOpacity>
-          </View>
+          
 
           <View style={styles.sideBySideContainer}>
             <TouchableOpacity style={styles.sideBySideButton}>
                <Text style={styles.text}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.sideBySideButton}>
+            <TouchableOpacity style={styles.sideBySideButton} onPress={this.handleNewTripSave}>
               <Text style={styles.text}>Save</Text>
             </TouchableOpacity>
           </View>
