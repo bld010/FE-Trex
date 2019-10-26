@@ -33,7 +33,7 @@ const RootStack = createStackNavigator({
   TripForm: {
     screen: TripForm,
     navigationOptions: {
-      headerBackTitle: 'Add Trip',
+      headerBackTitle: 'Add/Edit Trip',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }

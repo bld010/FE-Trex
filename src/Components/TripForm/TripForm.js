@@ -20,7 +20,8 @@ export default class TripForm extends Component {
       name: '',
       startDate: '',
       endDate: '', 
-      userId: this.props.navigation.getParam('userId')
+      userId: this.props.navigation.getParam('userId'),
+      trip: this.props.navigation.getParam('trip') || null
     }
   }
   
@@ -61,7 +62,13 @@ export default class TripForm extends Component {
         <ScrollView>
 
           <View>
-            <Text style={styles.title}>Add A New Trip</Text>
+            {this.state.trip === null && 
+              <Text style={styles.title}>Add A New Trip</Text>
+            }
+
+            {this.state.trip && 
+              <Text style={styles.title}>Edit Trip</Text>
+            }
           </View>
 
           <View style={styles.form}>

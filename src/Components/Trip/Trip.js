@@ -33,7 +33,7 @@ export default class Trip extends Component {
             <Text style={styles.text}>{this.state.trip.name}</Text>
             
             <TouchableOpacity>
-              <Text style={styles.editTripButton}>Edit Trip</Text>
+              <Text style={styles.editTripButton} onPress={() => navigate('TripForm', {trip: this.state.trip})}>Edit Trip</Text>
             </TouchableOpacity>
           </View>
 
