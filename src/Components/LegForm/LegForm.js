@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import DatePicker from 'react-native-datepicker';
-import WandererFooter from '../WandererFooter/WandererFooter';
-import WandererHeader from '../WandererHeader/WandererHeader';
+
 import {
   StyleSheet,
   Text,
@@ -11,44 +10,124 @@ import {
   TextInput,
   Keyboard
 } from "react-native";
+import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from '../WandererHeader/WandererHeader';
+import { postNewLeg, patchLeg, deleteLeg } from '../../util/apiCalls';
 
 export default class LegForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      existingLeg: this.props.navigation.getParam('leg'),
-      startLegDest: '',
-      endLegDest: '',
-      startLegDate: '',
-      endLegDate: '',
+      startLocation: '',
+      endLocation: '',
       startDate: '',
       endDate: '',
+      tripId: this.props.navigation.getParam('tripId'),
+      leg: this.props.navigation.getParam('leg') || null,
+      error: ''
     };
   }
 
-    render() {
+  componentDidMount = () => {
+    if (this.state.leg) {
+      let { startDate, endDate, startLocation, endLocation } = this.state.leg
+      this.setState({
+        startLocation,
+        startDate,
+        endLocation,
+        endDate
+      })
+    }
+  }
+
+  handleNewLegSave = async () => {
+    if(!this.props.navigation.getParam('leg')) {
+      this.createNewLeg()
+    } else {
+      this.editLeg()
+    }
+  }
+
+  createNewLeg = async () => {
+    let {startLocation, endLocation, startDate, endDate, tripId} = this.state;
+    let newLegInfo = {
+      startLocation,
+      endLocation,
+      startDate,
+      endDate,
+      tripId
+    }
+
+    try {
+      let newLeg = await postNewLeg(newLegInfo);
+      this.props.navigation.navigate('Trip', {tripId})
+    }
+    catch (error) {
+      this.setState({ error: 'There was an error creating your leg'})
+    }
+  }
+
+  editLeg = async () => {
+    let id = this.state.leg.id
+    let {startLocation, endLocation, startDate, endDate, tripId} = this.state;
+
+    let editedLegInfo = { 
+      startLocation,
+      endLocation,
+      startDate,
+      endDate,
+      tripId,
+      id
+    }
+    try {
+      let editedLeg = await patchLeg(editedLegInfo)
+      this.props.navigation.navigate('Trip', {tripId})
+    }
+    catch (error) {
+      this.setState({error: 'There was an error editing your leg'})
+    }
+  }
+
+
+  removeLeg = async () => {
+    try {
+      let deletedLeg = await deleteLeg(this.state.leg.id);
+      this.props.navigation.navigate('Trip', {tripId: this.state.tripId});
+    } catch (error) {
+      this.setState({ error: 'There was an error deleting your leg'})
+    }
+  }
+
+
+  render() {
     const {navigate} = this.props.navigation;
-    console.log(this.state.existingLeg)
     return (
       <View style={styles.container}>
+
         <WandererHeader />
-      <ScrollView>
-        <View style={styles.inputContainer}>
+        <ScrollView>
+
+        <View>
+            {this.state.leg === null && <Text style={styles.title}>Add A New Leg</Text>}
+            {this.state.leg && <Text style={styles.title}>Edit Leg</Text>}
+          </View>
+      <View style={styles.inputContainer}>
           <TextInput
             style={styles.textInput}
             placeholder="Start Destination"
             maxLength={20}
             onBlur={Keyboard.dismiss}
-            value={this.state.startLegDest}
-            onChangeText={startLegDest => this.setState({ startLegDest })}
+            value={this.state.startLocation}
+            onChangeText={startLocation => this.setState({ startLocation })}
           />
           <TextInput
             style={styles.textInput}
             placeholder="End Destination"
             maxLength={20}
             onBlur={Keyboard.dismiss}
-            value={this.state.endLegDest}
-            onChangeText={endLegDest => this.setState({ endLegDest })}
+            value={this.state.endLocation}
+            onChangeText={endLocation => this.setState({ endLocation })}
           />
           <Text>Start Date:</Text>
           <DatePicker
@@ -99,12 +178,16 @@ export default class LegForm extends Component {
           <TouchableOpacity>
             <Text style={styles.button} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.button}>Edit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.handleNewLegSave}>
             <Text style={styles.button}>Save</Text>
           </TouchableOpacity>
+          {this.props.navigation.getParam('leg') && 
+          <TouchableOpacity style={styles.deleteButton} onPress={this.removeLeg}>
+          <Text styles={styles.text}>Delete Leg</Text>
+          </TouchableOpacity>
+          }
+
+
         </View>
       </ScrollView>
       <WandererFooter navigate={navigate} />
@@ -122,6 +205,25 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: 15
+  }, 
+  text: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'white',
+    paddingVertical: 10,
+  },
+  deleteButton: {
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    width: "auto",
+    height: 60,
+    margin: 20,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "red"
   },
   textInput: {
     backgroundColor: "white",

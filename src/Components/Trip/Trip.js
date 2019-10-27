@@ -16,7 +16,8 @@ export default class Trip extends Component {
     super(props)
     this.state = {
       userId: this.props.navigation.getParam('userId'),
-      trip: this.props.navigation.getParam('trip')
+      trip: this.props.navigation.getParam('trip'),
+      tripId: '',
     }
   }
 
@@ -25,15 +26,16 @@ export default class Trip extends Component {
     return this.state.trip.legs.map(leg => {
       return (
         <TouchableOpacity key={leg.name} style={styles.tripButton}>
-        <Text onPress={() => navigate('Leg', {leg})} style={styles.text} key={leg.name}>{leg.name}</Text>
+        <Text onPress={() => navigate('Leg', {leg, tripId: this.state.trip.id})} style={styles.text} key={leg.name}>{leg.name}</Text>
       </TouchableOpacity>
       )
     })
   }
 
+
   render() {
     const {navigate} = this.props.navigation;
-    let { name, startDate, endDate } = this.state.trip
+    let { name, startDate, endDate, id } = this.state.trip
     return (
       <View style={styles.container}>
 
@@ -59,7 +61,7 @@ export default class Trip extends Component {
 
           <View style={styles.container}>
             <TouchableOpacity style={styles.button}>
-              <Text onPress={() => navigate('LegForm')} style={styles.text}>Add A Leg + </Text>
+              <Text onPress={() => navigate('LegForm' , {tripId: id})} style={styles.text}>Add A Leg + </Text>
             </TouchableOpacity>
           </View>
 
@@ -140,5 +142,4 @@ const styles = StyleSheet.create({
     fontSize: 20
   }
 });
-
 

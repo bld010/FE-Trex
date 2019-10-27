@@ -102,7 +102,6 @@ export default class TripForm extends Component {
   render() {
     const {navigate} = this.props.navigation;
 
-
     return (
       <View style={styles.container}>
 
