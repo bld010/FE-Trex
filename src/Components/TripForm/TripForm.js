@@ -12,8 +12,9 @@ import {
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
 import { postNewTrip, patchTrip, deleteTrip } from '../../util/apiCalls';
+import { withNavigationFocus } from 'react-navigation';
 
-export default class TripForm extends Component {
+class TripForm extends Component {
   constructor(props) {
     super(props);
 
@@ -27,6 +28,14 @@ export default class TripForm extends Component {
     };
   }
 
+  componentDidUpdate = async (prevProps) => {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this.setState({
+        trip: this.props.navigation.getParam('trip')
+      });
+    }
+  }
+
   componentDidMount = () => {
     if (this.state.trip) {
       let { name, startDate, endDate } = this.state.trip;
@@ -34,7 +43,7 @@ export default class TripForm extends Component {
         name,
         startDate,
         endDate
-      });
+      })
     }
   };
 
@@ -325,3 +334,6 @@ const styles = StyleSheet.create({
     alignItems: 'stretch'
   }
 });
+
+export default withNavigationFocus(TripForm);
+
