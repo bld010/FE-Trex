@@ -25,8 +25,8 @@ export default class Trip extends Component {
     const {navigate} = this.props.navigation;
     return this.state.trip.legs.map(leg => {
       return (
-        <TouchableOpacity key={leg.name} style={styles.tripButton}>
-        <Text onPress={() => navigate('Leg', {leg, tripId: this.state.trip.id})} style={styles.text} key={leg.name}>{leg.name}</Text>
+        <TouchableOpacity key={leg.endLocation} style={styles.tripButton}>
+        <Text onPress={() => navigate('Leg', {leg, tripId: this.state.trip.id})} style={styles.text} key={leg.endLocation}>{leg.endLocation}</Text>
       </TouchableOpacity>
       )
     })

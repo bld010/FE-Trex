@@ -187,6 +187,7 @@ export default class LegForm extends Component {
           </TouchableOpacity>
           }
 
+          {this.state.error !== '' && <Text style={styles.text}>{this.state.error}</Text>}
 
         </View>
       </ScrollView>

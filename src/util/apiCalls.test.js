@@ -328,7 +328,6 @@ describe('apiCalls', () => {
       global.fetch = mockFetch;
   
       mockLegInfo = {
-        name: "Peru",
         startDate: "2019-10-02",
         endDate: "2020-08-20", 
         startLocation: "Peru",
@@ -336,7 +335,7 @@ describe('apiCalls', () => {
         tripId: 4,
       }
   
-      let queryParams = `mutation {createLeg(input: {name: "Peru", startDate: "2019-10-02", endDate: "2020-08-20", startLocation: "Peru", endLocation: "Quito", tripId: 4}) {leg{startDate endDate startLocation endLocation id tripId}}}`
+      let queryParams = `mutation {createLeg(input: {startDate: "2019-10-02", endDate: "2020-08-20", startLocation: "Peru", endLocation: "Quito", tripId: 4}) {leg{startDate endDate startLocation endLocation id tripId}}}`
       
       url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
       
@@ -438,7 +437,7 @@ describe('apiCalls', () => {
         tripId: 4,
       }
   
-      let queryParams = `mutation {updateLeg(input: {id: 1, name: "Peru", startDate: "2019-10-02", endDate: "2020-08-20", startLocation: "Peru", endLocation: "Quito", tripId: 4}) {leg{startDate endDate startLocation endLocation id tripId}}}`
+      let queryParams = `mutation {updateLeg(input: {id: 1, startDate: "2019-10-02", endDate: "2020-08-20", startLocation: "Peru", endLocation: "Quito", tripId: 4}) {leg{startDate endDate startLocation endLocation id tripId}}}`
       
       url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
       
