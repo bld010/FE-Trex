@@ -113,71 +113,98 @@ export default class LegForm extends Component {
             {this.state.leg && <Text style={styles.title}>Edit Leg</Text>}
           </View>
       <View style={styles.inputContainer}>
+      <Text style={styles.label}>Start Destination</Text>
+      <View style={styles.form}>
           <TextInput
-            style={styles.textInput}
-            placeholder="Start Destination"
+            style={styles.input}
+            placeholder="Enter Start Destination..."
+            placeholderTextColor='white'
             maxLength={20}
             onBlur={Keyboard.dismiss}
             value={this.state.startLocation}
             onChangeText={startLocation => this.setState({ startLocation })}
           />
+          </View>
+          <Text style={styles.label}>End Destination</Text>
+          <View style={styles.form}>
           <TextInput
-            style={styles.textInput}
-            placeholder="End Destination"
+            style={styles.input}
+            placeholder="Enter End Destination..."
+            placeholderTextColor='white'
             maxLength={20}
             onBlur={Keyboard.dismiss}
             value={this.state.endLocation}
             onChangeText={endLocation => this.setState({ endLocation })}
           />
-          <Text>Start Date:</Text>
+          </View>
+          <Text style={styles.text}>Start Date</Text>
           <DatePicker
-          style={{width: 200}}
-          date={this.state.startDate} //initial date from state
-          mode="date" //The enum of date, datetime and time
-          placeholder="select date"
-          format="YYYY-MM-DD"
+          style={{ width: 370, height: 65 }}
+          date={this.state.startDate}
+          mode="date"
+          placeholder="Select End Date"
+          placeholderTextColor='white'
+          format="MM-DD-YYYY"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{
             dateIcon: {
-              position: 'absolute',
               left: 0,
-              top: 4,
-              marginLeft: 0
+              top: 4
             },
             dateInput: {
-              marginLeft: 36
+              marginLeft: 15,
+              color: "white",
+              height: 60,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: "white",
+            },
+            dateText: {
+              fontSize: 24,
+              color: "white",
             }
           }}
           onDateChange={(date) => {this.setState({startDate: date})}}
         />
+        <Text style={styles.text}>End Date</Text>
         <DatePicker
-          style={{width: 200}}
+          style={{ width: 370, height: 65 }}
           date={this.state.endDate}
-          mode="date" 
-          placeholder="select date"
-          format="YYYY-MM-DD"
+          mode="date"
+          placeholder="Select End Date"
+          placeholderTextColor='white'
+          format="MM-DD-YYYY"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{
             dateIcon: {
-              position: 'absolute',
               left: 0,
-              top: 4,
-              marginLeft: 0
+              top: 4
             },
             dateInput: {
-              marginLeft: 36
+              marginLeft: 15,
+              color: "white",
+              height: 60,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: "white",
+            },
+            dateText: {
+              fontSize: 24,
+              color: "white",
             }
           }}
           onDateChange={(date) => {this.setState({endDate: date})}}
         />
-          <TouchableOpacity>
-            <Text style={styles.button} onPress={() => navigate('AddTransportInfo')}>Add Transportation</Text>
+        <View style={styles.sideBySideContainer}>
+          <TouchableOpacity style={styles.sideBySideButton}>
+            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo')}>Add Transport</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.button} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
+          <TouchableOpacity style={styles.sideBySideButton}>
+            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
           </TouchableOpacity>
+          </View>
           <TouchableOpacity onPress={this.handleNewLegSave}>
             <Text style={styles.button}>Save</Text>
           </TouchableOpacity>
@@ -203,14 +230,20 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'flex-start'
   },
+  title: {
+    textAlign: "center",
+    fontSize: 30,
+    color: "white",
+    paddingVertical: 25
+  },
   inputContainer: {
     marginTop: 15
   }, 
   text: {
-    textAlign: 'center',
-    fontSize: 30,
-    color: 'white',
-    paddingVertical: 10,
+    marginLeft: 20,
+    fontSize: 20,
+    color: "white",
+    paddingVertical: 10
   },
   deleteButton: {
     borderColor: "white",
@@ -225,16 +258,68 @@ const styles = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "red"
   },
-  textInput: {
-    backgroundColor: "white",
-    borderColor: "#CCCCCC",
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    height: 50,
-    fontSize: 25,
-    marginTop: 15,
-    paddingLeft: 20,
-    paddingRight: 20
+  input: {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: 22,
+    flex: 1,
+    alignItems: 'center',
+    marginLeft: 10
+  },
+  form: {
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    height: 60,
+    width: 350,
+    color: 'white',
+    padding: 10,
+    marginLeft: 15,
+    marginBottom: 10
+  },
+  sideBySideContainer: {
+    flex: 1,
+    backgroundColor: "#000000",
+    flexDirection: "row",
+    justifyContent: "space-around"
+    // justifyContent: 'flex-start'
+  },
+  buttonText: {
+    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 10
+  },
+  button: {
+    borderColor: "#768DA1",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    width: "auto",
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#1C4263",
+    alignItems: "stretch"
+  },
+  sideBySideButton: {
+    width: 170,
+    borderColor: "#768DA1",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#1C4263",
+    alignItems: "stretch"
   },
   button: {
     borderColor: "white",
@@ -249,5 +334,11 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     backgroundColor: "#1C4263"
+  },
+  label: {
+    marginLeft: 20,
+    fontSize: 20,
+    color: "white",
+    marginBottom: 5
   }
 });

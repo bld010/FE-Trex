@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: 'black',
     color: 'white',
-    fontSize: 26,
+    fontSize: 22,
     flex: 1,
     alignItems: 'center',
     marginLeft: 10
