@@ -31,72 +31,106 @@ export default class AddLodgingInfo extends Component {
         <WandererHeader />
         <ScrollView>
           <View style={styles.inputContainer}>
+          <View>
+            <Text style={styles.title}>Add Lodging</Text>
+          </View>
+          <Text style={styles.label}>Country</Text>
+          <View style={styles.form}>
             <TextInput
-              style={styles.textInput}
-              placeholder="Country"
+              style={styles.input}
+              placeholder="Enter Country of Stay..."
+              placeholderTextColor='white'
               maxLength={20}
               onBlur={Keyboard.dismiss}
               value={this.state.countryLodge}
               onChangeText={countryLodge => this.setState({ countryLodge })}
             />
+            </View>
+            <Text style={styles.label}>City</Text>
+          <View style={styles.form}>
             <TextInput
-              style={styles.textInput}
-              placeholder="City"
+              style={styles.input}
+              placeholder="Enter City of Stay..."
+              placeholderTextColor='white'
               maxLength={20}
               onBlur={Keyboard.dismiss}
               value={this.state.cityLodge}
               onChangeText={cityLodge => this.setState({ cityLodge })}
             />
+            </View>
+            <Text style={styles.label}>Name</Text>
+          <View style={styles.form}>
             <TextInput
-              style={styles.textInput}
-              placeholder="Lodging Name"
+              style={styles.input}
+              placeholder="Enter Lodging Name..."
+              placeholderTextColor='white'
               maxLength={20}
               onBlur={Keyboard.dismiss}
               value={this.state.lodgeName}
               onChangeText={lodgeName => this.setState({ lodgeName })}
             />
+            </View>
+            <Text style={styles.text}>Beginning of Stay</Text>
             <DatePicker
-              style={{ width: 200 }}
+              style={{ width: 370, height: 65 }}
               date={this.state.startLodge}
               mode="date"
-              placeholder="select date"
-              format="YYYY-MM-DD"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              customStyles={{
-                dateIcon: {
-                  position: "absolute",
-                  left: 0,
-                  top: 4,
-                  marginLeft: 0
-                },
-                dateInput: {
-                  marginLeft: 36
-                }
-              }}
+          placeholder="Start Date"
+          placeholderTextColor='white'
+          format="MM-DD-YYYY"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              left: 0,
+              top: 4
+            },
+            dateInput: {
+              marginLeft: 15,
+              color: "white",
+              height: 60,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: "white",
+            },
+            dateText: {
+              fontSize: 24,
+              color: "white",
+            }
+          }}
               onDateChange={date => {
                 this.setState({ startLodge: date });
               }}
             />
+            <Text style={styles.text}>End of Stay</Text>
             <DatePicker
-              style={{ width: 200 }}
+              style={{ width: 370, height: 65 }}
               date={this.state.endLodge}
               mode="date"
-              placeholder="select date"
-              format="YYYY-MM-DD"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              customStyles={{
-                dateIcon: {
-                  position: "absolute",
-                  left: 0,
-                  top: 4,
-                  marginLeft: 0
-                },
-                dateInput: {
-                  marginLeft: 36
-                }
-              }}
+              mode="date"
+          placeholder="Start Date"
+          placeholderTextColor='white'
+          format="MM-DD-YYYY"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              left: 0,
+              top: 4
+            },
+            dateInput: {
+              marginLeft: 15,
+              color: "white",
+              height: 60,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: "white",
+            },
+            dateText: {
+              fontSize: 24,
+              color: "white",
+            }
+          }}
               onDateChange={date => {
                 this.setState({ endLodge: date });
               }}
@@ -122,16 +156,80 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginTop: 15
   },
-  textInput: {
-    backgroundColor: "white",
-    borderColor: "#CCCCCC",
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    height: 50,
-    fontSize: 25,
-    marginTop: 15,
-    paddingLeft: 20,
-    paddingRight: 20
+  title: {
+    textAlign: "center",
+    fontSize: 30,
+    color: "white",
+    paddingVertical: 25
+  },
+  text: {
+    marginLeft: 20,
+    fontSize: 20,
+    color: "white",
+    paddingVertical: 12
+  },
+  input: {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: 18,
+    flex: 1,
+    alignItems: 'center',
+    marginLeft: 10
+  },
+  form: {
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    height: 60,
+    width: 350,
+    color: 'white',
+    padding: 10,
+    marginLeft: 15,
+    marginBottom: 20
+  },
+  sideBySideContainer: {
+    flex: 1,
+    backgroundColor: "#000000",
+    flexDirection: "row",
+    justifyContent: "space-around"
+    // justifyContent: 'flex-start'
+  },
+  buttonText: {
+    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 10
+  },
+  button: {
+    borderColor: "#768DA1",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    width: "auto",
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#1C4263",
+    alignItems: "stretch"
+  },
+  sideBySideButton: {
+    width: 170,
+    borderColor: "#768DA1",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#1C4263",
+    alignItems: "stretch"
   },
   button: {
     borderColor: "white",
@@ -146,5 +244,11 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     backgroundColor: "#1C4263"
+  },
+  label: {
+    marginLeft: 20,
+    fontSize: 20,
+    color: "white",
+    marginBottom: 5
   }
 });

@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: 'black',
     color: 'white',
-    fontSize: 22,
+    fontSize: 18,
     flex: 1,
     alignItems: 'center',
     marginLeft: 10
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 20,
     color: "white",
-    paddingVertical: 13
+    paddingVertical: 12
   },
   label: {
     marginLeft: 20,
