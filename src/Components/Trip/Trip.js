@@ -114,14 +114,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 10
   },
-  tripHeader: {
-    flex: 1,
-    flexDirection: 'row',
-    padding: 20,
-    justifyContent: 'space-between',
-    marginVertical: 30,
-    textAlign: 'center'
-  },
   text: {
     color: 'white',
     marginVertical: 10,
@@ -167,17 +159,6 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     backgroundColor: '#1C4263'
-  },
-  footer: {
-    backgroundColor: '#1C4263',
-    flexDirection: 'row',
-    padding: 30,
-    justifyContent: 'space-around'
-  }, 
-  footerText: {
-    color: 'white',
-    marginBottom: 20,
-    fontSize: 20
   },
   sideBySideContainer: {
     flex: 1,

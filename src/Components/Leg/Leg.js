@@ -22,18 +22,24 @@ export const Leg = (props) => {
 
         <ScrollView>
 
-          <View style={styles.legHeader}>
+          <View>
+            <Text style={styles.text}>{leg.name}</Text>
+            <View style={styles.borderContainer}>
+            <Text style={styles.headerText}>Start Location</Text>
             <Text style={styles.text}>{startLocation}</Text>
+            <Text style={styles.dateText}>{startDate}</Text>
+            </View>
+            <View style={styles.borderContainer}>
+            <Text style={styles.headerText}>End Location</Text>
             <Text style={styles.text}>{endLocation}</Text>
-            <TouchableOpacity>
-              <Text onPress={() => navigate('LegForm', { leg, tripId })} style={styles.editLegButton}>Edit Leg</Text>
+            <Text style={styles.dateText}>{endDate}</Text>
+            </View>
+          </View>
+          <View>
+          </View>
+          <TouchableOpacity>
+              <Text onPress={() => navigate('LegForm', { leg, tripId })} style={styles.button}>Edit Leg</Text>
             </TouchableOpacity>
-
-
-          </View>
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>{startDate} thru {endDate}</Text>
-          </View>
 
         </ScrollView>
 
@@ -48,59 +54,58 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000000',
     alignItems: 'stretch',
-    justifyContent: 'flex-start'
-    
+    justifyContent: 'flex-start',
   }, 
-  legHeader: {
-    flex: 1,
-    flexDirection: 'row',
-    padding: 20,
-    justifyContent: 'space-between',
-    backgroundColor: '#1C4263',
-    borderWidth: 1,
-    borderColor: 'white'
-  },
-  text: {
-    color: 'white',
-    marginVertical: 10,
-    textAlign: 'center',
-    fontSize: 10,
-    width: 'auto'
-  },
-  header: {
-    backgroundColor: '#1C4263',
-    color: 'white',
-    paddingTop: 60,
-    paddingLeft: 10,
-    // height: 'auto',,
-    textAlign: 'center',
-    top: 0,
-    fontSize: 50,
-  }, 
-  editLegButton: {
+  button: {
     borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: 'solid',
     width: 'auto',
-    height: 40,
-    margin: 0,
-    fontSize: 12,
+    height: 60,
+    margin: 20,
+    fontSize: 30,
     padding: 10,
     color: 'white',
     textAlign: 'center',
-    backgroundColor: '#1C4263'
-  },
-  footer: {
     backgroundColor: '#1C4263',
-    flexDirection: 'row',
-    padding: 30,
-    justifyContent: 'space-around'
+    alignItems: 'stretch'
   }, 
-  footerText: {
+  text: {
     color: 'white',
-    marginBottom: 20,
-    fontSize: 20
+    marginVertical: 10,
+    textAlign: 'center',
+    fontSize: 30,
+    width: 'auto',
+    textAlign: 'center'
+  },
+  dateText: {
+    color: 'white',
+    marginVertical: 10,
+    textAlign: 'center',
+    fontSize: 18,
+    width: 'auto',
+    textAlign: 'center'
+  },
+  borderContainer: {
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: 'solid',
+    width: 330,
+    marginLeft: 20,
+    marginVertical: 10,
+    marginBottom: 10
+  },
+  headerText: {
+    color: 'white',
+    marginVertical: 10,
+    textAlign: 'center',
+    fontSize: 30,
+    width: 'auto',
+    textAlign: 'center',
+    borderBottomColor: 'white',
+    borderBottomWidth: 1,
   }
 });
 

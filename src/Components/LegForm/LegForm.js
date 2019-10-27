@@ -210,7 +210,7 @@ export default class LegForm extends Component {
           </TouchableOpacity>
           {this.props.navigation.getParam('leg') && 
           <TouchableOpacity style={styles.deleteButton} onPress={this.removeLeg}>
-          <Text styles={styles.text}>Delete Leg</Text>
+          <Text style={styles.buttonText}>Delete Leg</Text>
           </TouchableOpacity>
           }
 

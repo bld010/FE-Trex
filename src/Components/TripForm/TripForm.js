@@ -232,10 +232,17 @@ const styles = StyleSheet.create({
     paddingVertical: 25
   },
   deleteButton: {
-    color: 'white',
-    backgroundColor: 'red',
+    borderColor: "white",
     borderWidth: 1,
-    borderColor: 'white'
+    borderRadius: 8,
+    borderStyle: "solid",
+    width: "auto",
+    height: 60,
+    margin: 20,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "red"
   },
   input: {
     backgroundColor: 'black',
