@@ -283,28 +283,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
     flexDirection: "row",
     justifyContent: "space-around"
-    // justifyContent: 'flex-start'
   },
   buttonText: {
     fontSize: 20,
     color: "white",
     textAlign: "center",
     paddingVertical: 10
-  },
-  button: {
-    borderColor: "#768DA1",
-    borderWidth: 1,
-    borderRadius: 8,
-    borderStyle: "solid",
-    width: "auto",
-    height: 60,
-    margin: 20,
-    fontSize: 30,
-    padding: 10,
-    color: "white",
-    textAlign: "center",
-    backgroundColor: "#1C4263",
-    alignItems: "stretch"
   },
   sideBySideButton: {
     width: 170,
