@@ -3,7 +3,8 @@ import {
   postNewTrip,
   patchTrip,
   postNewLeg,
-  patchLeg
+  patchLeg,
+  deleteTrip
 } from './apiCalls';
 
 describe('apiCalls', () => {
@@ -314,213 +315,306 @@ describe('apiCalls', () => {
     })
   })
 
-})
-
-
-
-describe('postNewLeg', () => {
-
-  let mockFetch;
-  let url;
-  let options;
-  let mockLegInfo;
-
-  beforeEach(() => {
-    mockFetch = jest.fn()
-    global.fetch = mockFetch;
-
-    mockLegInfo = {
-      name: "Peru",
-      startDate: "2019-10-02",
-      endDate: "2020-08-20", 
-      startLocation: "Peru",
-      endLocation: "Quito",
-      tripId: 4,
-    }
-
-    let queryParams = `mutation {createLeg(input: {name: "Peru", startDate: "2019-10-02", endDate: "2020-08-20", startLocation: "Peru", endLocation: "Quito", tripId: 4}) {leg{startDate endDate startLocation endLocation id tripId}}}`
+  describe('postNewLeg', () => {
+  
+    let mockFetch;
+    let url;
+    let options;
+    let mockLegInfo;
+  
+    beforeEach(() => {
+      mockFetch = jest.fn()
+      global.fetch = mockFetch;
+  
+      mockLegInfo = {
+        name: "Peru",
+        startDate: "2019-10-02",
+        endDate: "2020-08-20", 
+        startLocation: "Peru",
+        endLocation: "Quito",
+        tripId: 4,
+      }
+  
+      let queryParams = `mutation {createLeg(input: {name: "Peru", startDate: "2019-10-02", endDate: "2020-08-20", startLocation: "Peru", endLocation: "Quito", tripId: 4}) {leg{startDate endDate startLocation endLocation id tripId}}}`
+      
+      url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+      
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      } 
+    })
+  
+    it('should call fetch with proper url and query params', async () => {
+  
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                  createLeg: {
+                    leg:{}
+                  }
+                }
+              }
+            )}
+          })
+        })
+  
+        await postNewLeg(mockLegInfo)
+  
+        expect(mockFetch).toHaveBeenCalledWith(url, options)
+    })
+  
+    it('should return a leg object when successful (HAPPY)', async () => {
+  
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                  createLeg: {
+                    leg: {...mockLegInfo, id: 4}
+                  }
+                }
+              }
+            )}
+          })
+        })
+  
+        let expected = {...mockLegInfo, id: 4}
+  
+        await expect(postNewLeg(mockLegInfo)).resolves.toEqual(expected)
+  
+    })
+  
+    it('should return an error if response status is not ok (SAD)', async () => {
+  
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+          })
+        })
+  
+      await expect(postNewLeg(mockLegInfo)).rejects.toEqual(Error('There was an error creating your leg'))
+  
+    })
+  
+    it('should return an error if the fetch fails (SAD)', async () => {
+  
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error creating your leg'))
+      })
+  
+      await expect(postNewLeg(mockLegInfo)).rejects.toEqual(Error('There was an error creating your leg'))
+  
+    })
+  })
+  
+  
+  describe('patchLeg', () => {
+  
+    let mockFetch;
+    let url;
+    let options;
+    let mockLegInfo;
+  
+    beforeEach(() => {
+      mockFetch = jest.fn()
+      global.fetch = mockFetch;
+  
+      mockLegInfo = {
+        id: 1,
+        name: "Peru",
+        startDate: "2019-10-02",
+        endDate: "2020-08-20", 
+        startLocation: "Peru",
+        endLocation: "Quito",
+        tripId: 4,
+      }
+  
+      let queryParams = `mutation {updateLeg(input: {id: 1, name: "Peru", startDate: "2019-10-02", endDate: "2020-08-20", startLocation: "Peru", endLocation: "Quito", tripId: 4}) {leg{startDate endDate startLocation endLocation id tripId}}}`
+      
+      url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+      
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      } 
+    })
+  
+    it('should call fetch with the correct url and options', async() => {
+  
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                  updateLeg: {
+                    leg: {}
+                  }
+                }
+              }
+            )}
+          })
+        })
+  
+        await patchLeg(mockLegInfo)
+  
+        expect(mockFetch).toHaveBeenCalledWith(url, options)
+    })
+  
+    it('should return the updated leg when successful (HAPPY)', async () => {
+  
+      let newMockLegInfo = mockLegInfo = {
+        name: "Dallas",
+        startDate: "2019-10-02",
+        endDate: "2020-08-20", 
+        startLocation: "Dallas",
+        endLocation: "Quito",
+        tripId: 4,
+      }
+  
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                  updateLeg: {
+                    leg: newMockLegInfo
+                  }
+                }
+              }
+            )}
+          })
+        })
+  
+  
+        await expect(patchLeg(newMockLegInfo)).resolves.toEqual(newMockLegInfo)
+    })
+  
+    it('should return an error if the response is not ok (SAD)', async () => {
+  
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+          })
+        })
+  
+        await expect(patchLeg(mockLegInfo)).rejects.toEqual(Error('There was an error editing your leg'))
+    })
+  
+    it('should return an error if the fetch fails (SAD)', async () => {
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error editing your leg'))
+        })
+  
+        await expect(patchLeg(mockLegInfo)).rejects.toEqual(Error('There was an error editing your leg'))
     
-    url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
-    
-    options = {
+    })
+  })
+
+  describe('deleteTrip', () => {
+
+    let options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       }
-    } 
-  })
+    }
 
-  it('should call fetch with proper url and query params', async () => {
+    let queryParams = `mutation {removeTrip(input: {id: "17"}) {trip {name}}}`
 
-    mockFetch.mockImplementation(() => {
-      return Promise.resolve({
-        ok: true,
-        json: () => { 
-          return (
-            { data: {
-                createLeg: {
-                  leg:{}
-                }
-              }
-            }
-          )}
-        })
-      })
+    let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+  
+    let mockFetch;
 
-      await postNewLeg(mockLegInfo)
-
-      expect(mockFetch).toHaveBeenCalledWith(url, options)
-  })
-
-  it('should return a leg object when successful (HAPPY)', async () => {
-
-    mockFetch.mockImplementation(() => {
-      return Promise.resolve({
-        ok: true,
-        json: () => { 
-          return (
-            { data: {
-                createLeg: {
-                  leg: {...mockLegInfo, id: 4}
-                }
-              }
-            }
-          )}
-        })
-      })
-
-      let expected = {...mockLegInfo, id: 4}
-
-      await expect(postNewLeg(mockLegInfo)).resolves.toEqual(expected)
-
-  })
-
-  it('should return an error if response status is not ok (SAD)', async () => {
-
-    mockFetch.mockImplementation(() => {
-      return Promise.resolve({
-        ok: false
-        })
-      })
-
-    await expect(postNewLeg(mockLegInfo)).rejects.toEqual(Error('There was an error creating your leg'))
-
-  })
-
-  it('should return an error if the fetch fails (SAD)', async () => {
-
-    mockFetch.mockImplementation(() => {
-      return Promise.reject(Error('There was an error creating your leg'))
+    beforeEach(() => {
+      mockFetch = jest.fn();
+      global.fetch = mockFetch;
     })
 
-    await expect(postNewLeg(mockLegInfo)).rejects.toEqual(Error('There was an error creating your leg'))
 
-  })
-})
+    it('should call fetch with the proper url and options', async () => {
 
-
-describe('patchLeg', () => {
-
-  let mockFetch;
-  let url;
-  let options;
-  let mockLegInfo;
-
-  beforeEach(() => {
-    mockFetch = jest.fn()
-    global.fetch = mockFetch;
-
-    mockLegInfo = {
-      id: 1,
-      name: "Peru",
-      startDate: "2019-10-02",
-      endDate: "2020-08-20", 
-      startLocation: "Peru",
-      endLocation: "Quito",
-      tripId: 4,
-    }
-
-    let queryParams = `mutation {updateLeg(input: {id: 1, name: "Peru", startDate: "2019-10-02", endDate: "2020-08-20", startLocation: "Peru", endLocation: "Quito", tripId: 4}) {leg{startDate endDate startLocation endLocation id tripId}}}`
-    
-    url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
-    
-    options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    } 
-  })
-
-  it('should call fetch with the correct url and options', async() => {
-
-    mockFetch.mockImplementation(() => {
-      return Promise.resolve({
-        ok: true,
-        json: () => { 
-          return (
-            { data: {
-                updateLeg: {
-                  leg: {}
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+            return (
+              { 
+                data: {
+                  removeTrip: {
+                    trip: {}
+                  }
                 }
               }
-            }
-          )}
+            )
+          }
         })
       })
 
-      await patchLeg(mockLegInfo)
+      await deleteTrip(17)
 
       expect(mockFetch).toHaveBeenCalledWith(url, options)
-  })
+    })
 
-  it('should return the updated leg when successful (HAPPY)', async () => {
+    it('should return the deleted trip name when successful (HAPPY)', async () => {
 
-    let newMockLegInfo = mockLegInfo = {
-      name: "Dallas",
-      startDate: "2019-10-02",
-      endDate: "2020-08-20", 
-      startLocation: "Dallas",
-      endLocation: "Quito",
-      tripId: 4,
-    }
+      let mockTrip = { id: 17 }
 
-    mockFetch.mockImplementation(() => {
-      return Promise.resolve({
-        ok: true,
-        json: () => { 
-          return (
-            { data: {
-                updateLeg: {
-                  leg: newMockLegInfo
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+            return (
+              { 
+                data: {
+                  removeTrip: {
+                    trip: mockTrip
+                  }
                 }
               }
-            }
-          )}
+            )
+          }
         })
       })
 
+      await expect(deleteTrip(17)).resolves.toEqual(mockTrip)
 
-      await expect(patchLeg(newMockLegInfo)).resolves.toEqual(newMockLegInfo)
-  })
+    })
 
-  it('should return an error if the response is not ok (SAD)', async () => {
+    it('should return an error when response is not ok (SAD)', async () => {
 
-    mockFetch.mockImplementation(() => {
-      return Promise.resolve({
-        ok: false
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false,
         })
       })
 
-      await expect(patchLeg(mockLegInfo)).rejects.toEqual(Error('There was an error editing your leg'))
-  })
+      await expect(deleteTrip(17)).rejects.toEqual(Error('There was an error deleting your trip'))
 
-  it('should return an error if the fetch fails (SAD)', async () => {
-    mockFetch.mockImplementation(() => {
-      return Promise.reject(Error('There was an error editing your leg'))
+    })
+
+    it('should return an error when the fetch fails (SAD)', async () => {
+
+
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error deleting your trip (fetch failed)'))
       })
 
-      await expect(patchLeg(mockLegInfo)).rejects.toEqual(Error('There was an error editing your leg'))
-  
+      await expect(deleteTrip(17)).rejects.toEqual(Error('There was an error deleting your trip (fetch failed)'))
+    })
   })
 })
+
+
+
