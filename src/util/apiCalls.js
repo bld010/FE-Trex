@@ -117,7 +117,6 @@ export const deleteTrip = async (tripId) => {
 
 
 export const postNewLeg = async (legInfo) => {
-  console.log('in the api calls post', legInfo)
 
   let options = {
     method: 'POST',
@@ -151,7 +150,6 @@ export const postNewLeg = async (legInfo) => {
 
 
 export const patchLeg = async (legInfo) => {
-  console.log('in the api calls patch', legInfo)
 
   let options = {
     method: 'POST',
@@ -185,7 +183,6 @@ export const patchLeg = async (legInfo) => {
 
 
 export const deleteLeg = async (legId) => {
-  console.log('in the api calls delete', legId)
 
   let options = {
     method: 'POST',
