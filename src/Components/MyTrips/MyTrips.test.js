@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { MyTrips } from './MyTrips';
+import MyTrips from './MyTrips';
 
 describe('MyTrips', () => {
   it('should return true', () => {

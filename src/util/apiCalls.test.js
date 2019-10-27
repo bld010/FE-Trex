@@ -4,7 +4,8 @@ import {
   patchTrip,
   postNewLeg,
   patchLeg,
-  deleteTrip
+  deleteTrip,
+  deleteLeg
 } from './apiCalls';
 
 describe('apiCalls', () => {
@@ -614,7 +615,104 @@ describe('apiCalls', () => {
       await expect(deleteTrip(17)).rejects.toEqual(Error('There was an error deleting your trip (fetch failed)'))
     })
   })
+
+  describe('deleteLeg', () => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `mutation {removeLeg(input: {id: "13"}) {leg {name}}}`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  let mockFetch;
+
+  beforeEach(() => {
+    mockFetch = jest.fn();
+    global.fetch = mockFetch;
+  })
+
+
+  it('should call fetch with the proper url and options', async () => {
+
+    mockFetch.mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => {
+          return (
+            { 
+              data: {
+                removeLeg: {
+                  leg: {}
+                }
+              }
+            }
+          )
+        }
+      })
+    })
+
+    await deleteLeg(13)
+
+    expect(mockFetch).toHaveBeenCalledWith(url, options)
+  })
+
+  it('should return the deleted leg name when successful (HAPPY)', async () => {
+
+    let mockLeg = { id: 13 }
+
+    mockFetch.mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => {
+          return (
+            { 
+              data: {
+                removeLeg: {
+                  leg: mockLeg
+                }
+              }
+            }
+          )
+        }
+      })
+    })
+
+    await expect(deleteLeg(13)).resolves.toEqual(mockLeg)
+
+  })
+
+  it('should return an error when response is not ok (SAD)', async () => {
+
+    mockFetch.mockImplementation(() => {
+      return Promise.resolve({
+        ok: false,
+      })
+    })
+
+    await expect(deleteLeg(13)).rejects.toEqual(Error('There was an error deleting your leg'))
+
+  })
+
+  it('should return an error when the fetch fails (SAD)', async () => {
+
+
+    mockFetch.mockImplementation(() => {
+      return Promise.reject(Error('There was an error deleting your leg (fetch failed)'))
+    })
+
+    await expect(deleteLeg(17)).rejects.toEqual(Error('There was an error deleting your leg (fetch failed)'))
+  })
+  })
 })
+
+
+
+
 
 
 
