@@ -117,6 +117,7 @@ export default class TripForm extends Component {
             <TextInput
               style={styles.input}
               placeholder={(this.state.trip && this.state.name) || "Enter Trip Name..."}
+              placeholderTextColor='white'
               onChangeText={name => this.setState({ name })}
               value={this.state.name}
               onBlur={Keyboard.dismiss}
@@ -128,7 +129,8 @@ export default class TripForm extends Component {
             date={this.state.startDate}
             mode="date"
             placeholder="Select Start Date"
-            format="YYYY-MM-DD"
+            placeholderTextColor='white'
+            format="MM-DD-YYYY"
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
             customStyles={{
@@ -141,7 +143,12 @@ export default class TripForm extends Component {
                 color: "white",
                 height: 60,
                 borderRadius: 8,
-                fontSize: 34
+                borderWidth: 1,
+                borderColor: "white"
+              },
+              dateText: {
+                fontSize: 24,
+                color: "white",
               }
             }}
             onDateChange={date => {
@@ -154,7 +161,8 @@ export default class TripForm extends Component {
             date={this.state.endDate}
             mode="date"
             placeholder="Select End Date"
-            format="YYYY-MM-DD"
+            placeholderTextColor='white'
+            format="MM-DD-YYYY"
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
             customStyles={{
@@ -167,7 +175,12 @@ export default class TripForm extends Component {
                 color: "white",
                 height: 60,
                 borderRadius: 8,
-                fontSize: 34
+                borderWidth: 1,
+                borderColor: "white",
+              },
+              dateText: {
+                fontSize: 24,
+                color: "white",
               }
             }}
             onDateChange={date => {
