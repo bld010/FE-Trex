@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import DatePicker from "react-native-datepicker";
+import React, { Component } from 'react';
+import DatePicker from 'react-native-datepicker';
 import {
   StyleSheet,
   Text,
@@ -8,22 +8,22 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard
-} from "react-native";
-import WandererFooter from "../WandererFooter/WandererFooter";
-import WandererHeader from "../WandererHeader/WandererHeader";
-import { postNewTrip, patchTrip, deleteTrip } from "../../util/apiCalls";
+} from 'react-native';
+import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from '../WandererHeader/WandererHeader';
+import { postNewTrip, patchTrip, deleteTrip } from '../../util/apiCalls';
 
 export default class TripForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: "",
-      startDate: "",
-      endDate: "",
-      userId: this.props.navigation.getParam("userId"),
-      trip: this.props.navigation.getParam("trip") || null,
-      error: ""
+      name: '',
+      startDate: '',
+      endDate: '',
+      userId: this.props.navigation.getParam('userId'),
+      trip: this.props.navigation.getParam('trip') || null,
+      error: ''
     };
   }
 
@@ -39,7 +39,7 @@ export default class TripForm extends Component {
   };
 
   handleNewTripSave = async () => {
-    if (!this.props.navigation.getParam("trip")) {
+    if (!this.props.navigation.getParam('trip')) {
       this.createNewTrip();
     } else {
       this.editTrip();
@@ -58,12 +58,12 @@ export default class TripForm extends Component {
 
     try {
       let newTrip = await postNewTrip(newTripInfo);
-      this.props.navigation.navigate("Trip", {
+      this.props.navigation.navigate('Trip', {
         trip: newTrip,
         userId: this.state.userId
       });
     } catch (error) {
-      this.setState({ error: "There was an error creating your trip" });
+      this.setState({ error: 'There was an error creating your trip' });
     }
   };
 
@@ -79,21 +79,21 @@ export default class TripForm extends Component {
 
     try {
       let editedTrip = await patchTrip(editedTripInfo);
-      this.props.navigation.navigate("Trip", {
+      this.props.navigation.navigate('Trip', {
         trip: editedTrip,
         userId: this.state.userId
       });
     } catch (error) {
-      this.setState({ error: "There was an error editing your trip" });
+      this.setState({ error: 'There was an error editing your trip' });
     }
   };
 
   removeTrip = async () => {
     try {
       let deletedTrip = await deleteTrip(this.state.trip.id);
-      this.props.navigation.navigate("MyTrips");
+      this.props.navigation.navigate('MyTrips');
     } catch (error) {
-      this.setState({ error: "There was an error deleting your trip" });
+      this.setState({ error: 'There was an error deleting your trip' });
     }
   };
 
@@ -112,11 +112,13 @@ export default class TripForm extends Component {
             {this.state.trip && <Text style={styles.title}>Edit Trip</Text>}
           </View>
 
-            <Text style={styles.label}>Trip Name</Text>
+          <Text style={styles.label}>Trip Name</Text>
           <View style={styles.form}>
             <TextInput
               style={styles.input}
-              placeholder={(this.state.trip && this.state.name) || "Enter Trip Name..."}
+              placeholder={
+                (this.state.trip && this.state.name) || 'Enter Trip Name...'
+              }
               placeholderTextColor='white'
               onChangeText={name => this.setState({ name })}
               value={this.state.name}
@@ -127,28 +129,28 @@ export default class TripForm extends Component {
           <DatePicker
             style={{ width: 370, height: 65 }}
             date={this.state.startDate}
-            mode="date"
-            placeholder="Select Start Date"
+            mode='date'
+            placeholder='Select Start Date'
             placeholderTextColor='white'
-            format="MM-DD-YYYY"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
+            format='MM-DD-YYYY'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
             customStyles={{
               dateIcon: {
                 left: 0,
-                top: 4,
+                top: 4
               },
               dateInput: {
                 marginLeft: 15,
-                color: "white",
+                color: 'white',
                 height: 60,
                 borderRadius: 8,
                 borderWidth: 1,
-                borderColor: "white"
+                borderColor: 'white'
               },
               dateText: {
                 fontSize: 24,
-                color: "white",
+                color: 'white'
               }
             }}
             onDateChange={date => {
@@ -159,12 +161,12 @@ export default class TripForm extends Component {
           <DatePicker
             style={{ width: 370, height: 65 }}
             date={this.state.endDate}
-            mode="date"
-            placeholder="Select End Date"
+            mode='date'
+            placeholder='Select End Date'
             placeholderTextColor='white'
-            format="MM-DD-YYYY"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
+            format='MM-DD-YYYY'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
             customStyles={{
               dateIcon: {
                 left: 0,
@@ -172,15 +174,15 @@ export default class TripForm extends Component {
               },
               dateInput: {
                 marginLeft: 15,
-                color: "white",
+                color: 'white',
                 height: 60,
                 borderRadius: 8,
                 borderWidth: 1,
-                borderColor: "white",
+                borderColor: 'white'
               },
               dateText: {
                 fontSize: 24,
-                color: "white",
+                color: 'white'
               }
             }}
             onDateChange={date => {
@@ -191,7 +193,7 @@ export default class TripForm extends Component {
           <View style={styles.sideBySideContainer}>
             <TouchableOpacity
               style={styles.sideBySideButton}
-              onPress={() => navigate("MyTrips")}
+              onPress={() => navigate('MyTrips')}
             >
               <Text style={styles.buttonText}>Cancel</Text>
             </TouchableOpacity>
@@ -203,7 +205,7 @@ export default class TripForm extends Component {
             </TouchableOpacity>
           </View>
 
-          {this.props.navigation.getParam("trip") && (
+          {this.props.navigation.getParam('trip') && (
             <TouchableOpacity
               style={styles.deleteButton}
               onPress={this.removeTrip}
@@ -212,7 +214,7 @@ export default class TripForm extends Component {
             </TouchableOpacity>
           )}
 
-          {this.state.error !== "" && (
+          {this.state.error !== '' && (
             <Text style={styles.buttonText}>{this.state.error}</Text>
           )}
         </ScrollView>
@@ -224,16 +226,16 @@ export default class TripForm extends Component {
 
 const styles = StyleSheet.create({
   title: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 30,
-    color: "white",
+    color: 'white',
     paddingVertical: 25
   },
   deleteButton: {
-    color: "white",
-    backgroundColor: "red",
+    color: 'white',
+    backgroundColor: 'red',
     borderWidth: 1,
-    borderColor: "white"
+    borderColor: 'white'
   },
   input: {
     backgroundColor: 'black',
@@ -247,7 +249,7 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: "solid",
+    borderStyle: 'solid',
     height: 60,
     width: 350,
     color: 'white',
@@ -258,62 +260,61 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 20,
     fontSize: 20,
-    color: "white",
+    color: 'white',
     paddingVertical: 12
   },
   label: {
     marginLeft: 20,
     fontSize: 20,
-    color: "white",
+    color: 'white',
     marginBottom: 5
   },
   container: {
     flex: 1,
-    backgroundColor: "#000000",
-    alignItems: "stretch",
-    justifyContent: "flex-start"
+    backgroundColor: '#000000',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start'
   },
   sideBySideContainer: {
     flex: 1,
-    backgroundColor: "#000000",
-    flexDirection: "row",
-    justifyContent: "space-around"
-    // justifyContent: 'flex-start'
+    backgroundColor: '#000000',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   buttonText: {
     fontSize: 20,
-    color: "white",
-    textAlign: "center",
+    color: 'white',
+    textAlign: 'center',
     paddingVertical: 10
   },
   button: {
-    borderColor: "#768DA1",
+    borderColor: '#768DA1',
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: "solid",
-    width: "auto",
+    borderStyle: 'solid',
+    width: 'auto',
     height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
-    color: "white",
-    textAlign: "center",
-    backgroundColor: "#1C4263",
-    alignItems: "stretch"
+    color: 'white',
+    textAlign: 'center',
+    backgroundColor: '#1C4263',
+    alignItems: 'stretch'
   },
   sideBySideButton: {
     width: 170,
-    borderColor: "#768DA1",
+    borderColor: '#768DA1',
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: "solid",
+    borderStyle: 'solid',
     height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
-    color: "white",
-    textAlign: "center",
-    backgroundColor: "#1C4263",
-    alignItems: "stretch"
+    color: 'white',
+    textAlign: 'center',
+    backgroundColor: '#1C4263',
+    alignItems: 'stretch'
   }
 });
