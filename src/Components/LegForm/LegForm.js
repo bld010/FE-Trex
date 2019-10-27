@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
-import { postNewLeg, patchLeg, deleteLeg } from '../../util/apiCalls';
+import { postNewLeg, patchLeg, deleteLeg, fetchMyTrip } from '../../util/apiCalls';
 
 export default class LegForm extends Component {
   constructor(props) {
@@ -25,7 +25,9 @@ export default class LegForm extends Component {
       endDate: '',
       tripId: this.props.navigation.getParam('tripId'),
       leg: this.props.navigation.getParam('leg') || null,
-      error: ''
+      error: '',
+      user: {id: 1},
+      // we will need to pass this user object dyanmically
     };
   }
 
@@ -61,7 +63,7 @@ export default class LegForm extends Component {
 
     try {
       let newLeg = await postNewLeg(newLegInfo);
-      this.props.navigation.navigate('Trip', {tripId})
+      this.refreshTrip(newLeg)
     }
     catch (error) {
       this.setState({ error: 'There was an error creating your leg'})
@@ -90,10 +92,20 @@ export default class LegForm extends Component {
   }
 
 
+  refreshTrip = async (tripId) => { 
+    try {
+      let updatedTrip = await fetchMyTrip(tripId)
+      this.props.navigation.navigate('Trip', {trip: trip, userId: this.state.user.id})
+    } catch (error) {
+      this.setState({error: 'There was an error fetching your trips.'})
+    }
+  }
+
+
   removeLeg = async () => {
     try {
       let deletedLeg = await deleteLeg(this.state.leg.id);
-      this.props.navigation.navigate('Trip', {tripId: this.state.tripId});
+      this.props.navigation.navigate('Trip', {tripId});
     } catch (error) {
       this.setState({ error: 'There was an error deleting your leg'})
     }

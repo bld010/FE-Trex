@@ -36,6 +36,8 @@ export default class Trip extends Component {
 
 
   render() {
+    console.log('back in the trip, props', this.props)
+    console.log('back in the trip this.state.trip', this.state.trip)
     const {navigate} = this.props.navigation;
     let { name, startDate, endDate, id } = this.state.trip
     return (
