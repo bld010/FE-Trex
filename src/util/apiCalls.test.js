@@ -336,7 +336,7 @@ describe('apiCalls', () => {
         tripId: 4,
       }
   
-      let queryParams = `mutation {createLeg(input: {startDate: "2019-10-02", endDate: "2020-08-20", startLocation: "Peru", endLocation: "Quito", tripId: 4}) {leg{startDate endDate startLocation endLocation id tripId}}}`
+      let queryParams = `mutation {createLeg(input: {startDate: "2019-10-02", endDate: "2020-08-20", startLocation: "Peru", endLocation: "Quito", tripId: 4}) {leg{tripId}}}`
       
       url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
       
@@ -438,7 +438,7 @@ describe('apiCalls', () => {
         tripId: 4,
       }
   
-      let queryParams = `mutation {updateLeg(input: {id: 1, startDate: "2019-10-02", endDate: "2020-08-20", startLocation: "Peru", endLocation: "Quito", tripId: 4}) {leg{startDate endDate startLocation endLocation id tripId}}}`
+      let queryParams = `mutation {updateLeg(input: {id: 1, startDate: "2019-10-02", endDate: "2020-08-20", startLocation: "Peru", endLocation: "Quito", tripId: 4}) {leg{tripId}}}`
       
       url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
       
@@ -625,7 +625,7 @@ describe('apiCalls', () => {
     }
   }
 
-  let queryParams = `mutation {removeLeg(input: {id: "13"}) {leg {name}}}`
+  let queryParams = `mutation {removeLeg(input: {id: "13"}) {leg {tripId}}}`
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
@@ -721,7 +721,7 @@ describe('apiCalls', () => {
       mockFetch = jest.fn()
       global.fetch = mockFetch;
 
-      queryParams = `{trip(id: 1) {trips {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}}`
+      queryParams = `{trip(id: 1) {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}`
   
       url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
       
@@ -750,13 +750,13 @@ describe('apiCalls', () => {
           })
         })
 
-        await fetchTrip(1)
+        await fetchTrip({tripId: 1})
 
         expect(mockFetch).toHaveBeenCalledWith(url, options)
     })
       
     it('should return the trips for a specific user (HAPPY)', async () => {
-      let mockLegs = [{
+      let mockTrip = {"legs": [{
         "starttLocation": "Paris",
         "endLocation": "Rome",
         "endDate": "2020-01-02",
@@ -764,6 +764,7 @@ describe('apiCalls', () => {
         "startDate": "2019-07-11",
         "tripId": "22"
       }]
+    }
 
       mockFetch.mockImplementation(() => {
         return Promise.resolve({
@@ -772,7 +773,7 @@ describe('apiCalls', () => {
             return (
               { data: {
                 trip: {
-                  legs: mockLegs
+                  legs: mockTrip
                 }
                 }
               }
@@ -782,7 +783,7 @@ describe('apiCalls', () => {
 
       let response = await fetchTrip(1)
 
-      expect(response).toEqual(mockLegs)
+      expect(response).toEqual(mockTrip)
 
     })
 
