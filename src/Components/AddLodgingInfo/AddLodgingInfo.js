@@ -20,8 +20,38 @@ export default class AddLodgingInfo extends Component {
       cityLodge: "",
       lodgeName: "",
       startLodge: "",
-      endLodge: ""
+      endLodge: "",
+      error: ''
     };
+  }
+
+  handleSave = () => {
+    let { 
+      countryLodge, 
+      cityLodge,
+      lodgeName,
+      startLodge,
+      endLodge
+    } = this.state;
+
+    let requiredParams = [
+      countryLodge,
+      cityLodge,
+      lodgeName,
+      startLodge,
+      endLodge
+    ]
+
+    requiredParams.forEach(param => {
+      if (param === '') {
+        this.setState({ error: `Please fill out all fields.`});
+        return
+      } else {
+        this.setState({ error: '' })
+        //fire post call here 
+      }
+    })
+
   }
 
   render() {
@@ -101,7 +131,12 @@ export default class AddLodgingInfo extends Component {
                 this.setState({ endLodge: date });
               }}
             />
-            <TouchableOpacity>
+            
+            {this.state.error !== '' && 
+              <Text style={styles.error}>{this.state.error}</Text>
+            }
+
+            <TouchableOpacity onPress={this.handleSave}>
               <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
           </View>
@@ -146,5 +181,11 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     backgroundColor: "#1C4263"
+  },
+  error: {
+    color: 'white',
+    fontSize: 25,
+    textAlign: 'center',
+    marginVertical: 15
   }
 });
