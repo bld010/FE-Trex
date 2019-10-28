@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DatePicker from 'react-native-datepicker';
-import MapInput from '../MapInput/MapInput'
+import MapInputFirst from '../MapInput/MapInputFirst'
+import MapInputSecond from '../MapInput/MapInputSecond'
 import {
   StyleSheet,
   Text,
@@ -28,13 +29,19 @@ export default class LegForm extends Component {
       error: '',
       user: {id: 1},
       // we will need to pass this user object dyanmically
-      loc: ''
     };
   }
 
-  handler(arg) {
+  handlerFirstInput(arg) {
     this.setState({
-      loc: arg
+      startLocation: arg
+    });
+    return;
+  }
+
+  handlerSecondInput(arg) {
+    this.setState({
+      endLocation: arg
     });
     return;
   }
@@ -68,7 +75,7 @@ export default class LegForm extends Component {
     }
   }
 
-  handleSave = async () => {
+  handleNewLegSave = async () => {
 
     let updatedTripId;
 
@@ -137,6 +144,8 @@ export default class LegForm extends Component {
   }
 
   render() {
+    console.log(this.state.startLocation)
+    console.log(this.state.endLocation)
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
@@ -148,89 +157,104 @@ export default class LegForm extends Component {
               {this.state.leg === null && <Text style={styles.title}>Add A New Leg</Text>}
               {this.state.leg && <Text style={styles.title}>Edit Leg</Text>}
           </View>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Start Destination"
-              maxLength={20}
-              onBlur={Keyboard.dismiss}
-              value={this.state.startLocation}
-              onChangeText={startLocation => this.setState({ startLocation })}
-            />
-            {/* <MapInput handler={this.handler.bind(this)} /> */}
-            <TextInput
-              style={styles.textInput}
-              placeholder="End Destination"
-              maxLength={20}
-              onBlur={Keyboard.dismiss}
-              value={this.state.endLocation}
-              onChangeText={endLocation => this.setState({ endLocation })}
-            />
-            <Text>Start Date:</Text>
-            <DatePicker
-            style={{width: 200}}
-            date={this.state.startDate} //initial date from state
-            mode="date" //The enum of date, datetime and time
-            placeholder="select date"
-            format="YYYY-MM-DD"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            customStyles={{
-              dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: 4,
-                marginLeft: 0
-              },
-              dateInput: {
-                marginLeft: 36
-              }
-            }}
-            onDateChange={(date) => {this.setState({startDate: date})}}
-            />
-            <DatePicker
-              style={{width: 200}}
-              date={this.state.endDate}
-              mode="date" 
-              placeholder="select date"
-              format="YYYY-MM-DD"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              customStyles={{
-                dateIcon: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 4,
-                  marginLeft: 0
-                },
-                dateInput: {
-                  marginLeft: 36
-                }
-              }}
-              onDateChange={(date) => {this.setState({endDate: date})}}
-            />
-            <TouchableOpacity>
-              <Text style={styles.button} onPress={() => navigate('AddTransportInfo')}>Add Transportation</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.button} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
-            </TouchableOpacity>
-            {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
-            <TouchableOpacity onPress={this.handleSave}>
-              <Text style={styles.button}>Save</Text>
-            </TouchableOpacity>
-            {this.props.navigation.getParam('leg') && 
-              <TouchableOpacity style={styles.deleteButton} onPress={this.removeLeg}>
-                <Text styles={styles.text}>Delete Leg</Text>
-              </TouchableOpacity>
+          <View>
+      <Text style={styles.label}>Start Destination</Text>
+          <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
+          <Text style={styles.label}>End Destination</Text>
+          <MapInputSecond handlerSecondInput={this.handlerSecondInput.bind(this)} />
+          </View>
+          <Text style={styles.text}>Start Date</Text>
+          <DatePicker
+          style={{ width: 370, height: 65 }}
+          date={this.state.startDate}
+          mode="date"
+          placeholder="Select End Date"
+          placeholderTextColor='white'
+          format="MM-DD-YYYY"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              left: 0,
+              top: 4
+            },
+            dateInput: {
+              marginLeft: 15,
+              color: "black",
+              backgroundColor: 'white',
+              height: 60,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: "white",
+              marginVertical: -20
+            },
+            dateText: {
+              fontSize: 22,
+              color: "black",
+            },
+            placeholderText: {
+              fontSize: 22,
+              color: "black"
             }
-
-
-            </View>
+          }}
+          onDateChange={(date) => {this.setState({startDate: date})}}
+        />
+        <Text style={styles.text}>End Date</Text>
+        <DatePicker
+          style={{ width: 370, height: 65 }}
+          date={this.state.endDate}
+          mode="date"
+          placeholder="Select End Date"
+          placeholderTextColor='white'
+          format="MM-DD-YYYY"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              left: 0,
+              top: 4
+            },
+            dateInput: {
+              marginLeft: 15,
+              color: "black",
+              backgroundColor: 'white',
+              height: 60,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: "white",
+            },
+            dateText: {
+              fontSize: 22,
+              color: "black",
+            },
+            placeholderText: {
+              fontSize: 22,
+              color: "black"
+            }
+          }}
+          onDateChange={(date) => {this.setState({endDate: date})}}
+        />
+        <View style={styles.sideBySideContainer}>
+          <TouchableOpacity style={styles.sideBySideButton}>
+            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo')}>Add Transport</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sideBySideButton}>
+            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
+          </TouchableOpacity>
+          </View>
+          <TouchableOpacity onPress={this.handleNewLegSave}>
+            <Text style={styles.button}>Save</Text>
+          </TouchableOpacity>
+          {this.props.navigation.getParam('leg') && 
+          <TouchableOpacity style={styles.deleteButton} onPress={this.removeLeg}>
+          <Text style={styles.buttonText}>Delete Leg</Text>
+          </TouchableOpacity>
+          }
+    
       </ScrollView>
-       
       <WandererFooter navigate={navigate} />
       </View>
+      
     );
   }
 }
@@ -238,18 +262,21 @@ export default class LegForm extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     alignItems: 'stretch',
     justifyContent: 'flex-start'
   },
-  inputContainer: {
-    marginTop: 15
-  }, 
-  text: {
-    textAlign: 'center',
+  title: {
+    textAlign: "center",
     fontSize: 30,
-    color: 'white',
-    paddingVertical: 10,
+    color: "white",
+    paddingVertical: 25
+  },
+  text: {
+    marginLeft: 20,
+    fontSize: 20,
+    color: "white",
+    paddingVertical: 15
   },
   deleteButton: {
     borderColor: "white",
@@ -264,16 +291,45 @@ const styles = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "red"
   },
-  textInput: {
-    backgroundColor: "white",
-    borderColor: "#CCCCCC",
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    height: 50,
-    fontSize: 25,
-    marginTop: 15,
-    paddingLeft: 20,
-    paddingRight: 20
+  form: {
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    height: 60,
+    width: 350,
+    color: 'black',
+    padding: 10,
+    marginLeft: 15,
+    marginBottom: 10,
+    position: 'absolute'
+  },
+  sideBySideContainer: {
+    flex: 1,
+    backgroundColor: "#000000",
+    flexDirection: "row",
+    justifyContent: "space-around"
+  },
+  buttonText: {
+    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 10
+  },
+  sideBySideButton: {
+    width: 170,
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#1C4263",
+    alignItems: "stretch"
   },
   button: {
     borderColor: "white",
@@ -288,6 +344,12 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     backgroundColor: "#1C4263"
+  },
+  label: {
+    marginLeft: 20,
+    fontSize: 20,
+    color: "white",
+    marginBottom: -22
   },
   error: {
     color: 'red',

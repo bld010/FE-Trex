@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import DatePicker from "react-native-datepicker";
-import WandererHeader from "../WandererHeader/WandererHeader";
-import WandererFooter from "../WandererFooter/WandererFooter";
+import MapInputFirst from '../MapInput/MapInputFirst'
+import WandererHeader from '../WandererHeader/WandererHeader';
+import WandererFooter from '../WandererFooter/WandererFooter';
 import {
   StyleSheet,
   Text,
@@ -10,21 +11,26 @@ import {
   TouchableOpacity,
   Keyboard,
   TextInput
-} from "react-native";
+} from 'react-native';
 
 export default class AddLodgingInfo extends Component {
   constructor() {
     super();
     this.state = {
-      countryLodge: "",
-      cityLodge: "",
-      lodgeName: "",
-      startLodge: "",
-      endLodge: "",
-      error: ''
+      countryLodge: '',
+      cityLodge: '',
+      lodgeName: '',
+      startLodge: '',
+      endLodge: ''
     };
   }
 
+  handlerFirstInput(arg) {
+    this.setState({
+      cityLodge: arg
+    });
+    return;
+  }
   
   checkLodgingParams = () => {
     let { 
@@ -58,9 +64,6 @@ export default class AddLodgingInfo extends Component {
     }
 
   }
-    
-
-
 
   render() {
     const { navigate } = this.props.navigation;
@@ -69,70 +72,104 @@ export default class AddLodgingInfo extends Component {
         <WandererHeader />
         <ScrollView>
           <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Country"
-              maxLength={20}
-              onBlur={Keyboard.dismiss}
-              value={this.state.countryLodge}
-              onChangeText={countryLodge => this.setState({ countryLodge })}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="City"
-              maxLength={20}
-              onBlur={Keyboard.dismiss}
-              value={this.state.cityLodge}
-              onChangeText={cityLodge => this.setState({ cityLodge })}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Lodging Name"
-              maxLength={20}
-              onBlur={Keyboard.dismiss}
-              value={this.state.lodgeName}
-              onChangeText={lodgeName => this.setState({ lodgeName })}
-            />
+            <View>
+              <Text style={styles.title}>Add Lodging</Text>
+            </View>
+            <Text style={styles.label}>Country</Text>
+            <View style={styles.form}>
+              <TextInput
+                style={styles.input}
+                placeholder='Enter Country of Stay...'
+                placeholderTextColor='black'
+                maxLength={20}
+                onBlur={Keyboard.dismiss}
+                value={this.state.countryLodge}
+                onChangeText={countryLodge => this.setState({ countryLodge })}
+              />
+            </View>
+            <Text style={styles.labelCity}>City</Text>
+            <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
+            <Text style={styles.label}>Name</Text>
+            <View style={styles.form}>
+              <TextInput
+                style={styles.input}
+                placeholder='Enter Lodging Name...'
+                placeholderTextColor='black'
+                maxLength={20}
+                onBlur={Keyboard.dismiss}
+                value={this.state.lodgeName}
+                onChangeText={lodgeName => this.setState({ lodgeName })}
+              />
+            </View>
+            <Text style={styles.text}>Beginning of Stay</Text>
             <DatePicker
-              style={{ width: 200 }}
+              style={{ width: 370, height: 65 }}
               date={this.state.startLodge}
-              mode="date"
-              placeholder="select date"
-              format="YYYY-MM-DD"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
+              mode='date'
+              placeholder='Start Date'
+              placeholderTextColor='white'
+              format='MM-DD-YYYY'
+              confirmBtnText='Confirm'
+              cancelBtnText='Cancel'
               customStyles={{
                 dateIcon: {
-                  position: "absolute",
                   left: 0,
-                  top: 4,
-                  marginLeft: 0
+                  top: 4
                 },
                 dateInput: {
-                  marginLeft: 36
+                  marginLeft: 15,
+                  color: "black",
+                  backgroundColor: 'white',
+                  height: 60,
+                  borderRadius: 8,
+                  borderWidth: 1,
+                  borderColor: "white",
+                },
+                dateText: {
+                  fontSize: 22,
+                  color: "black",
+                },
+                placeholderText: {
+                  fontSize: 22,
+                  color: "black"
                 }
               }}
               onDateChange={date => {
                 this.setState({ startLodge: date });
               }}
             />
+            <Text style={styles.text}>End of Stay</Text>
             <DatePicker
-              style={{ width: 200 }}
+              style={{ width: 370, height: 65 }}
               date={this.state.endLodge}
-              mode="date"
-              placeholder="select date"
-              format="YYYY-MM-DD"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
+              mode='date'
+              mode='date'
+              placeholder='Start Date'
+              placeholderTextColor='white'
+              format='MM-DD-YYYY'
+              confirmBtnText='Confirm'
+              cancelBtnText='Cancel'
               customStyles={{
                 dateIcon: {
-                  position: "absolute",
                   left: 0,
-                  top: 4,
-                  marginLeft: 0
+                  top: 4
                 },
                 dateInput: {
-                  marginLeft: 36
+                  marginLeft: 15,
+                  color: "black",
+                  backgroundColor: 'white',
+                  height: 60,
+                  borderRadius: 8,
+                  borderWidth: 1,
+                  borderColor: "white",
+                },
+                dateText: {
+                  fontSize: 22,
+                  color: "black",
+                },
+                placeholderText: {
+                  fontSize: 22,
+                  color: "black"
                 }
               }}
               onDateChange={date => {
@@ -158,37 +195,73 @@ export default class AddLodgingInfo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000000",
-    alignItems: "stretch",
-    justifyContent: "flex-start"
+    backgroundColor: '#000000',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start'
   },
   inputContainer: {
     marginTop: 15
   },
-  textInput: {
-    backgroundColor: "white",
-    borderColor: "#CCCCCC",
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    height: 50,
-    fontSize: 25,
-    marginTop: 15,
-    paddingLeft: 20,
-    paddingRight: 20
+  title: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'white',
+    paddingVertical: 25
   },
-  button: {
-    borderColor: "white",
+  text: {
+    marginLeft: 20,
+    fontSize: 20,
+    color: 'white',
+    paddingVertical: 15
+  },
+  input: {
+    backgroundColor: 'white',
+    color: 'black',
+    fontSize: 18,
+    flex: 1,
+    alignItems: 'center',
+    marginLeft: 10
+  },
+  form: {
+    backgroundColor: 'white',
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: "solid",
-    width: "auto",
+    borderStyle: 'solid',
+    height: 60,
+    width: 350,
+    color: 'white',
+    padding: 10,
+    marginLeft: 15,
+    marginBottom: 20
+  },
+  button: {
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: 'solid',
+    width: 'auto',
     height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
-    color: "white",
-    textAlign: "center",
-    backgroundColor: "#1C4263"
+    color: 'white',
+    textAlign: 'center',
+    backgroundColor: '#1C4263'
+  },
+  label: {
+    marginLeft: 20,
+    fontSize: 20,
+    color: 'white',
+    marginBottom: 5
+  },
+  labelCity: {
+    marginLeft: 20,
+    fontSize: 20,
+    color: 'white',
+    marginBottom: -22,
+    marginVertical: -10,
+    color: "white"
   },
   error: {
     color: 'white',

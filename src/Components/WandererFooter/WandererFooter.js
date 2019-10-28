@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
   footer: {
     backgroundColor: '#1C4263',
     flexDirection: 'row',
-    padding: 30,
-    justifyContent: 'space-around'
+    padding: 10,
+    justifyContent: 'space-around',
+    height: 60
   }, 
   footerText: {
     color: 'white',
-    marginBottom: 20,
     fontSize: 20
   }
 })

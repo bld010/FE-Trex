@@ -27,8 +27,8 @@ class Trip extends Component {
     const {navigate} = this.props.navigation;
     return this.state.trip.legs.map(leg => {
       return (
-        <TouchableOpacity key={leg.endLocation} style={styles.tripButton}>
-        <Text onPress={() => navigate('Leg', {leg, tripId: this.state.trip.id})} style={styles.text} key={leg.endLocation}>{leg.endLocation}</Text>
+        <TouchableOpacity key={leg.name} style={styles.legButton}>
+        <Text onPress={() => navigate('Leg', {leg, tripId: this.state.trip.id})} style={styles.buttonText} key={leg.name}>{leg.startLocation}</Text>
       </TouchableOpacity>
       )
     })
@@ -59,29 +59,24 @@ class Trip extends Component {
       <WandererHeader />
 
         <ScrollView>
-
-          <View style={styles.tripHeader}>
-            <Text style={styles.text}>{name}</Text>
-            <TouchableOpacity>
-              <Text style={styles.editTripButton} onPress={() => navigate('TripForm', {trip: this.state.trip, userId: this.state.userId})}>Edit Trip</Text>
+          
+            <Text style={styles.title}>{name}</Text>
+            <View>
+            <Text style={styles.dateText}>{startDate} to {endDate}</Text>
+          </View>
+            <View style={styles.container}>
+            <View style={styles.sideBySideContainer}>
+            <TouchableOpacity style={styles.sideBySideButton}>
+              <Text onPress={() => navigate('LegForm' , {tripId: id})} style={styles.buttonText}>Add A Leg <Text style={styles.plus}>+</Text> </Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.sideBySideButton}>
+              <Text style={styles.buttonText} onPress={() => navigate('TripForm', {trip: this.state.trip, userId: this.state.userId})}>Edit Trip</Text>
+            </TouchableOpacity>
+            </View>
           </View>
-
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>{startDate} thru {endDate}</Text>
-          </View>
-
           <View>
             {this.state.trip.legs && this.generateLegElements()}
           </View>
-
-
-          <View style={styles.container}>
-            <TouchableOpacity style={styles.button}>
-              <Text onPress={() => navigate('LegForm' , {tripId: id})} style={styles.text}>Add A Leg + </Text>
-            </TouchableOpacity>
-          </View>
-
           
         </ScrollView>
 
@@ -101,34 +96,69 @@ const styles = StyleSheet.create({
     
   }, 
   button: {
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
-    borderColor: 'white',
-    marginVertical: 10,
-    backgroundColor: '#1C4263'
-  },
-  tripHeader: {
-    flex: 1,
-    flexDirection: 'row',
-    padding: 20,
-    justifyContent: 'space-between',
+    borderStyle: 'solid',
+    width: 'auto',
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: 'white',
+    textAlign: 'center',
     backgroundColor: '#1C4263',
+    alignItems: 'stretch'
+  },
+  legButton: {
+    borderColor: 'white',
     borderWidth: 1,
-    borderColor: 'white'
+    borderRadius: 8,
+    borderStyle: 'solid',
+    width: 'auto',
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: 'white',
+    textAlign: 'center',
+    backgroundColor: '#84183B',
+    alignItems: 'stretch'
+  },
+  buttonText: {
+    fontSize: 20,
+    color: 'white',
+    textAlign: 'center',
+    paddingVertical: 10
   },
   text: {
     color: 'white',
     marginVertical: 10,
     textAlign: 'center',
     fontSize: 30,
-    width: 'auto'
+    width: 'auto',
+    textAlign: 'center'
+  },
+  dateText: {
+    color: 'white',
+    marginVertical: 10,
+    textAlign: 'center',
+    fontSize: 18,
+    width: 'auto',
+    textAlign: 'center'
+  },
+  title: {
+    color: 'white',
+    marginVertical: 15,
+    textAlign: 'center',
+    fontSize: 40,
+    textAlign: 'center'
   },
   header: {
     backgroundColor: '#1C4263',
     color: 'white',
     paddingTop: 60,
     paddingLeft: 10,
-    // height: 'auto',,
     textAlign: 'center',
     top: 0,
     fontSize: 50,
@@ -147,16 +177,31 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#1C4263'
   },
-  footer: {
-    backgroundColor: '#1C4263',
+  sideBySideContainer: {
+    flex: 1,
+    backgroundColor: '#000000',
     flexDirection: 'row',
-    padding: 30,
     justifyContent: 'space-around'
-  }, 
-  footerText: {
+  },
+  sideBySideButton: {
+    width: 160,
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: 'solid',
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
     color: 'white',
-    marginBottom: 20,
-    fontSize: 20
+    textAlign: 'center',
+    backgroundColor: '#1C4263',
+    alignItems: 'stretch'
+  },
+  plus: {
+    color: '#84183B',
+    fontSize: 20,
+    fontWeight: '900'
   }
 });
 

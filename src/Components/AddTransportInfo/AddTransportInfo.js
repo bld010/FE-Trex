@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-native-datepicker';
+import MapInputFirst from '../MapInput/MapInputFirst'
+import MapInputSecond from '../MapInput/MapInputSecond'
 import WandererHeader from '../WandererHeader/WandererHeader';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import {
@@ -18,10 +20,25 @@ export default class AddTransportInfo extends Component {
     this.state = {
       startTrans: '',
       endTrans: '',
-      dateTrans: '', 
+      dateTrans: '',
       error: ''
     };
   }
+
+  handlerFirstInput(arg) {
+    this.setState({
+      startTrans: arg
+    });
+    return;
+  }
+
+  handlerSecondInput(arg) {
+    this.setState({
+      endTrans: arg
+    });
+    return;
+    }
+
 
   checkTransportParams = () => {
     let { 
@@ -49,7 +66,6 @@ export default class AddTransportInfo extends Component {
     if (formIsFilledCorrectly) {
       //fire post call here
     }
-
   }
 
   render() {
@@ -58,40 +74,45 @@ export default class AddTransportInfo extends Component {
       <View style={styles.container}>
         <WandererHeader />
         <ScrollView>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.textInput}
-              placeholder='Start Destination'
-              maxLength={20}
-              onBlur={Keyboard.dismiss}
-              value={this.state.startTrans}
-              onChangeText={startTrans => this.setState({ startTrans })}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder='End Destination'
-              maxLength={20}
-              onBlur={Keyboard.dismiss}
-              value={this.state.endTrans}
-              onChangeText={endTrans => this.setState({ endTrans })}
-            />
+          <View>
+            <Text style={styles.title}>Add Transportation</Text>
+          </View>
+            <Text style={styles.label}>Start Destination</Text>
+            <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
+            <Text style={styles.label}>End Destination</Text>
+            <MapInputSecond handlerSecondInput={this.handlerSecondInput.bind(this)} />
+            <Text style={styles.text}>Travel Date</Text>
             <DatePicker
-              style={{ width: 200 }}
+              style={{ width: 370, height: 65 }}
               date={this.state.dateTrans}
               mode='date'
-              placeholder='select date'
-              format='YYYY-MM-DD'
+              placeholder='Select End Date'
+              placeholderTextColor='white'
+              format='MM-DD-YYYY'
               confirmBtnText='Confirm'
               cancelBtnText='Cancel'
               customStyles={{
                 dateIcon: {
-                  position: 'absolute',
                   left: 0,
-                  top: 4,
-                  marginLeft: 0
+                  top: 4
                 },
                 dateInput: {
-                  marginLeft: 36
+                  marginLeft: 15,
+                  color: "black",
+                  backgroundColor: 'white',
+                  height: 60,
+                  borderRadius: 8,
+                  borderWidth: 1,
+                  borderColor: "white",
+                  marginVertical: -20
+                },
+                dateText: {
+                  fontSize: 22,
+                  color: "black",
+                },
+                placeholderText: {
+                  fontSize: 22,
+                  color: "black"
                 }
               }}
               onDateChange={date => {
@@ -106,7 +127,6 @@ export default class AddTransportInfo extends Component {
             <TouchableOpacity onPress={this.handleSave}>
               <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
-          </View>
         </ScrollView>
         <WandererFooter navigate={navigate} />
       </View>
@@ -123,6 +143,38 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: 15
+  },
+  title: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'white',
+    paddingVertical: 25
+  },
+  text: {
+    marginLeft: 20,
+    fontSize: 20,
+    color: 'white',
+    paddingVertical: 15
+  },
+  input: {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: 18,
+    flex: 1,
+    alignItems: 'center',
+    marginLeft: 10
+  },
+  form: {
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: 'solid',
+    height: 60,
+    width: 350,
+    color: 'white',
+    padding: 10,
+    marginLeft: 15,
+    marginBottom: 20
   },
   textInput: {
     backgroundColor: 'white',
@@ -148,6 +200,12 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     backgroundColor: '#1C4263'
+  },
+  label: {
+    marginLeft: 20,
+    fontSize: 20,
+    color: 'white',
+    marginBottom: -22
   },
   error: {
     color: 'white',
