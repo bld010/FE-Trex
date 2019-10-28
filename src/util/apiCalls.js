@@ -17,6 +17,7 @@ export const fetchMyTrip = async (tripId) => {
 
     let data = await resp.json();
     let trip = data.data.trip;
+    console.log('in the fetch: trip:', trip)
     return trip;
 
   } catch (error) {

@@ -62,8 +62,8 @@ export default class LegForm extends Component {
     }
 
     try {
-      let newLeg = await postNewLeg(newLegInfo);
-      this.refreshTrip(newLeg)
+      let updatedTrip = await postNewLeg(newLegInfo);
+      this.refreshTrip(updatedTrip)
     }
     catch (error) {
       this.setState({ error: 'There was an error creating your leg'})
@@ -83,8 +83,8 @@ export default class LegForm extends Component {
       id
     }
     try {
-      let editedLeg = await patchLeg(editedLegInfo)
-      this.props.navigation.navigate('Trip', {tripId})
+      let editedTrip = await patchLeg(editedLegInfo)
+      this.refreshTrip(editedTrip)
     }
     catch (error) {
       this.setState({error: 'There was an error editing your leg'})
@@ -92,22 +92,23 @@ export default class LegForm extends Component {
   }
 
 
-  refreshTrip = async (tripId) => { 
+  removeLeg = async () => {
     try {
-      let updatedTrip = await fetchMyTrip(tripId)
-      this.props.navigation.navigate('Trip', {trip: trip, userId: this.state.user.id})
+      let shortenedTrip = await deleteLeg(this.state.leg.id);
+      this.refreshTrip(shortenedTrip)
     } catch (error) {
-      this.setState({error: 'There was an error fetching your trips.'})
+      this.setState({ error: 'There was an error deleting your leg'})
     }
   }
 
 
-  removeLeg = async () => {
+  refreshTrip = async (tripId) => { 
     try {
-      let deletedLeg = await deleteLeg(this.state.leg.id);
-      this.props.navigation.navigate('Trip', {tripId});
+      let updatedTrip = await fetchMyTrip(tripId)
+      console.log(updatedTrip)
+      this.props.navigation.navigate('Trip', {updatedTrip, userId: this.state.user.id})
     } catch (error) {
-      this.setState({ error: 'There was an error deleting your leg'})
+      this.setState({error: 'There was an error fetching your trips.'})
     }
   }
 
