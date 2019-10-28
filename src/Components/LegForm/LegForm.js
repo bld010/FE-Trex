@@ -105,7 +105,6 @@ export default class LegForm extends Component {
   refreshTrip = async (tripId) => { 
     try {
       let updatedTrip = await fetchTrip(tripId)
-      console.log(updatedTrip)
       this.props.navigation.navigate('Trip', {updatedTrip, userId: this.state.user.id})
     } catch (error) {
       this.setState({error: 'There was an error fetching your trips.'})
