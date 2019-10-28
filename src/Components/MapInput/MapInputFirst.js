@@ -5,7 +5,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 The component is child component for location search 
 the selected location can be stored in state variable
 */
-export default class MapInput extends React.Component {
+export default class MapInputFirst extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -13,7 +13,8 @@ export default class MapInput extends React.Component {
     return (
       <View style={{ paddingTop: 20, flex: 1 }}>
         <GooglePlacesAutocomplete
-          placeholder="Search"
+          placeholder="Search..."
+          placeholderTextColor='black'
           minLength={2} // minimum length of text to search
           autoFocus={false}
           returnKeyType={"search"}
@@ -23,7 +24,7 @@ export default class MapInput extends React.Component {
             row.description || row.formatted_address || row.name
           }
           onPress={(data, details = null) => {
-            this.props.handler(data.description)
+            this.props.handlerFirstInput(data.description)
 }}
           getDefaultValue={() => {
             return ""; // text input default value
@@ -40,14 +41,14 @@ export default class MapInput extends React.Component {
               borderBottomWidth:0,
               width: 350,
               marginLeft: 15,
-              marginBottom: 30
+              marginBottom: 34
             },
             textInput: {
               marginLeft: 0,
               marginRight: 0,
               height: 60,
               color: '#5d5d5d',
-              fontSize: 16
+              fontSize: 22
             },
             description: {
               color: 'white',

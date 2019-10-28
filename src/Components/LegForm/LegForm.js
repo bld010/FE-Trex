@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DatePicker from 'react-native-datepicker';
-import MapInput from '../MapInput/MapInput'
+import MapInputFirst from '../MapInput/MapInputFirst'
+import MapInputSecond from '../MapInput/MapInputSecond'
 import {
   StyleSheet,
   Text,
@@ -28,13 +29,19 @@ export default class LegForm extends Component {
       error: '',
       user: {id: 1},
       // we will need to pass this user object dyanmically
-      loc: ''
     };
   }
 
-  handler(arg) {
+  handlerFirstInput(arg) {
     this.setState({
-      loc: arg
+      startLocation: arg
+    });
+    return;
+  }
+
+  handlerSecondInput(arg) {
+    this.setState({
+      endLocation: arg
     });
     return;
   }
@@ -113,7 +120,8 @@ export default class LegForm extends Component {
   }
 
   render() {
-    console.log(this.state.loc)
+    console.log(this.state.startLocation)
+    console.log(this.state.endLocation)
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
@@ -125,20 +133,11 @@ export default class LegForm extends Component {
             {this.state.leg === null && <Text style={styles.title}>Add A New Leg</Text>}
             {this.state.leg && <Text style={styles.title}>Edit Leg</Text>}
           </View>
+          <View>
       <Text style={styles.label}>Start Destination</Text>
-          <MapInput handler={this.handler.bind(this)} />
-
+          <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
           <Text style={styles.label}>End Destination</Text>
-          <View style={styles.form}>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter End Destination..."
-            placeholderTextColor='white'
-            maxLength={20}
-            onBlur={Keyboard.dismiss}
-            value={this.state.endLocation}
-            onChangeText={endLocation => this.setState({ endLocation })}
-          />
+          <MapInputSecond handlerSecondInput={this.handlerSecondInput.bind(this)} />
           </View>
           <Text style={styles.text}>Start Date</Text>
           <DatePicker
@@ -157,15 +156,21 @@ export default class LegForm extends Component {
             },
             dateInput: {
               marginLeft: 15,
-              color: "white",
+              color: "black",
+              backgroundColor: 'white',
               height: 60,
               borderRadius: 8,
               borderWidth: 1,
               borderColor: "white",
+              marginVertical: -20
             },
             dateText: {
-              fontSize: 24,
-              color: "white",
+              fontSize: 22,
+              color: "black",
+            },
+            placeholderText: {
+              fontSize: 22,
+              color: "black"
             }
           }}
           onDateChange={(date) => {this.setState({startDate: date})}}
@@ -187,15 +192,20 @@ export default class LegForm extends Component {
             },
             dateInput: {
               marginLeft: 15,
-              color: "white",
+              color: "black",
+              backgroundColor: 'white',
               height: 60,
               borderRadius: 8,
               borderWidth: 1,
               borderColor: "white",
             },
             dateText: {
-              fontSize: 24,
-              color: "white",
+              fontSize: 22,
+              color: "black",
+            },
+            placeholderText: {
+              fontSize: 22,
+              color: "black"
             }
           }}
           onDateChange={(date) => {this.setState({endDate: date})}}
@@ -239,14 +249,11 @@ const styles = StyleSheet.create({
     color: "white",
     paddingVertical: 25
   },
-  inputContainer: {
-    marginTop: 15
-  }, 
   text: {
     marginLeft: 20,
     fontSize: 20,
     color: "white",
-    paddingVertical: 12
+    paddingVertical: 15
   },
   deleteButton: {
     borderColor: "white",
@@ -261,14 +268,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "red"
   },
-  input: {
-    backgroundColor: 'black',
-    color: 'white',
-    fontSize: 18,
-    flex: 1,
-    alignItems: 'center',
-    marginLeft: 10
-  },
   form: {
     borderColor: 'white',
     borderWidth: 1,
@@ -276,10 +275,11 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     height: 60,
     width: 350,
-    color: 'white',
+    color: 'black',
     padding: 10,
     marginLeft: 15,
-    marginBottom: 10
+    marginBottom: 10,
+    position: 'absolute'
   },
   sideBySideContainer: {
     flex: 1,
@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
   },
   sideBySideButton: {
     width: 170,
-    borderColor: "#768DA1",
+    borderColor: "white",
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: "solid",
@@ -326,6 +326,6 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 20,
     color: "white",
-    marginBottom: 5
+    marginBottom: -22
   }
 });
