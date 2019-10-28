@@ -113,6 +113,7 @@ export default class LegForm extends Component {
   }
 
   render() {
+    console.log(this.state.loc)
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
@@ -124,25 +125,11 @@ export default class LegForm extends Component {
             {this.state.leg === null && <Text style={styles.title}>Add A New Leg</Text>}
             {this.state.leg && <Text style={styles.title}>Edit Leg</Text>}
           </View>
-      <View style={styles.inputContainer}>
       <Text style={styles.label}>Start Destination</Text>
-      <View style={styles.form}>
-      {/* <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter Start Destination..."
-            placeholderTextColor='white'
-            maxLength={20}
-            onBlur={Keyboard.dismiss}
-            value={this.state.startLocation}
-            onChangeText={startLocation => this.setState({ startLocation })}
-          />
-          </View>
-          
-          /> */}
           <MapInput handler={this.handler.bind(this)} />
+
           <Text style={styles.label}>End Destination</Text>
-          <View style={styles.form}></View>
+          <View style={styles.form}>
           <TextInput
             style={styles.input}
             placeholder="Enter End Destination..."
@@ -229,13 +216,12 @@ export default class LegForm extends Component {
           <Text style={styles.buttonText}>Delete Leg</Text>
           </TouchableOpacity>
           }
-          
-
+        
           {this.state.error !== '' && <Text style={styles.text}>{this.state.error}</Text>}
-          </View>
       </ScrollView>
       <WandererFooter navigate={navigate} />
       </View>
+      
     );
   }
 }

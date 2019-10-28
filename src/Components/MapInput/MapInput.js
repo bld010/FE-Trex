@@ -34,11 +34,26 @@ export default class MapInput extends React.Component {
             types: "(cities)" // default: 'geocode'
           }}
           styles={{
-            description: {
-              fontWeight: "bold"
+            textInputContainer: {
+              backgroundColor: 'rgba(0,0,0,0)',
+              borderTopWidth: 0,
+              borderBottomWidth:0,
+              width: 350,
+              marginLeft: 15,
+              marginBottom: 30
             },
-            predefinedPlacesDescription: {
-              color: "black"
+            textInput: {
+              marginLeft: 0,
+              marginRight: 0,
+              height: 60,
+              color: '#5d5d5d',
+              fontSize: 16
+            },
+            description: {
+              color: 'white',
+            },
+            listView: {
+              marginVertical: 30
             }
           }}
           enablePoweredByContainer={true}
