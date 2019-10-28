@@ -75,7 +75,7 @@ export default class LegForm extends Component {
     }
   }
 
-  handleSave = async () => {
+  handleNewLegSave = async () => {
 
     let updatedTripId;
 
