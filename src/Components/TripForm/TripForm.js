@@ -240,7 +240,7 @@ class TripForm extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.sideBySideButton} onPress={this.handleSave}>
-              <Text style={styles.text}>Save</Text>
+              <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
           </View>
 
