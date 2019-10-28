@@ -95,7 +95,8 @@ const styles = StyleSheet.create({
     width: 330,
     marginLeft: 20,
     marginVertical: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    height: 170
   },
   headerText: {
     color: 'white',
