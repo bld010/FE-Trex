@@ -9,6 +9,7 @@ import {
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
 import { withNavigationFocus } from 'react-navigation';
+import { fetchTripById } from '../../util/apiCalls';
 
 
 class Trip extends Component {
@@ -17,8 +18,8 @@ class Trip extends Component {
     super(props)
     this.state = {
       userId: this.props.navigation.getParam('userId'),
-      trip: this.props.navigation.getParam('trip'),
-      tripId: ''
+      trip: this.props.navigation.getParam('trip') || null,
+      error: ''
     }
   }
 
@@ -33,25 +34,21 @@ class Trip extends Component {
     })
   }
 
+  refetchTrip = async () => {
+    try {
+      let updatedTrip = await fetchTripById(this.state.trip.id);
+      this.setState({ trip: updatedTrip })
+    } catch (error) {
+      this.setState({ error: 'There was a problem updating the legs of your trip'})
+    }
+  }
 
-  
+  componentDidUpdate = async (prevProps) => {
+    if (prevProps.isFocused !== this.props.isFocused) {
 
-  // componentDidMount = async  () => {
-  //   try {
-  //     let trips = await fetchMyTrips(this.state.user.id)
-  //     this.setState({ trips })
-
-  //   } catch (error) {
-  //     this.setState({error: 'There was an error fetching your trips.'})
-  //   }
-  // }
-
-  
-  // componentDidUpdate = async (prevProps) => {
-  //   if (prevProps.isFocused !== this.props.isFocused) {
-  //     this.componentDidMount();
-  //   }
-  // }
+      this.refetchTrip();
+    }
+  }
 
 
   render() {
