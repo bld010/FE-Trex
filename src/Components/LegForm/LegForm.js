@@ -41,9 +41,33 @@ export default class LegForm extends Component {
     }
   }
 
-  handleNewLegSave = async () => {
+  handleSave = async () => {
     if(!this.props.navigation.getParam('leg')) {
-      this.createNewLeg()
+
+      let {
+        startLocation,
+        startDate,
+        endLocation,
+        endDate
+      } = this.state;
+
+      let requiredParams = [
+        startLocation,
+        startDate,
+        endLocation,
+        endDate
+      ]
+
+      requiredParams.forEach(param => {
+        if (param === '') {
+          this.setState({ error: 'Please fill out both destinations and both dates'});
+          return;
+        } else {
+          this.setState({ error: '' })
+          this.createNewLeg()
+        }
+      })
+
     } else {
       this.editLeg()
     }
@@ -177,8 +201,13 @@ export default class LegForm extends Component {
           </TouchableOpacity>
           <TouchableOpacity>
             <Text style={styles.button} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
+
+            {this.state.error !== '' && 
+              <Text style={styles.error}>{this.state.error}</Text>
+            }
+
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.handleNewLegSave}>
+          <TouchableOpacity onPress={this.handleSave}>
             <Text style={styles.button}>Save</Text>
           </TouchableOpacity>
           {this.props.navigation.getParam('leg') && 
@@ -249,5 +278,11 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     backgroundColor: "#1C4263"
+  },
+  error: {
+    color: 'white',
+    fontSize: 25,
+    textAlign: 'center',
+    marginVertical: 15
   }
 });
