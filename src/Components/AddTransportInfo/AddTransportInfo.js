@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-native-datepicker';
+import MapInputFirst from '../MapInput/MapInputFirst'
+import MapInputSecond from '../MapInput/MapInputSecond'
 import WandererHeader from '../WandererHeader/WandererHeader';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import {
@@ -22,6 +24,20 @@ export default class AddTransportInfo extends Component {
     };
   }
 
+  handlerFirstInput(arg) {
+    this.setState({
+      startTrans: arg
+    });
+    return;
+  }
+
+  handlerSecondInput(arg) {
+    this.setState({
+      endTrans: arg
+    });
+    return;
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -31,31 +47,10 @@ export default class AddTransportInfo extends Component {
           <View>
             <Text style={styles.title}>Add Transportation</Text>
           </View>
-          <View style={styles.inputContainer}>
             <Text style={styles.label}>Start Destination</Text>
-            <View style={styles.form}>
-              <TextInput
-                style={styles.input}
-                placeholder='Enter Start Destination...'
-                placeholderTextColor='white'
-                maxLength={20}
-                onBlur={Keyboard.dismiss}
-                value={this.state.startTrans}
-                onChangeText={startTrans => this.setState({ startTrans })}
-              />
-            </View>
+            <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
             <Text style={styles.label}>End Destination</Text>
-            <View style={styles.form}>
-              <TextInput
-                style={styles.input}
-                placeholder='Enter End Destination...'
-                placeholderTextColor='white'
-                maxLength={20}
-                onBlur={Keyboard.dismiss}
-                value={this.state.endTrans}
-                onChangeText={endTrans => this.setState({ endTrans })}
-              />
-            </View>
+            <MapInputSecond handlerSecondInput={this.handlerSecondInput.bind(this)} />
             <Text style={styles.text}>Travel Date</Text>
             <DatePicker
               style={{ width: 370, height: 65 }}
@@ -73,15 +68,21 @@ export default class AddTransportInfo extends Component {
                 },
                 dateInput: {
                   marginLeft: 15,
-                  color: 'white',
+                  color: "black",
+                  backgroundColor: 'white',
                   height: 60,
                   borderRadius: 8,
                   borderWidth: 1,
-                  borderColor: 'white'
+                  borderColor: "white",
+                  marginVertical: -20
                 },
                 dateText: {
-                  fontSize: 24,
-                  color: 'white'
+                  fontSize: 22,
+                  color: "black",
+                },
+                placeholderText: {
+                  fontSize: 22,
+                  color: "black"
                 }
               }}
               onDateChange={date => {
@@ -91,7 +92,6 @@ export default class AddTransportInfo extends Component {
             <TouchableOpacity>
               <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
-          </View>
         </ScrollView>
         <WandererFooter navigate={navigate} />
       </View>
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 20,
     color: 'white',
-    paddingVertical: 12
+    paddingVertical: 15
   },
   input: {
     backgroundColor: 'black',
@@ -159,6 +159,6 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 20,
     color: 'white',
-    marginBottom: 5
+    marginBottom: -22
   }
 });
