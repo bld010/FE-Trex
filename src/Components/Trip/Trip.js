@@ -8,16 +8,18 @@ import {
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
+import { withNavigationFocus } from 'react-navigation';
+import { fetchTrip } from '../../util/apiCalls';
 
 
-export default class Trip extends Component {
+class Trip extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
       userId: this.props.navigation.getParam('userId'),
-      trip: this.props.navigation.getParam('trip'),
-      tripId: '',
+      trip: this.props.navigation.getParam('trip') || null,
+      error: ''
     }
   }
 
@@ -32,7 +34,20 @@ export default class Trip extends Component {
     })
   }
 
+  refetchTrip = async () => {
+    try {
+      let updatedTrip = await fetchTrip(this.state.trip.id);
+      this.setState({ trip: updatedTrip })
+    } catch (error) {
+      this.setState({ error: 'There was a problem updating the legs of your trip'})
+    }
+  }
 
+  componentDidUpdate = async (prevProps) => {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this.refetchTrip();
+    }
+  }
 
 
   render() {
@@ -190,3 +205,4 @@ const styles = StyleSheet.create({
   }
 });
 
+export default withNavigationFocus(Trip)
