@@ -20,7 +20,8 @@ export default class AddTransportInfo extends Component {
     this.state = {
       startTrans: '',
       endTrans: '',
-      dateTrans: ''
+      dateTrans: '',
+      error: ''
     };
   }
 
@@ -36,6 +37,35 @@ export default class AddTransportInfo extends Component {
       endTrans: arg
     });
     return;
+    }
+
+
+  checkTransportParams = () => {
+    let { 
+      startTrans,
+      endTrans,
+      dateTrans
+    } = this.state;
+
+    if (
+      startTrans === '' ||
+      endTrans === '' ||
+      dateTrans === '' 
+    ) {
+      this.setState({ error: 'Please fill out all fields'})
+      return false;
+    } else {
+      this.setState({ error: ''});
+      return true;
+    }
+  }
+
+  handleSave = async () => {
+    
+    let formIsFilledCorrectly = this.checkTransportParams();
+    if (formIsFilledCorrectly) {
+      //fire post call here
+    }
   }
 
   render() {
@@ -89,7 +119,12 @@ export default class AddTransportInfo extends Component {
                 this.setState({ dateTrans: date });
               }}
             />
-            <TouchableOpacity>
+
+            {this.state.error !== '' && 
+              <Text style={styles.error}>{this.state.error}</Text>
+            }
+
+            <TouchableOpacity onPress={this.handleSave}>
               <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
         </ScrollView>
@@ -141,6 +176,17 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginBottom: 20
   },
+  textInput: {
+    backgroundColor: 'white',
+    borderColor: '#CCCCCC',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    height: 50,
+    fontSize: 25,
+    marginTop: 15,
+    paddingLeft: 20,
+    paddingRight: 20
+  },
   button: {
     borderColor: 'white',
     borderWidth: 1,
@@ -160,5 +206,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     marginBottom: -22
+  },
+  error: {
+    color: 'white',
+    fontSize: 25,
+    textAlign: 'center',
+    marginVertical: 15
   }
 });

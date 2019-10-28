@@ -38,7 +38,7 @@ class TripForm extends Component {
 
   componentDidMount = () => {
     if (this.state.trip) {
-      let { name, startDate, endDate } = this.state.trip;
+      let { name, startDate, endDate } = this.state.trip
       this.setState({
         name,
         startDate,
@@ -47,9 +47,31 @@ class TripForm extends Component {
     }
   };
 
-  handleNewTripSave = async () => {
+  checkNewTripParams = () => {
+    let { name, startDate, endDate } = this.state;
+
+    if (
+      name === '' ||
+      startDate === '' ||
+      endDate === ''
+    ) {
+      this.setState({ error: 'Please fill out all fields'})
+      return false;
+    } else {
+      this.setState({ error: ''});
+      return true;
+    }
+  }
+
+  handleSave = async () => {
     if (!this.props.navigation.getParam('trip')) {
-      this.createNewTrip();
+    
+      let formIsFilledCorrectly = this.checkNewTripParams();
+
+      if (formIsFilledCorrectly) {
+        this.createNewTrip();
+      }
+
     } else {
       this.editTrip();
     }
@@ -216,11 +238,9 @@ class TripForm extends Component {
             >
               <Text style={styles.buttonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.sideBySideButton}
-              onPress={this.handleNewTripSave}
-            >
-              <Text style={styles.buttonText}>Save</Text>
+
+            <TouchableOpacity style={styles.sideBySideButton} onPress={this.handleSave}>
+              <Text style={styles.text}>Save</Text>
             </TouchableOpacity>
           </View>
 

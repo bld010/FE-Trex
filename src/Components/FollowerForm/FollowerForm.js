@@ -13,15 +13,47 @@ import WandererHeader from "../WandererHeader/WandererHeader";
 
 export default class FollowerForm extends Component {
   constructor(props) {
-    super();
+    super(props)
     this.state = {
-      name: "",
-      followerName: "",
-      followerEmail: "",
-      followerPhoneNum: "",
-      followerAddress: "",
-      emergencyContact: false
-    };
+      followerName: '',
+      followerEmail: '',
+      followerPhoneNum: '',
+      followerAddress: '',
+      emergencyContact: false,
+      error: '', 
+      //we will likely need the current user id to be passed in here 
+    }
+  }
+
+  checkFollowerParams = () => {
+    let {
+      followerName,
+      followerEmail,
+      followerPhoneNum,
+      followerAddress
+       } = this.state;
+
+    if (
+      followerName === '' ||
+      followerEmail === '' ||
+      followerPhoneNum === '' ||
+      followerAddress === ''
+    ) {
+      this.setState({ error: 'Please fill out all fields'})
+      return false;
+    } else {
+      this.setState({ error: '' });
+      return true;
+    }
+  }
+
+  handleSave = async () => {
+    
+    let formIsFilledCorrectly = this.checkFollowerParams();
+    if (formIsFilledCorrectly) {
+      //fire post call here
+    }
+
   }
 
   render() {
@@ -40,7 +72,7 @@ export default class FollowerForm extends Component {
               <TextInput
                 style={styles.input}
                 placeholder="Enter Followers Name..."
-                placeholderTextColor="white"
+                placeholderTextColor="black"
                 maxLength={20}
                 onBlur={Keyboard.dismiss}
                 value={this.state.followerName}
@@ -52,7 +84,7 @@ export default class FollowerForm extends Component {
               <TextInput
                 style={styles.input}
                 placeholder="Enter Followers Email..."
-                placeholderTextColor="white"
+                placeholderTextColor="black"
                 maxLength={20}
                 onBlur={Keyboard.dismiss}
                 value={this.state.followerEmail}
@@ -63,8 +95,8 @@ export default class FollowerForm extends Component {
             <View style={styles.form}>
               <TextInput
                 style={styles.input}
-                placeholder="Enter Followers Phone Number"
-                placeholderTextColor="white"
+                placeholder="Enter Followers Phone Number..."
+                placeholderTextColor="black"
                 maxLength={20}
                 onBlur={Keyboard.dismiss}
                 value={this.state.followerPhoneNum}
@@ -73,9 +105,12 @@ export default class FollowerForm extends Component {
                 }
               />
             </View>
-            <TouchableOpacity>
-              <Text style={styles.button}>Save</Text>
-            </TouchableOpacity>
+          {this.state.error !== '' && 
+            <Text style={styles.error}>{this.state.error}</Text>
+          }
+          <TouchableOpacity onPress={this.handleSave}>
+            <Text style={styles.button}>Save</Text>
+          </TouchableOpacity>
           </View>
         </ScrollView>
         <WandererFooter navigate={navigate} />
@@ -104,14 +139,15 @@ const styles = StyleSheet.create({
     paddingVertical: 12
   },
   input: {
-    backgroundColor: "black",
-    color: "white",
+    backgroundColor: "white",
+    color: "black",
     fontSize: 18,
     flex: 1,
     alignItems: "center",
     marginLeft: 10
   },
   form: {
+    backgroundColor: 'white',
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 8,
@@ -142,5 +178,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "white",
     marginBottom: 5
+  },
+  error: {
+    color: 'white',
+    fontSize: 25,
+    textAlign: 'center',
+    marginVertical: 15
   }
 });

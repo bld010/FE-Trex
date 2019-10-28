@@ -58,17 +58,41 @@ export default class LegForm extends Component {
     }
   }
 
-  handleNewLegSave = async () => {
+  checkNewLegParams = () => {
+    let { startLocation, startDate, endLocation, endDate } = this.state;
+
+    if (
+      startLocation === '' ||
+      startDate === '' ||
+      endLocation === '' ||
+      endDate === ''
+    ) {
+      this.setState({ error: 'Please fill out dates and destinations'})
+      return false;
+    } else {
+      this.setState({ error: ''});
+      return true;
+    }
+  }
+
+  handleSave = async () => {
 
     let updatedTripId;
 
     if(!this.props.navigation.getParam('leg')) {
-      updatedTripId = await this.createNewLeg();
+      let formIsFilledCorrectly = this.checkNewLegParams();
+      if (formIsFilledCorrectly) {
+        updatedTripId = await this.createNewLeg();
+        this.props.navigation.navigate('Trip', {tripId: updatedTripId})
+
+      }
     } else {
       updatedTripId = await this.editLeg();
+      this.props.navigation.navigate('Trip', {tripId: updatedTripId})
+
     }
-    this.props.navigation.navigate('Trip', {tripId: updatedTripId})
   }
+
 
   createNewLeg = async () => {
     let {startLocation, endLocation, startDate, endDate, tripId} = this.state;
@@ -129,9 +153,9 @@ export default class LegForm extends Component {
         <WandererHeader />
         <ScrollView>
 
-        <View>
-            {this.state.leg === null && <Text style={styles.title}>Add A New Leg</Text>}
-            {this.state.leg && <Text style={styles.title}>Edit Leg</Text>}
+          <View>
+              {this.state.leg === null && <Text style={styles.title}>Add A New Leg</Text>}
+              {this.state.leg && <Text style={styles.title}>Edit Leg</Text>}
           </View>
           <View>
       <Text style={styles.label}>Start Destination</Text>
@@ -226,8 +250,7 @@ export default class LegForm extends Component {
           <Text style={styles.buttonText}>Delete Leg</Text>
           </TouchableOpacity>
           }
-        
-          {this.state.error !== '' && <Text style={styles.text}>{this.state.error}</Text>}
+    
       </ScrollView>
       <WandererFooter navigate={navigate} />
       </View>
@@ -327,5 +350,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "white",
     marginBottom: -22
+  },
+  error: {
+    color: 'red',
+    fontSize: 25,
+    textAlign: 'center',
+    marginVertical: 15
   }
 });
