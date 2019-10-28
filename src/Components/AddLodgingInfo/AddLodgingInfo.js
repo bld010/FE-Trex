@@ -48,7 +48,7 @@ export default class AddLodgingInfo extends Component {
         return
       } else {
         this.setState({ error: '' })
-        //fire post call here 
+        //fire post call here
       }
     })
 
