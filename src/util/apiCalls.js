@@ -6,7 +6,7 @@ export const fetchTrip = async (tripId) => {
     }
   }
 
-  let queryParams = `{trip(id: ${tripId.tripId}) {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}`
+  let queryParams = `{trip(id: ${tripId}) {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}`
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
   
   try {
@@ -16,7 +16,7 @@ export const fetchTrip = async (tripId) => {
     }
 
     let data = await resp.json();
-    let trip = data.data.trip.legs;
+    let trip = data.data.trip;
     return trip;
 
   } catch (error) {
@@ -50,31 +50,6 @@ export const fetchMyTrips = async (user_id) => {
   } catch (error) {
     throw error
   }
-}
-
-export const fetchTripById = async (tripId) => {
-  let options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-
-  let queryParams = `{trip(id: ${tripId}) {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}`
-
-  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
-
-  try {
-    let resp = await fetch(url,options)
-    if (!resp.ok) {
-      throw new Error('There was an error creating your trip')
-    }
-    let data = await resp.json();
-    return data.data.trip
-  } catch (error) {
-    throw error
-  }
-
 }
 
 export const postNewTrip = async (tripInfo) => {

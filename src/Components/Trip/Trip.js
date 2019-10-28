@@ -9,7 +9,7 @@ import {
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
 import { withNavigationFocus } from 'react-navigation';
-import { fetchTripById } from '../../util/apiCalls';
+import { fetchTrip } from '../../util/apiCalls';
 
 
 class Trip extends Component {
@@ -36,7 +36,7 @@ class Trip extends Component {
 
   refetchTrip = async () => {
     try {
-      let updatedTrip = await fetchTripById(this.state.trip.id);
+      let updatedTrip = await fetchTrip(this.state.trip.id);
       this.setState({ trip: updatedTrip })
     } catch (error) {
       this.setState({ error: 'There was a problem updating the legs of your trip'})
@@ -45,7 +45,6 @@ class Trip extends Component {
 
   componentDidUpdate = async (prevProps) => {
     if (prevProps.isFocused !== this.props.isFocused) {
-
       this.refetchTrip();
     }
   }

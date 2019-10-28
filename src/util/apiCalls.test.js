@@ -750,7 +750,7 @@ describe('apiCalls', () => {
           })
         })
 
-        await fetchTrip({tripId: 1})
+        await fetchTrip(1)
 
         expect(mockFetch).toHaveBeenCalledWith(url, options)
     })
@@ -772,9 +772,7 @@ describe('apiCalls', () => {
           json: () => { 
             return (
               { data: {
-                trip: {
-                  legs: mockTrip
-                }
+                trip: mockTrip
                 }
               }
             )}

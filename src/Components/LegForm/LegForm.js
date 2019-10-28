@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
-import { postNewLeg, patchLeg, deleteLeg, fetchTrip } from '../../util/apiCalls';
+import { postNewLeg, patchLeg, deleteLeg } from '../../util/apiCalls';
 
 export default class LegForm extends Component {
   constructor(props) {
