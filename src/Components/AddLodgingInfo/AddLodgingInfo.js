@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from "react-native-datepicker";
+import MapInputFirst from '../MapInput/MapInputFirst'
 import WandererHeader from '../WandererHeader/WandererHeader';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import {
@@ -24,6 +25,13 @@ export default class AddLodgingInfo extends Component {
     };
   }
 
+  handlerFirstInput(arg) {
+    this.setState({
+      cityLodge: arg
+    });
+    return;
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -39,31 +47,21 @@ export default class AddLodgingInfo extends Component {
               <TextInput
                 style={styles.input}
                 placeholder='Enter Country of Stay...'
-                placeholderTextColor='white'
+                placeholderTextColor='black'
                 maxLength={20}
                 onBlur={Keyboard.dismiss}
                 value={this.state.countryLodge}
                 onChangeText={countryLodge => this.setState({ countryLodge })}
               />
             </View>
-            <Text style={styles.label}>City</Text>
-            <View style={styles.form}>
-              <TextInput
-                style={styles.input}
-                placeholder='Enter City of Stay...'
-                placeholderTextColor='white'
-                maxLength={20}
-                onBlur={Keyboard.dismiss}
-                value={this.state.cityLodge}
-                onChangeText={cityLodge => this.setState({ cityLodge })}
-              />
-            </View>
+            <Text style={styles.labelCity}>City</Text>
+            <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
             <Text style={styles.label}>Name</Text>
             <View style={styles.form}>
               <TextInput
                 style={styles.input}
                 placeholder='Enter Lodging Name...'
-                placeholderTextColor='white'
+                placeholderTextColor='black'
                 maxLength={20}
                 onBlur={Keyboard.dismiss}
                 value={this.state.lodgeName}
@@ -87,15 +85,20 @@ export default class AddLodgingInfo extends Component {
                 },
                 dateInput: {
                   marginLeft: 15,
-                  color: 'white',
+                  color: "black",
+                  backgroundColor: 'white',
                   height: 60,
                   borderRadius: 8,
                   borderWidth: 1,
-                  borderColor: 'white'
+                  borderColor: "white",
                 },
                 dateText: {
-                  fontSize: 24,
-                  color: 'white'
+                  fontSize: 22,
+                  color: "black",
+                },
+                placeholderText: {
+                  fontSize: 22,
+                  color: "black"
                 }
               }}
               onDateChange={date => {
@@ -120,15 +123,20 @@ export default class AddLodgingInfo extends Component {
                 },
                 dateInput: {
                   marginLeft: 15,
-                  color: 'white',
+                  color: "black",
+                  backgroundColor: 'white',
                   height: 60,
                   borderRadius: 8,
                   borderWidth: 1,
-                  borderColor: 'white'
+                  borderColor: "white",
                 },
                 dateText: {
-                  fontSize: 24,
-                  color: 'white'
+                  fontSize: 22,
+                  color: "black",
+                },
+                placeholderText: {
+                  fontSize: 22,
+                  color: "black"
                 }
               }}
               onDateChange={date => {
@@ -166,17 +174,18 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 20,
     color: 'white',
-    paddingVertical: 12
+    paddingVertical: 15
   },
   input: {
-    backgroundColor: 'black',
-    color: 'white',
+    backgroundColor: 'white',
+    color: 'black',
     fontSize: 18,
     flex: 1,
     alignItems: 'center',
     marginLeft: 10
   },
   form: {
+    backgroundColor: 'white',
     borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
@@ -207,5 +216,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     marginBottom: 5
+  },
+  labelCity: {
+    marginLeft: 20,
+    fontSize: 20,
+    color: 'white',
+    marginBottom: -22,
+    marginVertical: -10
   }
 });

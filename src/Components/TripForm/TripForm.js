@@ -128,7 +128,7 @@ class TripForm extends Component {
               placeholder={
                 (this.state.trip && this.state.name) || 'Enter Trip Name...'
               }
-              placeholderTextColor='white'
+              placeholderTextColor='black'
               onChangeText={name => this.setState({ name })}
               value={this.state.name}
               onBlur={Keyboard.dismiss}
@@ -151,15 +151,20 @@ class TripForm extends Component {
               },
               dateInput: {
                 marginLeft: 15,
-                color: 'white',
+                color: "black",
+                backgroundColor: 'white',
                 height: 60,
                 borderRadius: 8,
                 borderWidth: 1,
-                borderColor: 'white'
+                borderColor: "white",
               },
               dateText: {
-                fontSize: 24,
-                color: 'white'
+                fontSize: 22,
+                color: "black",
+              },
+              placeholderText: {
+                fontSize: 22,
+                color: "black"
               }
             }}
             onDateChange={date => {
@@ -183,15 +188,20 @@ class TripForm extends Component {
               },
               dateInput: {
                 marginLeft: 15,
-                color: 'white',
+                color: "black",
+                backgroundColor: 'white',
                 height: 60,
                 borderRadius: 8,
                 borderWidth: 1,
-                borderColor: 'white'
+                borderColor: "white",
               },
               dateText: {
-                fontSize: 24,
-                color: 'white'
+                fontSize: 22,
+                color: "black",
+              },
+              placeholderText: {
+                fontSize: 22,
+                color: "black"
               }
             }}
             onDateChange={date => {
@@ -254,14 +264,15 @@ const styles = StyleSheet.create({
     backgroundColor: "red"
   },
   input: {
-    backgroundColor: 'black',
-    color: 'white',
-    fontSize: 18,
+    backgroundColor: 'white',
+    color: 'black',
+    fontSize: 22,
     flex: 1,
     alignItems: 'center',
     marginLeft: 10
   },
   form: {
+    backgroundColor: 'white',
     borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,

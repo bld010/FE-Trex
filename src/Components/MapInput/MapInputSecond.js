@@ -47,7 +47,7 @@ export default class MapInputSecond extends React.Component {
               marginLeft: 0,
               marginRight: 0,
               height: 60,
-              color: '#5d5d5d',
+              color: 'black',
               fontSize: 22
             },
             description: {
