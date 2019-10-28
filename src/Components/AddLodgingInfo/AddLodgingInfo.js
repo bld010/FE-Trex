@@ -25,7 +25,8 @@ export default class AddLodgingInfo extends Component {
     };
   }
 
-  handleSave = () => {
+  
+  checkLodgingParams = () => {
     let { 
       countryLodge, 
       cityLodge,
@@ -34,25 +35,32 @@ export default class AddLodgingInfo extends Component {
       endLodge
     } = this.state;
 
-    let requiredParams = [
-      countryLodge,
-      cityLodge,
-      lodgeName,
-      startLodge,
-      endLodge
-    ]
+    if (
+      countryLodge === '' ||
+      cityLodge === '' ||
+      lodgeName === '' ||
+      startLodge === '' ||
+      endLodge === ''
+    ) {
+      this.setState({ error: 'Please fill out all fields'})
+      return false;
+    } else {
+      this.setState({ error: ''});
+      return true;
+    }
+  }
 
-    requiredParams.forEach(param => {
-      if (param === '') {
-        this.setState({ error: `Please fill out all fields.`});
-        return
-      } else {
-        this.setState({ error: '' })
-        //fire post call here
-      }
-    })
+  handleSave = async () => {
+    
+    let formIsFilledCorrectly = this.checkLodgingParams();
+    if (formIsFilledCorrectly) {
+      //fire post call here
+    }
 
   }
+    
+
+
 
   render() {
     const { navigate } = this.props.navigation;

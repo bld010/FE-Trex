@@ -41,33 +41,29 @@ export default class LegForm extends Component {
     }
   }
 
+  checkNewLegParams = () => {
+    let { startLocation, startDate, endLocation, endDate } = this.state;
+
+    if (
+      startLocation === '' ||
+      startDate === '' ||
+      endLocation === '' ||
+      endDate === ''
+    ) {
+      this.setState({ error: 'Please fill out dates and destinations'})
+      return false;
+    } else {
+      this.setState({ error: ''});
+      return true;
+    }
+  }
+
   handleSave = async () => {
     if(!this.props.navigation.getParam('leg')) {
-
-      let {
-        startLocation,
-        startDate,
-        endLocation,
-        endDate
-      } = this.state;
-
-      let requiredParams = [
-        startLocation,
-        startDate,
-        endLocation,
-        endDate
-      ]
-
-      requiredParams.forEach(param => {
-        if (param === '') {
-          this.setState({ error: 'Please fill out both destinations and both dates'});
-          return;
-        } else {
-          this.setState({ error: '' })
-          this.createNewLeg()
-        }
-      })
-
+      let formIsFilledCorrectly = this.checkNewLegParams();
+      if (formIsFilledCorrectly) {
+        this.createNewLeg();
+      }
     } else {
       this.editLeg()
     }

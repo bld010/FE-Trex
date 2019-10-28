@@ -15,43 +15,45 @@ export default class FollowerForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
       followerName: '',
       followerEmail: '',
       followerPhoneNum: '',
       followerAddress: '',
       emergencyContact: false,
-      error: ''
+      error: '', 
+      //we will likely need the current user id to be passed in here 
     }
   }
 
-  handleSave = () => {
-    let { 
-      name,
+  checkFollowerParams = () => {
+    let {
       followerName,
       followerEmail,
       followerPhoneNum,
       followerAddress
-     } = this.state;
+       } = this.state;
 
-    let requiredParams = [
-      name,
-      followerName,
-      followerEmail,
-      followerPhoneNum,
-      followerAddress, 
-    ]
+    if (
+      followerName === '' ||
+      followerEmail === '' ||
+      followerPhoneNum === '' ||
+      followerAddress === ''
+    ) {
+      this.setState({ error: 'Please fill out all fields'})
+      return false;
+    } else {
+      this.setState({ error: '' });
+      return true;
+    }
+  }
 
-    requiredParams.forEach(param => {
-      if (param === '') {
-        this.setState({ error: 'Please fill out all fields.'});
-        return;
-      } else {
-        this.setState({ error: ''})
-        //fire post call here
+  handleSave = async () => {
+    
+    let formIsFilledCorrectly = this.checkFollowerParams();
+    if (formIsFilledCorrectly) {
+      //fire post call here
+    }
 
-      }
-    })
   }
   
   render() {

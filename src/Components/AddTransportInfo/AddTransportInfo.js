@@ -23,24 +23,33 @@ export default class AddTransportInfo extends Component {
     };
   }
 
-  handleSave = () => {
-    let { startTrans, endTrans, dateTrans } = this.state;
-
-    let requiredParams = [
+  checkTransportParams = () => {
+    let { 
       startTrans,
       endTrans,
       dateTrans
-    ]
+    } = this.state;
 
-    requiredParams.forEach(param => {
-      if (param === '') {
-        this.setState({ error: 'Please fill out all fields.'})
-      } else {
-        this.setState({ error: ''})
-        //fire post call here
+    if (
+      startTrans === '' ||
+      endTrans === '' ||
+      dateTrans === '' 
+    ) {
+      this.setState({ error: 'Please fill out all fields'})
+      return false;
+    } else {
+      this.setState({ error: ''});
+      return true;
+    }
+  }
 
-      }
-    })
+  handleSave = async () => {
+    
+    let formIsFilledCorrectly = this.checkTransportParams();
+    if (formIsFilledCorrectly) {
+      //fire post call here
+    }
+
   }
 
   render() {
