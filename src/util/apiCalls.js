@@ -69,11 +69,8 @@ export const fetchTripById = async (tripId) => {
     if (!resp.ok) {
       throw new Error('There was an error creating your trip')
     }
-
     let data = await resp.json();
-    console.log('data in fetchTripById', data)
     return data.data.trip
-  
   } catch (error) {
     throw error
   }
