@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DatePicker from 'react-native-datepicker';
-
+import MapInput from '../MapInput/MapInput'
 import {
   StyleSheet,
   Text,
@@ -25,8 +25,16 @@ export default class LegForm extends Component {
       endDate: '',
       tripId: this.props.navigation.getParam('tripId'),
       leg: this.props.navigation.getParam('leg') || null,
-      error: ''
+      error: '',
+      loc: ''
     };
+  }
+
+  handler(arg) {
+    this.setState({
+      loc: arg
+    });
+    return;
   }
 
   componentDidMount = () => {
@@ -115,6 +123,7 @@ export default class LegForm extends Component {
       <View style={styles.inputContainer}>
       <Text style={styles.label}>Start Destination</Text>
       <View style={styles.form}>
+      {/* <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
             placeholder="Enter Start Destination..."
@@ -125,8 +134,11 @@ export default class LegForm extends Component {
             onChangeText={startLocation => this.setState({ startLocation })}
           />
           </View>
+          
+          /> */}
+          <MapInput handler={this.handler.bind(this)} />
           <Text style={styles.label}>End Destination</Text>
-          <View style={styles.form}>
+          <View style={styles.form}></View>
           <TextInput
             style={styles.input}
             placeholder="Enter End Destination..."
@@ -213,9 +225,8 @@ export default class LegForm extends Component {
           <Text style={styles.buttonText}>Delete Leg</Text>
           </TouchableOpacity>
           }
+          </View>
 
-
-        </View>
       </ScrollView>
       <WandererFooter navigate={navigate} />
       </View>
@@ -226,7 +237,7 @@ export default class LegForm extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    backgroundColor: 'black',
     alignItems: 'stretch',
     justifyContent: 'flex-start'
   },
