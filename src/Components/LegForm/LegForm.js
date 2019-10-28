@@ -51,17 +51,41 @@ export default class LegForm extends Component {
     }
   }
 
-  handleNewLegSave = async () => {
+  checkNewLegParams = () => {
+    let { startLocation, startDate, endLocation, endDate } = this.state;
+
+    if (
+      startLocation === '' ||
+      startDate === '' ||
+      endLocation === '' ||
+      endDate === ''
+    ) {
+      this.setState({ error: 'Please fill out dates and destinations'})
+      return false;
+    } else {
+      this.setState({ error: ''});
+      return true;
+    }
+  }
+
+  handleSave = async () => {
 
     let updatedTripId;
 
     if(!this.props.navigation.getParam('leg')) {
-      updatedTripId = await this.createNewLeg();
+      let formIsFilledCorrectly = this.checkNewLegParams();
+      if (formIsFilledCorrectly) {
+        updatedTripId = await this.createNewLeg();
+        this.props.navigation.navigate('Trip', {tripId: updatedTripId})
+
+      }
     } else {
       updatedTripId = await this.editLeg();
+      this.props.navigation.navigate('Trip', {tripId: updatedTripId})
+
     }
-    this.props.navigation.navigate('Trip', {tripId: updatedTripId})
   }
+
 
   createNewLeg = async () => {
     let {startLocation, endLocation, startDate, endDate, tripId} = this.state;
@@ -120,88 +144,89 @@ export default class LegForm extends Component {
         <WandererHeader />
         <ScrollView>
 
-        <View>
-            {this.state.leg === null && <Text style={styles.title}>Add A New Leg</Text>}
-            {this.state.leg && <Text style={styles.title}>Edit Leg</Text>}
+          <View>
+              {this.state.leg === null && <Text style={styles.title}>Add A New Leg</Text>}
+              {this.state.leg && <Text style={styles.title}>Edit Leg</Text>}
           </View>
-      {/* <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Start Destination"
-            maxLength={20}
-            onBlur={Keyboard.dismiss}
-            value={this.state.startLocation}
-            onChangeText={startLocation => this.setState({ startLocation })}
-          /> */}
-          <MapInput handler={this.handler.bind(this)} />
-          <TextInput
-            style={styles.textInput}
-            placeholder="End Destination"
-            maxLength={20}
-            onBlur={Keyboard.dismiss}
-            value={this.state.endLocation}
-            onChangeText={endLocation => this.setState({ endLocation })}
-          />
-          <Text>Start Date:</Text>
-          <DatePicker
-          style={{width: 200}}
-          date={this.state.startDate} //initial date from state
-          mode="date" //The enum of date, datetime and time
-          placeholder="select date"
-          format="YYYY-MM-DD"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          customStyles={{
-            dateIcon: {
-              position: 'absolute',
-              left: 0,
-              top: 4,
-              marginLeft: 0
-            },
-            dateInput: {
-              marginLeft: 36
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Start Destination"
+              maxLength={20}
+              onBlur={Keyboard.dismiss}
+              value={this.state.startLocation}
+              onChangeText={startLocation => this.setState({ startLocation })}
+            />
+            {/* <MapInput handler={this.handler.bind(this)} /> */}
+            <TextInput
+              style={styles.textInput}
+              placeholder="End Destination"
+              maxLength={20}
+              onBlur={Keyboard.dismiss}
+              value={this.state.endLocation}
+              onChangeText={endLocation => this.setState({ endLocation })}
+            />
+            <Text>Start Date:</Text>
+            <DatePicker
+            style={{width: 200}}
+            date={this.state.startDate} //initial date from state
+            mode="date" //The enum of date, datetime and time
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0
+              },
+              dateInput: {
+                marginLeft: 36
+              }
+            }}
+            onDateChange={(date) => {this.setState({startDate: date})}}
+            />
+            <DatePicker
+              style={{width: 200}}
+              date={this.state.endDate}
+              mode="date" 
+              placeholder="select date"
+              format="YYYY-MM-DD"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              customStyles={{
+                dateIcon: {
+                  position: 'absolute',
+                  left: 0,
+                  top: 4,
+                  marginLeft: 0
+                },
+                dateInput: {
+                  marginLeft: 36
+                }
+              }}
+              onDateChange={(date) => {this.setState({endDate: date})}}
+            />
+            <TouchableOpacity>
+              <Text style={styles.button} onPress={() => navigate('AddTransportInfo')}>Add Transportation</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={styles.button} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
+            </TouchableOpacity>
+            {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
+            <TouchableOpacity onPress={this.handleSave}>
+              <Text style={styles.button}>Save</Text>
+            </TouchableOpacity>
+            {this.props.navigation.getParam('leg') && 
+              <TouchableOpacity style={styles.deleteButton} onPress={this.removeLeg}>
+                <Text styles={styles.text}>Delete Leg</Text>
+              </TouchableOpacity>
             }
-          }}
-          onDateChange={(date) => {this.setState({startDate: date})}}
-        />
-        <DatePicker
-          style={{width: 200}}
-          date={this.state.endDate}
-          mode="date" 
-          placeholder="select date"
-          format="YYYY-MM-DD"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          customStyles={{
-            dateIcon: {
-              position: 'absolute',
-              left: 0,
-              top: 4,
-              marginLeft: 0
-            },
-            dateInput: {
-              marginLeft: 36
-            }
-          }}
-          onDateChange={(date) => {this.setState({endDate: date})}}
-        />
-          <TouchableOpacity>
-            <Text style={styles.button} onPress={() => navigate('AddTransportInfo')}>Add Transportation</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.button} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.handleNewLegSave}>
-            <Text style={styles.button}>Save</Text>
-          </TouchableOpacity>
-          {this.props.navigation.getParam('leg') && 
-          <TouchableOpacity style={styles.deleteButton} onPress={this.removeLeg}>
-          <Text styles={styles.text}>Delete Leg</Text>
-          </TouchableOpacity>
-          }
 
-          {this.state.error !== '' && <Text style={styles.text}>{this.state.error}</Text>}
 
+            </View>
       </ScrollView>
        
       <WandererFooter navigate={navigate} />
@@ -263,5 +288,11 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     backgroundColor: "#1C4263"
+  },
+  error: {
+    color: 'red',
+    fontSize: 25,
+    textAlign: 'center',
+    marginVertical: 15
   }
 });

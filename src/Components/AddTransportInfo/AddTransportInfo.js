@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import DatePicker from "react-native-datepicker";
-import WandererHeader from "../WandererHeader/WandererHeader";
-import WandererFooter from "../WandererFooter/WandererFooter";
+import React, { Component } from 'react';
+import DatePicker from 'react-native-datepicker';
+import WandererHeader from '../WandererHeader/WandererHeader';
+import WandererFooter from '../WandererFooter/WandererFooter';
 import {
   StyleSheet,
   Text,
@@ -10,16 +10,46 @@ import {
   TouchableOpacity,
   Keyboard,
   TextInput
-} from "react-native";
+} from 'react-native';
 
 export default class AddTransportInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startTrans: "",
-      endTrans: "",
-      dateTrans: ""
+      startTrans: '',
+      endTrans: '',
+      dateTrans: '', 
+      error: ''
     };
+  }
+
+  checkTransportParams = () => {
+    let { 
+      startTrans,
+      endTrans,
+      dateTrans
+    } = this.state;
+
+    if (
+      startTrans === '' ||
+      endTrans === '' ||
+      dateTrans === '' 
+    ) {
+      this.setState({ error: 'Please fill out all fields'})
+      return false;
+    } else {
+      this.setState({ error: ''});
+      return true;
+    }
+  }
+
+  handleSave = async () => {
+    
+    let formIsFilledCorrectly = this.checkTransportParams();
+    if (formIsFilledCorrectly) {
+      //fire post call here
+    }
+
   }
 
   render() {
@@ -31,7 +61,7 @@ export default class AddTransportInfo extends Component {
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.textInput}
-              placeholder="Start Destination"
+              placeholder='Start Destination'
               maxLength={20}
               onBlur={Keyboard.dismiss}
               value={this.state.startTrans}
@@ -39,7 +69,7 @@ export default class AddTransportInfo extends Component {
             />
             <TextInput
               style={styles.textInput}
-              placeholder="End Destination"
+              placeholder='End Destination'
               maxLength={20}
               onBlur={Keyboard.dismiss}
               value={this.state.endTrans}
@@ -48,14 +78,14 @@ export default class AddTransportInfo extends Component {
             <DatePicker
               style={{ width: 200 }}
               date={this.state.dateTrans}
-              mode="date"
-              placeholder="select date"
-              format="YYYY-MM-DD"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
+              mode='date'
+              placeholder='select date'
+              format='YYYY-MM-DD'
+              confirmBtnText='Confirm'
+              cancelBtnText='Cancel'
               customStyles={{
                 dateIcon: {
-                  position: "absolute",
+                  position: 'absolute',
                   left: 0,
                   top: 4,
                   marginLeft: 0
@@ -68,7 +98,12 @@ export default class AddTransportInfo extends Component {
                 this.setState({ dateTrans: date });
               }}
             />
-            <TouchableOpacity>
+
+            {this.state.error !== '' && 
+              <Text style={styles.error}>{this.state.error}</Text>
+            }
+
+            <TouchableOpacity onPress={this.handleSave}>
               <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
           </View>
@@ -82,16 +117,16 @@ export default class AddTransportInfo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000000",
-    alignItems: "stretch",
-    justifyContent: "flex-start"
+    backgroundColor: '#000000',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start'
   },
   inputContainer: {
     marginTop: 15
   },
   textInput: {
-    backgroundColor: "white",
-    borderColor: "#CCCCCC",
+    backgroundColor: 'white',
+    borderColor: '#CCCCCC',
     borderTopWidth: 1,
     borderBottomWidth: 1,
     height: 50,
@@ -101,17 +136,23 @@ const styles = StyleSheet.create({
     paddingRight: 20
   },
   button: {
-    borderColor: "white",
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: "solid",
-    width: "auto",
+    borderStyle: 'solid',
+    width: 'auto',
     height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
-    color: "white",
-    textAlign: "center",
-    backgroundColor: "#1C4263"
+    color: 'white',
+    textAlign: 'center',
+    backgroundColor: '#1C4263'
+  },
+  error: {
+    color: 'white',
+    fontSize: 25,
+    textAlign: 'center',
+    marginVertical: 15
   }
 });

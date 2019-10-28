@@ -13,15 +13,47 @@ import WandererHeader from '../WandererHeader/WandererHeader';
 
 export default class FollowerForm extends Component {
   constructor(props) {
-    super()
+    super(props)
     this.state = {
-      name: '',
       followerName: '',
       followerEmail: '',
       followerPhoneNum: '',
       followerAddress: '',
       emergencyContact: false,
+      error: '', 
+      //we will likely need the current user id to be passed in here 
     }
+  }
+
+  checkFollowerParams = () => {
+    let {
+      followerName,
+      followerEmail,
+      followerPhoneNum,
+      followerAddress
+       } = this.state;
+
+    if (
+      followerName === '' ||
+      followerEmail === '' ||
+      followerPhoneNum === '' ||
+      followerAddress === ''
+    ) {
+      this.setState({ error: 'Please fill out all fields'})
+      return false;
+    } else {
+      this.setState({ error: '' });
+      return true;
+    }
+  }
+
+  handleSave = async () => {
+    
+    let formIsFilledCorrectly = this.checkFollowerParams();
+    if (formIsFilledCorrectly) {
+      //fire post call here
+    }
+
   }
   
   render() {
@@ -69,7 +101,12 @@ export default class FollowerForm extends Component {
             value={this.state.followerAddress}
             onChangeText={followerAddress => this.setState({ followerAddress })}
           />
-          <TouchableOpacity>
+
+          {this.state.error !== '' && 
+            <Text style={styles.error}>{this.state.error}</Text>
+          }
+
+          <TouchableOpacity onPress={this.handleSave}>
             <Text style={styles.button}>Save</Text>
           </TouchableOpacity>
           </View>
@@ -122,5 +159,11 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     backgroundColor: "#1C4263"
+  },
+  error: {
+    color: 'white',
+    fontSize: 25,
+    textAlign: 'center',
+    marginVertical: 15
   }
 });

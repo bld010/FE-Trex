@@ -20,9 +20,47 @@ export default class AddLodgingInfo extends Component {
       cityLodge: "",
       lodgeName: "",
       startLodge: "",
-      endLodge: ""
+      endLodge: "",
+      error: ''
     };
   }
+
+  
+  checkLodgingParams = () => {
+    let { 
+      countryLodge, 
+      cityLodge,
+      lodgeName,
+      startLodge,
+      endLodge
+    } = this.state;
+
+    if (
+      countryLodge === '' ||
+      cityLodge === '' ||
+      lodgeName === '' ||
+      startLodge === '' ||
+      endLodge === ''
+    ) {
+      this.setState({ error: 'Please fill out all fields'})
+      return false;
+    } else {
+      this.setState({ error: ''});
+      return true;
+    }
+  }
+
+  handleSave = async () => {
+    
+    let formIsFilledCorrectly = this.checkLodgingParams();
+    if (formIsFilledCorrectly) {
+      //fire post call here
+    }
+
+  }
+    
+
+
 
   render() {
     const { navigate } = this.props.navigation;
@@ -101,7 +139,12 @@ export default class AddLodgingInfo extends Component {
                 this.setState({ endLodge: date });
               }}
             />
-            <TouchableOpacity>
+            
+            {this.state.error !== '' && 
+              <Text style={styles.error}>{this.state.error}</Text>
+            }
+
+            <TouchableOpacity onPress={this.handleSave}>
               <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
           </View>
@@ -146,5 +189,11 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     backgroundColor: "#1C4263"
+  },
+  error: {
+    color: 'white',
+    fontSize: 25,
+    textAlign: 'center',
+    marginVertical: 15
   }
 });
