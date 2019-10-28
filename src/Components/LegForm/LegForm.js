@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DatePicker from 'react-native-datepicker';
-
+import MapInput from '../MapInput/MapInput'
 import {
   StyleSheet,
   Text,
@@ -28,7 +28,15 @@ export default class LegForm extends Component {
       error: '',
       user: {id: 1},
       // we will need to pass this user object dyanmically
+      loc: ''
     };
+  }
+
+  handler(arg) {
+    this.setState({
+      loc: arg
+    });
+    return;
   }
 
   componentDidMount = () => {
@@ -116,7 +124,7 @@ export default class LegForm extends Component {
             {this.state.leg === null && <Text style={styles.title}>Add A New Leg</Text>}
             {this.state.leg && <Text style={styles.title}>Edit Leg</Text>}
           </View>
-      <View style={styles.inputContainer}>
+      {/* <View style={styles.inputContainer}>
           <TextInput
             style={styles.textInput}
             placeholder="Start Destination"
@@ -124,7 +132,8 @@ export default class LegForm extends Component {
             onBlur={Keyboard.dismiss}
             value={this.state.startLocation}
             onChangeText={startLocation => this.setState({ startLocation })}
-          />
+          /> */}
+          <MapInput handler={this.handler.bind(this)} />
           <TextInput
             style={styles.textInput}
             placeholder="End Destination"
@@ -193,8 +202,8 @@ export default class LegForm extends Component {
 
           {this.state.error !== '' && <Text style={styles.text}>{this.state.error}</Text>}
 
-        </View>
       </ScrollView>
+       
       <WandererFooter navigate={navigate} />
       </View>
     );
@@ -204,7 +213,7 @@ export default class LegForm extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    backgroundColor: 'white',
     alignItems: 'stretch',
     justifyContent: 'flex-start'
   },
