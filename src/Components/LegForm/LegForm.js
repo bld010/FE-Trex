@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
-import { postNewLeg, patchLeg, deleteLeg, fetchMyTrip } from '../../util/apiCalls';
+import { postNewLeg, patchLeg, deleteLeg, fetchTrip } from '../../util/apiCalls';
 
 export default class LegForm extends Component {
   constructor(props) {
@@ -104,7 +104,7 @@ export default class LegForm extends Component {
 
   refreshTrip = async (tripId) => { 
     try {
-      let updatedTrip = await fetchMyTrip(tripId)
+      let updatedTrip = await fetchTrip(tripId)
       console.log(updatedTrip)
       this.props.navigation.navigate('Trip', {updatedTrip, userId: this.state.user.id})
     } catch (error) {

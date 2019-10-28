@@ -1,4 +1,4 @@
-export const fetchMyTrip = async (tripId) => {
+export const fetchTrip = async (tripId) => {
   let options = {
     method: 'POST',
     headers: {
@@ -6,7 +6,7 @@ export const fetchMyTrip = async (tripId) => {
     }
   }
 
-  let queryParams = `{trip(id: ${tripId.tripId}) {id, name, startDate, endDate legs{name startDate endDate id startLocation endLocation tripId}}}`
+  let queryParams = `{trip(id: ${tripId.tripId}) {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}`
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
   
   try {
@@ -34,7 +34,7 @@ export const fetchMyTrips = async (user_id) => {
     }
   }
 
-  let queryParams = `{user(id: ${user_id}) {trips {id, name, startDate, endDate legs{name startDate endDate id startLocation endLocation tripId}}}}`
+  let queryParams = `{user(id: ${user_id}) {trips {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}}`
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
@@ -121,7 +121,6 @@ export const deleteTrip = async (tripId) => {
       'Content-Type': 'application/json'
     }
   }
-
 
   let queryParams = `mutation {removeTrip(input: {id: "${tripId}"}) {trip {name}}}`
 
@@ -213,9 +212,7 @@ export const deleteLeg = async (legId) => {
     }
   }
 
-
   let queryParams = `mutation {removeLeg(input: {id: "${legId}"}) {leg {tripId}}}`
-  console.log(queryParams)
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 

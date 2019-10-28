@@ -1,4 +1,5 @@
 import {
+  fetchTrip,
   fetchMyTrips,
   postNewTrip,
   patchTrip,
@@ -21,7 +22,7 @@ describe('apiCalls', () => {
       mockFetch = jest.fn()
       global.fetch = mockFetch;
 
-      queryParams = `{user(id: 1) {trips {id, name, startDate, endDate legs{name startDate endDate id startLocation endLocation tripId}}}}`
+      queryParams = `{user(id: 1) {trips {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}}`
 
   
       url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
@@ -705,8 +706,109 @@ describe('apiCalls', () => {
     })
 
     await expect(deleteLeg(17)).rejects.toEqual(Error('There was an error deleting your leg (fetch failed)'))
+    })
   })
+
+
+  describe('fetchTrip', () => {
+
+    let mockFetch;
+    let queryParams;
+    let url;
+    let options;
+
+    beforeEach(() => {
+      mockFetch = jest.fn()
+      global.fetch = mockFetch;
+
+      queryParams = `{trip(id: 1) {trips {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}}`
+  
+      url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+      
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      } 
+    })
+
+    it('should call fetch with correct url and queryParams', async () => {
+      
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                trip: {
+                  legs: []
+                }
+                }
+              }
+            )}
+          })
+        })
+
+        await fetchTrip(1)
+
+        expect(mockFetch).toHaveBeenCalledWith(url, options)
+    })
+      
+    it('should return the trips for a specific user (HAPPY)', async () => {
+      let mockLegs = [{
+        "starttLocation": "Paris",
+        "endLocation": "Rome",
+        "endDate": "2020-01-02",
+        "id": "1",
+        "startDate": "2019-07-11",
+        "tripId": "22"
+      }]
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                trip: {
+                  legs: mockLegs
+                }
+                }
+              }
+            )}
+          })
+        })
+
+      let response = await fetchTrip(1)
+
+      expect(response).toEqual(mockLegs)
+
+    })
+
+    it('should throw an error when fetch fails (SAD)', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error fetching your trip'))
+      })
+
+      await expect(fetchTrip(1)).rejects.toEqual(Error('There was an error fetching your trip'))
+
+    })
+
+    it('should throw an error if response is not ok (SAD)', async () => {
+      
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+          })
+        })
+
+      await expect(fetchTrip(1)).rejects.toEqual(Error('There was an error fetching your trip'))
+
+    })
   })
+
 })
 
 
