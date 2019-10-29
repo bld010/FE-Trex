@@ -42,7 +42,7 @@ export default class Transportation extends Component {
           <Text style={styles.text}>Depart {transport.departureCity} at {transport.departureTime}</Text>
           <Text style={styles.text}>Arrive {transport.arrivalCity} at {transport.arrivalTime}</Text>
           <TouchableOpacity key={index + transport.id} style={styles.tripButton}>
-            <Text onPress={() => navigate('AddTransportInfo')} style={styles.text} key={transport.id}>Edit</Text>
+            <Text onPress={() => navigate('AddTransportInfo', {legId: this.state.leg.id, transportId: transport.id})} style={styles.text} key={transport.id}>Edit</Text>
           </TouchableOpacity>
         </View>
     )
@@ -60,7 +60,7 @@ export default class Transportation extends Component {
         <ScrollView>
           <Text style={styles.title}>Leg Transportation Detail</Text>
           <Text style={styles.text}>Leg: {leg.startLocation} - {leg.endLocation}</Text>
-          
+
           <TouchableOpacity>
             <Text onPress={() => navigate('AddTransportInfo', {legId: leg.id})} style={styles.button}>Add Transportation</Text>
             </TouchableOpacity>
