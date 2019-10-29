@@ -73,8 +73,6 @@ export default class AddTransportInfo extends Component {
   }
 
   render() {
-    console.log('this.state.legid', this.state.legId)
-    console.log('this.state.transportid', this.state.transportId)
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>

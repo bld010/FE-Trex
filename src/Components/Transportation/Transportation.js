@@ -19,7 +19,6 @@ export default class Transportation extends Component {
       leg: this.props.navigation.getParam('leg') ,
       transports: [],
       error: ''
-
      }
   }
   
@@ -35,7 +34,6 @@ export default class Transportation extends Component {
   generateTransportationElements = () => {
     const {navigate} = this.props.navigation;
     return this.state.transports.map((transport, index) => {
-      console.log('in the map', transport)
       return (
         <View style={styles.borderContainer}>
           <Text style={styles.headerText}>{transport.mode} details</Text>
