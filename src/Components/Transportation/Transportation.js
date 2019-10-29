@@ -58,8 +58,8 @@ export default class Transportation extends Component {
       <WandererHeader />
 
         <ScrollView>
-          <Text style={styles.text}>{leg.startLocation} - {leg.endLocation}</Text>
           <Text style={styles.title}>Leg Transportation Detail</Text>
+          <Text style={styles.text}>{leg.startLocation} - {leg.endLocation}</Text>
 
           <View>
            {transports.length > 0 && this.generateTransportationElements()}
@@ -88,6 +88,12 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'flex-start',
   }, 
+  title: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'white',
+    paddingVertical: 10
+  },
   button: {
     borderColor: 'white',
     borderWidth: 1,
@@ -128,7 +134,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginVertical: 10,
     marginBottom: 10,
-    height: 200
+    height: 240
   },
   headerText: {
     color: 'white',
