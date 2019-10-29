@@ -13,6 +13,7 @@ import {
   Keyboard,
   TextInput
 } from 'react-native';
+import { postNewTransport } from '../../util/apiCalls'
 
 export default class AddTransportInfo extends Component {
   constructor(props) {
@@ -47,6 +48,7 @@ export default class AddTransportInfo extends Component {
 
   checkTransportParams = () => {
     let { 
+      mode,
       departureCity,
       arrivalCity,
       departureTime,
@@ -54,6 +56,7 @@ export default class AddTransportInfo extends Component {
     } = this.state;
 
     if (
+      mode === '' || 
       departureCity === '' ||
       arrivalCity === '' ||
       departureTime === '' ||
@@ -86,30 +89,23 @@ export default class AddTransportInfo extends Component {
   }
 
   createNewTransport = async () => {
-    llet {}
+    let { mode, arrivalTime, departureTime, arrivalCity, departureCity, legId} = this.state
+    let newTransportInfo = {
+      mode,
+      arrivalTime,
+      departureTime,
+      arrivalCity,
+      departureCity,
+      legId
+    }
+
+    try {
+      let updateTransportId = await postNewTransport(newTransportInfo)
+      return updatedTransportId
+    } catch (error) {
+      this.setState({error: 'There was an error creating your transporation'})
+    }
   }
-
-
-
-
-  // createNewLeg = async () => {
-  //   let {startLocation, endLocation, startDate, endDate, tripId} = this.state;
-  //   let newLegInfo = {
-  //     startLocation,
-  //     endLocation,
-  //     startDate,
-  //     endDate,
-  //     tripId
-  //   }
-
-  //   try {
-  //     let updatedTripId = await postNewLeg(newLegInfo);
-  //     return updatedTripId
-  //   }
-  //   catch (error) {
-  //     this.setState({ error: 'There was an error creating your leg'})
-  //   }
-  // }
 
 
 
@@ -124,7 +120,7 @@ export default class AddTransportInfo extends Component {
             <TextInput
               style={styles.input}
               placeholder={
-                this.state.mode|| 'Enter Mode of Travel...'
+              this.state.mode || 'Enter Mode of Travel...'
               }
               placeholderTextColor='black'
               onChangeText={name => this.setState({ mode })}
