@@ -38,12 +38,12 @@ export const Leg = (props) => {
           <View>
           </View>
           <TouchableOpacity>
-              <Text onPress={() => navigate('LegForm', { leg, tripId })} style={styles.button}>Edit Leg</Text>
+              <Text onPress={() => navigate('LegForm', { leg, tripId, userId: props.navigation.getParam('userId') })} style={styles.button}>Edit Leg</Text>
             </TouchableOpacity>
 
         </ScrollView>
 
-        <WandererFooter navigate={navigate} />
+        <WandererFooter navigate={navigate} userId={props.navigation.getParam('userId')} />
         </View>
     )
 }
