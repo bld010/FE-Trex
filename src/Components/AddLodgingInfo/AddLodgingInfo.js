@@ -187,7 +187,7 @@ export default class AddLodgingInfo extends Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-        <WandererFooter navigate={navigate} />
+        <WandererFooter navigate={navigate} userId={this.state.userId} />
       </View>
     );
   }
