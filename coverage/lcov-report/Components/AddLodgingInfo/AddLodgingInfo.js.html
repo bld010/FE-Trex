@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">4.76% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/21</span>
+        <span class='fraction'>7/21</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">18.18% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/11</span>
+        <span class='fraction'>2/11</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">22.22% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>2/9</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">4.76% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/21</span>
+        <span class='fraction'>7/21</span>
       </div>
     </div>
     <p class="quiet">
@@ -335,8 +335,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -352,7 +352,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -376,7 +376,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -386,8 +386,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -606,9 +606,9 @@ import {
 } from 'react-native';
 &nbsp;
 export default class AddLodgingInfo extends Component {
-<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
-<span class="cstat-no" title="statement not covered" >    super();</span>
-<span class="cstat-no" title="statement not covered" >    this.state = {</span>
+  constructor() {
+    super();
+    this.state = {
       countryLodge: '',
       cityLodge: '',
       lodgeName: '',
@@ -624,7 +624,7 @@ export default class AddLodgingInfo extends Component {
 <span class="cstat-no" title="statement not covered" >    return;</span>
   }
   
-  checkLodgingParams = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+  checkLodgingParams = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
     let { 
       countryLodge, 
       cityLodge,
@@ -648,7 +648,7 @@ export default class AddLodgingInfo extends Component {
     }
   }
 &nbsp;
-  handleSave = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
+  handleSave = <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
     
     let formIsFilledCorrectly = <span class="cstat-no" title="statement not covered" >this.checkLodgingParams();</span>
 <span class="cstat-no" title="statement not covered" >    if (formIsFilledCorrectly) {</span>
@@ -657,9 +657,9 @@ export default class AddLodgingInfo extends Component {
 &nbsp;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  re</span>nder() {
-    const { navigate } = <span class="cstat-no" title="statement not covered" >this.props.navigation;</span>
-<span class="cstat-no" title="statement not covered" >    return (</span>
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
       &lt;View style={styles.container}&gt;
         &lt;WandererHeader /&gt;
         &lt;ScrollView&gt;
@@ -868,7 +868,7 @@ const styles = StyleSheet.create({
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 28 2019 19:40:09 GMT-0600 (Mountain Daylight Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 29 2019 11:03:25 GMT-0600 (MDT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

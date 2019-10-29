@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FollowerDashboard should match the snapshot when loading 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "white",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <Header />
+  <ScrollViewMock>
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 30,
+          "marginVertical": 40,
+          "textAlign": "center",
+          "width": "auto",
+        }
+      }
+    >
+      Display Wanderers that user follows
+    </Text>
+  </ScrollViewMock>
+  <Footer
+    navigate={[MockFunction]}
+  />
+</View>
+`;

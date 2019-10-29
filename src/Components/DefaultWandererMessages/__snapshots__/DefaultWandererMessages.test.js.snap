@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DefaultWandererMessages should match the snapshot when loading 1`] = `
+<View>
+  <View>
+    <WandererHeader />
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "backgroundColor": "#000000",
+        "flex": 1,
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+    >
+      <Text
+        style={
+          Object {
+            "backgroundColor": "#1C4263",
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "color": "white",
+            "fontSize": 30,
+            "height": 60,
+            "margin": 20,
+            "padding": 10,
+            "textAlign": "center",
+            "width": "auto",
+          }
+        }
+      >
+        Default Message 1
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+    >
+      <Text
+        style={
+          Object {
+            "backgroundColor": "#1C4263",
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "color": "white",
+            "fontSize": 30,
+            "height": 60,
+            "margin": 20,
+            "padding": 10,
+            "textAlign": "center",
+            "width": "auto",
+          }
+        }
+      >
+        Default Message 2
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+    >
+      <Text
+        style={
+          Object {
+            "backgroundColor": "#1C4263",
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "color": "white",
+            "fontSize": 30,
+            "height": 60,
+            "margin": 20,
+            "padding": 10,
+            "textAlign": "center",
+            "width": "auto",
+          }
+        }
+      >
+        Default Message 3
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+    >
+      <Text
+        style={
+          Object {
+            "backgroundColor": "#1C4263",
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "color": "white",
+            "fontSize": 30,
+            "height": 60,
+            "margin": 20,
+            "padding": 10,
+            "textAlign": "center",
+            "width": "auto",
+          }
+        }
+      >
+        Default Message 4
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View>
+    <WandererFooter />
+  </View>
+</View>
+`;
