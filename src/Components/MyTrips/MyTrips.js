@@ -11,7 +11,7 @@ import WandererHeader from '../WandererHeader/WandererHeader';
 import { fetchMyTrips } from '../../util/apiCalls';
 import { withNavigationFocus } from 'react-navigation';
 
-class MyTrips extends Component {
+export class MyTrips extends Component {
 
   constructor(props) {
     super(props);
