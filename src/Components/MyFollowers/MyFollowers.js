@@ -40,10 +40,8 @@ export class MyFollowers extends Component {
       try {
         let followers = await fetchFollowers(this.state.userId)
         this.setState({ followers })
-        //pass in actual userID here for wanderer
       } catch (error) {
         this.setState({ error: 'There was an error fetching your followers'})
-        console.log(error.message)
       }
     }
 
@@ -60,7 +58,7 @@ export class MyFollowers extends Component {
             {this.state.followers.length > 0 && this.generateFollowersElements()}
             
             <TouchableOpacity style={styles.addFollowerButton}>
-              <Text style={styles.text} onPress={() => navigate('FollowerForm')}>Add a New Follower</Text>
+              <Text style={styles.text} onPress={() => navigate('FollowerForm', {userId: this.state.userId})}>Add a New Follower</Text>
             </TouchableOpacity>
           </ScrollView>
           <WandererFooter navigate={navigate} userId={this.state.userId}/>
