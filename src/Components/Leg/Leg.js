@@ -35,10 +35,7 @@ export const Leg = (props) => {
             <Text style={styles.dateText}>{endDate}</Text>
             </View>
           </View>
-          <View>
-          </View>
-          <TouchableOpacity>
-            <Text onPress={() => navigate('LegForm', { leg, tripId })} style={styles.button}>Edit Leg</Text>
+          
             <View style={styles.sideBySideContainer}>
           <TouchableOpacity style={styles.sideBySideButton}>
             <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo', {legId: this.state.leg.id })}>Add Transport</Text>
@@ -47,7 +44,11 @@ export const Leg = (props) => {
             <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
           </TouchableOpacity>
         </View>
+        <View>
+          <TouchableOpacity>
+            <Text onPress={() => navigate('LegForm', { leg, tripId })} style={styles.button}>Edit Leg</Text>
             </TouchableOpacity>
+          </View>
 
         </ScrollView>
 
