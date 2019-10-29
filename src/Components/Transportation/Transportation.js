@@ -39,10 +39,10 @@ export default class Transportation extends Component {
       return (
         <View style={styles.borderContainer}>
           <Text style={styles.headerText}>{transport.mode} details</Text>
-          <Text style={styles.text}>Depart: {transport.departureCity} at {transport.departureTime}</Text>
-          <Text style={styles.text}>Arrival: {transport.arrivalCity} at {transport.arrivalTime}</Text>
+          <Text style={styles.text}>Depart {transport.departureCity} at {transport.departureTime}</Text>
+          <Text style={styles.text}>Arrive {transport.arrivalCity} at {transport.arrivalTime}</Text>
           <TouchableOpacity key={index + transport.id} style={styles.tripButton}>
-            <Text onPress={() => navigate('AddTransportation')} style={styles.text} key={transport.id}>Edit Transportation Details</Text>
+            <Text onPress={() => navigate('AddTransportInfo')} style={styles.text} key={transport.id}>Edit</Text>
           </TouchableOpacity>
         </View>
     )
@@ -59,7 +59,11 @@ export default class Transportation extends Component {
 
         <ScrollView>
           <Text style={styles.title}>Leg Transportation Detail</Text>
-          <Text style={styles.text}>{leg.startLocation} - {leg.endLocation}</Text>
+          <Text style={styles.text}>Leg: {leg.startLocation} - {leg.endLocation}</Text>
+          
+          <TouchableOpacity>
+            <Text onPress={() => navigate('AddTransportInfo', {legId: leg.id})} style={styles.button}>Add Transportation</Text>
+            </TouchableOpacity>
 
           <View>
            {transports.length > 0 && this.generateTransportationElements()}
@@ -68,9 +72,6 @@ export default class Transportation extends Component {
          
           </View>    
         
-          <TouchableOpacity>
-            <Text onPress={() => navigate('AddTransportation', {legId: leg.id})} style={styles.button}>Add Transportation</Text>
-            </TouchableOpacity>
 
         </ScrollView>
 
