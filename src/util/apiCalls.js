@@ -255,3 +255,34 @@ export const fetchFollowers = async (wanderer_id) => {
     throw error
   }
 }
+
+export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `{user(id: ${wanderer_id}) {notificationsReceived { unread message senderId }}}`
+ 
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error fetching your messages')
+    }
+
+    let data = await resp.json();
+ 
+    return data.data.user.notificationsReceived;
+
+  } catch (error) {
+    throw error
+  }
+}
+
+// export const markMessageRead = async (message_id) => {}
