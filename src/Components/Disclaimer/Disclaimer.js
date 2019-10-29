@@ -13,7 +13,7 @@ const Disclaimer = () => {
     <Text style={styles.text}>
   This application is designed for your safety. 
   Please do not add followers 
-  that you do not know of trust!
+  that you do not know or trust!
   </Text>
   <TouchableOpacity>
   <Text style={styles.button}>Continue</Text>

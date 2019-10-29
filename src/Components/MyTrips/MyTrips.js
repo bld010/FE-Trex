@@ -33,7 +33,6 @@ export class MyTrips extends Component {
     })
   }
   
-  
   componentDidMount = async  () => {
     try {
       let trips = await fetchMyTrips(this.state.userId)
@@ -74,7 +73,6 @@ export class MyTrips extends Component {
   
         <WandererFooter navigate={navigate} userId={this.state.userId} />
 
-        
     </View>
 
     )
