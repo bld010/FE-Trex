@@ -27,7 +27,7 @@ export class MyFollowers extends Component {
         let { navigate } = this.props.navigation;
 
         return (
-          <TouchableOpacity style={styles.followerButton} onPress={() => navigate('Follower', {follower, userId: this.state.userId})}>
+          <TouchableOpacity key={this.state.userId+follower.name}style={styles.followerButton} onPress={() => navigate('Follower', {follower, userId: this.state.userId})}>
             <Text style={styles.text}>{follower.name}</Text>
           </TouchableOpacity>
         )
@@ -54,9 +54,9 @@ export class MyFollowers extends Component {
           <WandererHeader />
           <ScrollView>
             <Text style={styles.title}>My Followers</Text>
-            
+            {this.state.followers.length === 0 && <Text style={styles.text}>Loading ...</Text>}
             {this.state.followers.length > 0 && this.generateFollowersElements()}
-            
+            {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
             <TouchableOpacity style={styles.addFollowerButton}>
               <Text style={styles.text} onPress={() => navigate('FollowerForm', {userId: this.state.userId})}>Add a New Follower</Text>
             </TouchableOpacity>
@@ -108,5 +108,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#1C4263',
     marginVertical: 10,
     marginHorizontal: 20
+  },
+  error: {
+    color: 'red',
+    textAlign: 'center',
+    paddingVertical: 10,
+    fontSize: 20
   }
 })
