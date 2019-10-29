@@ -117,8 +117,9 @@ export default class AddTransportInfo extends Component {
         <ScrollView>
           <View>
             <Text style={styles.title}>Add Transportation</Text>
-            <TextInput
-              style={styles.input}
+            </View>
+              <TextInput
+              style={styles.inputMode}
               placeholder={
               this.state.mode || 'Enter Mode of Travel...'
               }
@@ -127,7 +128,6 @@ export default class AddTransportInfo extends Component {
               value={this.state.mode}
               onBlur={Keyboard.dismiss}
             />
-          </View>
             <Text style={styles.label}>Start Destination</Text>
             <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
             <Text style={styles.label}>End Destination</Text>
@@ -167,7 +167,7 @@ export default class AddTransportInfo extends Component {
                 }
               }}
               onDateChange={date => {
-                this.setState({ departureDate: date });
+                this.setState({ departureTime: date });
               }}
             />
               <DatePicker
@@ -231,6 +231,14 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: 15
+  },
+  inputMode: {
+    backgroundColor: 'white',
+    color: 'black',
+    fontSize: 22,
+    flex: 1,
+    alignItems: 'center',
+    marginLeft: 10
   },
   title: {
     textAlign: 'center',
