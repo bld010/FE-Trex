@@ -27,8 +27,5 @@ exports[`FollowerDashboard should match the snapshot when loading 1`] = `
       Display Wanderers that user follows
     </Text>
   </ScrollViewMock>
-  <Footer
-    navigate={[MockFunction]}
-  />
 </View>
 `;

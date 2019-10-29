@@ -14,4 +14,4 @@ web-report/
 .DS_Store
 
 # Ignore folder named `coverage` 
-coverage/
+/coverage

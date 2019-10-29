@@ -199,9 +199,6 @@ export const patchLeg = async (legInfo) => {
   }
 }
 
-
-
-
 export const deleteLeg = async (legId) => {
 
   let options = {
