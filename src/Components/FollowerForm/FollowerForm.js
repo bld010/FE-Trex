@@ -21,7 +21,6 @@ export default class FollowerForm extends Component {
       followerAddress: '',
       emergencyContact: false,
       error: '', 
-      //we will likely need the current user id to be passed in here 
     }
   }
 
