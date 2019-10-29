@@ -18,10 +18,11 @@ export default class AddTransportInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startTrans: '',
-      endTrans: '',
-      dateTrans: '',
-      error: '',
+      mode: '',
+      arrivalTime: '',
+      departureTime: '',
+      arrivalCity: '',
+      departureCity: '',
       leg: '',
       legId: this.props.navigation.getParam('legId'),
       transportId: this.props.navigation.getParam('transportId') || null,
@@ -31,14 +32,14 @@ export default class AddTransportInfo extends Component {
 
   handlerFirstInput(arg) {
     this.setState({
-      startTrans: arg
+      departureCity: arg
     });
     return;
   }
 
   handlerSecondInput(arg) {
     this.setState({
-      endTrans: arg
+      arrivalCity: arg
     });
     return;
     }
@@ -46,15 +47,17 @@ export default class AddTransportInfo extends Component {
 
   checkTransportParams = () => {
     let { 
-      startTrans,
-      endTrans,
-      dateTrans
+      departureCity,
+      arrivalCity,
+      departureTime,
+      arrivalTime
     } = this.state;
 
     if (
-      startTrans === '' ||
-      endTrans === '' ||
-      dateTrans === '' 
+      departureCity === '' ||
+      arrivalCity === '' ||
+      departureTime === '' ||
+      arrivalTime === ''
     ) {
       this.setState({ error: 'Please fill out all fields'})
       return false;
@@ -83,30 +86,30 @@ export default class AddTransportInfo extends Component {
   }
 
   createNewTransport = async () => {
-    let {}
+    llet {}
   }
 
 
 
 
-  createNewLeg = async () => {
-    let {startLocation, endLocation, startDate, endDate, tripId} = this.state;
-    let newLegInfo = {
-      startLocation,
-      endLocation,
-      startDate,
-      endDate,
-      tripId
-    }
+  // createNewLeg = async () => {
+  //   let {startLocation, endLocation, startDate, endDate, tripId} = this.state;
+  //   let newLegInfo = {
+  //     startLocation,
+  //     endLocation,
+  //     startDate,
+  //     endDate,
+  //     tripId
+  //   }
 
-    try {
-      let updatedTripId = await postNewLeg(newLegInfo);
-      return updatedTripId
-    }
-    catch (error) {
-      this.setState({ error: 'There was an error creating your leg'})
-    }
-  }
+  //   try {
+  //     let updatedTripId = await postNewLeg(newLegInfo);
+  //     return updatedTripId
+  //   }
+  //   catch (error) {
+  //     this.setState({ error: 'There was an error creating your leg'})
+  //   }
+  // }
 
 
 
@@ -118,17 +121,27 @@ export default class AddTransportInfo extends Component {
         <ScrollView>
           <View>
             <Text style={styles.title}>Add Transportation</Text>
+            <TextInput
+              style={styles.input}
+              placeholder={
+                this.state.mode|| 'Enter Mode of Travel...'
+              }
+              placeholderTextColor='black'
+              onChangeText={name => this.setState({ mode })}
+              value={this.state.mode}
+              onBlur={Keyboard.dismiss}
+            />
           </View>
             <Text style={styles.label}>Start Destination</Text>
             <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
             <Text style={styles.label}>End Destination</Text>
             <MapInputSecond handlerSecondInput={this.handlerSecondInput.bind(this)} />
-            <Text style={styles.text}>Travel Date</Text>
+            <Text style={styles.text}>Travel Times</Text>
             <DatePicker
               style={{ width: 370, height: 65 }}
-              date={this.state.dateTrans}
+              date={this.state.departureTime}
               mode='date'
-              placeholder='Select End Date'
+              placeholder='Select Departure Date'
               placeholderTextColor='white'
               format='MM-DD-YYYY'
               confirmBtnText='Confirm'
@@ -158,7 +171,44 @@ export default class AddTransportInfo extends Component {
                 }
               }}
               onDateChange={date => {
-                this.setState({ dateTrans: date });
+                this.setState({ departureDate: date });
+              }}
+            />
+              <DatePicker
+              style={{ width: 370, height: 65 }}
+              date={this.state.arrivalTime}
+              mode='date'
+              placeholder='Select Arrival Date'
+              placeholderTextColor='white'
+              format='MM-DD-YYYY'
+              confirmBtnText='Confirm'
+              cancelBtnText='Cancel'
+              customStyles={{
+                dateIcon: {
+                  left: 0,
+                  top: 4
+                },
+                dateInput: {
+                  marginLeft: 15,
+                  color: "black",
+                  backgroundColor: 'white',
+                  height: 60,
+                  borderRadius: 8,
+                  borderWidth: 1,
+                  borderColor: "white",
+                  marginVertical: -20
+                },
+                dateText: {
+                  fontSize: 22,
+                  color: "black",
+                },
+                placeholderText: {
+                  fontSize: 22,
+                  color: "black"
+                }
+              }}
+              onDateChange={date => {
+                this.setState({ arrivalTime: date });
               }}
             />
 
