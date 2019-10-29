@@ -67,7 +67,7 @@ class Trip extends Component {
             <View style={styles.container}>
             <View style={styles.sideBySideContainer}>
             <TouchableOpacity style={styles.sideBySideButton}>
-              <Text onPress={() => navigate('LegForm' , {tripId: id})} style={styles.buttonText}>Add A Leg <Text style={styles.plus}>+</Text> </Text>
+              <Text onPress={() => navigate('LegForm' , {tripId: id, userId: this.state.userId})} style={styles.buttonText}>Add A Leg <Text style={styles.plus}>+</Text> </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.sideBySideButton}>
               <Text style={styles.buttonText} onPress={() => navigate('TripForm', {trip: this.state.trip, userId: this.state.userId})}>Edit Trip</Text>
@@ -80,7 +80,7 @@ class Trip extends Component {
           
         </ScrollView>
 
-        <WandererFooter navigate={navigate} />
+        <WandererFooter navigate={navigate} userId={this.state.userId} />
         </View>
     );
   }
