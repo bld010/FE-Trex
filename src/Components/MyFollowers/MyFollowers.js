@@ -15,17 +15,33 @@ export class MyFollowers extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        friends: []
+        followers: [],
+        error: ''
       }
     }
 
+    generateFollowersElements = () => {
+      let followersElements = this.state.followers.map(follower => {
+
+        let { navigate } = this.props.navigation;
+
+        return (
+          <TouchableOpacity style={styles.followerButton} onPress={() => navigate('Follower', {follower})}>
+            <Text style={styles.text}>{follower.name}</Text>
+          </TouchableOpacity>
+        )
+      })
+
+      return followersElements;
+    }
+
     componentDidMount = async () => {
-      console.log('component did mount in My followers')
       try {
         let followers = await fetchFollowers(1)
-
+        this.setState({ followers })
         //pass in actual userID here for wanderer
       } catch (error) {
+        this.setState({ error: 'There was an error fetching your followers'})
         console.log(error.message)
       }
     }
@@ -39,9 +55,9 @@ export class MyFollowers extends Component {
           <WandererHeader />
           <ScrollView>
             <Text style={styles.title}>My Followers</Text>
-            {/* <View>
-              {this.followerElements.length > 0 && this.followerElements}
-            </View> */}
+            
+            {this.state.followers.length > 0 && this.generateFollowersElements()}
+            
             <TouchableOpacity style={styles.addFollowerButton}>
               <Text style={styles.text} onPress={() => navigate('FollowerForm')}>Add a New Follower</Text>
             </TouchableOpacity>
@@ -81,6 +97,17 @@ const styles = StyleSheet.create({
     borderColor: 'white', 
     color: 'white',
     borderRadius: 8,
-    backgroundColor: '#1C4263'
+    backgroundColor: '#1C4263',
+    marginVertical: 30
+  },
+  followerButton: {
+    backgroundColor: '#1C4263',
+    borderWidth: 1,
+    borderColor: 'white', 
+    color: 'white',
+    borderRadius: 8,
+    backgroundColor: '#1C4263',
+    marginVertical: 10,
+    marginHorizontal: 20
   }
 })
