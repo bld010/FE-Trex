@@ -15,6 +15,7 @@ export class MyFollowers extends Component {
     constructor(props) {
       super(props);
       this.state = {
+        userId: this.props.navigation.getParam('userId'),
         followers: [],
         error: ''
       }
@@ -26,7 +27,7 @@ export class MyFollowers extends Component {
         let { navigate } = this.props.navigation;
 
         return (
-          <TouchableOpacity style={styles.followerButton} onPress={() => navigate('Follower', {follower})}>
+          <TouchableOpacity style={styles.followerButton} onPress={() => navigate('Follower', {follower, userId: this.state.userId})}>
             <Text style={styles.text}>{follower.name}</Text>
           </TouchableOpacity>
         )
@@ -37,7 +38,7 @@ export class MyFollowers extends Component {
 
     componentDidMount = async () => {
       try {
-        let followers = await fetchFollowers(1)
+        let followers = await fetchFollowers(this.state.userId)
         this.setState({ followers })
         //pass in actual userID here for wanderer
       } catch (error) {
@@ -62,7 +63,7 @@ export class MyFollowers extends Component {
               <Text style={styles.text} onPress={() => navigate('FollowerForm')}>Add a New Follower</Text>
             </TouchableOpacity>
           </ScrollView>
-          <WandererFooter navigate={navigate} />
+          <WandererFooter navigate={navigate} userId={this.state.userId}/>
       </View>
       )
     }

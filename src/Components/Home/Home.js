@@ -14,12 +14,8 @@ export default class Home extends Component {
   constructor(props) {
     super(props) 
       this.state = {
-        userId: null
+        userId: 1
       }
-  }
-
-  componentDidMount = () => {
-    this.setState({ userId: 1})
   }
 
   render() {
