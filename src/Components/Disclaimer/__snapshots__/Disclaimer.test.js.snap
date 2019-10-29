@@ -13,7 +13,7 @@ exports[`Disclaimer should match the snapshot when loading 1`] = `
       }
     }
   >
-    This application is designed for your safety.  Please do not add followers  that you do not know of trust!
+    This application is designed for your safety.  Please do not add followers  that you do not know or trust!
   </Text>
   <TouchableOpacity
     activeOpacity={0.2}
