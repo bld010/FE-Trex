@@ -1,0 +1,330 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddLodgingInfo should match the snapshot when loading 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#000000",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <WandererHeader />
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "marginTop": 15,
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "white",
+              "fontSize": 30,
+              "paddingVertical": 25,
+              "textAlign": "center",
+            }
+          }
+        >
+          Add Lodging
+        </Text>
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "marginBottom": 5,
+            "marginLeft": 20,
+          }
+        }
+      >
+        Country
+      </Text>
+      <View
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "color": "white",
+            "height": 60,
+            "marginBottom": 20,
+            "marginLeft": 15,
+            "padding": 10,
+            "width": 350,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          maxLength={20}
+          onBlur={[Function]}
+          onChangeText={[Function]}
+          placeholder="Enter Country of Stay..."
+          placeholderTextColor="black"
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "white",
+              "color": "black",
+              "flex": 1,
+              "fontSize": 18,
+              "marginLeft": 10,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "marginBottom": -22,
+            "marginLeft": 20,
+            "marginVertical": -10,
+          }
+        }
+      >
+        City
+      </Text>
+      <MapInputFirst
+        handlerFirstInput={[Function]}
+      />
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "marginBottom": 5,
+            "marginLeft": 20,
+          }
+        }
+      >
+        Name
+      </Text>
+      <View
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "color": "white",
+            "height": 60,
+            "marginBottom": 20,
+            "marginLeft": 15,
+            "padding": 10,
+            "width": 350,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          maxLength={20}
+          onBlur={[Function]}
+          onChangeText={[Function]}
+          placeholder="Enter Lodging Name..."
+          placeholderTextColor="black"
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "white",
+              "color": "black",
+              "flex": 1,
+              "fontSize": 18,
+              "marginLeft": 10,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "marginLeft": 20,
+            "paddingVertical": 15,
+          }
+        }
+      >
+        Beginning of Stay
+      </Text>
+      <DatePicker
+        TouchableComponent={[Function]}
+        allowFontScaling={true}
+        androidMode="default"
+        cancelBtnText="Cancel"
+        confirmBtnText="Confirm"
+        customStyles={
+          Object {
+            "dateIcon": Object {
+              "left": 0,
+              "top": 4,
+            },
+            "dateInput": Object {
+              "backgroundColor": "white",
+              "borderColor": "white",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "color": "black",
+              "height": 60,
+              "marginLeft": 15,
+            },
+            "dateText": Object {
+              "color": "black",
+              "fontSize": 22,
+            },
+            "placeholderText": Object {
+              "color": "black",
+              "fontSize": 22,
+            },
+          }
+        }
+        date=""
+        disabled={false}
+        duration={300}
+        format="MM-DD-YYYY"
+        height={259}
+        hideText={false}
+        iconSource={
+          Object {
+            "testUri": "../../react-native-datepicker/date_icon.png",
+          }
+        }
+        modalOnResponderTerminationRequest={[Function]}
+        mode="date"
+        onDateChange={[Function]}
+        placeholder="Start Date"
+        placeholderTextColor="white"
+        showIcon={true}
+        style={
+          Object {
+            "height": 65,
+            "width": 370,
+          }
+        }
+      />
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "marginLeft": 20,
+            "paddingVertical": 15,
+          }
+        }
+      >
+        End of Stay
+      </Text>
+      <DatePicker
+        TouchableComponent={[Function]}
+        allowFontScaling={true}
+        androidMode="default"
+        cancelBtnText="Cancel"
+        confirmBtnText="Confirm"
+        customStyles={
+          Object {
+            "dateIcon": Object {
+              "left": 0,
+              "top": 4,
+            },
+            "dateInput": Object {
+              "backgroundColor": "white",
+              "borderColor": "white",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "color": "black",
+              "height": 60,
+              "marginLeft": 15,
+            },
+            "dateText": Object {
+              "color": "black",
+              "fontSize": 22,
+            },
+            "placeholderText": Object {
+              "color": "black",
+              "fontSize": 22,
+            },
+          }
+        }
+        date=""
+        disabled={false}
+        duration={300}
+        format="MM-DD-YYYY"
+        height={259}
+        hideText={false}
+        iconSource={
+          Object {
+            "testUri": "../../react-native-datepicker/date_icon.png",
+          }
+        }
+        modalOnResponderTerminationRequest={[Function]}
+        mode="date"
+        onDateChange={[Function]}
+        placeholder="Start Date"
+        placeholderTextColor="white"
+        showIcon={true}
+        style={
+          Object {
+            "height": 65,
+            "width": 370,
+          }
+        }
+      />
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 25,
+            "marginVertical": 15,
+            "textAlign": "center",
+          }
+        }
+      />
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Text
+          style={
+            Object {
+              "backgroundColor": "#1C4263",
+              "borderColor": "white",
+              "borderRadius": 8,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "color": "white",
+              "fontSize": 30,
+              "height": 60,
+              "margin": 20,
+              "padding": 10,
+              "textAlign": "center",
+              "width": "auto",
+            }
+          }
+        >
+          Save
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollViewMock>
+  <WandererFooter
+    navigate={[MockFunction]}
+  />
+</View>
+`;

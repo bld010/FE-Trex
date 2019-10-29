@@ -16,7 +16,9 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
-    "setupFilesAfterEnv": ["<rootDir>/src/setupTests.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ]
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",

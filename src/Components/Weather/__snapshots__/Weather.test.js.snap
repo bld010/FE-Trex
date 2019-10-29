@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Weather should match the snapshot when loading 1`] = `
+<Text
+  style={
+    Object {
+      "borderColor": "white",
+      "borderRadius": 8,
+      "borderStyle": "solid",
+      "borderWidth": 1,
+      "color": "white",
+      "fontSize": 20,
+      "height": 200,
+      "marginVertical": 15,
+      "textAlign": "center",
+      "width": 200,
+    }
+  }
+>
+  Insert Weather Here
+</Text>
+`;

@@ -1,0 +1,224 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FollowerForm should match the snapshot when loading 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#000000",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <WandererHeader />
+  <ScrollViewMock>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 30,
+            "paddingVertical": 25,
+            "textAlign": "center",
+          }
+        }
+      >
+        Add A New Follower
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "stretch",
+          "backgroundColor": "#000000",
+          "flex": 1,
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "marginBottom": 5,
+            "marginLeft": 20,
+          }
+        }
+      >
+        Name
+      </Text>
+      <View
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "color": "white",
+            "height": 60,
+            "marginBottom": 20,
+            "marginLeft": 15,
+            "padding": 10,
+            "width": 350,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          maxLength={20}
+          onBlur={[Function]}
+          onChangeText={[Function]}
+          placeholder="Enter Followers Name..."
+          placeholderTextColor="black"
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "white",
+              "color": "black",
+              "flex": 1,
+              "fontSize": 18,
+              "marginLeft": 10,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "marginBottom": 5,
+            "marginLeft": 20,
+          }
+        }
+      >
+        Email
+      </Text>
+      <View
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "color": "white",
+            "height": 60,
+            "marginBottom": 20,
+            "marginLeft": 15,
+            "padding": 10,
+            "width": 350,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          maxLength={20}
+          onBlur={[Function]}
+          onChangeText={[Function]}
+          placeholder="Enter Followers Email..."
+          placeholderTextColor="black"
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "white",
+              "color": "black",
+              "flex": 1,
+              "fontSize": 18,
+              "marginLeft": 10,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "marginBottom": 5,
+            "marginLeft": 20,
+          }
+        }
+      >
+        Phone Number
+      </Text>
+      <View
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "color": "white",
+            "height": 60,
+            "marginBottom": 20,
+            "marginLeft": 15,
+            "padding": 10,
+            "width": 350,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          maxLength={20}
+          onBlur={[Function]}
+          onChangeText={[Function]}
+          placeholder="Enter Followers Phone Number..."
+          placeholderTextColor="black"
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "white",
+              "color": "black",
+              "flex": 1,
+              "fontSize": 18,
+              "marginLeft": 10,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+      >
+        <Text
+          style={
+            Object {
+              "backgroundColor": "#1C4263",
+              "borderColor": "white",
+              "borderRadius": 8,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "color": "white",
+              "fontSize": 30,
+              "height": 60,
+              "margin": 20,
+              "padding": 10,
+              "textAlign": "center",
+              "width": "auto",
+            }
+          }
+        >
+          Save
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollViewMock>
+  <WandererFooter
+    navigate={[MockFunction]}
+  />
+</View>
+`;
