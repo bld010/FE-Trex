@@ -143,8 +143,6 @@ export default class LegForm extends Component {
   }
 
   render() {
-    console.log(this.state.startLocation)
-    console.log(this.state.endLocation)
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
@@ -235,10 +233,10 @@ export default class LegForm extends Component {
         />
         <View style={styles.sideBySideContainer}>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo')}>Add Transport</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo', {userId: this.state.userId})}>Add Transport</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo', {userId: this.state.userId})}>Add Lodging</Text>
           </TouchableOpacity>
           </View>
           <TouchableOpacity onPress={this.handleNewLegSave}>
