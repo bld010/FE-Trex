@@ -30,13 +30,11 @@ export default class Home extends Component {
               <Text style={styles.button}>Wanderer</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigate('FollowerDashboard', {userId: this.state.userId})}>
-              <Text style={styles.button}>Follower</Text>
+              <Text style={styles.followerButton}>Follower</Text>
             </TouchableOpacity>
 
 
         </ScrollView>
-  
-       <WandererFooter navigate={navigate} userId={this.state.userId}/>
         
     </View>
     )
