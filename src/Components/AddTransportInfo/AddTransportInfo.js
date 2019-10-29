@@ -65,12 +65,50 @@ export default class AddTransportInfo extends Component {
   }
 
   handleSave = async () => {
-    
+
+    let updatedTransportId
+
+    if (!this.props.navigation.getParam('transportId')) {
     let formIsFilledCorrectly = this.checkTransportParams();
     if (formIsFilledCorrectly) {
-      //fire post call here
+      updatedTransportId = await this.createNewTransport()
+      this.props.navigation('Transportation', {transportId: updatedTransportId})
+
+      }
+    } else {
+      updatedTripId = await this.editTransportation()
+      this.props.navigation.navigate('Transporation', {transportId: updatedTransportId})
+
     }
   }
+
+  createNewTransport = async () => {
+    let {}
+  }
+
+
+
+
+  createNewLeg = async () => {
+    let {startLocation, endLocation, startDate, endDate, tripId} = this.state;
+    let newLegInfo = {
+      startLocation,
+      endLocation,
+      startDate,
+      endDate,
+      tripId
+    }
+
+    try {
+      let updatedTripId = await postNewLeg(newLegInfo);
+      return updatedTripId
+    }
+    catch (error) {
+      this.setState({ error: 'There was an error creating your leg'})
+    }
+  }
+
+
 
   render() {
     const { navigate } = this.props.navigation;

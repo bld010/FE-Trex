@@ -259,6 +259,7 @@ export const fetchTransport = async (legId) => {
 
 
 export const postNewTransport = async (tranportationInfo) => {
+  console.log('transportation info in the post', transportationInfo)
 
   let options = {
     method: 'POST',
@@ -268,8 +269,6 @@ export const postNewTransport = async (tranportationInfo) => {
   }
 
   let { legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
-
-
 
   let queryParams = `mutation {createTransportation(input: {mode: "${mode}", arrivalTime: "${arrivalTime}", departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", departureCity: "${departureCity}", legId: "${legId}" }) {transportation {mode departureTime departureCity arrivalTime arrivalCity legId}}}}`
 
@@ -282,6 +281,7 @@ export const postNewTransport = async (tranportationInfo) => {
     }
 
     let data = await resp.json();
+    console.log(data.data.createTransportation.transporation)
     return data.data.createTransportation.transportation
   
   } catch (error) {
