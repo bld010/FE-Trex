@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { 
   StyleSheet, 
   Text, 
@@ -8,27 +8,48 @@ import {
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
+import { fetchFollowers } from '../../util/apiCalls';
 
-export function MyFollowers(props) {
+export class MyFollowers extends Component {
 
-    const {navigate} = props.navigation;
+    constructor(props) {
+      super(props);
+      this.state = {
+        friends: []
+      }
+    }
 
+    componentDidMount = async () => {
+      console.log('component did mount in My followers')
+      try {
+        let followers = await fetchFollowers(1)
 
-    return (
-      <View style={styles.container}>
-        <WandererHeader />
-        <ScrollView>
-          <Text style={styles.title}>My Followers</Text>
-          {/* <View>
-            {this.followerElements.length > 0 && this.followerElements}
-          </View> */}
-          <TouchableOpacity style={styles.addFollowerButton}>
-            <Text style={styles.text} onPress={() => navigate('FollowerForm')}>Add a New Follower</Text>
-          </TouchableOpacity>
-        </ScrollView>
-        <WandererFooter navigate={navigate} />
-    </View>
-    )
+        //pass in actual userID here for wanderer
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
+
+    render = () => {
+
+      let { navigate } = this.props.navigation
+
+      return (
+        <View style={styles.container}>
+          <WandererHeader />
+          <ScrollView>
+            <Text style={styles.title}>My Followers</Text>
+            {/* <View>
+              {this.followerElements.length > 0 && this.followerElements}
+            </View> */}
+            <TouchableOpacity style={styles.addFollowerButton}>
+              <Text style={styles.text} onPress={() => navigate('FollowerForm')}>Add a New Follower</Text>
+            </TouchableOpacity>
+          </ScrollView>
+          <WandererFooter navigate={navigate} />
+      </View>
+      )
+    }
 }
 
 const styles = StyleSheet.create({

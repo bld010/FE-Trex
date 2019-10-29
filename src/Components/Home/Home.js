@@ -24,7 +24,7 @@ export default class Home extends Component {
       <View style={styles.container}>
         <WandererHeader />
         <ScrollView>
-          <Text style={styles.text}>Welcome to Ariva</Text>
+          <Text style={styles.text}>Welcome to Trex</Text>
             <Text style={styles.text}>I am a ...</Text>
             <TouchableOpacity onPress={() => navigate('WandererDashboard')}>
               <Text style={styles.button}>Wanderer</Text>

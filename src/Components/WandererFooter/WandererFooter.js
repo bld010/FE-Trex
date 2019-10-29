@@ -14,6 +14,7 @@ export default class WandererFooter extends Component {
   
   render() {
 
+    //pass user_id to each of the navigations
 
     return(
       <View style={styles.footer}>
