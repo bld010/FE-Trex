@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1572368606548" clover="3.2.0">
-  <project timestamp="1572368606549" name="All files">
-    <metrics statements="393" coveredstatements="196" conditionals="117" coveredconditionals="27" methods="129" coveredmethods="47" elements="639" coveredelements="270" complexity="0" loc="393" ncloc="393" packages="27" files="28" classes="28"/>
+<coverage generated="1572380982718" clover="3.2.0">
+  <project timestamp="1572380982718" name="All files">
+    <metrics statements="392" coveredstatements="195" conditionals="117" coveredconditionals="27" methods="129" coveredmethods="47" elements="638" coveredelements="269" complexity="0" loc="392" ncloc="392" packages="27" files="28" classes="28"/>
     <package name="Components.AddLodgingInfo">
       <metrics statements="21" coveredstatements="7" conditionals="11" coveredconditionals="2" methods="9" coveredmethods="2"/>
       <file name="AddLodgingInfo.js" path="/Users/Emily/mod_4/FE-Trex/src/Components/AddLodgingInfo/AddLodgingInfo.js">
@@ -142,16 +142,15 @@
       </file>
     </package>
     <package name="Components.Home">
-      <metrics statements="7" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
+      <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
       <file name="Home.js" path="/Users/Emily/mod_4/FE-Trex/src/Components/Home/Home.js">
-        <metrics statements="7" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
+        <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
       </file>
     </package>
     <package name="Components.Leg">

@@ -18,11 +18,10 @@ exports[`Home should match the snapshot when loading 1`] = `
           "fontSize": 30,
           "marginVertical": 40,
           "textAlign": "center",
-          "width": "auto",
         }
       }
     >
-      Welcome to Ariva
+      Welcome to Trex
     </Text>
     <Text
       style={
@@ -31,7 +30,6 @@ exports[`Home should match the snapshot when loading 1`] = `
           "fontSize": 30,
           "marginVertical": 40,
           "textAlign": "center",
-          "width": "auto",
         }
       }
     >
@@ -40,15 +38,18 @@ exports[`Home should match the snapshot when loading 1`] = `
     <TouchableOpacity
       activeOpacity={0.2}
       onPress={[Function]}
+      style={
+        Object {
+          "borderRadius": 8,
+        }
+      }
     >
       <Text
         style={
           Object {
-            "alignItems": "stretch",
             "backgroundColor": "#1C4263",
             "borderColor": "white",
             "borderRadius": 8,
-            "borderStyle": "solid",
             "borderWidth": 1,
             "color": "white",
             "fontSize": 30,
@@ -66,12 +67,17 @@ exports[`Home should match the snapshot when loading 1`] = `
     <TouchableOpacity
       activeOpacity={0.2}
       onPress={[Function]}
+      style={
+        Object {
+          "borderRadius": 8,
+        }
+      }
     >
       <Text
         style={
           Object {
             "alignItems": "stretch",
-            "backgroundColor": "#1C4263",
+            "backgroundColor": "#84183B",
             "borderColor": "white",
             "borderRadius": 8,
             "borderStyle": "solid",
@@ -90,8 +96,5 @@ exports[`Home should match the snapshot when loading 1`] = `
       </Text>
     </TouchableOpacity>
   </ScrollViewMock>
-  <WandererFooter
-    navigate={[MockFunction]}
-  />
 </View>
 `;
