@@ -16,6 +16,7 @@ import FollowerDashboard from './FollowerDashboard/FollowerDashboard';
 import DefaultFollowerMessages from './DefaultFollowerMessages/DefaultFollowerMessages';
 import MyWandererTrips from './MyWanderersTrips/MyWanderersTrips';
 import WandererDashboard from './WandererDashboard/WandererDashboard';
+import Transportation from './Transportation/Transportation'
 
 const RootStack = createStackNavigator({
   Home: {
@@ -133,11 +134,19 @@ const RootStack = createStackNavigator({
   MyWandererTrips: {
     screen: MyWandererTrips,
     navigationOptions: {
-      headerBackTitle: 'Follower Messages',
+      headerBackTitle: 'Follower Wanderer Trips',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }
   },
+  Transportation: {
+    screen: Transportation,
+    navigationOptions: {
+      headerBackTitle: 'Transportation',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  }
 });
 
 export default createAppContainer(RootStack);

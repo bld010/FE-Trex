@@ -4,7 +4,6 @@ import MapInputFirst from '../MapInput/MapInputFirst'
 import MapInputSecond from '../MapInput/MapInputSecond'
 import WandererHeader from '../WandererHeader/WandererHeader';
 import WandererFooter from '../WandererFooter/WandererFooter';
-import { fetchTransport } from '../../util/apiCalls'
 import {
   StyleSheet,
   Text,
@@ -29,14 +28,7 @@ export default class AddTransportInfo extends Component {
     };
   }
 
-  componentDidMount = async () => {
-    try {
-      let existingTransports = await fetchTransport(this.state.existingLegId)
-      this.setState({existingTransports})
-    } catch (error) {
-      this.setState({error: 'There was an error fetching your tranportation'})
-    }
-  }
+ 
 
 
   handlerFirstInput(arg) {
@@ -83,6 +75,7 @@ export default class AddTransportInfo extends Component {
   }
 
   render() {
+    console.log(this.state.existingTransports)
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>

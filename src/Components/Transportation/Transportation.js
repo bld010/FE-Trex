@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { 
   StyleSheet, 
   Text, 
@@ -8,13 +8,53 @@ import {
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
+import { fetchTransport } from '../../util/apiCalls'
 
 
-export const Leg = (props) => {
-  const {navigate} = props.navigation;
-  let { startLocation, endLocation, startDate, endDate} = props.navigation.getParam('leg')
-  let  tripId  = props.navigation.getParam('tripId')
-  let leg = props.navigation.getParam('leg')
+
+export default class Transportation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      leg: this.props.navigation.getParam('leg') ,
+      transports: ''
+
+     }
+  }
+  
+  componentDidMount = async () => {
+    try {
+      let transports = await fetchTransport(this.state.leg.id)
+      this.setState({transports})
+    } catch (error) {
+      this.setState({error: 'There was an error fetching your tranportation'})
+    }
+  }
+
+  generateTripElements = () => {
+    const {navigate} = this.props.navigation;
+    return this.state.transports.map((transport, index) => {
+      return (
+            <View style={styles.borderContainer}>
+            <Text style={styles.headerText}>{transport.mode}</Text>
+            <Text style={styles.headerText}>Departure Details:</Text>
+            <Text style={styles.text}>{transport.departureLocation}</Text>
+            <Text style={styles.dateText}>{transport.departureDate}</Text>
+            <Text style={styles.headerText}>Arrival Details:</Text>
+            <Text style={styles.text}>{transport.arrivalLocation}</Text>
+            <Text style={styles.dateText}>{transport.arrivalDate}</Text>
+
+
+        {/* <TouchableOpacity key={index + transport.id} style={styles.tripButton}>
+        <Text onPress={() => navigate('Trip', {trip: trip, tripId: trip.id, userId: this.state.user.id})} style={styles.text} key={trip.name}>{trip.name}</Text>
+      </TouchableOpacity> */}
+      </View>
+    )
+      })
+  }
+  
+  render() {
+  const {navigate} = this.props.navigation;
   return (
       <View style={styles.container}>
 
@@ -23,25 +63,16 @@ export const Leg = (props) => {
         <ScrollView>
 
           <View>
-            <Text style={styles.text}>{leg.name}</Text>
-            <View style={styles.borderContainer}>
-            <Text style={styles.headerText}>Start Location</Text>
-            <Text style={styles.text}>{startLocation}</Text>
-            <Text style={styles.dateText}>{startDate}</Text>
-            </View>
-            <View style={styles.borderContainer}>
-            <Text style={styles.headerText}>End Location</Text>
-            <Text style={styles.text}>{endLocation}</Text>
-            <Text style={styles.dateText}>{endDate}</Text>
-            </View>
-          </View>
-          
+          <Text style={styles.text}>Transportation Detail</Text>
+            <Text style={styles.text}>{this.state.leg.startLocation} - {this.state.leg.endLocation}</Text>
+           {this.generateTripElements()}
+          </View>    
             <View style={styles.sideBySideContainer}>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('Transportation', { leg })}>Transportation</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo', {legId: leg.id })}>Add Transport</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo')}>Add Lodging</Text>
           </TouchableOpacity>
         </View>
         <View>
@@ -55,6 +86,7 @@ export const Leg = (props) => {
         <WandererFooter navigate={navigate} />
         </View>
     )
+  }
 }
 
 
