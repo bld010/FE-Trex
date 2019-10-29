@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyFollowers should match the snapshot when loading 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#000000",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <WandererHeader />
+  <ScrollViewMock>
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 30,
+          "paddingVertical": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      My Followers
+    </Text>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "backgroundColor": "#1C4263",
+          "borderColor": "white",
+          "borderRadius": 8,
+          "borderWidth": 1,
+          "color": "white",
+        }
+      }
+    >
+      <Text
+        onPress={[Function]}
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "paddingVertical": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        Add a New Follower
+      </Text>
+    </TouchableOpacity>
+  </ScrollViewMock>
+  <WandererFooter
+    navigate={[MockFunction]}
+  />
+</View>
+`;

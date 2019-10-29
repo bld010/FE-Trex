@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
+import React, { Component } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
   ScrollView,
   TouchableOpacity
-} from 'react-native';
+} from "react-native";
 
-import WandererHeader from '../WandererHeader/WandererHeader';
-import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from "../WandererHeader/WandererHeader";
+import WandererFooter from "../WandererFooter/WandererFooter";
 
 export default class Home extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ export default class Home extends Component {
   }
 
   render() {
-      const {navigate} = this.props.navigation;
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <WandererHeader />
@@ -46,32 +46,40 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
-  }, 
+    backgroundColor: "#000000"
+  },
   text: {
-    color: 'white',
+    color: "white",
     marginVertical: 40,
-    textAlign: 'center',
-    fontSize: 30,
-    width: 'auto'
-  }, 
+    textAlign: "center",
+    fontSize: 30
+  },
   button: {
-    borderColor: 'white',
+    borderColor: "white",
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: 'solid',
-    width: 'auto',
+    width: "auto",
     height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
-    color: 'white',
-    textAlign: 'center',
-    backgroundColor: '#1C4263',
-    alignItems: 'stretch'
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#1C4263"
+  },
+  followerButton: {
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    width: "auto",
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#84183B",
+    alignItems: "stretch"
   }
 });
-
-
-
-

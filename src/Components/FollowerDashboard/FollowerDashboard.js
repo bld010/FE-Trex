@@ -24,9 +24,14 @@ export default class FollowerDashboard extends Component {
       <View style={styles.container}>
           <FollowerHeader />
       <ScrollView>
-        <Text style={styles.text}>Display Wanderers that user follows</Text>
+        <Text style={styles.text}>My Wanderers</Text>
+      <TouchableOpacity style={styles.button} onPress={() => navigate("MyWanderer")}>
+        <Text style={styles.buttonText}>Fake Wanderer 1</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigate("MyWanderer")}>
+        <Text style={styles.buttonText}>Fake Wanderer 2</Text>
+      </TouchableOpacity>
       </ScrollView>
-        <FollowerFooter navigate={navigate}/>
       </View>
     )
   }
@@ -40,25 +45,31 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   }, 
   text: {
-    color: 'white',
+    color: 'black',
     marginVertical: 40,
     textAlign: 'center',
     fontSize: 30,
     width: 'auto'
   }, 
   button: {
-    borderColor: 'white',
+    width: 'auto',
+    borderColor: "white",
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: 'solid',
-    width: 'auto',
+    borderStyle: "solid",
     height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
-    color: 'white',
-    textAlign: 'center',
-    backgroundColor: '#84183B',
-    alignItems: 'stretch'
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#84183B",
+    alignItems: "stretch"
+  },
+  buttonText: {
+    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 10
   }
 });
