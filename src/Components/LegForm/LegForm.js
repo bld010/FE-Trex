@@ -236,7 +236,7 @@ export default class LegForm extends Component {
         />
         <View style={styles.sideBySideContainer}>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo')}>Add Transport</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo', {legId: this.state.leg.id })}>Add Transport</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideBySideButton}>
             <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>

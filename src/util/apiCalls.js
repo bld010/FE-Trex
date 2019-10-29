@@ -230,3 +230,29 @@ export const deleteLeg = async (legId) => {
   }
 
 }
+
+export const fetchTransport = async (legId) => {
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `{leg(id: ${legId}) {id, startDate, endDate transportations {id mode departureTime departureCity arrivalTime arrivalCity}}}`
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+  
+  try {
+    let resp = await fetch(url, options)
+    if (!resp.ok) {
+      throw new Error('There was an error fetching your tranportation details')
+    }
+
+    let data = await resp.json();
+    let transportations = data.data.leg.transportations;
+    return transportations;
+
+  } catch (error) {
+    throw error
+  }
+}
