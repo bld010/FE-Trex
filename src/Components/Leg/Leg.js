@@ -38,7 +38,15 @@ export const Leg = (props) => {
           <View>
           </View>
           <TouchableOpacity>
-              <Text onPress={() => navigate('LegForm', { leg, tripId })} style={styles.button}>Edit Leg</Text>
+            <Text onPress={() => navigate('LegForm', { leg, tripId })} style={styles.button}>Edit Leg</Text>
+            <View style={styles.sideBySideContainer}>
+          <TouchableOpacity style={styles.sideBySideButton}>
+            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo', {legId: this.state.leg.id })}>Add Transport</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sideBySideButton}>
+            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
+          </TouchableOpacity>
+        </View>
             </TouchableOpacity>
 
         </ScrollView>
@@ -107,7 +115,34 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderBottomColor: 'white',
     borderBottomWidth: 1,
-  }
+  }, 
+  buttonText: {
+    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 10
+  },
+  sideBySideButton: {
+    width: 170,
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#1C4263",
+    alignItems: "stretch"
+  },
+  sideBySideContainer: {
+    flex: 1,
+    backgroundColor: "#000000",
+    flexDirection: "row",
+    justifyContent: "space-around"
+  },
 });
 
 
