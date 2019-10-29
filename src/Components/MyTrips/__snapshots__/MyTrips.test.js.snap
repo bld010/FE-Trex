@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyTrips should match the snapshot when loading 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#000000",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <WandererHeader />
+  <ScrollViewMock>
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 30,
+          "paddingVertical": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      My Trips
+    </Text>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "paddingVertical": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        Loading ...
+      </Text>
+    </View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "backgroundColor": "#1C4263",
+          "borderColor": "white",
+          "borderRadius": 8,
+          "borderWidth": 1,
+          "color": "white",
+          "marginBottom": 10,
+        }
+      }
+    >
+      <Text
+        onPress={[Function]}
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "paddingVertical": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        Add a New Trip
+      </Text>
+    </TouchableOpacity>
+  </ScrollViewMock>
+  <WandererFooter
+    navigate={[MockFunction]}
+  />
+</View>
+`;
+
+exports[`MyTrips should match the snapshot when trips array is populated 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#000000",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <WandererHeader />
+  <ScrollViewMock>
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 30,
+          "paddingVertical": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      My Trips
+    </Text>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        key="0Paris"
+        style={
+          Object {
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderWidth": 1,
+            "marginVertical": 10,
+          }
+        }
+      >
+        <Text
+          key="Paris"
+          onPress={[Function]}
+          style={
+            Object {
+              "color": "white",
+              "fontSize": 20,
+              "paddingVertical": 10,
+              "textAlign": "center",
+            }
+          }
+        >
+          Paris
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        key="1Rome"
+        style={
+          Object {
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderWidth": 1,
+            "marginVertical": 10,
+          }
+        }
+      >
+        <Text
+          key="Rome"
+          onPress={[Function]}
+          style={
+            Object {
+              "color": "white",
+              "fontSize": 20,
+              "paddingVertical": 10,
+              "textAlign": "center",
+            }
+          }
+        >
+          Rome
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "backgroundColor": "#1C4263",
+          "borderColor": "white",
+          "borderRadius": 8,
+          "borderWidth": 1,
+          "color": "white",
+          "marginBottom": 10,
+        }
+      }
+    >
+      <Text
+        onPress={[Function]}
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "paddingVertical": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        Add a New Trip
+      </Text>
+    </TouchableOpacity>
+  </ScrollViewMock>
+  <WandererFooter
+    navigate={[MockFunction]}
+  />
+</View>
+`;

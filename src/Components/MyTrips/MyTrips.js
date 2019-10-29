@@ -11,7 +11,7 @@ import WandererHeader from '../WandererHeader/WandererHeader';
 import { fetchMyTrips } from '../../util/apiCalls';
 import { withNavigationFocus } from 'react-navigation';
 
-class MyTrips extends Component {
+export class MyTrips extends Component {
 
   constructor(props) {
     super(props);
@@ -25,9 +25,9 @@ class MyTrips extends Component {
   
   generateTripsElements = () => {
     const {navigate} = this.props.navigation;
-    return this.state.trips.map(trip => {
+    return this.state.trips.map((trip, index) => {
       return (
-        <TouchableOpacity key={Date.now() + trip.name} style={styles.tripButton}>
+        <TouchableOpacity key={index + trip.name} style={styles.tripButton}>
         <Text onPress={() => navigate('Trip', {trip: trip, tripId: trip.id, userId: this.state.user.id})} style={styles.text} key={trip.name}>{trip.name}</Text>
       </TouchableOpacity>
       )

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for Components/MessageHistory/MessageHistory.js</title>
+    <title>Code coverage report for Components/MapInput/MapInputSecond.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,28 +16,28 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">All files</a> / <a href="index.html">Components/MessageHistory</a> MessageHistory.js
+      <a href="../../index.html">All files</a> / <a href="index.html">Components/MapInput</a> MapInputSecond.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">20% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/5</span>
+        <span class='fraction'>0/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">20% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/5</span>
+        <span class='fraction'>0/5</span>
       </div>
     </div>
     <p class="quiet">
@@ -109,13 +109,15 @@
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -125,12 +127,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -142,15 +140,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -172,70 +168,98 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from "react";
-import FollowerHeader from '../FollowerHeader/FollowerHeader';
-import FollowerFooter from '../FollowerFooter/FollowerFooter'
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  TextInput,
-  Keyboard
-} from "react-native";
-&nbsp;
-export default class MessageHistory extends Component {
-<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
-<span class="cstat-no" title="statement not covered" >    super()</span>
-<span class="cstat-no" title="statement not covered" >    this.state = {</span>
-&nbsp;
-    }
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
+import { View } from "react-native";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+/*
+The component is child component for location search 
+the selected location can be stored in state variable
+*/
+export default class MapInputSecond extends React.Component {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >    super(props);</span>
   }
 <span class="fstat-no" title="function not covered" >  re</span>nder() {
-    const {navigate} = <span class="cstat-no" title="statement not covered" >this.props.navigation;</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;View style={styles.container}&gt;
-        &lt;FollowerHeader /&gt;
-        &lt;ScrollView&gt;
-        &lt;Text&gt;Display Message history with specific follower&lt;/Text&gt;
-        &lt;/ScrollView&gt;
-        &lt;FollowerFooter navigate={navigate}/&gt;
+      &lt;View style={{ paddingTop: 20, flex: 1 }}&gt;
+        &lt;GooglePlacesAutocomplete
+          placeholder="Search..."
+          placeholderTextColor='black'
+          minLength={2} // minimum length of text to search
+          autoFocus={false}
+          returnKeyType={"search"}
+          listViewDisplayed="false"
+          fetchDetails={true}
+          renderDescription={<span class="fstat-no" title="function not covered" >ro</span>w =&gt;
+<span class="cstat-no" title="statement not covered" >            row.description || row.formatted_address || row.name</span>
+          }
+          onPress={<span class="fstat-no" title="function not covered" >(d</span>ata, details = <span class="branch-0 cbranch-no" title="branch not covered" >null)</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >            this.props.handlerSecondInput(data.description)</span>
+}}
+          getDefaultValue={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >            return ""; </span>// text input default value
+          }}
+          query={{
+            key: "AIzaSyAl5dxa6Z0jhVTOs6SDOzxCFOLjPKweyHM",
+            language: "en", // language of the results
+            types: "(cities)" // default: 'geocode'
+          }}
+          styles={{
+            textInputContainer: {
+              backgroundColor: 'rgba(0,0,0,0)',
+              borderTopWidth: 0,
+              borderBottomWidth:0,
+              width: 350,
+              marginLeft: 15,
+              marginBottom: 30
+            },
+            textInput: {
+              marginLeft: 0,
+              marginRight: 0,
+              height: 60,
+              color: 'black',
+              fontSize: 22
+            },
+            description: {
+              color: 'white',
+            }
+          }}
+          enablePoweredByContainer={true}
+          nearbyPlacesAPI="GoogleReverseGeocoding"
+          GooglePlacesSearchQuery={{
+            rankby: "distance",
+            types: "food"
+          }}
+          filterReverseGeocodingByTypes={[
+            "locality",
+            "administrative_area_level_3"
+          ]}
+          debounce={200}
+        /&gt;
       &lt;/View&gt;
-    )
+    );
   }
-}
-&nbsp;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start'
-  }, 
-  text: {
-    color: 'white',
-    marginVertical: 40,
-    textAlign: 'center',
-    fontSize: 30,
-    width: 'auto'
-  }, 
-  button: {
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 8,
-    borderStyle: 'solid',
-    width: 'auto',
-    height: 60,
-    margin: 20,
-    fontSize: 30,
-    padding: 10,
-    color: 'white',
-    textAlign: 'center',
-    backgroundColor: '#84183B',
-    alignItems: 'stretch'
-  }
-});</pre></td></tr>
+}</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
