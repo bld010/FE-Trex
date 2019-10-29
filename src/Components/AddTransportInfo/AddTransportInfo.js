@@ -23,12 +23,10 @@ export default class AddTransportInfo extends Component {
       dateTrans: '',
       error: '',
       leg: '',
-      existingLegId: this.props.navigation.getParam('legId') || null,
+      existingLegId: this.props.navigation.getParam('legId'),
       existingTransports: '',
     };
   }
-
- 
 
 
   handlerFirstInput(arg) {
@@ -75,7 +73,7 @@ export default class AddTransportInfo extends Component {
   }
 
   render() {
-    console.log(this.state.existingTransports)
+    console.log(this.state.existingLegId)
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>

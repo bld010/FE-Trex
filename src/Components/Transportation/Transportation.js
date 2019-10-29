@@ -38,15 +38,11 @@ export default class Transportation extends Component {
       console.log('in the map', transport)
       return (
         <View style={styles.borderContainer}>
-          <Text style={styles.headerText}>{transport.mode}</Text>
-          <Text style={styles.headerText}>Departure Details:</Text>
-          <Text style={styles.text}>{transport.departureCity}</Text>
-          <Text style={styles.dateText}>{transport.departureTime}</Text>
-          <Text style={styles.headerText}>Arrival Details:</Text>
-          <Text style={styles.text}>{transport.arrivalCity}</Text>
-          <Text style={styles.dateText}>{transport.arrivalTime}</Text>
+          <Text style={styles.headerText}>{transport.mode} details</Text>
+          <Text style={styles.text}>Depart: {transport.departureCity} at {transport.departureTime}</Text>
+          <Text style={styles.text}>Arrival: {transport.arrivalCity} at {transport.arrivalTime}</Text>
           <TouchableOpacity key={index + transport.id} style={styles.tripButton}>
-            <Text onPress={() => navigate('AddTransportation')} style={styles.text} key={trip.name}>Edit Transportation Details</Text>
+            <Text onPress={() => navigate('AddTransportation')} style={styles.text} key={transport.id}>Edit Transportation Details</Text>
           </TouchableOpacity>
         </View>
     )
@@ -73,7 +69,7 @@ export default class Transportation extends Component {
           </View>    
         
           <TouchableOpacity>
-            <Text onPress={() => navigate('AddTransportation')} style={styles.button}>Add Transportation</Text>
+            <Text onPress={() => navigate('AddTransportation', {legId: leg.id})} style={styles.button}>Add Transportation</Text>
             </TouchableOpacity>
 
         </ScrollView>
@@ -111,7 +107,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginVertical: 10,
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 15,
     width: 'auto',
     textAlign: 'center'
   },
@@ -132,7 +128,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginVertical: 10,
     marginBottom: 10,
-    height: 170
+    height: 200
   },
   headerText: {
     color: 'white',
@@ -170,6 +166,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
     flexDirection: "row",
     justifyContent: "space-around"
+  },
+  tripButton: {
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8,
+    marginVertical: 10
   },
 });
 
