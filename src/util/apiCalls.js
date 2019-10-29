@@ -227,3 +227,88 @@ export const deleteLeg = async (legId) => {
   }
 
 }
+
+export const postNewLodging = async (lodgingInfo) => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  let { name, arrivalDate, departureDate, city, legId } = lodgingInfo; 
+
+  let queryParams = `mutation {createLodging(input: {name: "${name}", arrivalDate: "${arrivalDate}", departureDate: "${departureDate}", city: "${city}", legId: ${legId}}) {lodging{legId}}}`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url,options)
+    if (!resp.ok) {
+      throw new Error('There was an error creating your lodging')
+    }
+
+    let data = await resp.json();
+    return data.data.createLodging.lodging
+  
+  } catch (error) {
+    throw error
+  }
+}
+
+export const patchLodging = async (lodgingInfo) => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let { name, arrivalDate, departureDate, city, legId } = lodgingInfo;  
+
+  let queryParams = `mutation {updateLodging(input: {id: ${id}, name: "${name}", arrivalDate: "${arrivalDate}", departureDate: "${departureDate}", city: "${city}", legId: ${legId}}) {lodging{legId}}}`
+  
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url,options)
+    if (!resp.ok) {
+      throw new Error('There was an error editing your lodging')
+    }
+    let data = await resp.json();
+    return data.data.updateLodging.lodging
+  
+  } catch (error) {
+    throw error
+  }
+}
+
+export const deleteLeg = async (id) => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `mutation {removeLodging(input: {id: "${id}"}) {lodging {legId}}}`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error deleting your lodging')
+    }
+
+    let data = await resp.json();
+    return data.data.removeLodging.lodging
+
+  } catch (error) {
+    throw error
+  }
+
+}
