@@ -17,7 +17,8 @@ export default class Transportation extends Component {
     super(props);
     this.state = {
       leg: this.props.navigation.getParam('leg') ,
-      transports: ''
+      transports: [],
+      error: ''
 
      }
   }
@@ -31,29 +32,29 @@ export default class Transportation extends Component {
     }
   }
 
-  generateTripElements = () => {
+  generateTransportationElements = () => {
     const {navigate} = this.props.navigation;
     return this.state.transports.map((transport, index) => {
+      console.log('in the map', transport)
       return (
-            <View style={styles.borderContainer}>
-            <Text style={styles.headerText}>{transport.mode}</Text>
-            <Text style={styles.headerText}>Departure Details:</Text>
-            <Text style={styles.text}>{transport.departureLocation}</Text>
-            <Text style={styles.dateText}>{transport.departureDate}</Text>
-            <Text style={styles.headerText}>Arrival Details:</Text>
-            <Text style={styles.text}>{transport.arrivalLocation}</Text>
-            <Text style={styles.dateText}>{transport.arrivalDate}</Text>
-
-
-        {/* <TouchableOpacity key={index + transport.id} style={styles.tripButton}>
-        <Text onPress={() => navigate('Trip', {trip: trip, tripId: trip.id, userId: this.state.user.id})} style={styles.text} key={trip.name}>{trip.name}</Text>
-      </TouchableOpacity> */}
-      </View>
+        <View style={styles.borderContainer}>
+          <Text style={styles.headerText}>{transport.mode}</Text>
+          <Text style={styles.headerText}>Departure Details:</Text>
+          <Text style={styles.text}>{transport.departureCity}</Text>
+          <Text style={styles.dateText}>{transport.departureTime}</Text>
+          <Text style={styles.headerText}>Arrival Details:</Text>
+          <Text style={styles.text}>{transport.arrivalCity}</Text>
+          <Text style={styles.dateText}>{transport.arrivalTime}</Text>
+          <TouchableOpacity key={index + transport.id} style={styles.tripButton}>
+            <Text onPress={() => navigate('AddTransportation')} style={styles.text} key={trip.name}>Edit Transportation Details</Text>
+          </TouchableOpacity>
+        </View>
     )
       })
   }
   
   render() {
+  const { leg, error, transports } = this.state
   const {navigate} = this.props.navigation;
   return (
       <View style={styles.container}>
@@ -61,25 +62,19 @@ export default class Transportation extends Component {
       <WandererHeader />
 
         <ScrollView>
+          <Text style={styles.text}>{leg.startLocation} - {leg.endLocation}</Text>
+          <Text style={styles.title}>Leg Transportation Detail</Text>
 
           <View>
-          <Text style={styles.text}>Transportation Detail</Text>
-            <Text style={styles.text}>{this.state.leg.startLocation} - {this.state.leg.endLocation}</Text>
-           {this.generateTripElements()}
+           {transports.length > 0 && this.generateTransportationElements()}
+           {error !== '' && <Text style={styles.text}>{error}</Text>}
+           {transports.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
+         
           </View>    
-            <View style={styles.sideBySideContainer}>
-          <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo', {legId: leg.id })}>Add Transport</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo')}>Add Lodging</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
+        
           <TouchableOpacity>
-            <Text onPress={() => navigate('LegForm', { leg, tripId })} style={styles.button}>Edit Leg</Text>
+            <Text onPress={() => navigate('AddTransportation')} style={styles.button}>Add Transportation</Text>
             </TouchableOpacity>
-          </View>
 
         </ScrollView>
 
