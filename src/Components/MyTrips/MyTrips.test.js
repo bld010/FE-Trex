@@ -22,10 +22,4 @@ describe('MyTrips', () => {
     expect(wrapper).toMatchSnapshot();
   })
 
-
-  describe('componentDidMount', () => {
-    it('should fire fetchMyTrips with the user id', () => {
-      
-    })
-  })
 })
