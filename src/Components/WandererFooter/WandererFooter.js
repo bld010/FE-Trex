@@ -9,18 +9,19 @@ import {
 export default class WandererFooter extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      userId: this.props.userId
+    }
   }
   
   render() {
-
-    //pass user_id to each of the navigations
 
     return(
       <View style={styles.footer}>
             <TouchableOpacity
             
-            onPress={() => this.props.navigate('MyTrips')}
+            onPress={() => this.props.navigate('MyTrips', { userId: this.state.userId})}
             >
               <Text style={styles.footerText}>Trips</Text>
             </TouchableOpacity>
@@ -31,7 +32,7 @@ export default class WandererFooter extends Component {
             </TouchableOpacity>
             <TouchableOpacity
             
-            onPress={() => this.props.navigate('MyFollowers')}>
+            onPress={() => this.props.navigate('MyFollowers', { userId: this.state.userId})}>
               <Text style={styles.footerText}>Followers</Text>
             </TouchableOpacity>
 

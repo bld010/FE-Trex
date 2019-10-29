@@ -16,7 +16,7 @@ export class MyTrips extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {id: 1},
+      userId: this.props.navigation.getParam('userId'),
       // we will need to pass this user object dyanmically
       trips: [],
       error: ''
@@ -28,7 +28,7 @@ export class MyTrips extends Component {
     return this.state.trips.map((trip, index) => {
       return (
         <TouchableOpacity key={index + trip.name} style={styles.tripButton}>
-        <Text onPress={() => navigate('Trip', {trip: trip, tripId: trip.id, userId: this.state.user.id})} style={styles.text} key={trip.name}>{trip.name}</Text>
+        <Text onPress={() => navigate('Trip', {trip: trip, tripId: trip.id, userId: this.state.userId})} style={styles.text} key={trip.name}>{trip.name}</Text>
       </TouchableOpacity>
       )
     })

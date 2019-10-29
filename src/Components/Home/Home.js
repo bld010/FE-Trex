@@ -14,8 +14,12 @@ export default class Home extends Component {
   constructor(props) {
     super(props) 
       this.state = {
-
+        userId: null
       }
+  }
+
+  componentDidMount = () => {
+    this.setState({ userId: 1})
   }
 
   render() {
@@ -26,17 +30,17 @@ export default class Home extends Component {
         <ScrollView>
           <Text style={styles.text}>Welcome to Trex</Text>
             <Text style={styles.text}>I am a ...</Text>
-            <TouchableOpacity onPress={() => navigate('WandererDashboard')}>
+            <TouchableOpacity onPress={() => navigate('WandererDashboard', {userId: this.state.userId})}>
               <Text style={styles.button}>Wanderer</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigate('FollowerDashboard')}>
+            <TouchableOpacity onPress={() => navigate('FollowerDashboard', {userId: this.state.userId})}>
               <Text style={styles.button}>Follower</Text>
             </TouchableOpacity>
 
 
         </ScrollView>
   
-       <WandererFooter navigate={navigate} />
+       <WandererFooter navigate={navigate} userId={this.state.userId}/>
         
     </View>
     )
