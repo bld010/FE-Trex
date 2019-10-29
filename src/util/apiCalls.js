@@ -284,7 +284,7 @@ export const patchLodging = async (lodgingInfo) => {
   }
 }
 
-export const deleteLeg = async (id) => {
+export const deleteLodging = async (id) => {
 
   let options = {
     method: 'POST',

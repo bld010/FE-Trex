@@ -35,7 +35,13 @@ export const Leg = (props) => {
             <Text style={styles.dateText}>{endDate}</Text>
             </View>
           </View>
-          <View>
+          <View style={styles.sideBySideContainer}>
+          <TouchableOpacity style={styles.sideBySideButton}>
+            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo')}>Add Transport</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sideBySideButton}>
+            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
+          </TouchableOpacity>
           </View>
           <TouchableOpacity>
               <Text onPress={() => navigate('LegForm', { leg, tripId })} style={styles.button}>Edit Leg</Text>
@@ -107,7 +113,33 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderBottomColor: 'white',
     borderBottomWidth: 1,
-  }
+  },
+  sideBySideContainer: {
+    flex: 1,
+    backgroundColor: "#000000",
+    flexDirection: "row",
+    justifyContent: "space-around"
+  },buttonText: {
+    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 10
+  },
+  sideBySideButton: {
+    width: 170,
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#1C4263",
+    alignItems: "stretch"
+  },
 });
 
 
