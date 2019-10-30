@@ -104,8 +104,7 @@ export default class AddLodgingInfo extends Component {
   };
 
   editLodging = async () => {
-    let id = this.state.lodging.id;
-    let { name, city, arrivalDate, departureDate, legId } = this.state;
+    let { name, city, arrivalDate, departureDate, legId, lodgingId } = this.state;
 
     let editedLodgingInfo = {
       name,
@@ -113,7 +112,7 @@ export default class AddLodgingInfo extends Component {
       arrivalDate,
       departureDate,
       legId,
-      id
+      lodgingId
     };
     try {
       let editedLegId = await patchLodging(editedLodgingInfo);
@@ -125,8 +124,8 @@ export default class AddLodgingInfo extends Component {
 
   removeLodging = async () => {
     try {
-      await deleteLodging(this.state.lodging.id);
-      this.props.navigation.navigate("Leg");
+      await deleteLodging(this.state.lodgingId);
+      this.props.navigation.navigate("Lodging");
     } catch (error) {
       this.setState({ error: "There was an error deleting your lodging" });
     }

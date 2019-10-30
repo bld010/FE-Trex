@@ -18,6 +18,7 @@ import MyWandererTrips from './MyWanderersTrips/MyWanderersTrips';
 import WandererDashboard from './WandererDashboard/WandererDashboard';
 import MyWanderer from './MyWanderer/MyWanderer';
 import FollowerMessageHistory from './FollowerMessageHistory/FollowerMessageHistory';
+import 
 
 const RootStack = createStackNavigator({
   Home: {
