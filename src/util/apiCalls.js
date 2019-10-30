@@ -326,7 +326,7 @@ export const postNewTransport = async (transportationInfo) => {
 
       let { legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
   
-      let queryParams = `mutation {createTransportation(input: {mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {mode departureTime departureCity arrivalTime arrivalCity legId}}}`
+      let queryParams = `mutation {createTransportation(input: {mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {id mode departureCity departureTime arrivalTime arrivalCity legId}}}`
       console.log(queryParams)
       let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
     
