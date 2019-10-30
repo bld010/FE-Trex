@@ -27,7 +27,8 @@ export default class AddTransportInfo extends Component {
       legId: this.props.navigation.getParam('legId'),
       leg: this.props.navigation.getParam('leg'),
       transportId: this.props.navigation.getParam('transportId') || null,
-      transport: this.props.navigation.getParam('transport')
+      transport: this.props.navigation.getParam('transport'),
+      userId: this.props.navigation.getParam('userId')
     };
   }
 

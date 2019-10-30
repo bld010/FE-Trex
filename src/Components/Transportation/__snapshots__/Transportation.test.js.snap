@@ -5,3 +5,9 @@ exports[`Transportation should match the snapshot when loading 1`] = `
   <Component />
 </ContextConsumer>
 `;
+
+exports[`Transportation should match the snapshot when tranportation array is populated 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;

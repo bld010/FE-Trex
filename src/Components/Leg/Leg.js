@@ -38,10 +38,10 @@ export const Leg = (props) => {
           
             <View style={styles.sideBySideContainer}>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('Transportation', { leg })}>Transportation</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('Transportation', { leg, userId: props.navigation.getParam('userId') })}>Transportation</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo', {userId: props.navigation.getParam('userId')})}>Add Lodging</Text>
           </TouchableOpacity>
         </View>
         <View>

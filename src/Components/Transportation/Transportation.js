@@ -17,6 +17,7 @@ class Transportation extends Component {
     super(props);
     this.state = {
       leg: this.props.navigation.getParam('leg'),
+      userId: this.props.navigation.getParam('userId'),
       transports: [],
       error: '',
       existingLegId: this.props.navigation.getParam('existingLegId') || null
@@ -47,7 +48,7 @@ class Transportation extends Component {
           <Text style={styles.text}>Depart {transport.departureCity} at {transport.departureTime}</Text>
           <Text style={styles.text}>Arrive {transport.arrivalCity} at {transport.arrivalTime}</Text>
           <TouchableOpacity key={index + transport.id} style={styles.tripButton}>
-            <Text onPress={() => navigate('AddTransportInfo', {leg: this.state.leg, legId: this.state.leg.id, transportId: transport.id, transport: transport})} style={styles.text} key={transport.id}>Edit Transportation Info</Text>
+            <Text onPress={() => navigate('AddTransportInfo', {leg: this.state.leg, legId: this.state.leg.id, transportId: transport.id, transport: transport, userId: this.state.userId})} style={styles.text} key={transport.id}>Edit Transportation Info</Text>
           </TouchableOpacity>
         </View>
     )
@@ -67,7 +68,7 @@ class Transportation extends Component {
           <Text style={styles.text}>Leg: {leg.startLocation} - {leg.endLocation}</Text>
 
           <TouchableOpacity>
-            <Text onPress={() => navigate('AddTransportInfo', {legId: leg.id})} style={styles.button}>Add Transportation</Text>
+            <Text onPress={() => navigate('AddTransportInfo', {legId: leg.id, userId: this.state.userId})} style={styles.button}>Add Transportation</Text>
             </TouchableOpacity>
 
           <View>
@@ -80,7 +81,7 @@ class Transportation extends Component {
 
         </ScrollView>
 
-        <WandererFooter navigate={navigate} />
+        <WandererFooter navigate={navigate} userId={this.state.userId} />
         </View>
     )
   }

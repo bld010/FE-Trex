@@ -105,7 +105,7 @@ const RootStack = createStackNavigator({
   AddTransportInfo: {
     screen: AddTransportInfo,
     navigationOptions: {
-      headerBackTitle: 'Add Transportation',
+      headerBackTitle: 'Add Transport',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }
@@ -137,7 +137,7 @@ const RootStack = createStackNavigator({
   MyWandererTrips: {
     screen: MyWandererTrips,
     navigationOptions: {
-      headerBackTitle: 'Follower Wanderer Trips',
+      headerBackTitle: 'Follower Messages',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }
