@@ -96,6 +96,9 @@ export default class Follower extends Component {
               }
             </>
           }
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Send Check-In</Text>
+          </TouchableOpacity>
         </ScrollView>
         <WandererFooter navigate={navigate} userId={this.state.userId}/>
 
@@ -175,5 +178,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     margin: 20
+  },
+  button: {
+    height: 50,
+    color: 'white',
+    backgroundColor: '#1C4263',
+    margin: 20,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8
   }
 })
