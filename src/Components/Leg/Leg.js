@@ -41,7 +41,7 @@ export const Leg = (props) => {
             <Text style={styles.buttonText} onPress={() => navigate('Transportation', { leg, userId: props.navigation.getParam('userId') })}>Transportation</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo', {leg, userId: props.navigation.getParam('userId')})}>Add Lodging</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('Lodging', {leg, userId: props.navigation.getParam('userId')})}>Add Lodging</Text>
           </TouchableOpacity>
         </View>
         <View>

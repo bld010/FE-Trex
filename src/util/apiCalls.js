@@ -358,12 +358,8 @@ export const deleteLodging = async lodgingId => {
   }
 }
 
-<<<<<<< HEAD
-export const fetchFollowers = async wanderer_id => {
-=======
 
 export const fetchFollowers = async (wanderer_id) => {
->>>>>>> master
   let options = {
     method: "POST",
     headers: {
@@ -605,9 +601,6 @@ export const deleteTransport = async (transportationId) => {
 // export const sendFollowerMessage = async () => {}
 
 // export const fetchFollowersIncomingNotifications = async () => {}
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> master
