@@ -383,9 +383,6 @@ export const fetchFollowers = async wanderer_id => {
   } catch (error) {
     throw error;
   }
-<<<<<<< HEAD
-};
-=======
 }
 
 export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
@@ -485,4 +482,3 @@ export const sendWandererMessage = async (message_object) => {
 // export const sendFollowerMessage = async () => {}
 
 // export const fetchFollowersIncomingNotifications = async () => {}
->>>>>>> master
