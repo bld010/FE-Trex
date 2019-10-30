@@ -3,6 +3,7 @@ import DatePicker from "react-native-datepicker";
 import MapInputFirst from '../MapInput/MapInputFirst'
 import WandererHeader from '../WandererHeader/WandererHeader';
 import WandererFooter from '../WandererFooter/WandererFooter';
+import { postNewLodging, patchLodging, deleteLodging } from '../../util/apiCalls';
 import {
   StyleSheet,
   Text,
@@ -48,7 +49,6 @@ export default class AddLodgingInfo extends Component {
   
   checkLodgingParams = () => {
     let { 
-      countryLodge, 
       city,
       name,
       arrivalDate,
@@ -56,7 +56,6 @@ export default class AddLodgingInfo extends Component {
     } = this.state;
 
     if (
-      countryLodge === '' ||
       city === '' ||
       name === '' ||
       arrivalDate === '' ||
@@ -76,6 +75,55 @@ export default class AddLodgingInfo extends Component {
       //fire post call here
     }
 
+  }
+
+  createNewLodging = async () => {
+    let {name, city, arrivalDate, departureDate, legId} = this.state;
+    let newLodgingInfo = {
+      name,
+      city,
+      arrivalDate,
+      departureDate,
+      legId
+    }
+
+    try {
+      let updatedLegId = await postNewLodging(newLodgingInfo);
+      return updatedLegId
+    }
+    catch (error) {
+      this.setState({ error: 'There was an error creating your lodging'})
+    }
+  }
+
+  editLodging = async () => {
+    let id = this.state.lodging.id
+    let {name, city, arrivalDate, departureDate, legId} = this.state;
+
+    let editedLodgingInfo = { 
+      name,
+      city,
+      arrivalDate,
+      departureDate,
+      legId,
+      id
+    }
+    try {
+      let editedLegId = await patchLodging(editedLodgingInfo)
+      return editedLegId
+    }
+    catch (error) {
+      this.setState({error: 'There was an error editing your lodging'})
+    }
+  }
+
+  removeLodging = async () => {
+    try {
+      await deleteLodging(this.state.lodging.id);
+      this.props.navigation.navigate('Leg')
+    } catch (error) {
+      this.setState({ error: 'There was an error deleting your lodging'})
+    }
   }
 
   render() {
