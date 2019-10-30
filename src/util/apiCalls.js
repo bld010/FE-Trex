@@ -315,9 +315,9 @@ export const fetchTransport = async (legId) => {
 }
 
 
-export const postNewTransport = async (tranportationInfo) => {
-      console.log('transportation info in the post', transportationInfo)
-      let options = {
+export const postNewTransport = async (transportationInfo) => {
+
+    let options = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -325,20 +325,22 @@ export const postNewTransport = async (tranportationInfo) => {
       }
 
       let { legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
-
-      let queryParams = `mutation {createTransportation(input: {mode: "${mode}", arrivalTime: "${arrivalTime}", departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", departureCity: "${departureCity}", legId: "${legId}" }) {transportation {mode departureTime departureCity arrivalTime arrivalCity legId}}}}`
-    
+  
+      let queryParams = `mutation {createTransportation(input: {mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {mode departureTime departureCity arrivalTime arrivalCity legId}}}`
+      console.log(queryParams)
       let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
     
       try {
         let resp = await fetch(url,options)
+        console.log(resp)
         if (!resp.ok) {
           throw new Error('There was an error saving your transportation information')
         }
     
         let data = await resp.json();
-        console.log(data.data.createTransportation.transporation)
-        return data.data.createTransportation.transportation
+        let transportation = data.data.createTransportation.transportation
+        console.log(transportation)
+        return transportation
       
       } catch (error) {
         throw error
