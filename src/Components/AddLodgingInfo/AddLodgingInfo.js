@@ -17,18 +17,31 @@ export default class AddLodgingInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      countryLodge: '',
-      cityLodge: '',
-      lodgeName: '',
-      startLodge: '',
-      endLodge: '',
+      city: '',
+      name: '',
+      arrivalDate: '',
+      departureDate: '',
+      lodging: this.props.navigation.getParam('lodging') || null,
+      legId: this.props.navigation.getParam('legId'),
       userId: this.props.navigation.getParam('userId')
     };
   }
 
+  componentDidMount = () => {
+    if (this.state.lodging) {
+      let { name, arrivalDate, departureDate, city } = this.state.leg
+      this.setState({
+        name,
+        arrivalDate,
+        departureDate,
+        city
+      })
+    }
+  }
+
   handlerFirstInput(arg) {
     this.setState({
-      cityLodge: arg
+      city: arg
     });
     return;
   }
@@ -36,18 +49,18 @@ export default class AddLodgingInfo extends Component {
   checkLodgingParams = () => {
     let { 
       countryLodge, 
-      cityLodge,
-      lodgeName,
-      startLodge,
-      endLodge
+      city,
+      name,
+      arrivalDate,
+      departureDate
     } = this.state;
 
     if (
       countryLodge === '' ||
-      cityLodge === '' ||
-      lodgeName === '' ||
-      startLodge === '' ||
-      endLodge === ''
+      city === '' ||
+      name === '' ||
+      arrivalDate === '' ||
+      departureDate === ''
     ) {
       this.setState({ error: 'Please fill out all fields'})
       return false;
@@ -58,7 +71,6 @@ export default class AddLodgingInfo extends Component {
   }
 
   handleSave = async () => {
-    
     let formIsFilledCorrectly = this.checkLodgingParams();
     if (formIsFilledCorrectly) {
       //fire post call here
@@ -76,18 +88,6 @@ export default class AddLodgingInfo extends Component {
             <View>
               <Text style={styles.title}>Add Lodging</Text>
             </View>
-            <Text style={styles.label}>Country</Text>
-            <View style={styles.form}>
-              <TextInput
-                style={styles.input}
-                placeholder='Enter Country of Stay...'
-                placeholderTextColor='black'
-                maxLength={20}
-                onBlur={Keyboard.dismiss}
-                value={this.state.countryLodge}
-                onChangeText={countryLodge => this.setState({ countryLodge })}
-              />
-            </View>
             <Text style={styles.labelCity}>City</Text>
             <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
             <Text style={styles.label}>Name</Text>
@@ -98,14 +98,14 @@ export default class AddLodgingInfo extends Component {
                 placeholderTextColor='black'
                 maxLength={20}
                 onBlur={Keyboard.dismiss}
-                value={this.state.lodgeName}
-                onChangeText={lodgeName => this.setState({ lodgeName })}
+                value={this.state.name}
+                onChangeText={name => this.setState({ name })}
               />
             </View>
             <Text style={styles.text}>Beginning of Stay</Text>
             <DatePicker
               style={{ width: 370, height: 65 }}
-              date={this.state.startLodge}
+              date={this.state.arrivalDate}
               mode='date'
               placeholder='Start Date'
               placeholderTextColor='white'
@@ -136,13 +136,13 @@ export default class AddLodgingInfo extends Component {
                 }
               }}
               onDateChange={date => {
-                this.setState({ startLodge: date });
+                this.setState({ arrivalDate: date });
               }}
             />
             <Text style={styles.text}>End of Stay</Text>
             <DatePicker
               style={{ width: 370, height: 65 }}
-              date={this.state.endLodge}
+              date={this.state.departureDate}
               mode='date'
               mode='date'
               placeholder='Start Date'
@@ -174,7 +174,7 @@ export default class AddLodgingInfo extends Component {
                 }
               }}
               onDateChange={date => {
-                this.setState({ endLodge: date });
+                this.setState({ departureDate: date });
               }}
             />
             
