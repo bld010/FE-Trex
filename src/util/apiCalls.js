@@ -215,7 +215,7 @@ export const fetchLodging = async legId => {
     }
   }
 
-  let queryParams = `{leg(id: ${legId}) {lodgings {name arrivalDate departureDate city legId}}}`
+  let queryParams = `{leg(id: ${legId}) {lodgings {name arrivalDate departureDate city legId id}}}`
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
   try {
