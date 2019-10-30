@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
-import { markMessageRead, sendWandererMessage  } from '../../util/apiCalls';
+import { markMessageRead, sendWandererMessage, fetchWanderersIncomingNotifications  } from '../../util/apiCalls';
 
 export default class Follower extends Component {
   constructor(props) {
@@ -37,6 +37,8 @@ export default class Follower extends Component {
 
     try {
       let sentMessage = await sendWandererMessage(message)
+      this.setState({ error: '' })
+      this.reQueryAllMessages();
       // Fire a re-render of unread and read messages here and on MyFollowers (and Footer?)
     } catch (error) {
       this.setState({ error: 'There was an error sending your message'})
@@ -47,6 +49,7 @@ export default class Follower extends Component {
   markIncomingMessageAsRead = async (incoming_message_id) => {
     try {
       let updatedMessage = await markMessageRead(incoming_message_id)
+      this.setState({ error: '' })
     } catch (error) {
       this.setState({ error: 'There was an error marking the message as read'})
     }
@@ -110,7 +113,11 @@ export default class Follower extends Component {
         );
     }
       
-      
+  reQueryAllMessages = async () => {
+    let messages = await fetchWanderersIncomingNotifications(this.state.userId);
+    this.setState({ messages });
+    this.filterMessages();
+  }    
       
 
   componentDidMount = () => {
@@ -148,7 +155,9 @@ export default class Follower extends Component {
             </>
           }
           {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity 
+            onPress={this.sendNewMessage}
+            style={styles.button}>
             <Text style={styles.text}>Send Check-In</Text>
           </TouchableOpacity>
         </ScrollView>
