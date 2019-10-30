@@ -17,7 +17,9 @@ export default class Weather extends Component {
   }
   render() {
     return (
-      <Text style={styles.text}>Insert Weather Here</Text>
+      <View style={styles.container}>
+        <Text style={styles.text}>Insert Weather Here</Text>
+      </View>
     )
   }
 }
@@ -33,6 +35,6 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     textAlign: 'center',
     fontSize: 20,
-    width: 200
+    width: 190
   }
 });
