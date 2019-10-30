@@ -4,12 +4,14 @@ import {
   Text, 
   View, 
   ScrollView,
-  TouchableOpacity 
+  TouchableOpacity,
+  Image 
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
 import { fetchFollowers, fetchWanderersIncomingNotifications } from '../../util/apiCalls';
 import { withNavigationFocus } from 'react-navigation';
+import wandererSpinner from '../../../assets/wanderer_spinner.gif';
 
 export class MyFollowers extends Component {
 
@@ -81,6 +83,10 @@ export class MyFollowers extends Component {
           <WandererHeader />
           <ScrollView>
             <Text style={styles.title}>My Followers</Text>
+
+            {this.state.error === '' && this.state.followers.length == 0 &&
+              <Image alt={'Loading...'} style={styles.loading} source={wandererSpinner} />
+            }
             {this.state.followers.length === 0 && <Text style={styles.text}>Loading ...</Text>}
             {this.state.followers.length > 0 && this.state.messages !== null && this.generateFollowersElements()}
             {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
@@ -141,6 +147,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 10,
     fontSize: 20
+  },
+  loading: {
+    width: 100,
+    height: 100,
+    alignSelf: 'center'
   }
 })
 

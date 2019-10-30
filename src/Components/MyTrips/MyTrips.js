@@ -4,12 +4,14 @@ import {
   Text, 
   View, 
   ScrollView,
-  TouchableOpacity 
+  TouchableOpacity,
+  Image 
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
 import { fetchMyTrips } from '../../util/apiCalls';
 import { withNavigationFocus } from 'react-navigation';
+import wandererSpinner from '../../../assets/wanderer_spinner.gif';
 
 export class MyTrips extends Component {
 
@@ -65,6 +67,9 @@ export class MyTrips extends Component {
             {trips.length > 0 && this.generateTripsElements()}
             {error !== '' && <Text style={styles.text}>{error}</Text>}
             {trips.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
+            {error === '' && trips.length == 0 &&
+              <Image alt={'Loading...'} style={styles.loading} source={wandererSpinner} />
+            }
           </View>
           <TouchableOpacity style={styles.addTripButton}>
             <Text style={styles.text} onPress={() => navigate('TripForm', {userId: this.state.userId})}>Add a New Trip</Text>

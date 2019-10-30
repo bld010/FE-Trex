@@ -11,11 +11,13 @@ import {
   Keyboard
 } from "react-native";
 
+import followerSpinner from '../../../assets/follower_spinner.gif';
+
 export default class MessageHistory extends Component {
   constructor() {
     super()
     this.state = {
-
+      error: ''
     }
   }
   render() {
@@ -24,7 +26,11 @@ export default class MessageHistory extends Component {
       <View style={styles.container}>
         <FollowerHeader />
         <ScrollView>
-        <Text>Display Message history with specific follower</Text>
+
+        {this.state.error === '' &&
+        <Image alt={'Loading...'} style={styles.loading} source={followerSpinner} />
+      }
+        <Text>Display Message history with specific wanderer</Text>
         </ScrollView>
         <FollowerFooter navigate={navigate}/>
       </View>
