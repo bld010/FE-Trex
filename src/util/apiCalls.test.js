@@ -1305,7 +1305,112 @@ describe('apiCalls', () => {
       })
     })
   
+    describe('patchTransport', () => {
+  
+      let mockFetch;
+      let url;
+      let options;
+      let mockLegInfo;
+    
+      beforeEach(() => {
+        mockFetch = jest.fn()
+        global.fetch = mockFetch;
+    
+        mockTransportInfo = {
+          mode: "flight",
+          departureTime: "2019-10-15",
+          departureCity: "Denver",
+          arrivalTime: "2021-02-20",
+          arrivalCity: "Rome",
+          legId: "1",
+          transportId: "7"
+      }
+            
+        let queryParams = `mutation {updateTransportation(input: {id: 7, mode: "flight",  departureCity: "Denver",  departureTime: "2019-10-15", arrivalCity: "Rome", arrivalTime: "2021-02-20", legId: 1 }) {transportation {legId}}}`
 
+        url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+        
+        options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        } 
+      })
+    
+      it('should call fetch with the correct url and options', async() => {
+    
+        mockFetch.mockImplementation(() => {
+          return Promise.resolve({
+            ok: true,
+            json: () => { 
+              return (
+                { data: {
+                    updateTransportation: {
+                      transportation: {}
+                    }
+                  }
+                }
+              )}
+            })
+          })
+    
+          await patchTransport(mockTransportInfo)
+    
+          expect(mockFetch).toHaveBeenCalledWith(url, options)
+      })
+    
+      it('should return the updated leg when successful (HAPPY)', async () => {
+    
+        let newMockTransportInfo = mockTransportInfo = {
+          mode: "bus",
+          departureTime: "2019-10-15",
+          departureCity: "Denver",
+          arrivalTime: "2021-02-20",
+          arrivalCity: "Rome",
+          legId: "1",
+          id: "7"
+      }
+    
+        mockFetch.mockImplementation(() => {
+          return Promise.resolve({
+            ok: true,
+            json: () => { 
+              return (
+                { data: {
+                    updateTransportation: {
+                      transportation: newMockTransportInfo
+                    }
+                  }
+                }
+              )}
+            })
+          })
+    
+    
+          await expect(patchTransport(newMockTransportInfo)).resolves.toEqual(newMockTransportInfo)
+      })
+    
+      it('should return an error if the response is not ok (SAD)', async () => {
+    
+        mockFetch.mockImplementation(() => {
+          return Promise.resolve({
+            ok: false
+            })
+          })
+    
+          await expect(patchTransport(mockTransportInfo)).rejects.toEqual(Error('There was an error editing your transport.'))
+      })
+    
+      it('should return an error if the fetch fails (SAD)', async () => {
+        mockFetch.mockImplementation(() => {
+          return Promise.reject(Error('There was an error editing your transport.'))
+          })
+    
+          await expect(patchTransport(mockTransportInfo)).rejects.toEqual(Error('There was an error editing your transport.'))
+      
+      })
+    })
 
 })
 
