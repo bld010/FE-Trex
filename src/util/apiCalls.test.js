@@ -1086,8 +1086,121 @@ describe('apiCalls', () => {
     })
 
   })
-      // describe('sendWandererMessage', () => {
+  
+  describe('sendWandererMessage', () => {
+
+    let mockFetch;
+    let queryParams;
+    let url;
+    let options;
+
+    beforeEach(() => {
+      mockFetch = jest.fn()
+      global.fetch = mockFetch;
+
+
+      queryParams = `mutation {createNotification(input: {senderId: 2, receiverId: 2, message: "Check in with me", latitude: 122, longitude: 122}) {notification {id message latitude longitude senderId receiverId}}}`
+  
+      url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+      
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    })
+
+    it('should call fetch with correct url and options', async () => {
+      let mockMessage = {
+        senderId: 2,
+        receiverId: 2,
+        message: "Check in with me",
+        latitude: 122,
+        longitude: 122
+      }
+      
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+            return ({
+              data: {
+                createNotification: {
+                  notification: mockMessage
+                }
+              }
+            })
+          }
+        })
+      })
+
+      sendWandererMessage(mockMessage)
+      await expect(mockFetch).toHaveBeenCalledWith(url, options)
+    })
+
+    it('should return the sent message when successful (HAPPY)', async () => {
+      let mockMessage = {
+        senderId: 2,
+        receiverId: 2,
+        message: "Check in with me",
+        latitude: 122,
+        longitude: 122
+      }
+      
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+            return ({
+              data: {
+                createNotification: {
+                  notification: mockMessage
+                }
+              }
+            })
+          }
+        })
+      })  
+
+      await expect(sendWandererMessage(mockMessage)).resolves.toEqual(mockMessage)
+    })
+
+    it('should reutrn an error if fetch fails (SAD)', async () => {
+      let mockMessage = {
+        senderId: 2,
+        receiverId: 2,
+        message: "Check in with me",
+        latitude: 122,
+        longitude: 122
+      }
+      
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error sending your message'))
+      })  
+
+      await expect(sendWandererMessage(mockMessage)).rejects.toEqual(Error('There was an error sending your message'))
+    })
+
+    it('should return an error if status is not ok (SAD)', async () => {
+
+      let mockMessage = {
+        senderId: 2,
+        receiverId: 2,
+        message: "Check in with me",
+        latitude: 122,
+        longitude: 122
+      }
+      
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        })
+      })  
+
+      await expect(sendWandererMessage(mockMessage)).rejects.toEqual(Error('There was an error sending your message'))
     
-      // })
+    })
+  })
 
 })

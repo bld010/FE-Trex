@@ -345,7 +345,6 @@ export const sendWandererMessage = async (message_object) => {
     return data.data.createNotification.notification;
 
   } catch (error) {
-    console.log(error)
     throw error
   }
 
