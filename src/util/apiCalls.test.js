@@ -7,7 +7,8 @@ import {
   patchLeg,
   deleteTrip,
   deleteLeg, 
-  fetchFollowers
+  fetchFollowers,
+  fetchWanderersIncomingNotifications
 } from './apiCalls';
 
 describe('apiCalls', () => {
@@ -899,6 +900,99 @@ describe('apiCalls', () => {
       })
 
       await expect(fetchFollowers(1)).rejects.toEqual(Error('There was an error fetching your followers'))
+    })
+  })
+
+  describe('fetchWanderersIncomingNotifications', () => {
+    let mockFetch;
+    let queryParams;
+    let url;
+    let options;
+
+    beforeEach(() => {
+      mockFetch = jest.fn()
+      global.fetch = mockFetch;
+
+      queryParams = `{user(id: 1) {notificationsReceived { unread message senderId }}}`
+
+      url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+      
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      } 
+    })
+
+    it('should call fetch with correct url and options', async () => {
+      
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+            return ({
+              data: {
+                user: {
+                  notificationsReceived: []
+                }
+              }
+            })
+          }
+        })
+      })
+
+      await fetchWanderersIncomingNotifications(1)
+      expect(mockFetch).toHaveBeenCalledWith(url, options)
+    })
+
+    it('should return an array of messages when successful', async () => {
+
+      let mockMessages = [
+        'Hi', 
+        'Hey',
+        'Hope you are ok'
+      ]
+
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+            return ({
+              data: {
+                user: {
+                  notificationsReceived: mockMessages
+                }
+              }
+            })
+          }
+        })
+      })
+
+      await expect(fetchWanderersIncomingNotifications(1)).resolves.toEqual(mockMessages)
+    })
+
+    it('should return an error when fetch fails (SAD)', async () => {
+
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        })
+      })
+
+      await expect(fetchWanderersIncomingNotifications(1)).rejects.toEqual(Error('There was an error fetching your messages'))
+    })
+
+    it('should return an error when status is not ok (SAD)', async () => {
+
+
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error fetching your messages'))
+      })
+
+      await expect(fetchWanderersIncomingNotifications(1)).rejects.toEqual(Error('There was an error fetching your messages'))
     })
   })
 

@@ -286,3 +286,9 @@ export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
 }
 
 // export const markMessageRead = async (message_id) => {}
+
+// export const sendWandererMessage = async () => {}
+
+// export const sendFollowerMessage = async () => {}
+
+// export const fetchFollowersIncomingNotivications = async () => {}
