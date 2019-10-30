@@ -140,8 +140,8 @@ export default class AddTransportInfo extends Component {
     }
   }
 
+  
   removeTransportation = async () => {
-    console.log(' int he remove', this.state.transportId)
     try {
       let deletedTransport = await deleteTransport(this.state.transportId);
       this.props.navigation.navigate('Transportation')

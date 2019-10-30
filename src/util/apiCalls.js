@@ -350,7 +350,6 @@ export const postNewTransport = async (transportationInfo) => {
 
 
 export const deleteTransport = async (transportationId) => {
-console.log('in the api calls delete', transportationId)
   let options = {
     method: 'POST',
     headers: {
@@ -359,8 +358,6 @@ console.log('in the api calls delete', transportationId)
   }
 
   let queryParams = `mutation {removeTransportation(input: {id: ${transportationId}}) {transportation {legId}}}`
-
-  console.log('queryPrams', queryParams)
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
