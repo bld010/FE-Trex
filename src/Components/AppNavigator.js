@@ -6,7 +6,7 @@ import MyTrips from './MyTrips/MyTrips';
 import TripForm from './TripForm/TripForm';
 import Trip from './Trip/Trip';
 import LegForm from './LegForm/LegForm';
-import { MyFollowers } from './MyFollowers/MyFollowers';
+import MyFollowers from './MyFollowers/MyFollowers';
 import FollowerForm from './FollowerForm/FollowerForm';
 import { SafetyInfo } from './SafetyInfo/SafetyInfo';
 import AddLodgingInfo from './AddLodgingInfo/AddLodgingInfo';
@@ -18,7 +18,11 @@ import MyWandererTrips from './MyWanderersTrips/MyWanderersTrips';
 import WandererDashboard from './WandererDashboard/WandererDashboard';
 import MyWanderer from './MyWanderer/MyWanderer';
 import FollowerMessageHistory from './FollowerMessageHistory/FollowerMessageHistory';
+<<<<<<< HEAD
 import Lodging from './Lodging/Lodging'
+=======
+import Follower from '../Components/Follower/Follower';
+>>>>>>> master
 
 const RootStack = createStackNavigator({
   Home: {
@@ -164,7 +168,15 @@ const RootStack = createStackNavigator({
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }
-  }
+  },
+  Follower: {
+    screen: Follower,
+    navigationOptions: {
+      headerBackTitle: 'Follower',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'}
+    }
+  },
 });
 
 export default createAppContainer(RootStack);
