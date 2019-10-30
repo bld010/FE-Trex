@@ -13,7 +13,7 @@ import {
   Keyboard,
   TextInput
 } from 'react-native';
-import { postNewTransport, deleteTranport, editTransportation } from '../../util/apiCalls'
+import { postNewTransport, deleteTranport, patchTransport } from '../../util/apiCalls'
 
 export default class AddTransportInfo extends Component {
   constructor(props) {
@@ -76,7 +76,7 @@ export default class AddTransportInfo extends Component {
     if (!this.props.navigation.getParam('transportId')) {
     let formIsFilledCorrectly = this.checkTransportParams();
     if (formIsFilledCorrectly) {
-      updatedTransportId = await this.createNewTransport()
+      updatedTransportId = await this.createNewTransportation()
       this.props.navigation.navigate('Transportation')
       }
     } else {
@@ -85,7 +85,7 @@ export default class AddTransportInfo extends Component {
     }
   }
 
-  createNewTransport = async () => {
+  createNewTransportation = async () => {
     let { mode, arrivalTime, departureTime, arrivalCity, departureCity, legId} = this.state
     let newTransportInfo = {
       mode,
@@ -101,6 +101,27 @@ export default class AddTransportInfo extends Component {
       return updatedTransportId
     } catch (error) {
       this.setState({error: 'There was an error creating your transporation'})
+    }
+  }
+
+  editTransportation = async () => {
+    let { mode, arrivalTime, departureTime, arrivalCity, departureCity, legId, transportId } = this.state;
+
+    let editedTransportInfo = { 
+      mode,
+      arrivalTime,
+      departureTime,
+      arrivalCity,
+      departureCity,
+      legId,
+      transportId
+    }
+    try {
+      let editedTransportId = await patchTransport(editedTransportInfo)
+      return editedTransportId
+    }
+    catch (error) {
+      this.setState({error: 'There was an error editing your transportation'})
     }
   }
 
