@@ -29,7 +29,7 @@ export default class Follower extends Component {
 
     let message = {
       senderId: this.state.userId,
-      receiverId: this.state.follower.id,
+      receiverId: parseInt(this.state.follower.id),
       message: `I\'m checking in.`,
       latitude: this.state.latitude,
       longitude: this.state.longitude

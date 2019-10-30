@@ -8,21 +8,53 @@ import {
 } from "react-native";
 import FollowerHeader from '../FollowerHeader/FollowerHeader';
 import FollowerFooter from '../FollowerFooter/FollowerFooter';
+import MessageMap from '../MessageMap/MessageMap';
 
 export default class MyWanderer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      wanderer: this.props.navigation.getParam('wanderer'),
+      userId: this.props.navigation.getParam('userId'),
+      messages: this.props.navigation.getParam('messages') || []
     }
   }
+
+  generateUnreadMessagesElements = () => {
+
+    let unreadMessages = this.state.messages.filter(message => message.unread === true)
+  
+    // let unreadMessagesWithCoordinates = this.state.messages.filter(message => message.longitude !== 0 )
+
+    let unreadMessagesElements = unreadMessages.map((message, index) => {
+      if (message.longitude) {
+        console.log(message)
+        return(
+          <View key={this.state.userId + index} style={styles.sideBySide}>
+            <Text style={styles.message}>{message.message}</Text>
+            <MessageMap longitude={message.longitude} latitude={message.latitude} />
+          </View>
+        )
+      }
+    })
+
+    return unreadMessagesElements;
+  }
+
   render() {
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <FollowerHeader />
         <ScrollView>
-          <Text style={styles.text}>My Wanderer</Text>
+          <Text style={styles.text}>{this.state.wanderer.name}</Text>
+
+          
+          <Text style={styles.text}>Unread Messages</Text>
+          {this.generateUnreadMessagesElements()}
+
+          {/* conditionally render unread messages here */}
+
           <View style={styles.sideBySideContainer}>
           <TouchableOpacity style={styles.sideBySideButton}>
             <Text style={styles.buttonText} onPress={() => navigate('DefaultFollowerMessages')}>Message</Text>
@@ -35,7 +67,7 @@ export default class MyWanderer extends Component {
             <Text style={styles.buttonText}>Message History</Text>
           </TouchableOpacity>
         </ScrollView>
-        <FollowerFooter navigate={navigate}/>
+        <FollowerFooter navigate={navigate} userId={this.state.userId} />
       </View>
     )
   }

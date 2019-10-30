@@ -120,7 +120,7 @@ const RootStack = createStackNavigator({
   FollowerDashboard: {
     screen: FollowerDashboard,
     navigationOptions: {
-      headerBackTitle: 'Follower Dashboard',
+      headerBackTitle: 'Dashboard',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }
