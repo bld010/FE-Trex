@@ -295,7 +295,7 @@ export const markMessageRead = async (message_id) => {
   }
 
   let queryParams = `mutation {updateNotification(input: {id: ${message_id}, unread: false}) {notification {id message unread}}}`
-  console.log(queryParams)
+
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
   try {
@@ -306,7 +306,7 @@ export const markMessageRead = async (message_id) => {
     }
 
     let data = await resp.json();
-    console.log('incoming message as read: ', data)
+
     return data.data.updateNotification.notification;
 
   } catch (error) {

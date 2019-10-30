@@ -8,7 +8,9 @@ import {
   deleteTrip,
   deleteLeg, 
   fetchFollowers,
-  fetchWanderersIncomingNotifications
+  fetchWanderersIncomingNotifications,
+  markMessageRead,
+  sendWandererMessage
 } from './apiCalls';
 
 describe('apiCalls', () => {
@@ -913,7 +915,7 @@ describe('apiCalls', () => {
       mockFetch = jest.fn()
       global.fetch = mockFetch;
 
-      queryParams = `{user(id: 1) {notificationsReceived { unread message senderId }}}`
+      queryParams = `{user(id: 1) {notificationsReceived { unread message senderId id}}}`
 
       url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
       
@@ -996,11 +998,96 @@ describe('apiCalls', () => {
     })
   })
 
+  describe('markMessageRead', () => {
+    let mockFetch;
+    let queryParams;
+    let url;
+    let options;
+
+    beforeEach(() => {
+      mockFetch = jest.fn()
+      global.fetch = mockFetch;
+
+      queryParams = `mutation {updateNotification(input: {id: 4, unread: false}) {notification {id message unread}}}`
+
+  
+      url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+      
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    })
+    
+    it('should call fetch with correct url and options', async () => {
+
+      let mockNotification = { id: 4, message: 'Hello' }
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+           return({
+            data: {
+              updateNotification: {
+                notification: mockNotification
+              }
+            }
+          })
+          }
+        })
+      })
+
+      await markMessageRead(4)
+      expect(mockFetch).toHaveBeenCalledWith(url, options)
+    })
+   
+    it('should return the edited message when successful (HAPPY)', async () => {
+
+      let mockNotification = { id: 4, message: 'Hello' }
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+           return({
+            data: {
+              updateNotification: {
+                notification: mockNotification
+              }
+            }
+          })
+          }
+        })
+      })
+
+      await expect(markMessageRead(4)).resolves.toEqual(mockNotification)
+    })
+
+    it('should return an error if fetch fails (SAD)', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error marking your message as read'))
+      })
+
+      await expect(markMessageRead(4)).rejects.toEqual(Error('There was an error marking your message as read'))
+    })
+
+    it('should return an error if status is not ok (SAD)', async () => {
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        })
+      })
+
+      await expect(markMessageRead(4)).rejects.toEqual(Error('There was an error marking your message as read'))
+    })
+
+  })
+      // describe('sendWandererMessage', () => {
+    
+      // })
+
 })
-
-
-
-
-
-
-
