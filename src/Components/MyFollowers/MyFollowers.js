@@ -33,6 +33,8 @@ export class MyFollowers extends Component {
           return message.unread === true
         })
 
+        console.log('incoming messages', incomingMessagesFromFollower)
+
         let { navigate } = this.props.navigation;
         return (
           <TouchableOpacity 
@@ -60,7 +62,6 @@ export class MyFollowers extends Component {
       try {
         let followers = await fetchFollowers(this.state.userId)
         let messages = await fetchWanderersIncomingNotifications(this.state.userId)
-        console.log('messages', messages)
         this.setState({ followers, messages })
       } catch (error) {
         this.setState({ error: 'There was an error fetching your followers'})
