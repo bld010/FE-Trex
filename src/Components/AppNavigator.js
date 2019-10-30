@@ -19,6 +19,7 @@ import WandererDashboard from './WandererDashboard/WandererDashboard';
 import MyWanderer from './MyWanderer/MyWanderer';
 import FollowerMessageHistory from './FollowerMessageHistory/FollowerMessageHistory';
 import Follower from '../Components/Follower/Follower';
+import Transportation from './Transportation/Transportation'
 
 const RootStack = createStackNavigator({
   Home: {
@@ -104,7 +105,7 @@ const RootStack = createStackNavigator({
   AddTransportInfo: {
     screen: AddTransportInfo,
     navigationOptions: {
-      headerBackTitle: 'Add Transportation',
+      headerBackTitle: 'Add Transport',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }
@@ -141,6 +142,14 @@ const RootStack = createStackNavigator({
       headerBackTitleStyle: { color: 'white'} 
     }
   },
+  Transportation: {
+    screen: Transportation,
+    navigationOptions: {
+      headerBackTitle: 'Transportation',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
   MyWanderer: {
     screen: MyWanderer,
     navigationOptions: {
@@ -166,5 +175,6 @@ const RootStack = createStackNavigator({
     }
   },
 });
+
 
 export default createAppContainer(RootStack);

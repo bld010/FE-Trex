@@ -13,29 +13,48 @@ import {
   Keyboard,
   TextInput
 } from 'react-native';
+import { postNewTransport, deleteTransport, patchTransport } from '../../util/apiCalls'
 
 export default class AddTransportInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startTrans: '',
-      endTrans: '',
-      dateTrans: '',
-      error: '',
+      mode: '',
+      arrivalTime: '',
+      departureTime: '',
+      arrivalCity: '',
+      departureCity: '',
+      legId: this.props.navigation.getParam('legId'),
+      leg: this.props.navigation.getParam('leg'),
+      transportId: this.props.navigation.getParam('transportId') || null,
+      transport: this.props.navigation.getParam('transport'),
       userId: this.props.navigation.getParam('userId')
     };
   }
 
+  componentDidMount = () => {
+    if (this.state.transport) { 
+      let  {mode, arrivalTime, departureTime, arrivalCity, departureCity,} = this.state.transport
+      this.setState({
+        mode,
+        arrivalTime,
+        departureTime,
+        arrivalCity,
+        departureCity,
+      })
+    }
+  }
+
   handlerFirstInput(arg) {
     this.setState({
-      startTrans: arg
+      departureCity: arg
     });
     return;
   }
 
   handlerSecondInput(arg) {
     this.setState({
-      endTrans: arg
+      arrivalCity: arg
     });
     return;
     }
@@ -43,15 +62,19 @@ export default class AddTransportInfo extends Component {
 
   checkTransportParams = () => {
     let { 
-      startTrans,
-      endTrans,
-      dateTrans
+      mode,
+      departureCity,
+      arrivalCity,
+      departureTime,
+      arrivalTime
     } = this.state;
 
     if (
-      startTrans === '' ||
-      endTrans === '' ||
-      dateTrans === '' 
+      mode === '' || 
+      departureCity === '' ||
+      arrivalCity === '' ||
+      departureTime === '' ||
+      arrivalTime === ''
     ) {
       this.setState({ error: 'Please fill out all fields'})
       return false;
@@ -61,13 +84,76 @@ export default class AddTransportInfo extends Component {
     }
   }
 
-  handleSave = async () => {
+  handleSave = async () => {  
+
+    let updatedLegId
+
+    if (!this.props.navigation.getParam('transportId')) {
+      let formIsFilledCorrectly = this.checkTransportParams();
+      if (formIsFilledCorrectly) {
+        updatedLegId = await this.createNewTransportation()
+        this.props.navigation.navigate('Transportation')
     
-    let formIsFilledCorrectly = this.checkTransportParams();
-    if (formIsFilledCorrectly) {
-      //fire post call here
+      }
+    } else {
+      updatedLegId = await this.editTransportation()
+      this.props.navigation.navigate('Transportation')
     }
   }
+
+  createNewTransportation = async () => {
+    let { mode, arrivalTime, departureTime, arrivalCity, departureCity, legId} = this.state
+    let newTransportInfo = {
+      mode,
+      arrivalTime,
+      departureTime,
+      arrivalCity,
+      departureCity,
+      legId
+    }
+
+    try {
+      let updatedTransportId = await postNewTransport(newTransportInfo)
+      return updatedTransportId
+    } 
+    catch (error) {
+      this.setState({error: 'There was an error creating your transporation'})
+    }
+  }
+
+  editTransportation = async () => {
+    let { mode, arrivalTime, departureTime, arrivalCity, departureCity, legId, transportId } = this.state;
+
+    let editedTransportInfo = { 
+      mode,
+      arrivalTime,
+      departureTime,
+      arrivalCity,
+      departureCity,
+      legId,
+      transportId
+    }
+
+    try {
+      let editedTransportId = await patchTransport(editedTransportInfo)
+      return editedTransportId
+    }
+    catch (error) {
+      this.setState({error: 'There was an error editing your transportation'})
+    }
+  }
+
+
+  removeTransportation = async () => {
+    try {
+      let deletedTransport = await deleteTransport(this.state.transportId);
+      this.props.navigation.navigate('Transportation')
+    } catch (error) {
+      this.setState({ error: 'There was an error deleting this transportation'})
+    }
+  }
+
+
 
   render() {
     const { navigate } = this.props.navigation;
@@ -77,17 +163,30 @@ export default class AddTransportInfo extends Component {
         <ScrollView>
           <View>
             <Text style={styles.title}>Add Transportation</Text>
-          </View>
+            </View>
+            <View>
+            <Text style={styles.label}>Mode of Travel</Text>
+            </View>
+              <TextInput
+              style={styles.inputMode}
+              placeholder={
+              this.state.mode || 'Enter Mode of Travel...'
+              }
+              placeholderTextColor='black'
+              onChangeText={mode => this.setState({ mode })}
+              value={this.state.mode}
+              onBlur={Keyboard.dismiss}
+            />
             <Text style={styles.label}>Start Destination</Text>
             <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
             <Text style={styles.label}>End Destination</Text>
             <MapInputSecond handlerSecondInput={this.handlerSecondInput.bind(this)} />
-            <Text style={styles.text}>Travel Date</Text>
+            <Text style={styles.text}>Travel Times</Text>
             <DatePicker
               style={{ width: 370, height: 65 }}
-              date={this.state.dateTrans}
+              date={this.state.departureTime}
               mode='date'
-              placeholder='Select End Date'
+              placeholder='Select Departure Date'
               placeholderTextColor='white'
               format='MM-DD-YYYY'
               confirmBtnText='Confirm'
@@ -117,7 +216,44 @@ export default class AddTransportInfo extends Component {
                 }
               }}
               onDateChange={date => {
-                this.setState({ dateTrans: date });
+                this.setState({ departureTime: date });
+              }}
+            />
+              <DatePicker
+              style={{ width: 370, height: 65 }}
+              date={this.state.arrivalTime}
+              mode='date'
+              placeholder='Select Arrival Date'
+              placeholderTextColor='white'
+              format='MM-DD-YYYY'
+              confirmBtnText='Confirm'
+              cancelBtnText='Cancel'
+              customStyles={{
+                dateIcon: {
+                  left: 0,
+                  top: 4
+                },
+                dateInput: {
+                  marginLeft: 15,
+                  color: "black",
+                  backgroundColor: 'white',
+                  height: 60,
+                  borderRadius: 8,
+                  borderWidth: 1,
+                  borderColor: "white",
+                  marginVertical: -20
+                },
+                dateText: {
+                  fontSize: 22,
+                  color: "black",
+                },
+                placeholderText: {
+                  fontSize: 22,
+                  color: "black"
+                }
+              }}
+              onDateChange={date => {
+                this.setState({ arrivalTime: date });
               }}
             />
 
@@ -128,6 +264,12 @@ export default class AddTransportInfo extends Component {
             <TouchableOpacity onPress={this.handleSave}>
               <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
+
+            {this.props.navigation.getParam('transport') && 
+          <TouchableOpacity onPress={this.removeTransportation}>
+            <Text style={[styles.button, styles.deleteButton]}>Delete</Text>
+          </TouchableOpacity>
+          }
         </ScrollView>
         <WandererFooter navigate={navigate} userId={this.state.userId} />
       </View>
@@ -144,6 +286,17 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: 15
+  },
+  buttonBackground: {
+    backgroundColor: "#000000",
+  },
+  inputMode: {
+    backgroundColor: 'white',
+    color: 'black',
+    fontSize: 22,
+    flex: 1,
+    alignItems: 'center',
+    marginLeft: 10
   },
   title: {
     textAlign: 'center',
@@ -213,5 +366,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     marginVertical: 15
-  }
+  },
+    deleteButton: {
+      backgroundColor: 'red'
+  },
 });
+
