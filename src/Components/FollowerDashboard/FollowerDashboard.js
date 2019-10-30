@@ -11,6 +11,7 @@ import {
   Keyboard,
   Image
 } from "react-native";
+import { withNavigationFocus } from 'react-navigation';
 
 import followerSpinner from '../../../assets/follower_spinner.gif';
 import { 
@@ -18,7 +19,7 @@ import {
   fetchWanderersIncomingNotifications 
 } from '../../util/apiCalls.js';
 
-export default class FollowerDashboard extends Component {
+export class FollowerDashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -41,6 +42,12 @@ export default class FollowerDashboard extends Component {
       this.setState({ error: 'There was an error loading your wanderers'})
     }
   } 
+
+  componentDidUpdate = async (prevProps) => {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this.componentDidMount();
+    }
+  }
 
   generateWanderersElements = () => {
     let wanderersElements = this.state.wanderers.map(wanderer => {
@@ -146,3 +153,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   }
 });
+
+export default withNavigationFocus(FollowerDashboard)

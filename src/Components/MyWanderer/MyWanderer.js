@@ -9,9 +9,7 @@ import {
 import FollowerHeader from '../FollowerHeader/FollowerHeader';
 import FollowerFooter from '../FollowerFooter/FollowerFooter';
 import MessageMap from '../MessageMap/MessageMap';
-
-// add in withNavigationFocus to use componentDidUpdate to fire markMessageRead 
-// calls for each unread wanderer message
+import { fetchWanderersIncomingNotifications, markMessageRead } from '../../util/apiCalls';
 
 export default class MyWanderer extends Component {
   constructor(props) {
@@ -23,12 +21,32 @@ export default class MyWanderer extends Component {
     }
   }
 
+  markMessageAsRead = async (message_id) => {
+    try {
+      let updatedMessage = await markMessageRead(message_id)
+      this.setState({ error: '' });
+      this.reQueryMessages();
+    } catch (error) {
+      this.setState({ error: 'There was an error marking the message as read'})
+    }
+  }
+
+  reQueryMessages = async () => {
+    try {
+      let messages = await fetchWanderersIncomingNotifications(this.state.userId);
+      this.setState({ messages });
+    } catch (error) {
+      this.setState({ error: 'There was an error updating your messages'})
+    }
+    
+  }   
+
   generateUnreadMessagesElements = () => {
 
     let unreadMessages = this.state.messages.filter(message => message.unread === true)
   
     //if the messages have coordinates, they are from a user acting as a Wanderer
-    let unreadMessagesWithCoordinates = this.state.messages.filter(message => message.longitude )
+    let unreadMessagesWithCoordinates = unreadMessages.filter(message => message.longitude )
 
     let unreadMessagesElements = unreadMessagesWithCoordinates.map((message, index) => {
       if (message.longitude) {
@@ -43,8 +61,7 @@ export default class MyWanderer extends Component {
               wandererName={this.state.wanderer.name} 
               createdAt={message.createdAt}/>
               <TouchableOpacity 
-                onPress={() => {}}
-                // fire mark as read call
+                onPress={() => this.markMessageAsRead(message.id)}
                 style={styles.button}>
                 <Text style={styles.text}>Mark as Read</Text>
               </TouchableOpacity>
