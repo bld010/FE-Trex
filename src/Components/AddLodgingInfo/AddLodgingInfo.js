@@ -26,8 +26,10 @@ export default class AddLodgingInfo extends Component {
       name: "",
       arrivalDate: "",
       departureDate: "",
-      lodging: this.props.navigation.getParam("lodging") || null,
-      legId: this.props.navigation.getParam("legId"),
+      legId: this.props.navigation.getParam('legId'),
+      leg: this.props.navigation.getParam('leg'),
+      lodgingId: this.props.navigation.getParam('lodgingId') || null,
+      lodging: this.props.navigation.getParam('lodging'),
       userId: this.props.navigation.getParam("userId")
     };
   }
@@ -71,15 +73,15 @@ export default class AddLodgingInfo extends Component {
   handleSave = async () => {
     let updatedLegId;
 
-    if (!this.props.navigation.getParam("lodging")) {
+    if (!this.props.navigation.getParam("lodgingId")) {
       let formIsFilledCorrectly = this.checkLodgingParams();
       if (formIsFilledCorrectly) {
         updatedLegId = await this.createNewLodging();
-        this.props.navigation.navigate("Leg", { legId: updatedLegId });
+        this.props.navigation.navigate('Lodging');
       }
     } else {
       updatedLegId = await this.editLodging();
-      this.props.navigation.navigate('Leg', {legId: updatedLegId})
+      this.props.navigation.navigate('Lodging')
     }
   };
 

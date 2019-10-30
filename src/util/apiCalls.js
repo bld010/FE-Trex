@@ -233,7 +233,7 @@ export const fetchLodging = async legId => {
   }
 }
 
-export const postLodging = async lodgingInfo => {
+export const postNewLodging = async lodgingInfo => {
 
   let options = {
     method: 'POST',
@@ -286,12 +286,12 @@ export const patchLodging = async lodgingInfo => {
     }
   }
 
-  let { id, legId, name, arrivalDate, departureDate, city } = lodgingInfo;
+  let { lodgingId, legId, name, arrivalDate, departureDate, city } = lodgingInfo;
 
   let queryParams = `mutation {
     updateLodging(
       input: {
-        id: ${id},
+        id: ${lodgingId},
         name: "${name}",
         arrivalDate: "${arrivalDate}",
         departureDate: "${departureDate}",
@@ -320,7 +320,7 @@ export const patchLodging = async lodgingInfo => {
   }
 }
 
-export const deleteLodging = async id => {
+export const deleteLodging = async lodgingId => {
 
   let options = {
     method: 'POST',
@@ -332,7 +332,7 @@ export const deleteLodging = async id => {
   let queryParams = `mutation {
     removeLodging(
       input: {
-        id: ${id}
+        id: ${lodgingId}
       })
     {
       lodging {
