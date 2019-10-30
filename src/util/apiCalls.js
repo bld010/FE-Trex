@@ -320,7 +320,43 @@ export const patchLodging = async lodgingInfo => {
   }
 }
 
+export const deleteLodging = async id => {
 
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `mutation {
+    removeLodging(
+      input: {
+        id: ${id}
+      })
+    {
+      lodging {
+        legId
+      }
+    }
+  }`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+
+    if (!resp.ok) {
+      throw new Error('There was an error deleting your lodging.')
+    }
+
+    let data = await resp.json();
+    return data.data.removeLodging.lodging
+
+  } catch (error) {
+    throw error
+  }
+}
 
 export const fetchFollowers = async wanderer_id => {
   let options = {
