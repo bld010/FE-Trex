@@ -130,10 +130,9 @@ export default class AddTransportInfo extends Component {
       transportId
     }
 
-    console.log('edit click editedTransportInfo', editedTransportInfo)
     try {
       let editedTransportId = await patchTransport(editedTransportInfo)
-      return editedTransportId
+      this.props.navigation.navigate('Transportation')
     }
     catch (error) {
       this.setState({error: 'There was an error editing your transportation'})

@@ -8,7 +8,11 @@ import {
   deleteTrip,
   deleteLeg, 
   fetchFollowers,
-  fetchWanderersIncomingNotifications
+  fetchWanderersIncomingNotifications,
+  fetchTransport,
+  postNewTransport,
+  deleteTransport,
+  patchTransport
 } from './apiCalls';
 
 describe('apiCalls', () => {

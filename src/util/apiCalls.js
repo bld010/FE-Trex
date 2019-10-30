@@ -326,7 +326,7 @@ export const postNewTransport = async (transportationInfo) => {
 
   let { legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
   
-  let queryParams = `mutation {createTransportation(input: {mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {id mode departureCity departureTime arrivalTime arrivalCity legId}}}`
+  let queryParams = `mutation {createTransportation(input: {mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {legId}}}`
  
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
     
@@ -379,7 +379,6 @@ export const deleteTransport = async (transportationId) => {
 
 
 export const patchTransport = async (transportationInfo) => {
-  console.log('in the patch', transportationInfo)
 
   let options = {
     method: 'POST',
@@ -390,8 +389,7 @@ export const patchTransport = async (transportationInfo) => {
 
   let { transportId, legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
   
-  let queryParams = `mutation {updateTransportation(input: {id: ${transportId}, mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {id mode departureCity departureTime arrivalCity arrivalTime legId}}}`
-  console.log('queryParams', queryParams)
+  let queryParams = `mutation {updateTransportation(input: {id: ${transportId}, mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {legId}}}`
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
   try {
