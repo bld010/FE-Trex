@@ -37,6 +37,7 @@ export default class Follower extends Component {
 
     try {
       let sentMessage = await sendWandererMessage(message)
+      // Fire a re-render of unread and read messages here and on MyFollowers (and Footer?)
     } catch (error) {
       this.setState({ error: 'There was an error sending your message'})
     }
@@ -53,15 +54,15 @@ export default class Follower extends Component {
   }
 
   handleReply = async (incoming_message_id) => {
-    // this.markIncomingMessageAsRead(incoming_message_id)
-
-    this.sendNewMessage()
+    this.markIncomingMessageAsRead(incoming_message_id)
+    // this.sendNewMessage()
   }
 
   generateUnreadMessagesElements = () => {
     
 
     let unreadMessagesElements = this.state.unreadMessages.map((message, index) => {
+      console.log(message)
       return(
         <View key={this.state.userId + index} style={styles.sideBySide}>
           <Text style={styles.message}>{message.message}</Text>
