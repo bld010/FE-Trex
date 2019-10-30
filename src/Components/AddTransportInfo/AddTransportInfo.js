@@ -83,18 +83,20 @@ export default class AddTransportInfo extends Component {
     }
   }
 
-  handleSave = async () => {    
-    let updatedTransportId
+  handleSave = async () => {  
+
+    let updatedLegId
 
     if (!this.props.navigation.getParam('transportId')) {
     let formIsFilledCorrectly = this.checkTransportParams();
     if (formIsFilledCorrectly) {
-      updatedTransportId = await this.createNewTransportation()
-      this.props.navigation.navigate('Transportation')
+      updatedLegId = await this.createNewTransportation()
+      this.props.navigation.navigate('Transportation', {legId: updatedLegId})
+
       }
     } else {
-      updatedTransportId = await this.editTransportation()
-      this.props.navigation.navigate('Transporation')
+      updatedLegId = await this.editTransportation()
+      this.props.navigation.navigate('Transporation', {legId: updatedLegId})
     }
   }
 
@@ -132,7 +134,7 @@ export default class AddTransportInfo extends Component {
 
     try {
       let editedTransportId = await patchTransport(editedTransportInfo)
-      this.props.navigation.navigate('Transportation')
+      return editedTransportId
     }
     catch (error) {
       this.setState({error: 'There was an error editing your transportation'})
