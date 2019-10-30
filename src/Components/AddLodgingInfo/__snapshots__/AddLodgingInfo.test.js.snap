@@ -20,20 +20,7 @@ exports[`AddLodgingInfo should match the snapshot when loading 1`] = `
         }
       }
     >
-      <View>
-        <Text
-          style={
-            Object {
-              "color": "white",
-              "fontSize": 30,
-              "paddingVertical": 25,
-              "textAlign": "center",
-            }
-          }
-        >
-          Add Lodging
-        </Text>
-      </View>
+      <View />
       <Text
         style={
           Object {
