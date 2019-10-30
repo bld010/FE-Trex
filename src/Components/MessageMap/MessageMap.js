@@ -18,6 +18,8 @@ export default class MessageMap extends Component {
     }
   }
 
+  
+
   render = () => {
     return (
       <MapView 
@@ -33,8 +35,8 @@ export default class MessageMap extends Component {
         <MapView.Marker
             coordinate={{latitude: this.state.latitude,
             longitude: this.state.longitude}}
-            title={"Wanderer Name"}
-            description={"Wanderer Location"}
+            title={this.props.wandererName}
+            description={this.props.createdAt}
          />
       </MapView>
 
@@ -52,5 +54,9 @@ const styles = StyleSheet.create({
   mapStyle: {
     width: 300,
     height: 300,
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 8
   }
 });

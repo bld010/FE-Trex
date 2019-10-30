@@ -10,6 +10,9 @@ import FollowerHeader from '../FollowerHeader/FollowerHeader';
 import FollowerFooter from '../FollowerFooter/FollowerFooter';
 import MessageMap from '../MessageMap/MessageMap';
 
+// add in withNavigationFocus to use componentDidUpdate to fire markMessageRead 
+// calls for each unread wanderer message
+
 export default class MyWanderer extends Component {
   constructor(props) {
     super(props)
@@ -24,15 +27,27 @@ export default class MyWanderer extends Component {
 
     let unreadMessages = this.state.messages.filter(message => message.unread === true)
   
-    // let unreadMessagesWithCoordinates = this.state.messages.filter(message => message.longitude !== 0 )
+    //if the messages have coordinates, they are from a user acting as a Wanderer
+    let unreadMessagesWithCoordinates = this.state.messages.filter(message => message.longitude )
 
-    let unreadMessagesElements = unreadMessages.map((message, index) => {
+    let unreadMessagesElements = unreadMessagesWithCoordinates.map((message, index) => {
       if (message.longitude) {
-        console.log(message)
+
         return(
-          <View key={this.state.userId + index} style={styles.sideBySide}>
+          <View key={this.state.userId + index} style={styles.messageContainer}>
+            <Text sytle={styles.date}>{message.createdAt}</Text>
             <Text style={styles.message}>{message.message}</Text>
-            <MessageMap longitude={message.longitude} latitude={message.latitude} />
+            <MessageMap 
+              longitude={message.longitude} 
+              latitude={message.latitude} 
+              wandererName={this.state.wanderer.name} 
+              createdAt={message.createdAt}/>
+              <TouchableOpacity 
+                onPress={() => {}}
+                // fire mark as read call
+                style={styles.button}>
+                <Text style={styles.text}>Mark as Read</Text>
+              </TouchableOpacity>
           </View>
         )
       }
@@ -41,19 +56,24 @@ export default class MyWanderer extends Component {
     return unreadMessagesElements;
   }
 
+
+
   render() {
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <FollowerHeader />
         <ScrollView>
-          <Text style={styles.text}>{this.state.wanderer.name}</Text>
+          <Text style={styles.headerText}>{this.state.wanderer.name}</Text>
 
           
           <Text style={styles.text}>Unread Messages</Text>
+
+
           {this.generateUnreadMessagesElements()}
 
-          {/* conditionally render unread messages here */}
+
+          {/* fire update of list on FollowerDashboard? */}
 
           <View style={styles.sideBySideContainer}>
           <TouchableOpacity style={styles.sideBySideButton}>
@@ -63,7 +83,7 @@ export default class MyWanderer extends Component {
             <Text style={styles.buttonText} onPress={() => navigate('MyWandererTrips')}>Trips</Text>
           </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.button} onPress={() => navigate('FollowerMessageHistory')}>
+          <TouchableOpacity style={styles.messageHistoryButton} onPress={() => navigate('FollowerMessageHistory')}>
             <Text style={styles.buttonText}>Message History</Text>
           </TouchableOpacity>
         </ScrollView>
@@ -87,11 +107,11 @@ const styles = StyleSheet.create({
     paddingVertical: 25
   },
   text: {
-    marginLeft: 20,
     fontSize: 20,
-    color: "black",
-    paddingVertical: 15,
-    textAlign: 'center'
+    color: "white",
+    padding: 10,
+    textAlign: 'center',
+    backgroundColor: '#84183B',
   },
   sideBySideContainer: {
     flex: 1,
@@ -127,6 +147,20 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     width: "auto",
     height: 60,
+    marginTop: 20,
+    fontSize: 30,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#84183B"
+  },
+  messageHistoryButton: {
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    width: "auto",
+    height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
@@ -146,4 +180,35 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingVertical: 10
   },
+  messageContainer: {
+    display: 'flex',
+    flex: 1,
+    width: 400,
+    height: 'auto',
+    marginVertical: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#84183B',
+    borderRadius: 8,
+    padding: 20,
+    alignSelf: 'center'
+  },
+  message: {
+    textAlign: 'left',
+    fontSize: 20,
+    margin: 10
+  },
+  date: {
+    fontSize: 10,
+    color: 'grey',
+    textAlign: 'right'
+  },
+  headerText: {
+    fontSize: 24,
+    color: '#84183b',
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    margin: 20
+  }
 });

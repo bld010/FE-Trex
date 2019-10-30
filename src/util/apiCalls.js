@@ -242,12 +242,11 @@ export const fetchFollowers = async (wanderer_id) => {
 
   try {
     let resp = await fetch(url, options);
-    
     if (!resp.ok) {
       throw new Error('There was an error fetching your followers')
     }
     let data = await resp.json();
-
+ 
     return data.data.user.friends;
 
   } catch (error) {
@@ -264,7 +263,7 @@ export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
     }
   }
 
-  let queryParams = `{user(id: ${wanderer_id}) {notificationsReceived { unread message senderId id latitude longitude}}}`
+  let queryParams = `{user(id: ${wanderer_id}) {notificationsReceived { unread message senderId id latitude longitude createdAt}}}`
  
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
@@ -276,7 +275,6 @@ export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
     }
 
     let data = await resp.json();
-
     return data.data.user.notificationsReceived;
 
   } catch (error) {

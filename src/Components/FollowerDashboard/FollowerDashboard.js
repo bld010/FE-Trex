@@ -31,7 +31,6 @@ export default class FollowerDashboard extends Component {
 
   componentDidMount = async () => {
     try {
-      // fetch messages, filter by unread and display count within wanderer element
       let wanderers = await fetchFollowers(this.state.userId)
       this.setState({ wanderers })
       let messages = await fetchWanderersIncomingNotifications(this.state.userId)
@@ -43,8 +42,6 @@ export default class FollowerDashboard extends Component {
     }
   } 
 
-  //generate Wanderer elements -- send messages from them to the MyWanderer component
-
   generateWanderersElements = () => {
     let wanderersElements = this.state.wanderers.map(wanderer => {
 
@@ -55,6 +52,8 @@ export default class FollowerDashboard extends Component {
       let unreadMessagesFromWanderer = incomingMessagesFromWanderer.filter(message => {
         return message.unread === true
       })
+
+      let unreadMessagesWithCoordinates = unreadMessagesFromWanderer.filter(message => message.longitude)
 
       let { navigate } = this.props.navigation;
       return (
@@ -68,7 +67,7 @@ export default class FollowerDashboard extends Component {
             })}>
           <Text style={styles.buttonText}>
             {wanderer.name}
-            {unreadMessagesFromWanderer.length > 0 && <>  ({unreadMessagesFromWanderer.length} unread)</>}
+            {unreadMessagesWithCoordinates.length > 0 && <>  ({unreadMessagesWithCoordinates.length} unread)</>}
           </Text>
         </TouchableOpacity>
       )
@@ -86,12 +85,6 @@ export default class FollowerDashboard extends Component {
           <FollowerHeader />
       <ScrollView>
         <Text style={styles.text}>My Wanderers</Text>
-      <TouchableOpacity style={styles.button} onPress={() => navigate("MyWanderer")}>
-        <Text style={styles.buttonText}>Fake Wanderer 1</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigate("MyWanderer")}>
-        <Text style={styles.buttonText}>Fake Wanderer 2</Text>
-      </TouchableOpacity>
       {this.state.error === '' && this.state.wanderers.length == 0 &&
         <Image alt={'Loading...'} style={styles.loading} source={followerSpinner} />
       }
