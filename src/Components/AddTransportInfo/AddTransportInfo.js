@@ -181,7 +181,7 @@ export default class AddTransportInfo extends Component {
             <Text style={styles.label}>End Destination</Text>
             <MapInputSecond handlerSecondInput={this.handlerSecondInput.bind(this)} />
             <Text style={styles.text}>Travel Times</Text>
-              <View>
+              {/* <View>
               <Text style={styles.text}>Departure Time</Text>
               <TextInput
               style={styles.inputMode}
@@ -208,8 +208,8 @@ export default class AddTransportInfo extends Component {
               onBlur={Keyboard.dismiss}
               >
               </TextInput>
-              </View>
-            {/* <DatePicker
+              </View> */}
+            <DatePicker
               style={{ width: 370, height: 65 }}
               date={this.state.departureTime}
               mode='date'
@@ -282,7 +282,7 @@ export default class AddTransportInfo extends Component {
               onDateChange={date => {
                 this.setState({ arrivalTime: date });
               }}
-            /> */}
+            />
 
             {this.state.error !== '' && 
               <Text style={styles.error}>{this.state.error}</Text>
@@ -293,8 +293,8 @@ export default class AddTransportInfo extends Component {
             </TouchableOpacity>
 
             {this.props.navigation.getParam('transport') && 
-          <TouchableOpacity style={styles.deleteButton} onPress={this.removeTransportation}>
-          <Text style={styles.buttonText}>Delete Transportation</Text>
+          <TouchableOpacity onPress={this.removeTransportation}>
+            <Text style={[styles.button, styles.deleteButton]}>Delete</Text>
           </TouchableOpacity>
           }
         </ScrollView>
@@ -313,6 +313,9 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: 15
+  },
+  buttonBackground: {
+    backgroundColor: "#000000",
   },
   inputMode: {
     backgroundColor: 'white',
@@ -391,18 +394,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 15
   },
-  deleteButton: {
-    borderColor: "white",
-    borderWidth: 1,
-    borderRadius: 8,
-    borderStyle: "solid",
-    width: "auto",
-    height: 60,
-    margin: 20,
-    padding: 10,
-    color: "white",
-    textAlign: "center",
-    backgroundColor: "red"
+    deleteButton: {
+      backgroundColor: 'red'
   },
 });
 

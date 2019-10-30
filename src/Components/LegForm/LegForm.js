@@ -235,8 +235,8 @@ export default class LegForm extends Component {
             <Text style={styles.button}>Save</Text>
           </TouchableOpacity>
           {this.props.navigation.getParam('leg') && 
-          <TouchableOpacity style={styles.deleteButton} onPress={this.removeLeg}>
-          <Text style={styles.deleteButtonText}>Delete Leg</Text>
+          <TouchableOpacity onPress={this.removeLeg}>
+          <Text style={styles.deleteButton}>Delete Leg</Text>
           </TouchableOpacity>
           }
     
@@ -276,6 +276,7 @@ const styles = StyleSheet.create({
     height: 60,
     margin: 20,
     padding: 10,
+    fontSize: 30,
     color: "white",
     textAlign: "center",
     backgroundColor: "red"
@@ -298,12 +299,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
     flexDirection: "row",
     justifyContent: "space-around"
-  },
-  deleteButtonText: {
-    fontSize: 30,
-    color: "white",
-    textAlign: "center",
-    paddingVertical: 10
   },
   button: {
     borderColor: "white",
