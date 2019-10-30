@@ -91,12 +91,12 @@ export default class AddTransportInfo extends Component {
       let formIsFilledCorrectly = this.checkTransportParams();
       if (formIsFilledCorrectly) {
         updatedLegId = await this.createNewTransportation()
-        this.props.navigation.navigate('Transportation', {existingLegId: updatedLegId.legId})
+        this.props.navigation.navigate('Transportation')
     
       }
     } else {
       updatedLegId = await this.editTransportation()
-      this.props.navigation.navigate('Transporation', {existingLegId: updatedLegId.legId})
+      this.props.navigation.navigate('Transportation')
     }
   }
 
