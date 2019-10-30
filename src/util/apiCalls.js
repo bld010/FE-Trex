@@ -246,7 +246,6 @@ export const fetchFollowers = async (wanderer_id) => {
     if (!resp.ok) {
       throw new Error('There was an error fetching your followers')
     }
-
     let data = await resp.json();
 
     return data.data.user.friends;

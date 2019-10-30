@@ -67,7 +67,6 @@ export class MyFollowers extends Component {
       try {
         let followers = await fetchFollowers(this.state.userId)
         let messages = await fetchWanderersIncomingNotifications(this.state.userId)
-        console.log(this.state)
         this.setState({ followers, messages })
       } catch (error) {
         this.setState({ error: 'There was an error fetching your followers'})
@@ -83,7 +82,6 @@ export class MyFollowers extends Component {
           <WandererHeader />
           <ScrollView>
             <Text style={styles.title}>My Followers</Text>
-
             {this.state.error === '' && this.state.followers.length == 0 &&
               <Image alt={'Loading...'} style={styles.loading} source={wandererSpinner} />
             }

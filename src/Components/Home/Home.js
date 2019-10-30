@@ -14,7 +14,8 @@ export default class Home extends Component {
   constructor(props) {
     super(props) 
       this.state = {
-        userId: 1
+        wanderer_userId: 1,
+        follower_userId: 2
       }
   }
 
@@ -26,16 +27,13 @@ export default class Home extends Component {
         <ScrollView>
           <Text style={styles.text}>Welcome to Trex</Text>
             <Text style={styles.text}>I am a ...</Text>
-            <TouchableOpacity onPress={() => navigate('WandererDashboard', {userId: this.state.userId})}>
+            <TouchableOpacity onPress={() => navigate('WandererDashboard', {userId: this.state.wanderer_userId})}>
               <Text style={styles.button}>Wanderer</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigate('FollowerDashboard', {userId: this.state.userId})}>
+            <TouchableOpacity onPress={() => navigate('FollowerDashboard', {userId: this.state.follower_userId})}>
               <Text style={styles.followerButton}>Follower</Text>
             </TouchableOpacity>
-
-
         </ScrollView>
-        
     </View>
     )
   }

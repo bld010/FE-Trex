@@ -12,33 +12,72 @@ import {
   Image
 } from "react-native";
 
-import followerSpinner from '../../../assets/follower_spinner.gif'
+import followerSpinner from '../../../assets/follower_spinner.gif';
+import { 
+  fetchFollowers,
+  fetchWanderersIncomingNotifications 
+} from '../../util/apiCalls.js';
 
 export default class FollowerDashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: this.props.userId,
+      userId: this.props.navigation.getParam('userId'),
       error: '',
-      wanderers: []
+      wanderers: [],
+      messages: []
     }
   }
 
   componentDidMount = async () => {
     try {
-      // fetch wanderers
       // fetch messages, filter by unread and display count within wanderer element
+      let wanderers = await fetchFollowers(this.state.userId)
+      this.setState({ wanderers })
+      let messages = await fetchWanderersIncomingNotifications(this.state.userId)
+      this.setState({ messages })
+      this.setState({ error: '' })
+
     } catch (error) {
       this.setState({ error: 'There was an error loading your wanderers'})
-
-      //Render error when not empty string
-      // Reset error when fetch is successful
     }
   } 
 
   //generate Wanderer elements -- send messages from them to the MyWanderer component
 
-  // filter messages?
+  generateWanderersElements = () => {
+    let wanderersElements = this.state.wanderers.map(wanderer => {
+
+      let incomingMessagesFromWanderer = this.state.messages.filter(message => {
+        return message.senderId == wanderer.id
+      })
+
+      let unreadMessagesFromWanderer = incomingMessagesFromWanderer.filter(message => {
+        return message.unread === true
+      })
+
+      let { navigate } = this.props.navigation;
+      return (
+        <TouchableOpacity 
+          key={this.state.userId+wanderer.name} 
+          style={styles.wandererButton} 
+          onPress={() => navigate('MyWanderer', {
+            wanderer, 
+            userId: this.state.userId,
+            messages: incomingMessagesFromWanderer
+            })}>
+          <Text style={styles.buttonText}>
+            {wanderer.name}
+            {unreadMessagesFromWanderer.length > 0 && <>  ({unreadMessagesFromWanderer.length} unread)</>}
+          </Text>
+        </TouchableOpacity>
+      )
+    })
+
+    return wanderersElements;
+  }
+
+
 
   render() {
     const {navigate} = this.props.navigation;
@@ -56,7 +95,10 @@ export default class FollowerDashboard extends Component {
       {this.state.error === '' && this.state.wanderers.length == 0 &&
         <Image alt={'Loading...'} style={styles.loading} source={followerSpinner} />
       }
-      
+      {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
+      {this.state.error === '' && this.state.messages.length !==0 && 
+        this.generateWanderersElements()
+      }
       </ScrollView>
       </View>
     )
@@ -77,7 +119,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     width: 'auto'
   }, 
-  button: {
+  error: {
+    color: 'red',
+    marginVertical: 40,
+    textAlign: 'center',
+    fontSize: 30,
+    width: 'auto'
+  },
+  wandererButton: {
     width: 'auto',
     borderColor: "white",
     borderWidth: 1,
