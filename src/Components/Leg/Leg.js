@@ -36,17 +36,19 @@ export const Leg = (props) => {
             <Text style={styles.dateText}>{endDate}</Text>
             </View>
           </View>
-          <View style={styles.sideBySideContainer}>
+            <View style={styles.sideBySideContainer}>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo')}>Add Transport</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('Transportation', { leg, userId: props.navigation.getParam('userId') })}>Transportation</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('Lodging', { leg })}>Add Lodging</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo', {leg, userId: props.navigation.getParam('userId')})}>Add Lodging</Text>
           </TouchableOpacity>
-          </View>
+        </View>
+        <View>
           <TouchableOpacity>
               <Text onPress={() => navigate('LegForm', { leg, tripId, userId: props.navigation.getParam('userId') })} style={styles.button}>Edit Leg</Text>
             </TouchableOpacity>
+          </View>
 
         </ScrollView>
 
@@ -120,7 +122,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
     flexDirection: "row",
     justifyContent: "space-around"
-  },buttonText: {
+  }, 
+  buttonText: {
     fontSize: 20,
     color: "white",
     textAlign: "center",
@@ -140,7 +143,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "#1C4263",
     alignItems: "stretch"
-  },
+  }
 });
 
 

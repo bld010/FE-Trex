@@ -358,7 +358,12 @@ export const deleteLodging = async lodgingId => {
   }
 }
 
+<<<<<<< HEAD
 export const fetchFollowers = async wanderer_id => {
+=======
+
+export const fetchFollowers = async (wanderer_id) => {
+>>>>>>> master
   let options = {
     method: "POST",
     headers: {
@@ -385,8 +390,9 @@ export const fetchFollowers = async wanderer_id => {
   }
 }
 
-export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
 
+export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
+ 
   let options = {
     method: 'POST',
     headers: {
@@ -414,8 +420,8 @@ export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
   }
 }
 
-export const markMessageRead = async (message_id) => {
 
+export const markMessageRead = async (message_id) => {
   let options = {
     method: 'POST',
     headers: {
@@ -479,6 +485,129 @@ export const sendWandererMessage = async (message_object) => {
 
 }
 
+export const fetchTransport = async (legId) => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `{leg(id: ${legId}) {id, startDate, startLocation, endDate, endLocation tripId transportations {id mode departureTime departureCity arrivalTime arrivalCity}}}`
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+  
+  try {
+    let resp = await fetch(url, options)
+    if (!resp.ok) {
+      throw new Error('There was an error fetching your transport details')
+    }
+
+    let data = await resp.json();
+    let transportations = data.data.leg.transportations;
+    return transportations;
+
+  } catch (error) {
+    throw error
+  }
+}
+
+
+export const postNewTransport = async (transportationInfo) => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let { legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
+  
+  let queryParams = `mutation {createTransportation(input: {mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {legId}}}`
+ 
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+    
+  try {
+    let resp = await fetch(url,options)
+    if (!resp.ok) {
+      throw new Error('There was an error saving your transportation information')
+    }
+    
+    let data = await resp.json();
+    let transportation = data.data.createTransportation.transportation
+    return transportation
+      
+  } catch (error) {
+    throw error
+    }
+    
+  }
+
+
+
+export const patchTransport = async (transportationInfo) => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let { transportId, legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
+  
+  let queryParams = `mutation {updateTransportation(input: {id: ${transportId}, mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {legId}}}`
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url,options)
+    if (!resp.ok) {
+      throw new Error('There was an error editing your transport.')
+    }
+    let data = await resp.json();
+    return data.data.updateTransportation.transportation
+  
+  } catch (error) {
+    throw error
+  }
+}
+
+export const deleteTransport = async (transportationId) => {
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `mutation {removeTransportation(input: {id: ${transportationId}}) {transportation {legId}}}`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error deleting your transport.')
+    }
+
+    let data = await resp.json();
+    return data.data.removeTransportation.transportation
+
+  } catch (error) {
+    throw error
+  }
+
+}
+
+
 // export const sendFollowerMessage = async () => {}
 
 // export const fetchFollowersIncomingNotifications = async () => {}
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> master
