@@ -266,8 +266,8 @@ export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
       'Content-Type': 'application/json'
     }
   }
-  
-  let queryParams = `{user(id: ${wanderer_id}) {notificationsReceived { unread message senderId }}}`
+
+  let queryParams = `{user(id: ${wanderer_id}) {notificationsReceived { unread message senderId id}}}`
  
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
@@ -285,6 +285,71 @@ export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
   } catch (error) {
     throw error
   }
+}
+
+
+export const markMessageRead = async (message_id) => {
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `mutation {updateNotification(input: {id: ${message_id}, unread: false}) {notification {id message unread}}}`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error marking your message as read')
+    }
+
+    let data = await resp.json();
+
+    return data.data.updateNotification.notification;
+
+  } catch (error) {
+    throw error
+  }
+
+}
+export const sendWandererMessage = async (message_object) => {
+  
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  let { 
+    senderId,
+    receiverId, 
+    message,
+    latitude,
+    longitude
+  } = message_object;
+
+  let queryParams = `mutation {createNotification(input: {senderId: ${senderId}, receiverId: ${receiverId}, message: "${message}", latitude: ${latitude}, longitude: ${longitude}}) {notification {id message latitude longitude senderId receiverId}}}`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error sending your message')
+    }
+
+    let data = await resp.json();
+    return data.data.createNotification.notification;
+
+  } catch (error) {
+    throw error
+  }
+
 }
 
 export const fetchTransport = async (legId) => {
@@ -348,6 +413,32 @@ export const postNewTransport = async (transportationInfo) => {
 
 
 
+export const patchTransport = async (transportationInfo) => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let { transportId, legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
+  
+  let queryParams = `mutation {updateTransportation(input: {id: ${transportId}, mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {legId}}}`
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url,options)
+    if (!resp.ok) {
+      throw new Error('There was an error editing your transport.')
+    }
+    let data = await resp.json();
+    return data.data.updateTransportation.transportation
+  
+  } catch (error) {
+    throw error
+  }
+}
 
 export const deleteTransport = async (transportationId) => {
   let options = {
@@ -378,38 +469,9 @@ export const deleteTransport = async (transportationId) => {
 }
 
 
-export const patchTransport = async (transportationInfo) => {
-
-  let options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-
-  let { transportId, legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
-  
-  let queryParams = `mutation {updateTransportation(input: {id: ${transportId}, mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {legId}}}`
-  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
-
-  try {
-    let resp = await fetch(url,options)
-    if (!resp.ok) {
-      throw new Error('There was an error editing your transport.')
-    }
-    let data = await resp.json();
-    return data.data.updateTransportation.transportation
-  
-  } catch (error) {
-    throw error
-  }
-}
-
-
-// export const markMessageRead = async (message_id) => {}
-
-// export const sendWandererMessage = async () => {}
-
 // export const sendFollowerMessage = async () => {}
 
-// export const fetchFollowersIncomingNotivications = async () => {}
+// export const fetchFollowersIncomingNotifications = async () => {}
+
+
+

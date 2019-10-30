@@ -27,6 +27,20 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
         Add Transportation
       </Text>
     </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 20,
+            "marginBottom": -22,
+            "marginLeft": 20,
+          }
+        }
+      >
+        Mode of Travel
+      </Text>
+    </View>
     <TextInput
       allowFontScaling={true}
       onBlur={[Function]}
