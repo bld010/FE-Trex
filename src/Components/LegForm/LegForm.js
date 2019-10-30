@@ -165,7 +165,7 @@ export default class LegForm extends Component {
           style={{ width: 370, height: 65 }}
           date={this.state.startDate}
           mode="date"
-          placeholder="Select End Date"
+          placeholder="Select Start Date"
           placeholderTextColor='white'
           format="MM-DD-YYYY"
           confirmBtnText="Confirm"
