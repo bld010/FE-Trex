@@ -138,7 +138,8 @@ export default class AddLodgingInfo extends Component {
         <ScrollView>
           <View style={styles.inputContainer}>
             <View>
-              <Text style={styles.title}>Add Lodging</Text>
+            {this.state.lodging === null &&<Text style={styles.title}>Add Lodging</Text>}
+            {this.state.lodging && <Text style={styles.title}>Edit Lodging</Text>}
             </View>
             <Text style={styles.labelCity}>City</Text>
             <MapInputFirst
@@ -241,6 +242,11 @@ export default class AddLodgingInfo extends Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
+        {this.props.navigation.getParam('lodging') && 
+          <TouchableOpacity style={styles.deleteButton} onPress={this.removeLodging}>
+          <Text style={styles.buttonText}>Delete Lodging</Text>
+          </TouchableOpacity>
+          }
         <WandererFooter navigate={navigate} userId={this.state.userId} />
       </View>
     );
@@ -323,5 +329,24 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: "center",
     marginVertical: 15
+  },
+  deleteButton: {
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    width: "auto",
+    height: 60,
+    margin: 20,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "red"
+  },
+  buttonText: {
+    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 10
   }
 });
