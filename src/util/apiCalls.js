@@ -378,6 +378,35 @@ export const deleteTranport = async (transportationId) => {
 }
 
 
+export const patchTransport = async (transportationInfo) => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let { id, legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
+  
+  let queryParams = `mutation {updateTransportation(input: {id: ${id}, mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {id mode departureCity departureTime arrivalCity arrivalTime legId}}}`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url,options)
+    if (!resp.ok) {
+      throw new Error('There was an error editing your transportation')
+    }
+    let data = await resp.json();
+    return data.data.updateTransportation.transportation
+  
+  } catch (error) {
+    throw error
+  }
+}
+
+
 // export const markMessageRead = async (message_id) => {}
 
 // export const sendWandererMessage = async () => {}

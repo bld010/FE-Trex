@@ -13,7 +13,7 @@ import {
   Keyboard,
   TextInput
 } from 'react-native';
-import { postNewTransport } from '../../util/apiCalls'
+import { postNewTransport, deleteTranport, editTransportation } from '../../util/apiCalls'
 
 export default class AddTransportInfo extends Component {
   constructor(props) {
@@ -101,6 +101,15 @@ export default class AddTransportInfo extends Component {
       return updatedTransportId
     } catch (error) {
       this.setState({error: 'There was an error creating your transporation'})
+    }
+  }
+
+  removeTransportation = async () => {
+    try {
+      await deleteTransport(this.state.transportId);
+      this.props.navigation.navigate('Transportation')
+    } catch (error) {
+      this.setState({ error: 'There was an error deleting this transportation'})
     }
   }
 
@@ -212,6 +221,12 @@ export default class AddTransportInfo extends Component {
             <TouchableOpacity onPress={this.handleSave}>
               <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
+
+            {/* {this.props.navigation.getParam('leg') && 
+          <TouchableOpacity style={styles.deleteButton} onPress={this.removeTransportation}>
+          <Text style={styles.buttonText}>Delete Transportation</Text>
+          </TouchableOpacity>
+          } */}
         </ScrollView>
         <WandererFooter navigate={navigate} userId={this.state.userId} />
       </View>
