@@ -25,6 +25,18 @@ exports[`MyFollowers should match the snapshot when loading 1`] = `
     >
       My Followers
     </Text>
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 20,
+          "paddingVertical": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      Loading ...
+    </Text>
     <TouchableOpacity
       activeOpacity={0.2}
       style={
@@ -34,6 +46,7 @@ exports[`MyFollowers should match the snapshot when loading 1`] = `
           "borderRadius": 8,
           "borderWidth": 1,
           "color": "white",
+          "marginVertical": 30,
         }
       }
     >

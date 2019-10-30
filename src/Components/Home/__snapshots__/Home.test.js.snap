@@ -38,11 +38,6 @@ exports[`Home should match the snapshot when loading 1`] = `
     <TouchableOpacity
       activeOpacity={0.2}
       onPress={[Function]}
-      style={
-        Object {
-          "borderRadius": 8,
-        }
-      }
     >
       <Text
         style={
@@ -67,11 +62,6 @@ exports[`Home should match the snapshot when loading 1`] = `
     <TouchableOpacity
       activeOpacity={0.2}
       onPress={[Function]}
-      style={
-        Object {
-          "borderRadius": 8,
-        }
-      }
     >
       <Text
         style={

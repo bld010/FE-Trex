@@ -16,8 +16,7 @@ export class MyTrips extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {id: 1},
-      // we will need to pass this user object dyanmically
+      userId: this.props.navigation.getParam('userId'),
       trips: [],
       error: ''
     }
@@ -28,16 +27,15 @@ export class MyTrips extends Component {
     return this.state.trips.map((trip, index) => {
       return (
         <TouchableOpacity key={index + trip.name} style={styles.tripButton}>
-        <Text onPress={() => navigate('Trip', {trip: trip, tripId: trip.id, userId: this.state.user.id})} style={styles.text} key={trip.name}>{trip.name}</Text>
+        <Text onPress={() => navigate('Trip', {trip: trip, tripId: trip.id, userId: this.state.userId})} style={styles.text} key={trip.name}>{trip.name}</Text>
       </TouchableOpacity>
       )
     })
   }
   
-  
   componentDidMount = async  () => {
     try {
-      let trips = await fetchMyTrips(this.state.user.id)
+      let trips = await fetchMyTrips(this.state.userId)
       this.setState({ trips })
 
     } catch (error) {
@@ -69,13 +67,12 @@ export class MyTrips extends Component {
             {trips.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
           </View>
           <TouchableOpacity style={styles.addTripButton}>
-            <Text style={styles.text} onPress={() => navigate('TripForm', {userId: this.state.user.id})}>Add a New Trip</Text>
+            <Text style={styles.text} onPress={() => navigate('TripForm', {userId: this.state.userId})}>Add a New Trip</Text>
           </TouchableOpacity>
         </ScrollView>
   
-        <WandererFooter navigate={navigate} />
+        <WandererFooter navigate={navigate} userId={this.state.userId} />
 
-        
     </View>
 
     )

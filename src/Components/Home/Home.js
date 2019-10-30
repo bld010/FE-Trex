@@ -12,8 +12,10 @@ import WandererFooter from "../WandererFooter/WandererFooter";
 
 export default class Home extends Component {
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props) 
+      this.state = {
+        userId: 1
+      }
   }
 
   render() {
@@ -23,16 +25,19 @@ export default class Home extends Component {
         <WandererHeader />
         <ScrollView>
           <Text style={styles.text}>Welcome to Trex</Text>
-          <Text style={styles.text}>I am a ...</Text>
-          <TouchableOpacity onPress={() => navigate("WandererDashboard")}>
-            <Text style={styles.button}>Wanderer</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigate("FollowerDashboard")}>
-            <Text style={styles.followerButton}>Follower</Text>
-          </TouchableOpacity>
+            <Text style={styles.text}>I am a ...</Text>
+            <TouchableOpacity onPress={() => navigate('WandererDashboard', {userId: this.state.userId})}>
+              <Text style={styles.button}>Wanderer</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigate('FollowerDashboard', {userId: this.state.userId})}>
+              <Text style={styles.followerButton}>Follower</Text>
+            </TouchableOpacity>
+
+
         </ScrollView>
-      </View>
-    );
+        
+    </View>
+    )
   }
 }
 

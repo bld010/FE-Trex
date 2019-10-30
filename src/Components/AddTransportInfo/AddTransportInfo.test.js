@@ -9,7 +9,7 @@ describe("AddTransportInfo", () => {
   });
 
   it("should match the snapshot when loading", () => {
-    let wrapper = shallow(<AddTransportInfo navigation={{ navigate: jest.fn() }} />);
+    let wrapper = shallow(<AddTransportInfo navigation={{ navigate: jest.fn(), getParam: jest.fn() }} />);
 
     expect(wrapper).toMatchSnapshot();
   });

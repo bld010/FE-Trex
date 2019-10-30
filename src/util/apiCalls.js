@@ -227,3 +227,31 @@ export const deleteLeg = async (legId) => {
   }
 
 }
+
+export const fetchFollowers = async (wanderer_id) => {
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `{user(id: ${wanderer_id}) {friends { id name role }}}`
+ 
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error fetching your followers')
+    }
+
+    let data = await resp.json();
+
+    return data.data.user.friends;
+
+  } catch (error) {
+    throw error
+  }
+}
