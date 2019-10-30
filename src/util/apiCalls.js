@@ -317,39 +317,6 @@ export const fetchTransport = async (legId) => {
 
 export const postNewTransport = async (transportationInfo) => {
 
-    let options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-
-      let { legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
-  
-      let queryParams = `mutation {createTransportation(input: {mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {id mode departureCity departureTime arrivalTime arrivalCity legId}}}`
-      let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
-    
-      try {
-        let resp = await fetch(url,options)
-        if (!resp.ok) {
-          throw new Error('There was an error saving your transportation information')
-        }
-    
-        let data = await resp.json();
-        let transportation = data.data.createTransportation.transportation
-        return transportation
-      
-      } catch (error) {
-        throw error
-      }
-    
-    }
-
-
-
-
-export const deleteTranport = async (transportationId) => {
-
   let options = {
     method: 'POST',
     headers: {
@@ -357,7 +324,43 @@ export const deleteTranport = async (transportationId) => {
     }
   }
 
-  let queryParams = `mutation {removeTransportation(input: {id: "${transportationId}"}) {transportation {legId}}}`
+  let { legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
+  
+  let queryParams = `mutation {createTransportation(input: {mode: "${mode}",  departureCity: "${departureCity}",  departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", arrivalTime: "${arrivalTime}", legId: ${legId} }) {transportation {id mode departureCity departureTime arrivalTime arrivalCity legId}}}`
+ 
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+    
+  try {
+    let resp = await fetch(url,options)
+    if (!resp.ok) {
+      throw new Error('There was an error saving your transportation information')
+    }
+    
+    let data = await resp.json();
+    let transportation = data.data.createTransportation.transportation
+    return transportation
+      
+  } catch (error) {
+    throw error
+    }
+    
+  }
+
+
+
+
+export const deleteTransport = async (transportationId) => {
+console.log('in the api calls delete', transportationId)
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `mutation {removeTransportation(input: {id: ${transportationId}}) {transportation {legId}}}`
+
+  console.log('queryPrams', queryParams)
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
@@ -365,7 +368,7 @@ export const deleteTranport = async (transportationId) => {
     let resp = await fetch(url, options);
     
     if (!resp.ok) {
-      throw new Error('There was an error deleting your transportation')
+      throw new Error('There was an error deleting your transport.')
     }
 
     let data = await resp.json();
@@ -379,6 +382,7 @@ export const deleteTranport = async (transportationId) => {
 
 
 export const patchTransport = async (transportationInfo) => {
+  console.log('in the patch', transportationInfo)
 
   let options = {
     method: 'POST',

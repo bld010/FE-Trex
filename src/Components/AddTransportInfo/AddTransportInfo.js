@@ -13,7 +13,7 @@ import {
   Keyboard,
   TextInput
 } from 'react-native';
-import { postNewTransport, deleteTranport, patchTransport } from '../../util/apiCalls'
+import { postNewTransport, deleteTransport, patchTransport } from '../../util/apiCalls'
 
 export default class AddTransportInfo extends Component {
   constructor(props) {
@@ -141,6 +141,7 @@ export default class AddTransportInfo extends Component {
   }
 
   removeTransportation = async () => {
+    console.log(' int he remove', this.state.transportId)
     try {
       let deletedTransport = await deleteTransport(this.state.transportId);
       this.props.navigation.navigate('Transportation')
@@ -152,7 +153,6 @@ export default class AddTransportInfo extends Component {
 
 
   render() {
-    console.log(this.state.transport)
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
