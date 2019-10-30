@@ -277,6 +277,51 @@ export const postLodging = async lodgingInfo => {
     }
 }
 
+export const patchLodging = async lodgingInfo => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let { id, legId, name, arrivalDate, departureDate, city } = lodgingInfo;
+
+  let queryParams = `mutation {
+    updateLodging(
+      input: {
+        id: ${id},
+        name: "${name}",
+        arrivalDate: "${arrivalDate}",
+        departureDate: "${departureDate}",
+        city: "${city}",
+        legId: ${legId}  
+      })
+    {
+      lodging {
+        legId
+      }
+    }
+  }`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url,options)
+    if (!resp.ok) {
+      throw new Error('There was an error editing your lodging.')
+    }
+    let data = await resp.json();
+    return data.data.updateLodging.lodging
+
+  } catch (error) {
+    throw error
+  }
+}
+
+
+
 export const fetchFollowers = async wanderer_id => {
   let options = {
     method: "POST",
