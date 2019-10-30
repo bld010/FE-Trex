@@ -24,12 +24,24 @@ export default class AddTransportInfo extends Component {
       departureTime: '',
       arrivalCity: '',
       departureCity: '',
-      leg: '',
       legId: this.props.navigation.getParam('legId'),
+      leg: this.props.navigation.getParam('leg'),
       transportId: this.props.navigation.getParam('transportId') || null,
     };
   }
 
+  componentDidMount = () => {
+    if (this.state.leg) { 
+      let  {mode, arrivalTime, departureTime, arrivalCity, departureCity,} = this.state.leg
+      this.setState({
+        mode,
+        arrivalTime,
+        departureTime,
+        arrivalCity,
+        departureCity,
+      })
+    }
+  }
 
   handlerFirstInput(arg) {
     this.setState({
@@ -127,7 +139,7 @@ export default class AddTransportInfo extends Component {
 
   removeTransportation = async () => {
     try {
-      await deleteTransport(this.state.transportId);
+      let deletedTransport = await deleteTransport(this.state.transportId);
       this.props.navigation.navigate('Transportation')
     } catch (error) {
       this.setState({ error: 'There was an error deleting this transportation'})
