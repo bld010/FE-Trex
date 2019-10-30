@@ -49,20 +49,16 @@ export default class Follower extends Component {
       let updatedMessage = await markMessageRead(incoming_message_id)
     } catch (error) {
       this.setState({ error: 'There was an error marking the message as read'})
-      // add conditional rendering for error message below
     }
   }
 
   handleReply = async (incoming_message_id) => {
     this.markIncomingMessageAsRead(incoming_message_id)
-    // this.sendNewMessage()
+    this.sendNewMessage()
   }
 
   generateUnreadMessagesElements = () => {
-    
-
     let unreadMessagesElements = this.state.unreadMessages.map((message, index) => {
-      console.log(message)
       return(
         <View key={this.state.userId + index} style={styles.sideBySide}>
           <Text style={styles.message}>{message.message}</Text>
@@ -151,6 +147,7 @@ export default class Follower extends Component {
               }
             </>
           }
+          {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>Send Check-In</Text>
           </TouchableOpacity>
