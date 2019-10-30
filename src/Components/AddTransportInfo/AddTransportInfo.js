@@ -140,7 +140,7 @@ export default class AddTransportInfo extends Component {
     }
   }
 
-  
+
   removeTransportation = async () => {
     try {
       let deletedTransport = await deleteTransport(this.state.transportId);
