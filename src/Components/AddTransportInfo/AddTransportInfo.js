@@ -88,15 +88,15 @@ export default class AddTransportInfo extends Component {
     let updatedLegId
 
     if (!this.props.navigation.getParam('transportId')) {
-    let formIsFilledCorrectly = this.checkTransportParams();
-    if (formIsFilledCorrectly) {
-      updatedLegId = await this.createNewTransportation()
-      this.props.navigation.navigate('Transportation', {existingLegId: updatedLegId})
-
+      let formIsFilledCorrectly = this.checkTransportParams();
+      if (formIsFilledCorrectly) {
+        updatedLegId = await this.createNewTransportation()
+        this.props.navigation.navigate('Transportation', {existingLegId: updatedLegId.legId})
+    
       }
     } else {
       updatedLegId = await this.editTransportation()
-      this.props.navigation.navigate('Transporation', {existingLegId: updatedLegId})
+      this.props.navigation.navigate('Transporation', {existingLegId: updatedLegId.legId})
     }
   }
 
@@ -114,7 +114,8 @@ export default class AddTransportInfo extends Component {
     try {
       let updatedTransportId = await postNewTransport(newTransportInfo)
       return updatedTransportId
-    } catch (error) {
+    } 
+    catch (error) {
       this.setState({error: 'There was an error creating your transporation'})
     }
   }

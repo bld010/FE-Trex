@@ -288,6 +288,7 @@ export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
 }
 
 export const fetchTransport = async (legId) => {
+  console.log('in the fetch transport', legId)
 
   let options = {
     method: 'POST',

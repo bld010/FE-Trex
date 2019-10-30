@@ -32,18 +32,19 @@ class Transportation extends Component {
     }
   }
 
-  refetchTransport = async () => {
-    try {
-      let updatedTransportation = await fetchTransport(this.state.existingLegId)
-      this.setState({transports: updatedTransportation})
-    } catch (error) {
-      this.setState({error: 'There was a problem update the transportation of this leg'})
-    }   
-  }
+  // refetchTransport = async () => {
+  //   console.log('this.state.existingLegId', this.state.existingLegId)
+  //   try {
+  //     let transports = await fetchTransport(this.state.leg)
+  //     this.setState({transports})
+  //   } catch (error) {
+  //     this.setState({error: 'There was a problem updating the transportation of this leg'})
+  //   }   
+  // }
 
   componentDidUpdate = async (prevProps) => {
     if (prevProps.isFocused !== this.props.isFocused) {
-      this.refetchTransport();
+      this.componentDidMount();
     }
   }
 
@@ -64,6 +65,7 @@ class Transportation extends Component {
   }
   
   render() {
+    console.log('transportation this.state.existingLegId', this.state.existingLegId)
   const { leg, error, transports } = this.state
   const {navigate} = this.props.navigation;
   return (
