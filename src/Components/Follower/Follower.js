@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
-import {  } from '../../util/apiCalls';
+import { markMessageRead  } from '../../util/apiCalls';
 
 export default class Follower extends Component {
   constructor(props) {
@@ -20,7 +20,8 @@ export default class Follower extends Component {
       unreadMessages: null,
       readMessages: null,
       latitude: null,
-      longitude: null
+      longitude: null,
+      error: ''
     }
   }
 
@@ -38,6 +39,21 @@ export default class Follower extends Component {
     //fire post call
   }
 
+  markIncomingMessageAsRead = (incoming_message_id) => {
+    try {
+      markMessageRead(incoming_message_id)
+    } catch (error) {
+      this.setState({ error: 'There was an error marking the message as read'})
+      // add conditional rendering for error message below
+    }
+  }
+
+  handleReply = async (incoming_message_id) => {
+    // this.markIncomingMessageAsRead(incoming_message_id)
+
+    this.sendNewMessage()
+  }
+
   generateUnreadMessagesElements = () => {
     
 
@@ -46,7 +62,7 @@ export default class Follower extends Component {
         <View key={this.state.userId + index} style={styles.sideBySide}>
           <Text style={styles.message}>{message.message}</Text>
           <TouchableOpacity 
-            onPress={this.sendNewMessage}
+            onPress={() => this.handleReply(message.id)}
             style={styles.respondButton}>
             <Text style={styles.respondButtonText}>Check In</Text>
           </TouchableOpacity>

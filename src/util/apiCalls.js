@@ -285,8 +285,35 @@ export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
   }
 }
 
-// export const markMessageRead = async (message_id) => {}
+export const markMessageRead = async (message_id) => {
 
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `mutation {updateNotification(input: {id: ${message_id}, unread: false}) {notification {id message unread}}}}`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error marking your message as read')
+    }
+
+    let data = await resp.json();
+ 
+    return data.data.updateNotification.notification;
+
+  } catch (error) {
+    throw error
+  }
+
+}
 // export const sendWandererMessage = async () => {}
 
 // export const sendFollowerMessage = async () => {}
