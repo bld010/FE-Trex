@@ -33,8 +33,6 @@ export class MyFollowers extends Component {
           return message.unread === true
         })
 
-        console.log('incoming messages', incomingMessagesFromFollower)
-
         let { navigate } = this.props.navigation;
         return (
           <TouchableOpacity 

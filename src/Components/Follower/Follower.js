@@ -18,18 +18,36 @@ export default class Follower extends Component {
       follower: this.props.navigation.getParam('follower'),
       userId: this.props.navigation.getParam('userId'),
       unreadMessages: null,
-      readMessages: null
+      readMessages: null,
+      latitude: null,
+      longitude: null
     }
+  }
+
+  sendNewMessage = () => {
+
+
+    let message = {
+      senderId: this.state.userId,
+      receiverId: this.state.follower.id,
+      message: `I\'m checking in.`,
+      latitude: this.state.latitude,
+      longitude: this.state.longitude
+    }
+    console.log(message)
+    //fire post call
   }
 
   generateUnreadMessagesElements = () => {
     
 
-    let unreadMessagesElements = this.state.unreadMessages.map(message => {
+    let unreadMessagesElements = this.state.unreadMessages.map((message, index) => {
       return(
-        <View style={styles.sideBySide}>
+        <View key={this.state.userId + index} style={styles.sideBySide}>
           <Text style={styles.message}>{message.message}</Text>
-          <TouchableOpacity style={styles.respondButton}>
+          <TouchableOpacity 
+            onPress={this.sendNewMessage}
+            style={styles.respondButton}>
             <Text style={styles.respondButtonText}>Check In</Text>
           </TouchableOpacity>
         </View>
@@ -40,9 +58,9 @@ export default class Follower extends Component {
   }
 
   generateReadMessagesElements = () => {
-    let readMessagesElements = this.state.readMessages.map(message => {
+    let readMessagesElements = this.state.readMessages.map((message, index) => {
       return(
-        <View style={styles.sideBySide}>
+        <View key={this.state.userId + index} style={styles.sideBySide}>
           <Text style={styles.message}>{message.message}</Text>
         </View>
       )
@@ -62,9 +80,25 @@ export default class Follower extends Component {
 
     this.setState({ unreadMessages, readMessages })
   }
+  
+  getPosition = () => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({ 
+          latitude: position.coords.latitude, 
+          longitude: position.coords.longitude });
+        },
+        error => console.log(error.message),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
+    }
+      
+      
+      
 
   componentDidMount = () => {
     this.filterMessages();
+    this.getPosition();
   }
 
   render = () => {
