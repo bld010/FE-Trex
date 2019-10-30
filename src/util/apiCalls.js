@@ -302,7 +302,7 @@ export const fetchTransport = async (legId) => {
   try {
     let resp = await fetch(url, options)
     if (!resp.ok) {
-      throw new Error('There was an error fetching your tranport details')
+      throw new Error('There was an error fetching your transport details')
     }
 
     let data = await resp.json();

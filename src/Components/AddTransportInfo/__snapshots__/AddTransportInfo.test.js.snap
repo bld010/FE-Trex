@@ -27,6 +27,26 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
         Add Transportation
       </Text>
     </View>
+    <TextInput
+      allowFontScaling={true}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      placeholder="Enter Mode of Travel..."
+      placeholderTextColor="black"
+      rejectResponderTermination={true}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "white",
+          "color": "black",
+          "flex": 1,
+          "fontSize": 22,
+          "marginLeft": 10,
+        }
+      }
+      underlineColorAndroid="transparent"
+      value=""
+    />
     <Text
       style={
         Object {
@@ -67,7 +87,7 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
         }
       }
     >
-      Travel Date
+      Travel Times
     </Text>
     <DatePicker
       TouchableComponent={[Function]}
@@ -115,13 +135,79 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
       modalOnResponderTerminationRequest={[Function]}
       mode="date"
       onDateChange={[Function]}
-      placeholder="Select End Date"
+      placeholder="Select Departure Date"
       placeholderTextColor="white"
       showIcon={true}
       style={
         Object {
           "height": 65,
           "width": 370,
+        }
+      }
+    />
+    <DatePicker
+      TouchableComponent={[Function]}
+      allowFontScaling={true}
+      androidMode="default"
+      cancelBtnText="Cancel"
+      confirmBtnText="Confirm"
+      customStyles={
+        Object {
+          "dateIcon": Object {
+            "left": 0,
+            "top": 4,
+          },
+          "dateInput": Object {
+            "backgroundColor": "white",
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderWidth": 1,
+            "color": "black",
+            "height": 60,
+            "marginLeft": 15,
+            "marginVertical": -20,
+          },
+          "dateText": Object {
+            "color": "black",
+            "fontSize": 22,
+          },
+          "placeholderText": Object {
+            "color": "black",
+            "fontSize": 22,
+          },
+        }
+      }
+      date=""
+      disabled={false}
+      duration={300}
+      format="MM-DD-YYYY"
+      height={259}
+      hideText={false}
+      iconSource={
+        Object {
+          "testUri": "../../react-native-datepicker/date_icon.png",
+        }
+      }
+      modalOnResponderTerminationRequest={[Function]}
+      mode="date"
+      onDateChange={[Function]}
+      placeholder="Select Arrival Date"
+      placeholderTextColor="white"
+      showIcon={true}
+      style={
+        Object {
+          "height": 65,
+          "width": 370,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 25,
+          "marginVertical": 15,
+          "textAlign": "center",
         }
       }
     />

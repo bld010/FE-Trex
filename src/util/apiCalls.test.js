@@ -1000,6 +1000,124 @@ describe('apiCalls', () => {
     })
   })
 
+
+  describe('fetchTransport', () => {
+
+    let mockFetch;
+    let queryParams;
+    let url;
+    let options;
+
+    beforeEach(() => {
+      mockFetch = jest.fn()
+      global.fetch = mockFetch;
+  
+      queryParams = `{leg(id: 1) {id, startDate, startLocation, endDate, endLocation tripId transportations {id mode departureTime departureCity arrivalTime arrivalCity}}}`
+
+      url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+      
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      } 
+    })
+
+    it('should call fetch with correct url and queryParams', async () => {
+      
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                leg: {
+                  transportations: []
+                }
+                }
+              }
+            )}
+          })
+        })
+
+        await fetchTransport(1)
+
+        expect(mockFetch).toHaveBeenCalledWith(url, options)
+    })
+      
+    it('should return the transportation for a specific leg (HAPPY)', async () => {
+      let mockTransportations = [{
+        "id": 1,
+        "mode": "bus",
+        "departureTime": "Paris",
+        "departureCity": "Rome",
+        "arrivalTime": "2020-01-02",
+        "arrivalCity": "2019-07-11",
+        "legId": "1"
+      },
+      {
+        "id": 2,
+        "mode": "flight",
+        "departureTime": "Rome",
+        "departureCity": "Denver",
+        "arrivalTime": "2021-02-20",
+        "arrivalCity": "2019-10-15",
+        "legId": "1"
+      }]
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                  leg: {
+                    transportations: mockTransportations
+                  }
+                }
+              }
+            )}
+          })
+        })
+
+      // let response = await fetchTransport(1)
+
+      await expect(fetchTransport(1)).resolves.toEqual(mockTransportations)
+
+
+      // expect(response).toEqual(mockTransportations)
+
+    })
+
+    it('should throw an error when fetch fails (SAD)', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error fetching your transport details'))
+      })
+
+      await expect(fetchTransport(1)).rejects.toEqual(Error('There was an error fetching your transport details'))
+
+    })
+
+    it('should throw an error if response is not ok (SAD)', async () => {
+      
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+          })
+        })
+
+      await expect(fetchTransport(1)).rejects.toEqual(Error('There was an error fetching your transport details'))
+
+    })
+  })
+
+
+
+
+
+
 })
 
 
