@@ -314,7 +314,43 @@ export const markMessageRead = async (message_id) => {
   }
 
 }
-// export const sendWandererMessage = async () => {}
+export const sendWandererMessage = async (message_object) => {
+  
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  let { 
+    senderId,
+    receiverId, 
+    message,
+    latitude,
+    longitude
+  } = message_object;
+
+  let queryParams = `mutation {createNotification(input: {senderId: ${senderId}, receiverId: ${receiverId}, message: "${message}", latitude: ${latitude}, longitude: ${longitude}}) {notification {id message latitude longitude senderId receiverId}}}`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error sending your message')
+    }
+
+    let data = await resp.json();
+    console.log('wandererMessageNew', data.data)
+    return data.data.createNotification.notification;
+
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+
+}
 
 // export const sendFollowerMessage = async () => {}
 

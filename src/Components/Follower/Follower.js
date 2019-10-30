@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
-import { markMessageRead  } from '../../util/apiCalls';
+import { markMessageRead, sendWandererMessage  } from '../../util/apiCalls';
 
 export default class Follower extends Component {
   constructor(props) {
@@ -25,8 +25,7 @@ export default class Follower extends Component {
     }
   }
 
-  sendNewMessage = () => {
-
+  sendNewMessage = async () => {
 
     let message = {
       senderId: this.state.userId,
@@ -35,13 +34,18 @@ export default class Follower extends Component {
       latitude: this.state.latitude,
       longitude: this.state.longitude
     }
-    console.log(message)
-    //fire post call
+
+    try {
+      let sentMessage = await sendWandererMessage(message)
+    } catch (error) {
+      this.setState({ error: 'There was an error sending your message'})
+    }
+
   }
 
-  markIncomingMessageAsRead = (incoming_message_id) => {
+  markIncomingMessageAsRead = async (incoming_message_id) => {
     try {
-      markMessageRead(incoming_message_id)
+      let updatedMessage = await markMessageRead(incoming_message_id)
     } catch (error) {
       this.setState({ error: 'There was an error marking the message as read'})
       // add conditional rendering for error message below
