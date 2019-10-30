@@ -8,7 +8,7 @@ describe("WandererDashboard", () => {
     expect(true).toEqual(true);
   });
   it("should match the snapshot when loading", () => {
-    let wrapper = shallow(<WandererDashboard navigation={{ navigate: jest.fn() }} />);
+    let wrapper = shallow(<WandererDashboard navigation={{ navigate: jest.fn(), getParam: jest.fn() }} />);
 
     expect(wrapper).toMatchSnapshot();
   });

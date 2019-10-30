@@ -21,7 +21,8 @@ export default class AddTransportInfo extends Component {
       startTrans: '',
       endTrans: '',
       dateTrans: '',
-      error: ''
+      error: '',
+      userId: this.props.navigation.getParam('userId')
     };
   }
 
@@ -128,7 +129,7 @@ export default class AddTransportInfo extends Component {
               <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
         </ScrollView>
-        <WandererFooter navigate={navigate} />
+        <WandererFooter navigate={navigate} userId={this.state.userId} />
       </View>
     );
   }

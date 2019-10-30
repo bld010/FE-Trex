@@ -9,7 +9,7 @@ describe("AddLodgingInfo", () => {
   });
   it("should match the snapshot when loading", () => {
     let wrapper = shallow(
-      <AddLodgingInfo navigation={{ navigate: jest.fn() }} />
+      <AddLodgingInfo navigation={{ navigate: jest.fn(), getParam: jest.fn() }} />
     );
 
     expect(wrapper).toMatchSnapshot();

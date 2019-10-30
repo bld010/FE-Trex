@@ -13,6 +13,11 @@ import WandererHeader from '../WandererHeader/WandererHeader';
 import WandererFooter from '../WandererFooter/WandererFooter';
 
 export default class WandererDashboard extends Component {
+
+  constructor(props) {
+    super(props)
+  }
+
   render() {
   const {navigate} = this.props.navigation;
 
@@ -23,7 +28,7 @@ export default class WandererDashboard extends Component {
       <Weather />
       <Map />
     </ScrollView>
-    <WandererFooter navigate={navigate}/>
+    <WandererFooter navigate={navigate} userId={this.props.navigation.getParam('userId')}/>
   </View>
       
     )

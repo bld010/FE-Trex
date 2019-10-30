@@ -257,7 +257,6 @@ export const postNewLodging = async (lodgingInfo) => {
 }
 
 export const patchLodging = async (lodgingInfo) => {
-
   let options = {
     method: 'POST',
     headers: {
@@ -294,7 +293,7 @@ export const deleteLodging = async (id) => {
   }
 
   let queryParams = `mutation {removeLodging(input: {id: "${id}"}) {lodging {legId}}}`
-
+ 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
   try {
@@ -310,5 +309,32 @@ export const deleteLodging = async (id) => {
   } catch (error) {
     throw error
   }
+}
 
+export const fetchFollowers = async (wanderer_id) => {
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `{user(id: ${wanderer_id}) {friends { id name role }}}`
+ 
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error fetching your followers')
+    }
+
+    let data = await resp.json();
+
+    return data.data.user.friends;
+
+  } catch (error) {
+    throw error
+  }
 }
