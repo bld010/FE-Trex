@@ -18,7 +18,7 @@ import MyWandererTrips from './MyWanderersTrips/MyWanderersTrips';
 import WandererDashboard from './WandererDashboard/WandererDashboard';
 import MyWanderer from './MyWanderer/MyWanderer';
 import FollowerMessageHistory from './FollowerMessageHistory/FollowerMessageHistory';
-import 
+import Lodging from './Lodging/Lodging'
 
 const RootStack = createStackNavigator({
   Home: {
@@ -153,6 +153,14 @@ const RootStack = createStackNavigator({
     screen: FollowerMessageHistory,
     navigationOptions: {
       headerBackTitle: 'Message History',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
+  Lodging: {
+    screen: Lodging,
+    navigationOptions: {
+      headerBackTitle: 'Lodging',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }

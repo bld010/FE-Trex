@@ -13,11 +13,8 @@ import WandererHeader from '../WandererHeader/WandererHeader';
 export const Leg = (props) => {
   const {navigate} = props.navigation;
   let { startLocation, endLocation, startDate, endDate} = props.navigation.getParam('leg')
-  // let { name, city, arrivalDate, departureDate} = props.navigation.getParam('lodging')
   let  tripId  = props.navigation.getParam('tripId')
   let leg = props.navigation.getParam('leg')
-  // let lodging = props.navigation.getParam('lodging')
-  // let legId = props.navigation.getParam('legId')
   console.log('heyo', props.navigation.getParam('lodging'))
   return (
       <View style={styles.container}>
@@ -38,20 +35,13 @@ export const Leg = (props) => {
             <Text style={styles.text}>{endLocation}</Text>
             <Text style={styles.dateText}>{endDate}</Text>
             </View>
-            {/* <View style={styles.borderContainer}>
-            <Text style={styles.headerText}>Lodging</Text>
-            <Text style={styles.text}>{name}</Text>
-            <Text style={styles.text}>{city}</Text>
-            <Text style={styles.text}>{arrivalDate}</Text>
-            <Text style={styles.text}>{departureDate}</Text>
-            </View> */}
           </View>
           <View style={styles.sideBySideContainer}>
           <TouchableOpacity style={styles.sideBySideButton}>
             <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo')}>Add Transport</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo')}>Add Lodging</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('Lodging', { leg })}>Add Lodging</Text>
           </TouchableOpacity>
           </View>
           <TouchableOpacity>

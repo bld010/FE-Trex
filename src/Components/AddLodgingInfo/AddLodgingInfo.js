@@ -124,7 +124,7 @@ export default class AddLodgingInfo extends Component {
 
   removeLodging = async () => {
     try {
-      await deleteLodging(this.state.lodgingId);
+      let deletedLodging = await deleteLodging(this.state.lodgingId);
       this.props.navigation.navigate("Lodging");
     } catch (error) {
       this.setState({ error: "There was an error deleting your lodging" });
@@ -132,8 +132,8 @@ export default class AddLodgingInfo extends Component {
   };
 
   render() {
-    console.log('legId', this.props.navigation.getParam("legId"))
-    console.log('boo', this.props.navigation.getParam("lodging"))
+    console.log('legId', this.state.legId)
+    console.log('lodgingId', this.state.lodgingId)
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>

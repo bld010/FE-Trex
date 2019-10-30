@@ -296,7 +296,7 @@ export const patchLodging = async lodgingInfo => {
         arrivalDate: "${arrivalDate}",
         departureDate: "${departureDate}",
         city: "${city}",
-        legId: ${legId}  
+        legId: ${legId}
       })
     {
       lodging {
