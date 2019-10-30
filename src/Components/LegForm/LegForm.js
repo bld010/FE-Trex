@@ -231,14 +231,6 @@ export default class LegForm extends Component {
           }}
           onDateChange={(date) => {this.setState({endDate: date})}}
         />
-        <View style={styles.sideBySideContainer}>
-          <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('AddTransportInfo', {userId: this.state.userId})}>Add Transport</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('AddLodgingInfo', {userId: this.state.userId})}>Add Lodging</Text>
-          </TouchableOpacity>
-          </View>
           <TouchableOpacity onPress={this.handleNewLegSave}>
             <Text style={styles.button}>Save</Text>
           </TouchableOpacity>
