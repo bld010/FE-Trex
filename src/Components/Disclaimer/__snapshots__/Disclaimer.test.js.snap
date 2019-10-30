@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Disclaimer should match the snapshot when loading 1`] = `
+<View>
+  <Text
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 20,
+        "marginVertical": 40,
+        "textAlign": "center",
+        "width": "auto",
+      }
+    }
+  >
+    This application is designed for your safety.  Please do not add followers  that you do not know or trust!
+  </Text>
+  <TouchableOpacity
+    activeOpacity={0.2}
+  >
+    <Text
+      style={
+        Object {
+          "backgroundColor": "#1C4263",
+          "borderColor": "white",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "color": "white",
+          "fontSize": 30,
+          "height": 60,
+          "margin": 20,
+          "padding": 10,
+          "textAlign": "center",
+          "width": "auto",
+        }
+      }
+    >
+      Continue
+    </Text>
+  </TouchableOpacity>
+</View>
+`;

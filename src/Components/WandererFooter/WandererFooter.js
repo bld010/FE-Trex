@@ -1,25 +1,21 @@
-import React, { Component } from 'react';
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
-  TouchableOpacity
-} from 'react-native';
+import React, { Component } from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 export default class WandererFooter extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      userId: this.props.userId
+    }
   }
   
   render() {
-
 
     return(
       <View style={styles.footer}>
             <TouchableOpacity
             
-            onPress={() => this.props.navigate('MyTrips')}
+            onPress={() => this.props.navigate('MyTrips', { userId: this.state.userId})}
             >
               <Text style={styles.footerText}>Trips</Text>
             </TouchableOpacity>
@@ -30,7 +26,7 @@ export default class WandererFooter extends Component {
             </TouchableOpacity>
             <TouchableOpacity
             
-            onPress={() => this.props.navigate('MyFollowers')}>
+            onPress={() => this.props.navigate('MyFollowers', { userId: this.state.userId})}>
               <Text style={styles.footerText}>Followers</Text>
             </TouchableOpacity>
 
@@ -39,17 +35,16 @@ export default class WandererFooter extends Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   footer: {
-    backgroundColor: '#1C4263',
-    flexDirection: 'row',
+    backgroundColor: "#1C4263",
+    flexDirection: "row",
     padding: 10,
-    justifyContent: 'space-around',
+    justifyContent: "space-around",
     height: 60
-  }, 
+  },
   footerText: {
-    color: 'white',
+    color: "white",
     fontSize: 20
   }
-})
+});

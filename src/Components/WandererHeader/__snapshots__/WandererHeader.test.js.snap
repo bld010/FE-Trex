@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WandererHeader should match the snapshot when loading 1`] = `
+<Fragment>
+  <SafeAreaView
+    style={
+      Object {
+        "backgroundColor": "#1C4263",
+        "flex": 0,
+      }
+    }
+  />
+  <Text
+    style={
+      Object {
+        "backgroundColor": "#1C4263",
+        "color": "white",
+        "fontSize": 40,
+        "height": 60,
+        "paddingLeft": 10,
+        "textAlign": "center",
+      }
+    }
+  >
+    Trex
+  </Text>
+</Fragment>
+`;

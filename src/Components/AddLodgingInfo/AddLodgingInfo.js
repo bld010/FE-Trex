@@ -14,14 +14,15 @@ import {
 } from 'react-native';
 
 export default class AddLodgingInfo extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       countryLodge: '',
       cityLodge: '',
       lodgeName: '',
       startLodge: '',
-      endLodge: ''
+      endLodge: '',
+      userId: this.props.navigation.getParam('userId')
     };
   }
 
@@ -186,7 +187,7 @@ export default class AddLodgingInfo extends Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-        <WandererFooter navigate={navigate} />
+        <WandererFooter navigate={navigate} userId={this.state.userId} />
       </View>
     );
   }

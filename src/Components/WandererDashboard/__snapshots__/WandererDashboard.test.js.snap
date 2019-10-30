@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WandererDashboard should match the snapshot when loading 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#000000",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <WandererHeader />
+  <ScrollViewMock>
+    <Weather />
+    <Map />
+  </ScrollViewMock>
+  <WandererFooter
+    navigate={[MockFunction]}
+  />
+</View>
+`;

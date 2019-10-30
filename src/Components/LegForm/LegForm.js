@@ -27,8 +27,7 @@ export default class LegForm extends Component {
       tripId: this.props.navigation.getParam('tripId'),
       leg: this.props.navigation.getParam('leg') || null,
       error: '',
-      user: {id: 1},
-      // we will need to pass this user object dyanmically
+      userId: this.props.navigation.getParam('userId'),
     };
   }
 
@@ -144,8 +143,6 @@ export default class LegForm extends Component {
   }
 
   render() {
-    console.log(this.state.startLocation)
-    console.log(this.state.endLocation)
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
@@ -244,7 +241,7 @@ export default class LegForm extends Component {
           }
     
       </ScrollView>
-      <WandererFooter navigate={navigate} />
+      <WandererFooter navigate={navigate} userId={this.state.userId} />
       </View>
       
     );

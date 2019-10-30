@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FollowerHeader should match the snapshot when loading 1`] = `
+<Fragment>
+  <SafeAreaView
+    style={
+      Object {
+        "backgroundColor": "#84183B",
+        "flex": 0,
+      }
+    }
+  />
+  <Text
+    style={
+      Object {
+        "backgroundColor": "#84183B",
+        "color": "white",
+        "fontSize": 50,
+        "height": 60,
+        "paddingLeft": 10,
+        "textAlign": "center",
+      }
+    }
+  >
+    Trex
+  </Text>
+</Fragment>
+`;

@@ -14,16 +14,6 @@ export default class Footer extends Component {
         >
           <Text style={styles.footerText}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => this.props.navigate("DefaultFollowerMessages")}
-        >
-          <Text style={styles.footerText}>Messages</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => this.props.navigate("MyWandererTrips")}
-        >
-          <Text style={styles.footerText}>Wanderer Trips</Text>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -31,14 +21,14 @@ export default class Footer extends Component {
 
 const styles = StyleSheet.create({
   footer: {
-    backgroundColor: "#84183B",
-    flexDirection: "row",
-    padding: 30,
-    justifyContent: "space-around"
+    backgroundColor: '#84183B',
+    flexDirection: 'row',
+    padding: 10,
+    justifyContent: 'space-around',
+    height: 60
   },
   footerText: {
     color: "white",
-    marginBottom: 20,
     fontSize: 20
   }
 });

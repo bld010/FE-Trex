@@ -199,9 +199,6 @@ export const patchLeg = async (legInfo) => {
   }
 }
 
-
-
-
 export const deleteLeg = async (legId) => {
 
   let options = {
@@ -231,7 +228,67 @@ export const deleteLeg = async (legId) => {
 
 }
 
+
+export const fetchFollowers = async (wanderer_id) => {
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `{user(id: ${wanderer_id}) {friends { id name role }}}`
+ 
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error fetching your followers')
+    }
+
+    let data = await resp.json();
+
+    return data.data.user.friends;
+
+  } catch (error) {
+    throw error
+  }
+}
+
+
+export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
+ 
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  
+  let queryParams = `{user(id: ${wanderer_id}) {notificationsReceived { unread message senderId }}}`
+ 
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error fetching your messages')
+    }
+
+    let data = await resp.json();
+ 
+    return data.data.user.notificationsReceived;
+
+  } catch (error) {
+    throw error
+  }
+}
+
 export const fetchTransport = async (legId) => {
+
   let options = {
     method: 'POST',
     headers: {
@@ -259,33 +316,42 @@ export const fetchTransport = async (legId) => {
 
 
 export const postNewTransport = async (tranportationInfo) => {
-  console.log('transportation info in the post', transportationInfo)
+      console.log('transportation info in the post', transportationInfo)
+      let options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
 
-  let options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
+      let { legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
+
+      let queryParams = `mutation {createTransportation(input: {mode: "${mode}", arrivalTime: "${arrivalTime}", departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", departureCity: "${departureCity}", legId: "${legId}" }) {transportation {mode departureTime departureCity arrivalTime arrivalCity legId}}}}`
+    
+      let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+    
+      try {
+        let resp = await fetch(url,options)
+        if (!resp.ok) {
+          throw new Error('There was an error saving your transportation information')
+        }
+    
+        let data = await resp.json();
+        console.log(data.data.createTransportation.transporation)
+        return data.data.createTransportation.transportation
+      
+      } catch (error) {
+        throw error
+      }
+    
     }
-  }
 
-  let { legId, mode, arrivalTime, departureTime, arrivalCity, departureCity } = transportationInfo;  
 
-  let queryParams = `mutation {createTransportation(input: {mode: "${mode}", arrivalTime: "${arrivalTime}", departureTime: "${departureTime}", arrivalCity: "${arrivalCity}", departureCity: "${departureCity}", legId: "${legId}" }) {transportation {mode departureTime departureCity arrivalTime arrivalCity legId}}}}`
 
-  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+// export const markMessageRead = async (message_id) => {}
 
-  try {
-    let resp = await fetch(url,options)
-    if (!resp.ok) {
-      throw new Error('There was an error saving your transportation information')
-    }
+// export const sendWandererMessage = async () => {}
 
-    let data = await resp.json();
-    console.log(data.data.createTransportation.transporation)
-    return data.data.createTransportation.transportation
-  
-  } catch (error) {
-    throw error
-  }
+// export const sendFollowerMessage = async () => {}
 
-}
+// export const fetchFollowersIncomingNotivications = async () => {}

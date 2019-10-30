@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WandererFooter should match the snapshot when loading 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#1C4263",
+      "flexDirection": "row",
+      "height": 60,
+      "justifyContent": "space-around",
+      "padding": 10,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 20,
+        }
+      }
+    >
+      Trips
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 20,
+        }
+      }
+    >
+      Safety
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 20,
+        }
+      }
+    >
+      Followers
+    </Text>
+  </TouchableOpacity>
+</View>
+`;

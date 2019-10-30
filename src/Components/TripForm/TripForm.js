@@ -257,7 +257,7 @@ class TripForm extends Component {
             <Text style={styles.buttonText}>{this.state.error}</Text>
           )}
         </ScrollView>
-        <WandererFooter navigate={navigate} />
+        <WandererFooter navigate={navigate} userId={this.state.userId} />
       </View>
     );
   }

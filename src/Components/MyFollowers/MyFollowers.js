@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { 
   StyleSheet, 
   Text, 
@@ -8,27 +8,86 @@ import {
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
+import { fetchFollowers, fetchWanderersIncomingNotifications } from '../../util/apiCalls';
 
-export function MyFollowers(props) {
+export class MyFollowers extends Component {
 
-    const {navigate} = props.navigation;
+    constructor(props) {
+      super(props);
+      this.state = {
+        userId: this.props.navigation.getParam('userId'),
+        messages: null,
+        followers: [],
+        error: ''
+      }
+    }
 
+    generateFollowersElements = () => {
+      let followersElements = this.state.followers.map(follower => {
 
-    return (
-      <View style={styles.container}>
-        <WandererHeader />
-        <ScrollView>
-          <Text style={styles.title}>My Followers</Text>
-          {/* <View>
-            {this.followerElements.length > 0 && this.followerElements}
-          </View> */}
-          <TouchableOpacity style={styles.addFollowerButton}>
-            <Text style={styles.text} onPress={() => navigate('FollowerForm')}>Add a New Follower</Text>
+        let incomingMessagesFromFollower = this.state.messages.filter(message => {
+          return message.senderId == follower.id
+        })
+
+        let unreadMessagesFromFollower = incomingMessagesFromFollower.filter(message => {
+          return message.unread === true
+        })
+
+        console.log('incoming messages', incomingMessagesFromFollower)
+
+        let { navigate } = this.props.navigation;
+        return (
+          <TouchableOpacity 
+            key={this.state.userId+follower.name} 
+            style={styles.followerButton} 
+            onPress={() => navigate('Follower', {
+              follower, 
+              userId: this.state.userId,
+              messages: incomingMessagesFromFollower
+              })}>
+            <Text style={styles.text}>
+              {follower.name}
+              {unreadMessagesFromFollower.length > 0 && <>  ({unreadMessagesFromFollower.length} unread)</>}
+            </Text>
           </TouchableOpacity>
-        </ScrollView>
-        <WandererFooter navigate={navigate} />
-    </View>
-    )
+        )
+      })
+
+      return followersElements;
+    }
+
+
+
+    componentDidMount = async () => {
+      try {
+        let followers = await fetchFollowers(this.state.userId)
+        let messages = await fetchWanderersIncomingNotifications(this.state.userId)
+        this.setState({ followers, messages })
+      } catch (error) {
+        this.setState({ error: 'There was an error fetching your followers'})
+      }
+    }
+
+    render = () => {
+
+      let { navigate } = this.props.navigation
+
+      return (
+        <View style={styles.container}>
+          <WandererHeader />
+          <ScrollView>
+            <Text style={styles.title}>My Followers</Text>
+            {this.state.followers.length === 0 && <Text style={styles.text}>Loading ...</Text>}
+            {this.state.followers.length > 0 && this.state.messages !== null && this.generateFollowersElements()}
+            {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
+            <TouchableOpacity style={styles.addFollowerButton}>
+              <Text style={styles.text} onPress={() => navigate('FollowerForm', {userId: this.state.userId})}>Add a New Follower</Text>
+            </TouchableOpacity>
+          </ScrollView>
+          <WandererFooter navigate={navigate} userId={this.state.userId}/>
+      </View>
+      )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -60,6 +119,23 @@ const styles = StyleSheet.create({
     borderColor: 'white', 
     color: 'white',
     borderRadius: 8,
-    backgroundColor: '#1C4263'
+    backgroundColor: '#1C4263',
+    marginVertical: 30
+  },
+  followerButton: {
+    backgroundColor: '#1C4263',
+    borderWidth: 1,
+    borderColor: 'white', 
+    color: 'white',
+    borderRadius: 8,
+    backgroundColor: '#1C4263',
+    marginVertical: 10,
+    marginHorizontal: 20
+  },
+  error: {
+    color: 'red',
+    textAlign: 'center',
+    paddingVertical: 10,
+    fontSize: 20
   }
 })

@@ -1,42 +1,40 @@
-import React, { Component } from 'react';
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
+import React, { Component } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
   ScrollView,
   TouchableOpacity
-} from 'react-native';
+} from "react-native";
 
-import WandererHeader from '../WandererHeader/WandererHeader';
-import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from "../WandererHeader/WandererHeader";
+import WandererFooter from "../WandererFooter/WandererFooter";
 
 export default class Home extends Component {
   constructor(props) {
     super(props) 
       this.state = {
-
+        userId: 1
       }
   }
 
   render() {
-      const {navigate} = this.props.navigation;
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <WandererHeader />
         <ScrollView>
-          <Text style={styles.text}>Welcome to Ariva</Text>
+          <Text style={styles.text}>Welcome to Trex</Text>
             <Text style={styles.text}>I am a ...</Text>
-            <TouchableOpacity onPress={() => navigate('WandererDashboard')}>
+            <TouchableOpacity onPress={() => navigate('WandererDashboard', {userId: this.state.userId})}>
               <Text style={styles.button}>Wanderer</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigate('FollowerDashboard')}>
-              <Text style={styles.button}>Follower</Text>
+            <TouchableOpacity onPress={() => navigate('FollowerDashboard', {userId: this.state.userId})}>
+              <Text style={styles.followerButton}>Follower</Text>
             </TouchableOpacity>
 
 
         </ScrollView>
-  
-       <WandererFooter navigate={navigate} />
         
     </View>
     )
@@ -46,32 +44,40 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
-  }, 
+    backgroundColor: "#000000"
+  },
   text: {
-    color: 'white',
+    color: "white",
     marginVertical: 40,
-    textAlign: 'center',
-    fontSize: 30,
-    width: 'auto'
-  }, 
+    textAlign: "center",
+    fontSize: 30
+  },
   button: {
-    borderColor: 'white',
+    borderColor: "white",
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: 'solid',
-    width: 'auto',
+    width: "auto",
     height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
-    color: 'white',
-    textAlign: 'center',
-    backgroundColor: '#1C4263',
-    alignItems: 'stretch'
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#1C4263"
+  },
+  followerButton: {
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    width: "auto",
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#84183B",
+    alignItems: "stretch"
   }
 });
-
-
-
-

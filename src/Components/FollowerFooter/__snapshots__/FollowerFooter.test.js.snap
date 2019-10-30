@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FollowerFooter should match the snapshot when loading 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#84183B",
+      "flexDirection": "row",
+      "height": 60,
+      "justifyContent": "space-around",
+      "padding": 10,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 20,
+        }
+      }
+    >
+      Home
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
