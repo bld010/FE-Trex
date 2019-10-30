@@ -98,7 +98,6 @@ export default class AddTransportInfo extends Component {
 
     try {
       let updatedTransportId = await postNewTransport(newTransportInfo)
-      console.log(updatedTransportId)
       return updatedTransportId
     } catch (error) {
       this.setState({error: 'There was an error creating your transporation'})

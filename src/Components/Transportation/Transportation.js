@@ -16,7 +16,7 @@ export default class Transportation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      leg: this.props.navigation.getParam('leg') ,
+      leg: this.props.navigation.getParam('leg'),
       transports: [],
       error: ''
      }
