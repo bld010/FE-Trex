@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
-import {  } from '../../util/apiCalls';
+import { markMessageRead, sendWandererMessage, fetchWanderersIncomingNotifications  } from '../../util/apiCalls';
 
 export default class Follower extends Component {
   constructor(props) {
@@ -18,18 +18,55 @@ export default class Follower extends Component {
       follower: this.props.navigation.getParam('follower'),
       userId: this.props.navigation.getParam('userId'),
       unreadMessages: null,
-      readMessages: null
+      readMessages: null,
+      latitude: null,
+      longitude: null,
+      error: ''
     }
   }
 
-  generateUnreadMessagesElements = () => {
-    
+  sendNewMessage = async () => {
 
-    let unreadMessagesElements = this.state.unreadMessages.map(message => {
+    let message = {
+      senderId: this.state.userId,
+      receiverId: this.state.follower.id,
+      message: `I\'m checking in.`,
+      latitude: this.state.latitude,
+      longitude: this.state.longitude
+    }
+
+    try {
+      let sentMessage = await sendWandererMessage(message)
+      this.setState({ error: '' })
+      this.reQueryAllMessages();
+    } catch (error) {
+      this.setState({ error: 'There was an error sending your message'})
+    }
+
+  }
+
+  markIncomingMessageAsRead = async (incoming_message_id) => {
+    try {
+      let updatedMessage = await markMessageRead(incoming_message_id)
+      this.setState({ error: '' })
+    } catch (error) {
+      this.setState({ error: 'There was an error marking the message as read'})
+    }
+  }
+
+  handleReply = async (incoming_message_id) => {
+    this.markIncomingMessageAsRead(incoming_message_id)
+    this.sendNewMessage()
+  }
+
+  generateUnreadMessagesElements = () => {
+    let unreadMessagesElements = this.state.unreadMessages.map((message, index) => {
       return(
-        <View style={styles.sideBySide}>
+        <View key={this.state.userId + index} style={styles.sideBySide}>
           <Text style={styles.message}>{message.message}</Text>
-          <TouchableOpacity style={styles.respondButton}>
+          <TouchableOpacity 
+            onPress={() => this.handleReply(message.id)}
+            style={styles.respondButton}>
             <Text style={styles.respondButtonText}>Check In</Text>
           </TouchableOpacity>
         </View>
@@ -40,9 +77,9 @@ export default class Follower extends Component {
   }
 
   generateReadMessagesElements = () => {
-    let readMessagesElements = this.state.readMessages.map(message => {
+    let readMessagesElements = this.state.readMessages.map((message, index) => {
       return(
-        <View style={styles.sideBySide}>
+        <View key={this.state.userId + index} style={styles.sideBySide}>
           <Text style={styles.message}>{message.message}</Text>
         </View>
       )
@@ -62,9 +99,29 @@ export default class Follower extends Component {
 
     this.setState({ unreadMessages, readMessages })
   }
+  
+  getPosition = () => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({ 
+          latitude: position.coords.latitude, 
+          longitude: position.coords.longitude });
+        },
+        error => console.log(error.message),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
+    }
+      
+  reQueryAllMessages = async () => {
+    let messages = await fetchWanderersIncomingNotifications(this.state.userId);
+    this.setState({ messages });
+    this.filterMessages();
+  }    
+      
 
   componentDidMount = () => {
     this.filterMessages();
+    this.getPosition();
   }
 
   render = () => {
@@ -96,6 +153,12 @@ export default class Follower extends Component {
               }
             </>
           }
+          {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
+          <TouchableOpacity 
+            onPress={this.sendNewMessage}
+            style={styles.button}>
+            <Text style={styles.text}>Send Check-In</Text>
+          </TouchableOpacity>
         </ScrollView>
         <WandererFooter navigate={navigate} userId={this.state.userId}/>
 
@@ -175,5 +238,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     margin: 20
+  },
+  button: {
+    height: 50,
+    color: 'white',
+    backgroundColor: '#1C4263',
+    margin: 20,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8
   }
 })
