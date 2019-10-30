@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
-import { fetchFollowers } from '../../util/apiCalls';
+import { fetchFollowers, fetchWanderersIncomingNotifications } from '../../util/apiCalls';
+import { withNavigationFocus } from 'react-navigation';
 
 export class MyFollowers extends Component {
 
@@ -16,6 +17,7 @@ export class MyFollowers extends Component {
       super(props);
       this.state = {
         userId: this.props.navigation.getParam('userId'),
+        messages: null,
         followers: [],
         error: ''
       }
@@ -24,11 +26,28 @@ export class MyFollowers extends Component {
     generateFollowersElements = () => {
       let followersElements = this.state.followers.map(follower => {
 
-        let { navigate } = this.props.navigation;
+        let incomingMessagesFromFollower = this.state.messages.filter(message => {
+          return message.senderId == follower.id
+        })
 
+        let unreadMessagesFromFollower = incomingMessagesFromFollower.filter(message => {
+          return message.unread === true
+        })
+
+        let { navigate } = this.props.navigation;
         return (
-          <TouchableOpacity key={this.state.userId+follower.name}style={styles.followerButton} onPress={() => navigate('Follower', {follower, userId: this.state.userId})}>
-            <Text style={styles.text}>{follower.name}</Text>
+          <TouchableOpacity 
+            key={this.state.userId+follower.name} 
+            style={styles.followerButton} 
+            onPress={() => navigate('Follower', {
+              follower, 
+              userId: this.state.userId,
+              messages: incomingMessagesFromFollower
+              })}>
+            <Text style={styles.text}>
+              {follower.name}
+              {unreadMessagesFromFollower.length > 0 && <>  ({unreadMessagesFromFollower.length} unread)</>}
+            </Text>
           </TouchableOpacity>
         )
       })
@@ -36,10 +55,18 @@ export class MyFollowers extends Component {
       return followersElements;
     }
 
+    componentDidUpdate = async (prevProps) => {
+      if (prevProps.isFocused !== this.props.isFocused) {
+        this.componentDidMount();
+      }
+    }
+
     componentDidMount = async () => {
       try {
         let followers = await fetchFollowers(this.state.userId)
-        this.setState({ followers })
+        let messages = await fetchWanderersIncomingNotifications(this.state.userId)
+        console.log(this.state)
+        this.setState({ followers, messages })
       } catch (error) {
         this.setState({ error: 'There was an error fetching your followers'})
       }
@@ -55,7 +82,7 @@ export class MyFollowers extends Component {
           <ScrollView>
             <Text style={styles.title}>My Followers</Text>
             {this.state.followers.length === 0 && <Text style={styles.text}>Loading ...</Text>}
-            {this.state.followers.length > 0 && this.generateFollowersElements()}
+            {this.state.followers.length > 0 && this.state.messages !== null && this.generateFollowersElements()}
             {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
             <TouchableOpacity style={styles.addFollowerButton}>
               <Text style={styles.text} onPress={() => navigate('FollowerForm', {userId: this.state.userId})}>Add a New Follower</Text>
@@ -116,3 +143,5 @@ const styles = StyleSheet.create({
     fontSize: 20
   }
 })
+
+export default withNavigationFocus(MyFollowers)
