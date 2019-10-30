@@ -9,6 +9,7 @@ import {
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
 import { fetchFollowers, fetchWanderersIncomingNotifications } from '../../util/apiCalls';
+import { withNavigationFocus } from 'react-navigation';
 
 export class MyFollowers extends Component {
 
@@ -54,12 +55,17 @@ export class MyFollowers extends Component {
       return followersElements;
     }
 
-
+    componentDidUpdate = async (prevProps) => {
+      if (prevProps.isFocused !== this.props.isFocused) {
+        this.componentDidMount();
+      }
+    }
 
     componentDidMount = async () => {
       try {
         let followers = await fetchFollowers(this.state.userId)
         let messages = await fetchWanderersIncomingNotifications(this.state.userId)
+        console.log(this.state)
         this.setState({ followers, messages })
       } catch (error) {
         this.setState({ error: 'There was an error fetching your followers'})
@@ -137,3 +143,5 @@ const styles = StyleSheet.create({
     fontSize: 20
   }
 })
+
+export default withNavigationFocus(MyFollowers)

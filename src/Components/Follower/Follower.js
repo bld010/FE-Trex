@@ -39,7 +39,6 @@ export default class Follower extends Component {
       let sentMessage = await sendWandererMessage(message)
       this.setState({ error: '' })
       this.reQueryAllMessages();
-      // Fire a re-render of unread and read messages here and on MyFollowers (and Footer?)
     } catch (error) {
       this.setState({ error: 'There was an error sending your message'})
     }
