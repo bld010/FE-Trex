@@ -384,12 +384,7 @@ export const fetchFollowers = async (wanderer_id) => {
   } catch (error) {
     throw error;
   }
-<<<<<<< HEAD
-=======
 };
-
->>>>>>> 491ee668c7ad17c6afda1ea59233a30804959775
-}
 
 
 export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
@@ -607,8 +602,5 @@ export const deleteTransport = async (transportationId) => {
 
 // export const fetchFollowersIncomingNotifications = async () => {}
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 491ee668c7ad17c6afda1ea59233a30804959775
