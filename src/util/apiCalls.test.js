@@ -7,7 +7,8 @@ import {
   patchLeg,
   deleteTrip,
   deleteLeg, 
-  fetchFollowers
+  fetchFollowers,
+  postNewLodging,
 } from './apiCalls';
 
 describe('apiCalls', () => {
@@ -904,6 +905,96 @@ describe('apiCalls', () => {
 
 })
 
+describe('postNewLodging', () => {
+  
+  let mockFetch;
+  let url;
+  let options;
+  let mockLodgingInfo;
+
+  beforeEach(() => {
+    mockFetch = jest.fn()
+    global.fetch = mockFetch;
+
+    mockLodgingInfo = {
+      name: "Queen Anne Hotel",
+      arrivalDate: "2019-10-11", 
+      departureDate: "2019-10-20",
+      city: "San Francisco",
+      legId: 2,
+    }
+
+    let queryParams = `mutation {
+      createLodging(
+        input: {
+          name: 'Queen Anne Hotel',
+          arrivalDate: '2019-10-11',
+          departureDate: '2019-10-20',
+          city: 'San Francisco',
+          legId: 2  
+        })
+      {
+        lodging {
+          legId
+        }
+      }
+    }`
+    
+    url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+    
+    options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    } 
+  })
+
+  it('should call fetch with proper url and query params', async () => {
+
+    mockFetch.mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => { 
+          return (
+            { data: {
+              createLodging: {
+                  lodging:{}
+                }
+              }
+            }
+          )}
+        })
+      })
+
+      await postNewLodging(mockLodgingInfo)
+
+      expect(mockFetch).toHaveBeenCalledWith(url, options)
+  })
+
+  it('should return a lodging object when successful (HAPPY)', async () => {
+
+    mockFetch.mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => { 
+          return (
+            { data: {
+              createLodging: {
+                lodging: {...mockLodgingInfo, id: 2}
+                }
+              }
+            }
+          )}
+        })
+      })
+
+      let expected = {...mockLodgingInfo, id: 2}
+
+      await expect(postNewLodging(mockLodgingInfo)).resolves.toEqual(expected)
+
+  })
+})
 
 
 

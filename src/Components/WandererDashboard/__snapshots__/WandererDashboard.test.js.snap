@@ -13,7 +13,35 @@ exports[`WandererDashboard should match the snapshot when loading 1`] = `
 >
   <WandererHeader />
   <ScrollViewMock>
-    <Weather />
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "borderColor": "white",
+            "borderRadius": 8,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "color": "white",
+            "fontSize": 20,
+            "height": 200,
+            "marginVertical": 15,
+            "textAlign": "center",
+            "width": 170,
+          }
+        }
+      >
+        Emergency Call
+      </Text>
+      <Weather />
+    </View>
     <Map />
   </ScrollViewMock>
   <WandererFooter

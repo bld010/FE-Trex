@@ -34,7 +34,7 @@ export default class AddLodgingInfo extends Component {
 
   componentDidMount = () => {
     if (this.state.lodging) {
-      let { name, arrivalDate, departureDate, city } = this.state.leg;
+      let { name, arrivalDate, departureDate, city } = this.state.lodging;
       this.setState({
         name,
         arrivalDate,
@@ -131,6 +131,8 @@ export default class AddLodgingInfo extends Component {
   };
 
   render() {
+    console.log('legId', this.props.navigation.getParam("legId"))
+    console.log('boo', this.props.navigation.getParam("lodging"))
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>

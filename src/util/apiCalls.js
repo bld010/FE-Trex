@@ -206,83 +206,76 @@ export const deleteLeg = async legId => {
   }
 };
 
-export const postNewLodging = async lodgingInfo => {
+export const fetchLodging = async legId => {
+
   let options = {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     }
-  };
-  let { name, arrivalDate, departureDate, city, legId } = lodgingInfo;
+  }
 
-  let queryParams = `mutation {createLodging(input: {name: "${name}", arrivalDate: "${arrivalDate}", departureDate: "${departureDate}", city: "${city}", legId: ${legId}}) {lodging{legId}}}`;
-
-  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`;
+  let queryParams = `{leg(id: ${legId}) {lodgings {name arrivalDate departureDate city legId}}}`
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
   try {
-    let resp = await fetch(url, options);
+    let resp = await fetch(url, options)
     if (!resp.ok) {
-      throw new Error("There was an error creating your lodging");
+      throw new Error('There was an error fetching your lodging')
     }
 
     let data = await resp.json();
-    return data.data.createLodging.lodging;
+    let lodgings = data.data.leg.lodgings;
+    return lodgings;
+
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
 
-export const patchLodging = async lodgingInfo => {
+export const postLodging = async lodgingInfo => {
+
   let options = {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     }
-  };
+  }
 
-  let { name, arrivalDate, departureDate, city, legId } = lodgingInfo;
+  let { legId, name, arrivalDate, departureDate, city } = lodgingInfo;
 
-  let queryParams = `mutation {updateLodging(input: {id: ${id}, name: "${name}", arrivalDate: "${arrivalDate}", departureDate: "${departureDate}", city: "${city}", legId: ${legId}}) {lodging{legId}}}`;
+  let queryParams = `mutation {
+    createLodging(
+      input: {
+        name: "${name}",
+        arrivalDate: "${arrivalDate}",
+        departureDate: "${departureDate}",
+        city: "${city}",
+        legId: ${legId} 
+      })
+    {
+      lodging {
+        legId
+      }
+    }
+  }`
 
-  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`;
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
   try {
-    let resp = await fetch(url, options);
+    let resp = await fetch(url,options)
     if (!resp.ok) {
-      throw new Error("There was an error editing your lodging");
-    }
-    let data = await resp.json();
-    return data.data.updateLodging.lodging;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const deleteLodging = async id => {
-  let options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-
-  let queryParams = `mutation {removeLodging(input: {id: "${id}"}) {lodging {legId}}}`;
-
-  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`;
-
-  try {
-    let resp = await fetch(url, options);
-
-    if (!resp.ok) {
-      throw new Error("There was an error deleting your lodging");
+      throw new Error('There was an error saving your lodging')
     }
 
     let data = await resp.json();
-    return data.data.removeLodging.lodging;
+    let lodging = data.data.createLodging.lodging
+    return lodging
+
   } catch (error) {
-    throw error;
-  }
-};
+    throw error
+    }
+}
 
 export const fetchFollowers = async wanderer_id => {
   let options = {
