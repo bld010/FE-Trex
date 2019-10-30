@@ -124,7 +124,7 @@ export default class AddTransportInfo extends Component {
               this.state.mode || 'Enter Mode of Travel...'
               }
               placeholderTextColor='black'
-              onChangeText={name => this.setState({ mode })}
+              onChangeText={mode => this.setState({ mode })}
               value={this.state.mode}
               onBlur={Keyboard.dismiss}
             />
