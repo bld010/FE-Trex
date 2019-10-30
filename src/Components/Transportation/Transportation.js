@@ -8,17 +8,18 @@ import {
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
+import { withNavigationFocus } from 'react-navigation';
 import { fetchTransport } from '../../util/apiCalls'
 
 
-
-export default class Transportation extends Component {
+class Transportation extends Component {
   constructor(props) {
     super(props);
     this.state = {
       leg: this.props.navigation.getParam('leg'),
       transports: [],
-      error: ''
+      error: '',
+      existingLegId: this.props.navigation.getParam('existingLegId') || null
      }
   }
   
@@ -28,6 +29,21 @@ export default class Transportation extends Component {
       this.setState({transports})
     } catch (error) {
       this.setState({error: 'There was an error fetching your tranportation'})
+    }
+  }
+
+  refetchTransport = async () => {
+    try {
+      let updatedTransportation = await fetchTransport(this.state.existingLegId)
+      this.setState({transports: updatedTransportation})
+    } catch (error) {
+      this.setState({error: 'There was a problem update the transportation of this leg'})
+    }   
+  }
+
+  componentDidUpdate = async (prevProps) => {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this.refetchTransport();
     }
   }
 
@@ -181,3 +197,4 @@ const styles = StyleSheet.create({
 });
 
 
+export default withNavigationFocus(Transportation)

@@ -91,12 +91,12 @@ export default class AddTransportInfo extends Component {
     let formIsFilledCorrectly = this.checkTransportParams();
     if (formIsFilledCorrectly) {
       updatedLegId = await this.createNewTransportation()
-      this.props.navigation.navigate('Transportation', {legId: updatedLegId})
+      this.props.navigation.navigate('Transportation', {existingLegId: updatedLegId})
 
       }
     } else {
       updatedLegId = await this.editTransportation()
-      this.props.navigation.navigate('Transporation', {legId: updatedLegId})
+      this.props.navigation.navigate('Transporation', {existingLegId: updatedLegId})
     }
   }
 
@@ -373,3 +373,4 @@ const styles = StyleSheet.create({
     backgroundColor: "red"
   },
 });
+
