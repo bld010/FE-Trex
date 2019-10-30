@@ -163,6 +163,9 @@ export default class AddTransportInfo extends Component {
           <View>
             <Text style={styles.title}>Add Transportation</Text>
             </View>
+            <View>
+            <Text style={styles.label}>Mode of Travel</Text>
+            </View>
               <TextInput
               style={styles.inputMode}
               placeholder={
@@ -178,7 +181,35 @@ export default class AddTransportInfo extends Component {
             <Text style={styles.label}>End Destination</Text>
             <MapInputSecond handlerSecondInput={this.handlerSecondInput.bind(this)} />
             <Text style={styles.text}>Travel Times</Text>
-            <DatePicker
+              <View>
+              <Text style={styles.text}>Departure Time</Text>
+              <TextInput
+              style={styles.inputMode}
+              placeholder={
+              this.state.departureTime || 'Enter Departure Time...'
+              }
+              placeholderTextColor='black'
+              onChangeText={mode => this.setState({ departureTime })}
+              value={this.state.departureTime}
+              onBlur={Keyboard.dismiss}
+              >
+              </TextInput>
+              </View>
+              <View>
+              <Text style={styles.text}>Arrival Time</Text>
+              <TextInput
+              style={styles.inputMode}
+              placeholder={
+              this.state.arrivalTime || 'Enter Arrival Time...'
+              }
+              placeholderTextColor='black'
+              onChangeText={mode => this.setState({ arrivalTime })}
+              value={this.state.arrivalTime}
+              onBlur={Keyboard.dismiss}
+              >
+              </TextInput>
+              </View>
+            {/* <DatePicker
               style={{ width: 370, height: 65 }}
               date={this.state.departureTime}
               mode='date'
@@ -251,7 +282,7 @@ export default class AddTransportInfo extends Component {
               onDateChange={date => {
                 this.setState({ arrivalTime: date });
               }}
-            />
+            /> */}
 
             {this.state.error !== '' && 
               <Text style={styles.error}>{this.state.error}</Text>
