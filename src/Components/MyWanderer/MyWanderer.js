@@ -17,7 +17,8 @@ export default class MyWanderer extends Component {
     this.state = {
       wanderer: this.props.navigation.getParam('wanderer'),
       userId: this.props.navigation.getParam('userId'),
-      messages: this.props.navigation.getParam('messages') || []
+      messages: this.props.navigation.getParam('messages') || [],
+      readVerification: false
     }
   }
 
@@ -26,6 +27,7 @@ export default class MyWanderer extends Component {
       let updatedMessage = await markMessageRead(message_id)
       this.setState({ error: '' });
       this.reQueryMessages();
+      this.showReadVerification();
     } catch (error) {
       this.setState({ error: 'There was an error marking the message as read'})
     }
@@ -74,6 +76,13 @@ export default class MyWanderer extends Component {
   }
 
 
+  showReadVerification = () => {
+    this.setState({ readVerification: true})
+
+    setTimeout(() => {
+      this.setState({ readVerification: false})
+    }, 5000)
+  }
 
   render() {
     const {navigate} = this.props.navigation;
@@ -86,7 +95,12 @@ export default class MyWanderer extends Component {
           
           <Text style={styles.text}>Unread Messages</Text>
 
-
+          {this.state.readVerification === true && 
+          
+            <View style={styles.messageContainer}>
+              <Text style={styles.message}>Marked as Read</Text>
+            </View>
+          }
           {this.generateUnreadMessagesElements()}
 
 
