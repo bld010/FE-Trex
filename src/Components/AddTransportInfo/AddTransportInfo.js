@@ -27,12 +27,13 @@ export default class AddTransportInfo extends Component {
       legId: this.props.navigation.getParam('legId'),
       leg: this.props.navigation.getParam('leg'),
       transportId: this.props.navigation.getParam('transportId') || null,
+      transport: this.props.navigation.getParam('transport')
     };
   }
 
   componentDidMount = () => {
-    if (this.state.leg) { 
-      let  {mode, arrivalTime, departureTime, arrivalCity, departureCity,} = this.state.leg
+    if (this.state.transport) { 
+      let  {mode, arrivalTime, departureTime, arrivalCity, departureCity,} = this.state.transport
       this.setState({
         mode,
         arrivalTime,
@@ -128,6 +129,8 @@ export default class AddTransportInfo extends Component {
       legId,
       transportId
     }
+
+    console.log('edit click editedTransportInfo', editedTransportInfo)
     try {
       let editedTransportId = await patchTransport(editedTransportInfo)
       return editedTransportId
@@ -149,6 +152,7 @@ export default class AddTransportInfo extends Component {
 
 
   render() {
+    console.log(this.state.transport)
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
@@ -255,11 +259,11 @@ export default class AddTransportInfo extends Component {
               <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
 
-            {/* {this.props.navigation.getParam('leg') && 
+            {this.props.navigation.getParam('transport') && 
           <TouchableOpacity style={styles.deleteButton} onPress={this.removeTransportation}>
           <Text style={styles.buttonText}>Delete Transportation</Text>
           </TouchableOpacity>
-          } */}
+          }
         </ScrollView>
         <WandererFooter navigate={navigate} userId={this.state.userId} />
       </View>
@@ -353,5 +357,18 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     marginVertical: 15
-  }
+  },
+  deleteButton: {
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    width: "auto",
+    height: 60,
+    margin: 20,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "red"
+  },
 });

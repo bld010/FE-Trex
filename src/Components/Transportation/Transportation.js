@@ -40,7 +40,7 @@ export default class Transportation extends Component {
           <Text style={styles.text}>Depart {transport.departureCity} at {transport.departureTime}</Text>
           <Text style={styles.text}>Arrive {transport.arrivalCity} at {transport.arrivalTime}</Text>
           <TouchableOpacity key={index + transport.id} style={styles.tripButton}>
-            <Text onPress={() => navigate('AddTransportInfo', {leg: this.state.leg, legId: this.state.leg.id, transportId: transport.id})} style={styles.text} key={transport.id}>Edit</Text>
+            <Text onPress={() => navigate('AddTransportInfo', {leg: this.state.leg, legId: this.state.leg.id, transportId: transport.id, transport: transport})} style={styles.text} key={transport.id}>Edit Transportation Info</Text>
           </TouchableOpacity>
         </View>
     )
