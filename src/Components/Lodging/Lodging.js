@@ -41,7 +41,6 @@ class Lodging extends Component {
   displayLodging = () => {
     const {navigate} = this.props.navigation;
     return this.state.lodgings.map((lodging, index) => {
-      console.log(lodging)
       return (
         <View style={styles.borderContainer}>
           <Text style={styles.headerText}>{lodging.name} details</Text>

@@ -132,8 +132,6 @@ export default class AddLodgingInfo extends Component {
   };
 
   render() {
-    console.log('legId', this.state.legId)
-    console.log('lodgingId', this.state.lodgingId)
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>

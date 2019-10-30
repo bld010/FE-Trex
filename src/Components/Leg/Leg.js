@@ -15,7 +15,6 @@ export const Leg = (props) => {
   let { startLocation, endLocation, startDate, endDate} = props.navigation.getParam('leg')
   let  tripId  = props.navigation.getParam('tripId')
   let leg = props.navigation.getParam('leg')
-  console.log('heyo', props.navigation.getParam('lodging'))
   return (
       <View style={styles.container}>
 
