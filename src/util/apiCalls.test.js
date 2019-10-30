@@ -1050,19 +1050,19 @@ describe('apiCalls', () => {
       let mockTransportations = [{
         "id": 1,
         "mode": "bus",
-        "departureTime": "Paris",
+        "departureTime": "2019-07-11",
         "departureCity": "Rome",
         "arrivalTime": "2020-01-02",
-        "arrivalCity": "2019-07-11",
+        "arrivalCity": "Paris",
         "legId": "1"
       },
       {
         "id": 2,
         "mode": "flight",
-        "departureTime": "Rome",
+        "departureTime": "2019-10-15",
         "departureCity": "Denver",
         "arrivalTime": "2021-02-20",
-        "arrivalCity": "2019-10-15",
+        "arrivalCity": "Rome",
         "legId": "1"
       }]
 
@@ -1081,12 +1081,8 @@ describe('apiCalls', () => {
           })
         })
 
-      // let response = await fetchTransport(1)
 
       await expect(fetchTransport(1)).resolves.toEqual(mockTransportations)
-
-
-      // expect(response).toEqual(mockTransportations)
 
     })
 
@@ -1113,6 +1109,107 @@ describe('apiCalls', () => {
     })
   })
 
+  describe('postNewTransport', () => {
+
+    let mockFetch;
+    let url;
+    let options;
+    let mockTripInfo;
+
+    beforeEach(() => {
+      mockFetch = jest.fn()
+      global.fetch = mockFetch;
+
+      mockTransportInfo = {
+          mode: "flight",
+          departureTime: "2019-10-15",
+          departureCity: "Denver",
+          arrivalTime: "2021-02-20",
+          arrivalCity: "Rome",
+          legId: "1"
+      }
+      
+      let queryParams = `mutation {createTransportation(input: {mode: "flight",  departureCity: "Denver",  departureTime: "2019-10-15", arrivalCity: "Rome", arrivalTime: "2021-02-20", legId: 1 }) {transportation {legId}}}`
+
+      url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+      
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      } 
+    })
+
+    it('should call fetch with proper url and query params', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                  createTransportation: {
+                    transportation: {}
+                  }
+                }
+              }
+            )}
+          })
+        })
+
+        await postNewTransport(mockTransportInfo)
+
+        expect(mockFetch).toHaveBeenCalledWith(url, options)
+
+    })
+
+    it('should return a legId when successful (HAPPY)', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                createTransportation: {
+                  transportation: {legId: 1}
+                }
+              }
+              }
+            )}
+          })
+        })
+
+        let expected = {legId: 1}
+
+        await expect(postNewTransport(mockTransportInfo)).resolves.toEqual(expected)
+
+    })
+
+    it('should return an error if response status is not ok (SAD)', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+          })
+        })
+
+      await expect(postNewTransport(mockTransportInfo)).rejects.toEqual(Error('There was an error saving your transportation information'))
+
+    })
+
+    it('should return an error if the fetch fails (SAD)', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error creating your transportation'))
+      })
+
+      await expect(postNewTransport(mockTransportInfo)).rejects.toEqual(Error('There was an error creating your transportation'))
+
+
+    })
+  })
 
 
 
