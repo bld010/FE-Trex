@@ -25,7 +25,10 @@ export default class WandererDashboard extends Component {
   <View style={styles.container}>
     <WandererHeader />
     <ScrollView>
+      <View style={styles.topContainer}>
+      <Text style={styles.textEmergency}>Emergency Call</Text>
       <Weather />
+      </View>
       <Map />
     </ScrollView>
     <WandererFooter navigate={navigate} userId={this.props.navigation.getParam('userId')}/>
@@ -48,7 +51,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
     alignItems: 'stretch',
     justifyContent: 'flex-start'
-    
+  },
+  textEmergency: {
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: 'solid',
+    color: 'white',
+    height: 200,
+    marginVertical: 15,
+    textAlign: 'center',
+    fontSize: 20,
+    width: 170
+  },
+  topContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
-
 });

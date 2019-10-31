@@ -10,20 +10,21 @@ import FollowerHeader from '../FollowerHeader/FollowerHeader';
 import FollowerFooter from '../FollowerFooter/FollowerFooter';
 
 export default class FollowerMessageHistory extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
 
     }
   }
   render() {
+    const {navigate} = this.props.navigation;
     return(
       <View style={styles.container}>
         <FollowerHeader />
         <ScrollView>
           <Text style={styles.text}>Message history with selected wanderer</Text>
         </ScrollView>
-        <FollowerFooter />
+        <FollowerFooter navigate={navigate}/>
       </View>
     )
   }
