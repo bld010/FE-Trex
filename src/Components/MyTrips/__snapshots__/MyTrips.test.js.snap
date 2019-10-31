@@ -38,6 +38,14 @@ exports[`MyTrips should match the snapshot when loading 1`] = `
       >
         Loading ...
       </Text>
+      <Image
+        alt="Loading..."
+        source={
+          Object {
+            "testUri": "../../../assets/wanderer_spinner.gif",
+          }
+        }
+      />
     </View>
     <TouchableOpacity
       activeOpacity={0.2}

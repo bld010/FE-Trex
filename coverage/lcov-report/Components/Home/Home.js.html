@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">71.43% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>5/7</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>2/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">71.43% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>5/7</span>
       </div>
     </div>
     <p class="quiet">
@@ -120,7 +120,16 @@
 <a name='L72'></a><a href='#L72'>72</a>
 <a name='L73'></a><a href='#L73'>73</a>
 <a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -141,6 +150,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -194,38 +204,47 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
   ScrollView,
   TouchableOpacity
-} from 'react-native';
+} from "react-native";
 &nbsp;
-import WandererHeader from '../WandererHeader/WandererHeader';
-import WandererFooter from '../WandererFooter/WandererFooter';
+import WandererHeader from "../WandererHeader/WandererHeader";
+import WandererFooter from "../WandererFooter/WandererFooter";
 &nbsp;
 export default class Home extends Component {
   constructor(props) {
     super(props) 
       this.state = {
-&nbsp;
+        userId: 1
       }
   }
 &nbsp;
   render() {
+    const {navigate} = this.props.navigation;
     return (
       &lt;View style={styles.container}&gt;
         &lt;WandererHeader /&gt;
         &lt;ScrollView&gt;
-          &lt;Text style={styles.text}&gt;Welcome to Ariva&lt;/Text&gt;
+          &lt;Text style={styles.text}&gt;Welcome to Trex&lt;/Text&gt;
             &lt;Text style={styles.text}&gt;I am a ...&lt;/Text&gt;
-            &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >navigate('WandererDashboard')}</span>&gt;
+            &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >navigate('WandererDashboard', {userId: this.state.userId})}</span>&gt;
               &lt;Text style={styles.button}&gt;Wanderer&lt;/Text&gt;
             &lt;/TouchableOpacity&gt;
-            &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >navigate('FollowerDashboard')}</span>&gt;
-              &lt;Text style={styles.button}&gt;Follower&lt;/Text&gt;
+            &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >navigate('FollowerDashboard', {userId: this.state.userId})}</span>&gt;
+              &lt;Text style={styles.followerButton}&gt;Follower&lt;/Text&gt;
             &lt;/TouchableOpacity&gt;
 &nbsp;
 &nbsp;
@@ -239,42 +258,50 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
-  }, 
+    backgroundColor: "#000000"
+  },
   text: {
-    color: 'white',
+    color: "white",
     marginVertical: 40,
-    textAlign: 'center',
-    fontSize: 30,
-    width: 'auto'
-  }, 
+    textAlign: "center",
+    fontSize: 30
+  },
   button: {
-    borderColor: 'white',
+    borderColor: "white",
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: 'solid',
-    width: 'auto',
+    width: "auto",
     height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
-    color: 'white',
-    textAlign: 'center',
-    backgroundColor: '#1C4263',
-    alignItems: 'stretch'
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#1C4263"
+  },
+  followerButton: {
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    width: "auto",
+    height: 60,
+    margin: 20,
+    fontSize: 30,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#84183B",
+    alignItems: "stretch"
   }
 });
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 29 2019 14:29:42 GMT-0600 (MDT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 30 2019 16:45:40 GMT-0600 (MDT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

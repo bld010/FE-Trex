@@ -1,8 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import DatePicker from "react-native-datepicker";
-import MapInputFirst from '../MapInput/MapInputFirst'
-import WandererHeader from '../WandererHeader/WandererHeader';
-import WandererFooter from '../WandererFooter/WandererFooter';
+import MapInputFirst from "../MapInput/MapInputFirst";
+import WandererHeader from "../WandererHeader/WandererHeader";
+import WandererFooter from "../WandererFooter/WandererFooter";
+import {
+  postNewLodging,
+  patchLodging,
+  deleteLodging
+} from "../../util/apiCalls";
 import {
   StyleSheet,
   Text,
@@ -11,60 +16,120 @@ import {
   TouchableOpacity,
   Keyboard,
   TextInput
-} from 'react-native';
+} from "react-native";
 
 export default class AddLodgingInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      countryLodge: '',
-      cityLodge: '',
-      lodgeName: '',
-      startLodge: '',
-      endLodge: '',
-      userId: this.props.navigation.getParam('userId')
+      city: "",
+      name: "",
+      arrivalDate: "",
+      departureDate: "",
+      legId: this.props.navigation.getParam('legId'),
+      leg: this.props.navigation.getParam('leg'),
+      lodgingId: this.props.navigation.getParam('lodgingId') || null,
+      lodging: this.props.navigation.getParam('lodging'),
+      userId: this.props.navigation.getParam("userId")
     };
   }
 
+  componentDidMount = () => {
+    if (this.state.lodging) {
+      let { name, arrivalDate, departureDate, city } = this.state.lodging;
+      this.setState({
+        name,
+        arrivalDate,
+        departureDate,
+        city
+      });
+    }
+  };
+
   handlerFirstInput(arg) {
     this.setState({
-      cityLodge: arg
+      city: arg
     });
     return;
   }
-  
+
   checkLodgingParams = () => {
-    let { 
-      countryLodge, 
-      cityLodge,
-      lodgeName,
-      startLodge,
-      endLodge
-    } = this.state;
+    let { city, name, arrivalDate, departureDate } = this.state;
 
     if (
-      countryLodge === '' ||
-      cityLodge === '' ||
-      lodgeName === '' ||
-      startLodge === '' ||
-      endLodge === ''
+      city === "" ||
+      name === "" ||
+      arrivalDate === "" ||
+      departureDate === ""
     ) {
-      this.setState({ error: 'Please fill out all fields'})
+      this.setState({ error: "Please fill out all fields" });
       return false;
     } else {
-      this.setState({ error: ''});
+      this.setState({ error: "" });
       return true;
     }
-  }
+  };
 
   handleSave = async () => {
-    
-    let formIsFilledCorrectly = this.checkLodgingParams();
-    if (formIsFilledCorrectly) {
-      //fire post call here
-    }
+    let updatedLegId;
 
-  }
+    if (!this.props.navigation.getParam("lodgingId")) {
+      let formIsFilledCorrectly = this.checkLodgingParams();
+      if (formIsFilledCorrectly) {
+        updatedLegId = await this.createNewLodging();
+        this.props.navigation.navigate('Lodging');
+      }
+    } else {
+      updatedLegId = await this.editLodging();
+      this.props.navigation.navigate('Lodging')
+    }
+  };
+
+  createNewLodging = async () => {
+    let { name, city, arrivalDate, departureDate, legId } = this.state;
+    let newLodgingInfo = {
+      name,
+      city,
+      arrivalDate,
+      departureDate,
+      legId
+    };
+
+    try {
+      let updatedLegId = await postNewLodging(newLodgingInfo);
+      return updatedLegId;
+    } catch (error) {
+      this.setState({ error: "There was an error creating your lodging" });
+    }
+  };
+
+  editLodging = async () => {
+    let { name, city, arrivalDate, departureDate, legId, lodgingId } = this.state;
+
+    let editedLodgingInfo = {
+      name,
+      city,
+      arrivalDate,
+      departureDate,
+      legId,
+      lodgingId
+    };
+    try {
+      let editedLegId = await patchLodging(editedLodgingInfo);
+      return editedLegId;
+    } catch (error) {
+      this.setState({ error: "There was an error editing your lodging" });
+    }
+  };
+
+  removeLodging = async () => {
+    try {
+      let deletedLodging = await deleteLodging(this.state.lodgingId);
+      this.props.navigation.navigate("Lodging");
+    } catch (error) {
+      this.setState({ error: "There was an error deleting your lodging" });
+    }
+  };
 
   render() {
     const { navigate } = this.props.navigation;
@@ -74,44 +139,35 @@ export default class AddLodgingInfo extends Component {
         <ScrollView>
           <View style={styles.inputContainer}>
             <View>
-              <Text style={styles.title}>Add Lodging</Text>
-            </View>
-            <Text style={styles.label}>Country</Text>
-            <View style={styles.form}>
-              <TextInput
-                style={styles.input}
-                placeholder='Enter Country of Stay...'
-                placeholderTextColor='black'
-                maxLength={20}
-                onBlur={Keyboard.dismiss}
-                value={this.state.countryLodge}
-                onChangeText={countryLodge => this.setState({ countryLodge })}
-              />
+            {this.state.lodging === null &&<Text style={styles.title}>Add Lodging</Text>}
+            {this.state.lodging && <Text style={styles.title}>Edit Lodging</Text>}
             </View>
             <Text style={styles.labelCity}>City</Text>
-            <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
+            <MapInputFirst
+              handlerFirstInput={this.handlerFirstInput.bind(this)}
+            />
             <Text style={styles.label}>Name</Text>
             <View style={styles.form}>
               <TextInput
                 style={styles.input}
-                placeholder='Enter Lodging Name...'
-                placeholderTextColor='black'
+                placeholder="Enter Lodging Name..."
+                placeholderTextColor="black"
                 maxLength={20}
                 onBlur={Keyboard.dismiss}
-                value={this.state.lodgeName}
-                onChangeText={lodgeName => this.setState({ lodgeName })}
+                value={this.state.name}
+                onChangeText={name => this.setState({ name })}
               />
             </View>
             <Text style={styles.text}>Beginning of Stay</Text>
             <DatePicker
               style={{ width: 370, height: 65 }}
-              date={this.state.startLodge}
-              mode='date'
-              placeholder='Start Date'
-              placeholderTextColor='white'
-              format='MM-DD-YYYY'
-              confirmBtnText='Confirm'
-              cancelBtnText='Cancel'
+              date={this.state.arrivalDate}
+              mode="date"
+              placeholder="Start Date"
+              placeholderTextColor="white"
+              format="MM-DD-YYYY"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
               customStyles={{
                 dateIcon: {
                   left: 0,
@@ -120,15 +176,15 @@ export default class AddLodgingInfo extends Component {
                 dateInput: {
                   marginLeft: 15,
                   color: "black",
-                  backgroundColor: 'white',
+                  backgroundColor: "white",
                   height: 60,
                   borderRadius: 8,
                   borderWidth: 1,
-                  borderColor: "white",
+                  borderColor: "white"
                 },
                 dateText: {
                   fontSize: 22,
-                  color: "black",
+                  color: "black"
                 },
                 placeholderText: {
                   fontSize: 22,
@@ -136,20 +192,20 @@ export default class AddLodgingInfo extends Component {
                 }
               }}
               onDateChange={date => {
-                this.setState({ startLodge: date });
+                this.setState({ arrivalDate: date });
               }}
             />
             <Text style={styles.text}>End of Stay</Text>
             <DatePicker
               style={{ width: 370, height: 65 }}
-              date={this.state.endLodge}
-              mode='date'
-              mode='date'
-              placeholder='Start Date'
-              placeholderTextColor='white'
-              format='MM-DD-YYYY'
-              confirmBtnText='Confirm'
-              cancelBtnText='Cancel'
+              date={this.state.departureDate}
+              mode="date"
+              mode="date"
+              placeholder="Start Date"
+              placeholderTextColor="white"
+              format="MM-DD-YYYY"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
               customStyles={{
                 dateIcon: {
                   left: 0,
@@ -158,15 +214,15 @@ export default class AddLodgingInfo extends Component {
                 dateInput: {
                   marginLeft: 15,
                   color: "black",
-                  backgroundColor: 'white',
+                  backgroundColor: "white",
                   height: 60,
                   borderRadius: 8,
                   borderWidth: 1,
-                  borderColor: "white",
+                  borderColor: "white"
                 },
                 dateText: {
                   fontSize: 22,
-                  color: "black",
+                  color: "black"
                 },
                 placeholderText: {
                   fontSize: 22,
@@ -174,19 +230,24 @@ export default class AddLodgingInfo extends Component {
                 }
               }}
               onDateChange={date => {
-                this.setState({ endLodge: date });
+                this.setState({ departureDate: date });
               }}
             />
-            
-            {this.state.error !== '' && 
+
+            {this.state.error !== "" && (
               <Text style={styles.error}>{this.state.error}</Text>
-            }
+            )}
 
             <TouchableOpacity onPress={this.handleSave}>
               <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
+        {this.props.navigation.getParam('lodging') && 
+          <TouchableOpacity style={styles.deleteButton} onPress={this.removeLodging}>
+          <Text style={styles.buttonText}>Delete Lodging</Text>
+          </TouchableOpacity>
+          }
         <WandererFooter navigate={navigate} userId={this.state.userId} />
       </View>
     );
@@ -196,78 +257,97 @@ export default class AddLodgingInfo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start'
+    backgroundColor: "#000000",
+    alignItems: "stretch",
+    justifyContent: "flex-start"
   },
   inputContainer: {
     marginTop: 15
   },
   title: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 30,
-    color: 'white',
+    color: "white",
     paddingVertical: 25
   },
   text: {
     marginLeft: 20,
     fontSize: 20,
-    color: 'white',
+    color: "white",
     paddingVertical: 15
   },
   input: {
-    backgroundColor: 'white',
-    color: 'black',
+    backgroundColor: "white",
+    color: "black",
     fontSize: 18,
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     marginLeft: 10
   },
   form: {
-    backgroundColor: 'white',
-    borderColor: 'white',
+    backgroundColor: "white",
+    borderColor: "white",
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: 'solid',
+    borderStyle: "solid",
     height: 60,
     width: 350,
-    color: 'white',
+    color: "white",
     padding: 10,
     marginLeft: 15,
     marginBottom: 20
   },
   button: {
-    borderColor: 'white',
+    borderColor: "white",
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: 'solid',
-    width: 'auto',
+    borderStyle: "solid",
+    width: "auto",
     height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
-    color: 'white',
-    textAlign: 'center',
-    backgroundColor: '#1C4263'
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#1C4263"
   },
   label: {
     marginLeft: 20,
     fontSize: 20,
-    color: 'white',
+    color: "white",
     marginBottom: 5
   },
   labelCity: {
     marginLeft: 20,
     fontSize: 20,
-    color: 'white',
+    color: "white",
     marginBottom: -22,
     marginVertical: -10,
     color: "white"
   },
   error: {
-    color: 'white',
+    color: "white",
     fontSize: 25,
-    textAlign: 'center',
+    textAlign: "center",
     marginVertical: 15
+  },
+  deleteButton: {
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    width: "auto",
+    height: 60,
+    margin: 20,
+    padding: 10,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "red"
+  },
+  buttonText: {
+    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 10
   }
 });

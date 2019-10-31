@@ -1,58 +1,212 @@
-export const fetchTrip = async (tripId) => {
+export const fetchTrip = async tripId => {
   let options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     }
-  }
+  };
 
-  let queryParams = `{trip(id: ${tripId}) {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}`
-  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
-  
+  let queryParams = `{trip(id: ${tripId}) {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}`;
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`;
+
   try {
-    let resp = await fetch(url, options)
+    let resp = await fetch(url, options);
     if (!resp.ok) {
-      throw new Error('There was an error fetching your trip')
+      throw new Error("There was an error fetching your trip");
     }
 
     let data = await resp.json();
     let trip = data.data.trip;
     return trip;
-
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
-
-export const fetchMyTrips = async (user_id) => {
+export const fetchMyTrips = async user_id => {
   let options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     }
-  }
+  };
 
-  let queryParams = `{user(id: ${user_id}) {trips {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}}`
+  let queryParams = `{user(id: ${user_id}) {trips {id, name, startDate, endDate legs{startDate endDate id startLocation endLocation tripId}}}}`;
 
-  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`;
 
   try {
-    let resp = await fetch(url, options)
+    let resp = await fetch(url, options);
     if (!resp.ok) {
-      throw new Error('There was an error fetching your trips')
+      throw new Error("There was an error fetching your trips");
     }
 
     let data = await resp.json();
     let trips = data.data.user.trips;
     return trips;
-
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
-export const postNewTrip = async (tripInfo) => {
+export const postNewTrip = async tripInfo => {
+  let options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  let { name, startDate, endDate, userId } = tripInfo;
+
+  let queryParams = `mutation {createTrip(input: {name: "${name}", startDate: "${startDate}", endDate: "${endDate}", userId: ${userId}}) {trip {name startDate endDate id}}}`;
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`;
+
+  try {
+    let resp = await fetch(url, options);
+    if (!resp.ok) {
+      throw new Error("There was an error creating your trip");
+    }
+
+    let data = await resp.json();
+    return data.data.createTrip.trip;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const patchTrip = async tripInfo => {
+  let options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  let { name, startDate, endDate, id } = tripInfo;
+
+  let queryParams = `mutation {updateTrip(input: {name: "${name}", startDate: "${startDate}", endDate: "${endDate}", id: ${id}}) {trip {name startDate endDate id}}}`;
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`;
+
+  try {
+    let resp = await fetch(url, options);
+
+    if (!resp.ok) {
+      throw new Error("There was an error editing your trip");
+    }
+
+    let data = await resp.json();
+    return data.data.updateTrip.trip;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteTrip = async tripId => {
+  let options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  let queryParams = `mutation {removeTrip(input: {id: "${tripId}"}) {trip {name}}}`;
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`;
+
+  try {
+    let resp = await fetch(url, options);
+
+    if (!resp.ok) {
+      throw new Error("There was an error deleting your trip");
+    }
+
+    let data = await resp.json();
+    return data.data.removeTrip.trip;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const postNewLeg = async legInfo => {
+  let options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  let { startLocation, endLocation, startDate, endDate, tripId } = legInfo;
+
+  let queryParams = `mutation {createLeg(input: {startDate: "${startDate}", endDate: "${endDate}", startLocation: "${startLocation}", endLocation: "${endLocation}", tripId: ${tripId}}) {leg{tripId}}}`;
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`;
+
+  try {
+    let resp = await fetch(url, options);
+    if (!resp.ok) {
+      throw new Error("There was an error creating your leg");
+    }
+
+    let data = await resp.json();
+    return data.data.createLeg.leg;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const patchLeg = async legInfo => {
+  let options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  let { startLocation, endLocation, startDate, endDate, tripId, id } = legInfo;
+
+  let queryParams = `mutation {updateLeg(input: {id: ${id}, startDate: "${startDate}", endDate: "${endDate}", startLocation: "${startLocation}", endLocation: "${endLocation}", tripId: ${tripId}}) {leg{tripId}}}`;
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`;
+
+  try {
+    let resp = await fetch(url, options);
+    if (!resp.ok) {
+      throw new Error("There was an error editing your leg");
+    }
+    let data = await resp.json();
+    return data.data.updateLeg.leg;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteLeg = async legId => {
+  let options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  let queryParams = `mutation {removeLeg(input: {id: "${legId}"}) {leg {tripId}}}`;
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`;
+
+  try {
+    let resp = await fetch(url, options);
+
+    if (!resp.ok) {
+      throw new Error("There was an error deleting your leg");
+    }
+
+    let data = await resp.json();
+    return data.data.removeLeg.leg;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchLodging = async legId => {
 
   let options = {
     method: 'POST',
@@ -60,38 +214,132 @@ export const postNewTrip = async (tripInfo) => {
       'Content-Type': 'application/json'
     }
   }
-  let { name, startDate, endDate, userId } = tripInfo;  
 
-  let queryParams = `mutation {createTrip(input: {name: "${name}", startDate: "${startDate}", endDate: "${endDate}", userId: ${userId}}) {trip {name startDate endDate id}}}`
+  let queryParams = `{leg(id: ${legId}) {lodgings {name arrivalDate departureDate city legId id}}}`
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url, options)
+    if (!resp.ok) {
+      throw new Error('There was an error fetching your lodging')
+    }
+
+    let data = await resp.json();
+    let lodgings = data.data.leg.lodgings;
+    return lodgings;
+
+  } catch (error) {
+    throw error
+  }
+}
+
+export const postNewLodging = async lodgingInfo => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let { legId, name, arrivalDate, departureDate, city } = lodgingInfo;
+
+  let queryParams = `mutation {
+    createLodging(
+      input: {
+        name: "${name}",
+        arrivalDate: "${arrivalDate}",
+        departureDate: "${departureDate}",
+        city: "${city}",
+        legId: ${legId} 
+      })
+    {
+      lodging {
+        legId
+      }
+    }
+  }`
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
   try {
     let resp = await fetch(url,options)
     if (!resp.ok) {
-      throw new Error('There was an error creating your trip')
+      throw new Error('There was an error saving your lodging')
     }
 
     let data = await resp.json();
-    return data.data.createTrip.trip
-  
+    let lodging = data.data.createLodging.lodging
+    return lodging
+
   } catch (error) {
     throw error
-  }
-
+    }
 }
 
+export const patchLodging = async lodgingInfo => {
 
-export const patchTrip = async (tripInfo) => {
   let options = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     }
   }
-  let { name, startDate, endDate, id } = tripInfo;  
 
-  let queryParams = `mutation {updateTrip(input: {name: "${name}", startDate: "${startDate}", endDate: "${endDate}", id: ${id}}) {trip {name startDate endDate id}}}`
+  let { lodgingId, legId, name, arrivalDate, departureDate, city } = lodgingInfo;
+
+  let queryParams = `mutation {
+    updateLodging(
+      input: {
+        id: ${lodgingId},
+        name: "${name}",
+        arrivalDate: "${arrivalDate}",
+        departureDate: "${departureDate}",
+        city: "${city}",
+        legId: ${legId}
+      })
+    {
+      lodging {
+        legId
+      }
+    }
+  }`
+
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+
+  try {
+    let resp = await fetch(url,options)
+    if (!resp.ok) {
+      throw new Error('There was an error editing your lodging.')
+    }
+    let data = await resp.json();
+    return data.data.updateLodging.lodging
+
+  } catch (error) {
+    throw error
+  }
+}
+
+export const deleteLodging = async lodgingId => {
+
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  let queryParams = `mutation {
+    removeLodging(
+      input: {
+        id: ${lodgingId}
+      })
+    {
+      lodging {
+        legId
+      }
+    }
+  }`
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
@@ -99,133 +347,15 @@ export const patchTrip = async (tripInfo) => {
     let resp = await fetch(url, options);
 
     if (!resp.ok) {
-      throw new Error('There was an error editing your trip')
+      throw new Error('There was an error deleting your lodging.')
     }
 
     let data = await resp.json();
-    return data.data.updateTrip.trip
-  
-  } catch (error) {
-    throw error
-  }
-}
-
-
-
-export const deleteTrip = async (tripId) => {
-
-  let options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-
-  let queryParams = `mutation {removeTrip(input: {id: "${tripId}"}) {trip {name}}}`
-
-  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
-
-  try {
-    let resp = await fetch(url, options);
-    
-    if (!resp.ok) {
-      throw new Error('There was an error deleting your trip')
-    }
-
-    let data = await resp.json();
-    return data.data.removeTrip.trip
+    return data.data.removeLodging.lodging
 
   } catch (error) {
     throw error
   }
-
-}
-
-
-export const postNewLeg = async (legInfo) => {
-
-  let options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-  let { startLocation, endLocation, startDate, endDate, tripId } = legInfo; 
-
-  let queryParams = `mutation {createLeg(input: {startDate: "${startDate}", endDate: "${endDate}", startLocation: "${startLocation}", endLocation: "${endLocation}", tripId: ${tripId}}) {leg{tripId}}}`
-
-  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
-
-  try {
-    let resp = await fetch(url,options)
-    if (!resp.ok) {
-      throw new Error('There was an error creating your leg')
-    }
-
-    let data = await resp.json();
-    return data.data.createLeg.leg
-  
-  } catch (error) {
-    throw error
-  }
-}
-
-
-export const patchLeg = async (legInfo) => {
-
-  let options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-
-  let { startLocation, endLocation, startDate, endDate, tripId, id } = legInfo; 
-
-  let queryParams = `mutation {updateLeg(input: {id: ${id}, startDate: "${startDate}", endDate: "${endDate}", startLocation: "${startLocation}", endLocation: "${endLocation}", tripId: ${tripId}}) {leg{tripId}}}`
-  
-  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
-
-  try {
-    let resp = await fetch(url,options)
-    if (!resp.ok) {
-      throw new Error('There was an error editing your leg')
-    }
-    let data = await resp.json();
-    return data.data.updateLeg.leg
-  
-  } catch (error) {
-    throw error
-  }
-}
-
-export const deleteLeg = async (legId) => {
-
-  let options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-
-  let queryParams = `mutation {removeLeg(input: {id: "${legId}"}) {leg {tripId}}}`
-
-  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
-
-  try {
-    let resp = await fetch(url, options);
-    
-    if (!resp.ok) {
-      throw new Error('There was an error deleting your leg')
-    }
-
-    let data = await resp.json();
-    return data.data.removeLeg.leg
-
-  } catch (error) {
-    throw error
-  }
-
 }
 
 
@@ -243,13 +373,11 @@ export const fetchFollowers = async (wanderer_id) => {
 
   try {
     let resp = await fetch(url, options);
-    
     if (!resp.ok) {
       throw new Error('There was an error fetching your followers')
     }
-
     let data = await resp.json();
-
+ 
     return data.data.user.friends;
 
   } catch (error) {
@@ -267,7 +395,7 @@ export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
     }
   }
 
-  let queryParams = `{user(id: ${wanderer_id}) {notificationsReceived { unread message senderId id}}}`
+  let queryParams = `{user(id: ${wanderer_id}) {notificationsReceived { unread message senderId id latitude longitude createdAt}}}`
  
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
@@ -279,7 +407,6 @@ export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
     }
 
     let data = await resp.json();
- 
     return data.data.user.notificationsReceived;
 
   } catch (error) {
@@ -316,6 +443,7 @@ export const markMessageRead = async (message_id) => {
   }
 
 }
+
 export const sendWandererMessage = async (message_object) => {
   
   let options = {
@@ -332,10 +460,10 @@ export const sendWandererMessage = async (message_object) => {
     longitude
   } = message_object;
 
+
   let queryParams = `mutation {createNotification(input: {senderId: ${senderId}, receiverId: ${receiverId}, message: "${message}", latitude: ${latitude}, longitude: ${longitude}}) {notification {id message latitude longitude senderId receiverId}}}`
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
-
   try {
     let resp = await fetch(url, options);
     
@@ -468,10 +596,31 @@ export const deleteTransport = async (transportationId) => {
 
 }
 
+export const fetchFollowersIncomingNotifications = async (follower_id) => {
 
-// export const sendFollowerMessage = async () => {}
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
 
-// export const fetchFollowersIncomingNotifications = async () => {}
+  let queryParams = `{user(id: ${follower_id}) {notificationsReceived { unread message senderId id latitude longitude}}}`
+ 
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error fetching your messages')
+    }
 
+    let data = await resp.json();
+ 
+    return data.data.user.notificationsReceived;
 
+  } catch (error) {
+    throw error
+  }
+}
