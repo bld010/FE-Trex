@@ -38,6 +38,8 @@ export default class SafetyInfo extends Component {
         <Text style={styles.title}>{this.state.safety.healthInfo}</Text>
         <Text style={styles.title}>Vaccine Information:</Text>
         <Text style={styles.title}>{this.state.safety.vaccineInfo}</Text>
+        <Text style={styles.title}>Passport Information:</Text>
+        <Text style={styles.title}>{this.state.safety.passportInfo}</Text>
         </ScrollView>
         <WandererFooter navigate={navigate}/>
       </View>
