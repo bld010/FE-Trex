@@ -95,7 +95,7 @@ export class FollowerDashboard extends Component {
       {this.state.error === '' && this.state.wanderers.length == 0 &&
         <Image alt={'Loading...'} style={styles.loading} source={followerSpinner} />
       }
-      {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
+      {this.state.error !== '' && <Text style={styles.errorText}>{this.state.error}</Text>}
       {this.state.error === '' && this.state.messages.length !==0 && 
         this.generateWanderersElements()
       }
@@ -119,12 +119,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     width: 'auto'
   }, 
-  error: {
+  errorText: {
     color: 'red',
-    marginVertical: 40,
     textAlign: 'center',
-    fontSize: 30,
-    width: 'auto'
+    paddingVertical: 5,
+    fontSize: 24
   },
   wandererButton: {
     width: 'auto',

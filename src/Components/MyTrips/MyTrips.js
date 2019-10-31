@@ -66,7 +66,7 @@ export class MyTrips extends Component {
           <View>
             {trips.length > 0 && this.generateTripsElements()}
             {error !== '' && <Text style={styles.text}>{error}</Text>}
-            {trips.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
+            {trips.length === 0 && error === '' && <Text style={styles.errorText}>Loading ...</Text>}
             {error === '' && trips.length == 0 &&
               <Image alt={'Loading...'} style={styles.loading} source={wandererSpinner} />
             }
@@ -139,6 +139,12 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     alignItems: 'stretch'
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    paddingVertical: 5,
+    fontSize: 24
   }
 })
 

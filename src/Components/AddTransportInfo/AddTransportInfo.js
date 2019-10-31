@@ -261,7 +261,7 @@ export default class AddTransportInfo extends Component {
             />
 
             {this.state.error !== '' && 
-              <Text style={styles.error}>{this.state.error}</Text>
+              <Text style={styles.errorText}>{this.state.error}</Text>
             }
 
             <TouchableOpacity onPress={this.handleSave}>
@@ -357,10 +357,11 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: -22
   },
-  error: {
-    color: 'white',
-    fontSize: 18,
+  errorText: {
+    color: 'red',
     textAlign: 'center',
+    paddingVertical: 5,
+    fontSize: 24
   },
     deleteButton: {
       backgroundColor: 'red'

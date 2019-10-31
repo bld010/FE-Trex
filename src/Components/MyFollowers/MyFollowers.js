@@ -87,7 +87,7 @@ export class MyFollowers extends Component {
             }
             {this.state.followers.length === 0 && <Text style={styles.text}>Loading ...</Text>}
             {this.state.followers.length > 0 && this.state.messages !== null && this.generateFollowersElements()}
-            {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
+            {this.state.error !== '' && <Text style={styles.errorText}>{this.state.error}</Text>}
             <TouchableOpacity style={styles.addFollowerButton}>
               <Text style={styles.text} onPress={() => navigate('FollowerForm', {userId: this.state.userId})}>Add a New Follower</Text>
             </TouchableOpacity>
@@ -140,11 +140,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 20
   },
-  error: {
+  errorText: {
     color: 'red',
     textAlign: 'center',
-    paddingVertical: 10,
-    fontSize: 20
+    paddingVertical: 5,
+    fontSize: 24
   },
   loading: {
     width: 100,
