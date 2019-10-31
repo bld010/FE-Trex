@@ -373,13 +373,11 @@ export const fetchFollowers = async (wanderer_id) => {
 
   try {
     let resp = await fetch(url, options);
-    
     if (!resp.ok) {
       throw new Error('There was an error fetching your followers')
     }
-
     let data = await resp.json();
-
+ 
     return data.data.user.friends;
 
   } catch (error) {
@@ -397,7 +395,7 @@ export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
     }
   }
 
-  let queryParams = `{user(id: ${wanderer_id}) {notificationsReceived { unread message senderId id}}}`
+  let queryParams = `{user(id: ${wanderer_id}) {notificationsReceived { unread message senderId id latitude longitude createdAt}}}`
  
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
@@ -409,7 +407,6 @@ export const fetchWanderersIncomingNotifications = async (wanderer_id) => {
     }
 
     let data = await resp.json();
- 
     return data.data.user.notificationsReceived;
 
   } catch (error) {
@@ -463,10 +460,10 @@ export const sendWandererMessage = async (message_object) => {
     longitude
   } = message_object;
 
+
   let queryParams = `mutation {createNotification(input: {senderId: ${senderId}, receiverId: ${receiverId}, message: "${message}", latitude: ${latitude}, longitude: ${longitude}}) {notification {id message latitude longitude senderId receiverId}}}`
 
   let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
-
   try {
     let resp = await fetch(url, options);
     
@@ -599,6 +596,31 @@ export const deleteTransport = async (transportationId) => {
 
 }
 
+export const fetchFollowersIncomingNotifications = async (follower_id) => {
 
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
 
+  let queryParams = `{user(id: ${follower_id}) {notificationsReceived { unread message senderId id latitude longitude}}}`
+ 
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
 
+  try {
+    let resp = await fetch(url, options);
+    
+    if (!resp.ok) {
+      throw new Error('There was an error fetching your messages')
+    }
+
+    let data = await resp.json();
+ 
+    return data.data.user.notificationsReceived;
+
+  } catch (error) {
+    throw error
+  }
+}
