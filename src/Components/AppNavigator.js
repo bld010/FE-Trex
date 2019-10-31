@@ -17,9 +17,10 @@ import MyWandererTrips from './MyWanderersTrips/MyWanderersTrips';
 import WandererDashboard from './WandererDashboard/WandererDashboard';
 import MyWanderer from './MyWanderer/MyWanderer';
 import MessageHistory from './MessageHistory/MessageHistory';
-import Lodging from './Lodging/Lodging'
+import Lodging from './Lodging/Lodging';
 import Follower from '../Components/Follower/Follower';
-import Transportation from './Transportation/Transportation'
+import Transportation from './Transportation/Transportation';
+import WandererLegDetail from './WandererLegDetail/WandererLegDetail';
 
 
 const RootStack = createStackNavigator({
@@ -130,7 +131,7 @@ const RootStack = createStackNavigator({
   DefaultFollowerMessages: {
     screen: DefaultFollowerMessages,
     navigationOptions: {
-      headerBackTitle: 'Follower Messages',
+      headerBackTitle: 'Messages',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }
@@ -138,7 +139,7 @@ const RootStack = createStackNavigator({
   MyWandererTrips: {
     screen: MyWandererTrips,
     navigationOptions: {
-      headerBackTitle: 'Follower Messages',
+      headerBackTitle: 'Messages',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }
@@ -179,6 +180,14 @@ const RootStack = createStackNavigator({
     screen: Follower,
     navigationOptions: {
       headerBackTitle: 'Follower',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'}
+    }
+  },
+  WandererLegDetail: {
+    screen: WandererLegDetail,
+    navigationOptions: {
+      headerBackTitle: 'Trips',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'}
     }

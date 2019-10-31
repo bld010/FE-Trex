@@ -89,7 +89,6 @@ export default class MyWanderer extends Component {
     
     try {
       let newMessage = await sendWandererMessage(message_body)
-      console.log(newMessage)
       this.setState({ error: ''})
       this.showCheckInVerification();
     } catch (error) {
@@ -140,7 +139,7 @@ export default class MyWanderer extends Component {
               <Text style={styles.buttonText} onPress={this.handleNewMessage}>Check In</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.sideBySideButton}>
-              <Text style={styles.buttonText} onPress={() => navigate('MyWandererTrips')}>Trips</Text>
+              <Text style={styles.buttonText} onPress={() => navigate('MyWandererTrips', {wanderer: this.state.wanderer})}>Trips</Text>
             </TouchableOpacity>
           </View>
           
