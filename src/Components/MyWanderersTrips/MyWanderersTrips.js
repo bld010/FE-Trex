@@ -24,25 +24,25 @@ export default class MyWanderersTrips extends Component {
   }
 
   generateTripElements = () => {
-    const {navigate} = this.props.navigation;
     return this.state.trips.map((trip, index) => {
       return (
-         <TouchableOpacity key={index + trip.name} style={styles.tripButton}>
+        <View key={index + trip.name} style={styles.tripButton}>
           <Text style={styles.text} key={trip.name}>{trip.name}</Text>
           {trip.legs.length && this.generateLegs(trip.legs)}
-          </TouchableOpacity>
+          </View>
       )
     })
   }
-
+  
   generateLegs = (legs) => {
+    const {navigate} = this.props.navigation;
     return legs.map((leg,index) => {
       return (
-        <View style={styles.legBorder}>
+        <TouchableOpacity onPress={() => navigate('WandererLegDetail', { leg })} style={styles.legBorder}>
           <Text style={styles.legHeader}>Leg {index + 1 }</Text>
           <Text style={styles.leg}>{leg.startLocation} to {leg.endLocation}</Text>
           <Text style={styles.leg}>{leg.startDate} through {leg.endDate} </Text>
-        </View>
+        </TouchableOpacity>      
       )
     })
   }
@@ -60,7 +60,6 @@ export default class MyWanderersTrips extends Component {
     const {navigate} = this.props.navigation;
     const { trips, error} = this.state
 
-    console.log(trips)
     return (
       <View style={styles.container}> 
 
@@ -101,6 +100,7 @@ const styles = StyleSheet.create({
   legHeader: {
     fontSize: 18,
     textAlign: 'center',
+    color: '#84183B'
   },
   legBorder: {
     borderWidth: 1,
