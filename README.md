@@ -1,8 +1,6 @@
 # Trex - travel safe & travel often
 
-## Description
-
-
+Trex, your safe travel application, allows users to travel the world all while keeping their loved ones abreast to their travels and their safety. 
 
 ## Set Up
 
@@ -25,6 +23,26 @@ First off, ensure you have the latest update of XCode installed on your machine 
  - Type `i` from the command line to open an iOS simulator
  - Run `npm test` to run the applications front end testing suite
 
+
+## Description
+
+The problem: The world is a both a beautiful and a dangerous place, in that order.
+
+Trex targets two audiences: 
+  1) Internet enabled world travelers and
+  2) These world traveler’s families and friends
+
+The Trex solution: Travel safe & travel often with Trex so you can keep others up-to-date on your well-being.
+
+Minimum Viable Product: 
+
+ - Wanderer facing application allows users to keep track of their upcoming travel plans including trips, legs, lodging and transportation. From there the friendly dashboard shows their current location with weather and the local emergency phone number. Most importantly, Wanderer's are able to add Followers, their loved ones who care for them and worry sometimes. The Wanderers and the Followers are able to ping each other. With each ping sent from a Wanderer to a Follower the Follower receives their Wanderer's current location. In the case of emergency, if the emergency phone number on the Dashboard is dialed all location information captured by the application will be sent to the Wanderer's emergency contact.
+
+ - Follower facing application allows users to view their Wanderer’s trip itinerary details as well as check-in on their loved ones on the road, pinging their Wanderer's request for a check-in.
+
+
+
+
 ## Tech Stack
 * React Native
 * Expo
@@ -33,6 +51,7 @@ First off, ensure you have the latest update of XCode installed on your machine 
 * Jest 
 * Enzyme
 * Ruby on Rails
+* Google geolocation
 
 ## Goals
  - Demonstrate knowledge gained throughout Turing
