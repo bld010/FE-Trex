@@ -651,12 +651,12 @@ export const fetchSafety = async (legId) => {
   try {
     let resp = await fetch(url, options)
     if (!resp.ok) {
-      throw new Error('There was an error fetching your transport details')
+      throw new Error('There was an error fetching your safety info')
     }
 
     let data = await resp.json();
-    let transportations = data.data.leg.transportations;
-    return transportations;
+    let safety = data.data.currentLocationInformation;
+    return safety;
 
   } catch (error) {
     throw error
