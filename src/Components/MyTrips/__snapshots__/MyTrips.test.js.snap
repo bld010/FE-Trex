@@ -45,6 +45,11 @@ exports[`MyTrips should match the snapshot when loading 1`] = `
             "testUri": "../../../assets/wanderer_spinner.gif",
           }
         }
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
       />
     </View>
     <TouchableOpacity
