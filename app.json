@@ -26,13 +26,15 @@
     "ios": {
       "supportsTablet": true,
       "config": {
-        "googleMapsApiKey": "AIzaSyAl5dxa6Z0jhVTOs6SDOzxCFOLjPKweyHM"
+        "googleMapsApiKey": "AIzaSyAl5dxa6Z0jhVTOs6SDOzxCFOLjPKweyHM",
+        "DARKSKY_KEY": "39ac8e23f50db38607e2ad728909f731"
       }
     },
     "android": {
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyAl5dxa6Z0jhVTOs6SDOzxCFOLjPKweyHM"
+          "apiKey": "AIzaSyAl5dxa6Z0jhVTOs6SDOzxCFOLjPKweyHM",
+          "DARKSKY_KEY": "39ac8e23f50db38607e2ad728909f731"
         }
       }
     }
