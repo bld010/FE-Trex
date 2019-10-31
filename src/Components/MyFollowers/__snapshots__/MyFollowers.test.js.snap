@@ -25,6 +25,21 @@ exports[`MyFollowers should match the snapshot when loading 1`] = `
     >
       My Followers
     </Text>
+    <Image
+      alt="Loading..."
+      source={
+        Object {
+          "testUri": "../../../assets/wanderer_spinner.gif",
+        }
+      }
+      style={
+        Object {
+          "alignSelf": "center",
+          "height": 100,
+          "width": 100,
+        }
+      }
+    />
     <Text
       style={
         Object {
