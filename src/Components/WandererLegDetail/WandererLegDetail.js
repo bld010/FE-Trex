@@ -44,8 +44,10 @@ export default class WandererLegDetail extends Component {
 
   componentDidMount = async () => {
     let transportations = await this.gatherTransportation()
+    console.log(tranportations)
     this.setState({ transportations })
     let lodgings = await this.gatherLodging()
+    console.log(lodgings)
     this.setState({ lodgings })
   }
 
@@ -92,16 +94,16 @@ export default class WandererLegDetail extends Component {
           </View>
 
         <View style={styles.container}>
-
+{/* 
         {error !== '' && <Text style={styles.text}>{error}</Text>}
         {transportations.length === 0 && lodgings.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
         {error === '' && transportations.length == 0 && lodgings.length == 0 && 
         <Image alt={'Loading...'} style={styles.loading} source={wandererSpinner} />
-        }
+        } */}
         <Text style={styles.title}>Lodging</Text>
-        {lodgings === [] && this.generateLodgingElements()}
+        {lodgings.length > 0 && this.generateLodgingElements()}
         <Text style={styles.title}>Transportation</Text>
-        {transportations === [] && this.generateTransportationElements()}
+        {transportations.lenght > 0 && this.generateTransportationElements()}
         </View>
         </ScrollView>
 
