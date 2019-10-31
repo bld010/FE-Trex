@@ -51,6 +51,12 @@ export default class Map extends Component {
               title={"My Location"}
               description={"Musée du Louvre"}
             />
+            <MapView.Marker
+              coordinate={{ latitude: 48.8677, longitude: 2.3200 }}
+              title={"US Embassy"}
+              description={"Embassy of the United States, Paris"}
+              pinColor={"green"}
+            />
           </MapView>
         )}
       </>
