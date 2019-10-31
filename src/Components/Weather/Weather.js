@@ -39,8 +39,9 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     color: 'white',
     height: 200,
-    marginVertical: 15,
-    width: 190
+    marginVertical: 19,
+    width: 180,
+    marginRight: 10
   },
   weatherText: {
     color: 'white',

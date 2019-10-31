@@ -6,7 +6,8 @@ import { 
   Text, 
   View, 
   ScrollView,
-  TouchableOpacity 
+  TouchableOpacity,
+  Image 
 } from 'react-native';
 
 import WandererHeader from '../WandererHeader/WandererHeader';
@@ -26,7 +27,13 @@ export default class WandererDashboard extends Component {
     <WandererHeader />
     <ScrollView>
       <View style={styles.topContainer}>
-      <Text style={styles.textEmergency}>112</Text>
+      <TouchableOpacity>
+        <View style={styles.textEmergency}>
+        <Text style={styles.text}> Call Emergency Number</Text>
+          <Text style={styles.textNum}>112</Text>
+          <Image  style={{width: 45, height: 45, marginLeft: 60, backgroundColor: 'red'}} source={{uri: 'https://cdn4.iconfinder.com/data/icons/ui-outline-1-of-5/100/ui_outline_2-18-512.png'}}/>
+      </View>
+        </TouchableOpacity>
       <Weather />
       </View>
       <Map />
@@ -41,10 +48,16 @@ export default class WandererDashboard extends Component {
 const styles = StyleSheet.create({
   text: {
     color: 'white',
-    marginVertical: 40,
+    marginVertical: 10,
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 18,
     width: 'auto'
+  },
+  textNum: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 70,
+    fontWeight: '700'
   },
   container: {
     flex: 1,
@@ -61,8 +74,10 @@ const styles = StyleSheet.create({
     height: 200,
     marginVertical: 15,
     textAlign: 'center',
-    fontSize: 20,
-    width: 170
+    width: 160,
+    marginVertical: 20,
+    marginLeft: 10,
+    backgroundColor: 'red'
   },
   topContainer: {
     flex: 1,

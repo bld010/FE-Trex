@@ -72,6 +72,6 @@ const styles = StyleSheet.create({
   },
   mapStyle: {
     width: Dimensions.get("window").width,
-    height: 400
+    height: 380
   }
 });
