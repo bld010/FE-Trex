@@ -1,6 +1,6 @@
 import React from "react";
 import "react-native";
-import FollowerForm from "./Followerform";
+import FollowerForm from "./FollowerForm";
 import { shallow } from "enzyme";
 
 describe("FollowerForm", () => {
