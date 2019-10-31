@@ -596,9 +596,6 @@ export const deleteTransport = async (transportationId) => {
 
 }
 
-
-// export const sendFollowerMessage = async () => {}
-
 export const fetchFollowersIncomingNotifications = async (follower_id) => {
 
   let options = {
