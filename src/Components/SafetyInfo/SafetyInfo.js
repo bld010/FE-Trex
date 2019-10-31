@@ -33,13 +33,14 @@ export default class SafetyInfo extends Component {
       <View style={styles.container}>
         <WandererHeader/>
         <ScrollView>
-        <Text style={styles.title}>Your Location: France</Text>
+        <Text style={styles.title}>Your Location:</Text>
+        <Text style={styles.text}>France</Text>
         <Text style={styles.title}>Health Information:</Text>
-        <Text style={styles.title}>{this.state.safety.healthInfo}</Text>
+        <Text style={styles.text}>{this.state.safety.healthInfo}</Text>
         <Text style={styles.title}>Vaccine Information:</Text>
-        <Text style={styles.title}>{this.state.safety.vaccineInfo}</Text>
+        <Text style={styles.text}>{this.state.safety.vaccineInfo}</Text>
         <Text style={styles.title}>Passport Information:</Text>
-        <Text style={styles.title}>{this.state.safety.passportInfo}</Text>
+        <Text style={styles.text}>{this.state.safety.passportInfo}</Text>
         </ScrollView>
         <WandererFooter navigate={navigate}/>
       </View>
@@ -50,9 +51,20 @@ export default class SafetyInfo extends Component {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
-    color: 'white'
+    fontSize: 24,
+    color: 'white',
+    textAlign: 'center',
+    marginVertical: 15,
   }, 
+  text: {
+    fontSize: 20,
+    color: 'white',
+    textAlign: 'center',
+    marginBottom: 15,
+    marginVertical: 15,
+    width: 330,
+    marginLeft: 20
+  },
   container: {
     flex: 1,
     backgroundColor: '#000000',
