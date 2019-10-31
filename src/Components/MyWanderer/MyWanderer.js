@@ -9,7 +9,7 @@ import {
 import FollowerHeader from '../FollowerHeader/FollowerHeader';
 import FollowerFooter from '../FollowerFooter/FollowerFooter';
 import MessageMap from '../MessageMap/MessageMap';
-import { fetchWanderersIncomingNotifications, markMessageRead } from '../../util/apiCalls';
+import { fetchWanderersIncomingNotifications, markMessageRead, sendWandererMessage } from '../../util/apiCalls';
 
 export default class MyWanderer extends Component {
   constructor(props) {
@@ -18,7 +18,9 @@ export default class MyWanderer extends Component {
       wanderer: this.props.navigation.getParam('wanderer'),
       userId: this.props.navigation.getParam('userId'),
       messages: this.props.navigation.getParam('messages') || [],
-      readVerification: false
+      readVerification: false,
+      checkInVerification: false,
+      error: ''
     }
   }
 
@@ -75,6 +77,34 @@ export default class MyWanderer extends Component {
     return unreadMessagesElements;
   }
 
+  handleNewMessage = async () => {
+    
+    let message_body = { 
+      senderId: this.state.userId,
+      receiverId: this.state.wanderer.id, 
+      message: 'Checking In',
+      latitude: 0,
+      longitude: 0
+    }
+    
+    try {
+      let newMessage = await sendWandererMessage(message_body)
+      console.log(newMessage)
+      this.setState({ error: ''})
+      this.showCheckInVerification();
+    } catch (error) {
+      this.setState({ error: 'There was an error sending your message'})
+    }
+  }
+
+  showCheckInVerification = () => {
+    this.setState({ checkInVerification: true})
+
+    setTimeout(() => {
+      this.setState({ checkInVerification: false})
+    }, 5000)
+  }
+
 
   showReadVerification = () => {
     this.setState({ readVerification: true})
@@ -86,14 +116,16 @@ export default class MyWanderer extends Component {
 
   render() {
     const {navigate} = this.props.navigation;
+
+    let unreadMessages = this.state.messages.filter(message => message.unread === true)
     return (
       <View style={styles.container}>
         <FollowerHeader />
         <ScrollView>
           <Text style={styles.headerText}>{this.state.wanderer.name}</Text>
 
-          
           <Text style={styles.text}>Unread Messages</Text>
+          {unreadMessages.length === 0 && <Text style={styles.error}>No messages found</Text>}
 
           {this.state.readVerification === true && 
           
@@ -104,15 +136,21 @@ export default class MyWanderer extends Component {
           {this.generateUnreadMessagesElements()}
 
           <View style={styles.sideBySideContainer}>
-          <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('DefaultFollowerMessages')}>Message</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('MyWandererTrips')}>Trips</Text>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.sideBySideButton}>
+              <Text style={styles.buttonText} onPress={this.handleNewMessage}>Check In</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.sideBySideButton}>
+              <Text style={styles.buttonText} onPress={() => navigate('MyWandererTrips')}>Trips</Text>
+            </TouchableOpacity>
           </View>
           
-          {/* hide the message history button unless there are actually messages */}
+          {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
+          {this.state.checkInVerification && 
+            <View style={styles.messageContainer}>
+              <Text style={styles.message}>Check In Sent</Text>
+            </View>
+          }
+          {/* hide the message history button if there is no message history */}
           {this.state.messages.length > 0 && 
           <TouchableOpacity 
             style={styles.messageHistoryButton} 
