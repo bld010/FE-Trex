@@ -28,7 +28,7 @@ class Trip extends Component {
     return this.state.trip.legs.map(leg => {
       return (
         <TouchableOpacity key={leg.name} style={styles.legButton}>
-        <Text onPress={() => navigate('Leg', {leg, tripId: this.state.trip.id, userId: this.state.userId})} style={styles.buttonText} key={leg.name}>{leg.startLocation}</Text>
+        <Text onPress={() => navigate('Leg', {leg, tripId: this.state.trip.id, userId: this.state.userId})} style={styles.buttonText} key={leg.name}>{leg.startLocation} to {leg.endLocation}</Text>
       </TouchableOpacity>
       )
     })

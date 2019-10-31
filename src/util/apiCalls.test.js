@@ -8,7 +8,12 @@ import {
   deleteTrip,
   deleteLeg, 
   fetchFollowers,
+  postNewLodging,
   fetchWanderersIncomingNotifications,
+  fetchTransport,
+  postNewTransport,
+  deleteTransport,
+  patchTransport,
   markMessageRead,
   sendWandererMessage
 } from './apiCalls';
@@ -998,7 +1003,9 @@ describe('apiCalls', () => {
     })
   })
 
-  describe('markMessageRead', () => {
+
+  describe('fetchTransport', () => {
+
     let mockFetch;
     let queryParams;
     let url;
@@ -1008,10 +1015,423 @@ describe('apiCalls', () => {
       mockFetch = jest.fn()
       global.fetch = mockFetch;
 
-      queryParams = `mutation {updateNotification(input: {id: 4, unread: false}) {notification {id message unread}}}`
+      queryParams = `{leg(id: 1) {id, startDate, startLocation, endDate, endLocation tripId transportations {id mode departureTime departureCity arrivalTime arrivalCity}}}`
 
-  
       url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+      
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      } 
+    })
+
+    it('should call fetch with correct url and queryParams', async () => {
+      
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                leg: {
+                  transportations: []
+                }
+                }
+              }
+            )}
+          })
+        })
+
+        await fetchTransport(1)
+
+        expect(mockFetch).toHaveBeenCalledWith(url, options)
+    })
+      
+    it('should return the transportation for a specific leg (HAPPY)', async () => {
+      let mockTransportations = [{
+        "id": 1,
+        "mode": "bus",
+        "departureTime": "2019-07-11",
+        "departureCity": "Rome",
+        "arrivalTime": "2020-01-02",
+        "arrivalCity": "Paris",
+        "legId": "1"
+      },
+      {
+        "id": 2,
+        "mode": "flight",
+        "departureTime": "2019-10-15",
+        "departureCity": "Denver",
+        "arrivalTime": "2021-02-20",
+        "arrivalCity": "Rome",
+        "legId": "1"
+      }]
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                  leg: {
+                    transportations: mockTransportations
+                  }
+                }
+              }
+            )}
+          })
+        })
+
+
+      await expect(fetchTransport(1)).resolves.toEqual(mockTransportations)
+
+    })
+
+    it('should throw an error when fetch fails (SAD)', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error fetching your transport details'))
+      })
+
+      await expect(fetchTransport(1)).rejects.toEqual(Error('There was an error fetching your transport details'))
+
+    })
+
+    it('should throw an error if response is not ok (SAD)', async () => {
+      
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+          })
+        })
+
+      await expect(fetchTransport(1)).rejects.toEqual(Error('There was an error fetching your transport details'))
+
+    })
+  })
+
+
+  describe('postNewTransport', () => {
+
+    let mockFetch;
+    let url;
+    let options;
+    let mockTripInfo;
+
+    beforeEach(() => {
+      mockFetch = jest.fn()
+      global.fetch = mockFetch;
+
+      mockTransportInfo = {
+          mode: "flight",
+          departureTime: "2019-10-15",
+          departureCity: "Denver",
+          arrivalTime: "2021-02-20",
+          arrivalCity: "Rome",
+          legId: "1"
+      }
+      
+      let queryParams = `mutation {createTransportation(input: {mode: "flight",  departureCity: "Denver",  departureTime: "2019-10-15", arrivalCity: "Rome", arrivalTime: "2021-02-20", legId: 1 }) {transportation {legId}}}`
+
+
+      url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+      
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+
+      } 
+    })
+
+    it('should call fetch with proper url and query params', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                  createTransportation: {
+                    transportation: {}
+                  }
+                }
+              }
+            )}
+          })
+        })
+
+        await postNewTransport(mockTransportInfo)
+
+        expect(mockFetch).toHaveBeenCalledWith(url, options)
+
+    })
+
+    it('should return a legId when successful (HAPPY)', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => { 
+            return (
+              { data: {
+                createTransportation: {
+                  transportation: {legId: 1}
+                }
+              }
+              }
+            )}
+          })
+        })
+
+        let expected = {legId: 1}
+
+        await expect(postNewTransport(mockTransportInfo)).resolves.toEqual(expected)
+
+    })
+
+    it('should return an error if response status is not ok (SAD)', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+          })
+        })
+
+      await expect(postNewTransport(mockTransportInfo)).rejects.toEqual(Error('There was an error saving your transportation information'))
+
+    })
+
+    it('should return an error if the fetch fails (SAD)', async () => {
+
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error creating your transportation'))
+      })
+
+      await expect(postNewTransport(mockTransportInfo)).rejects.toEqual(Error('There was an error creating your transportation'))
+
+
+    })
+  })
+
+  describe('deleteTransport', () => {
+
+    let options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  
+    let queryParams = `mutation {removeTransportation(input: {id: 13}) {transportation {legId}}}`
+
+    let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+  
+    let mockFetch;
+  
+    beforeEach(() => {
+      mockFetch = jest.fn();
+      global.fetch = mockFetch;
+    })
+  
+  
+    it('should call fetch with the proper url and options', async () => {
+  
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+            return (
+              { 
+                data: {
+                  removeTransportation: {
+                    transportation: {}
+                  }
+                }
+              }
+            )
+          }
+        })
+      })
+  
+      await deleteTransport(13)
+  
+      expect(mockFetch).toHaveBeenCalledWith(url, options)
+    })
+  
+    it('should return the deleted leg name when successful (HAPPY)', async () => {
+  
+      let mockLeg = { legId: 1 }
+  
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => {
+            return (
+              { 
+                data: {
+                  removeTransportation: {
+                    transportation: mockLeg
+                  }
+                }
+              }
+            )
+          }
+        })
+      })
+  
+      await expect(deleteTransport(13)).resolves.toEqual(mockLeg)
+  
+    })
+  
+    it('should return an error when response is not ok (SAD)', async () => {
+  
+      mockFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: false,
+        })
+      })
+  
+      await expect(deleteTransport(13)).rejects.toEqual(Error('There was an error deleting your transport.'))
+  
+    })
+  
+    it('should return an error when the fetch fails (SAD)', async () => {
+  
+  
+      mockFetch.mockImplementation(() => {
+        return Promise.reject(Error('There was an error deleting your transport (fetch failed)'))
+      })
+  
+      await expect(deleteTransport(17)).rejects.toEqual(Error('There was an error deleting your transport (fetch failed)'))
+      })
+    })
+
+
+    describe('patchTransport', () => {
+  
+      let mockFetch;
+      let url;
+      let options;
+      let mockLegInfo;
+    
+      beforeEach(() => {
+        mockFetch = jest.fn()
+        global.fetch = mockFetch;
+    
+        mockTransportInfo = {
+          mode: "flight",
+          departureTime: "2019-10-15",
+          departureCity: "Denver",
+          arrivalTime: "2021-02-20",
+          arrivalCity: "Rome",
+          legId: "1",
+          transportId: "7"
+      }
+            
+        let queryParams = `mutation {updateTransportation(input: {id: 7, mode: "flight",  departureCity: "Denver",  departureTime: "2019-10-15", arrivalCity: "Rome", arrivalTime: "2021-02-20", legId: 1 }) {transportation {legId}}}`
+
+        url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+        
+        options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        } 
+      })
+    
+      it('should call fetch with the correct url and options', async() => {
+    
+        mockFetch.mockImplementation(() => {
+          return Promise.resolve({
+            ok: true,
+            json: () => { 
+              return (
+                { data: {
+                    updateTransportation: {
+                      transportation: {}
+                    }
+                  }
+                }
+              )}
+            })
+          })
+    
+          await patchTransport(mockTransportInfo)
+    
+          expect(mockFetch).toHaveBeenCalledWith(url, options)
+      })
+    
+      it('should return the updated leg when successful (HAPPY)', async () => {
+    
+        let newMockTransportInfo = mockTransportInfo = {
+          mode: "bus",
+          departureTime: "2019-10-15",
+          departureCity: "Denver",
+          arrivalTime: "2021-02-20",
+          arrivalCity: "Rome",
+          legId: "1",
+          id: "7"
+      }
+    
+        mockFetch.mockImplementation(() => {
+          return Promise.resolve({
+            ok: true,
+            json: () => { 
+              return (
+                { data: {
+                    updateTransportation: {
+                      transportation: newMockTransportInfo
+                    }
+                  }
+                }
+              )}
+            })
+          })
+    
+    
+          await expect(patchTransport(newMockTransportInfo)).resolves.toEqual(newMockTransportInfo)
+      })
+    
+      it('should return an error if the response is not ok (SAD)', async () => {
+    
+        mockFetch.mockImplementation(() => {
+          return Promise.resolve({
+            ok: false
+            })
+          })
+    
+          await expect(patchTransport(mockTransportInfo)).rejects.toEqual(Error('There was an error editing your transport.'))
+      })
+    
+      it('should return an error if the fetch fails (SAD)', async () => {
+        mockFetch.mockImplementation(() => {
+          return Promise.reject(Error('There was an error editing your transport.'))
+          })
+    
+          await expect(patchTransport(mockTransportInfo)).rejects.toEqual(Error('There was an error editing your transport.'))
+      
+      })
+    })
+
+  describe('markMessageRead', () => {
+   let mockFetch;
+    let queryParams;
+    let url;
+    let options;
+        
+    beforeEach(() => {
+      mockFetch = jest.fn()
+      global.fetch = mockFetch;
+
+
+    queryParams = `mutation {updateNotification(input: {id: 4, unread: false}) {notification {id message unread}}}`
+
+        url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
       
       options = {
         method: 'POST',
@@ -1071,9 +1491,9 @@ describe('apiCalls', () => {
       mockFetch.mockImplementation(() => {
         return Promise.reject(Error('There was an error marking your message as read'))
       })
-
       await expect(markMessageRead(4)).rejects.toEqual(Error('There was an error marking your message as read'))
     })
+
 
     it('should return an error if status is not ok (SAD)', async () => {
       mockFetch.mockImplementation(() => {

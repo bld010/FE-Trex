@@ -1,4 +1,3 @@
-
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import Home from './Home/Home';
@@ -18,7 +17,10 @@ import MyWandererTrips from './MyWanderersTrips/MyWanderersTrips';
 import WandererDashboard from './WandererDashboard/WandererDashboard';
 import MyWanderer from './MyWanderer/MyWanderer';
 import MessageHistory from './MessageHistory/MessageHistory';
+import Lodging from './Lodging/Lodging'
 import Follower from '../Components/Follower/Follower';
+import Transportation from './Transportation/Transportation'
+
 
 const RootStack = createStackNavigator({
   Home: {
@@ -104,7 +106,7 @@ const RootStack = createStackNavigator({
   AddTransportInfo: {
     screen: AddTransportInfo,
     navigationOptions: {
-      headerBackTitle: 'Add Transportation',
+      headerBackTitle: 'Add Transport',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }
@@ -141,6 +143,14 @@ const RootStack = createStackNavigator({
       headerBackTitleStyle: { color: 'white'} 
     }
   },
+  Transportation: {
+    screen: Transportation,
+    navigationOptions: {
+      headerBackTitle: 'Transportation',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
   MyWanderer: {
     screen: MyWanderer,
     navigationOptions: {
@@ -157,6 +167,14 @@ const RootStack = createStackNavigator({
       headerBackTitleStyle: { color: 'white'} 
     }
   },
+  Lodging: {
+    screen: Lodging,
+    navigationOptions: {
+      headerBackTitle: 'Lodging',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
   Follower: {
     screen: Follower,
     navigationOptions: {
@@ -166,5 +184,6 @@ const RootStack = createStackNavigator({
     }
   },
 });
+
 
 export default createAppContainer(RootStack);

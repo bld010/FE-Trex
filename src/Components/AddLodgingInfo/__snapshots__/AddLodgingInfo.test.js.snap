@@ -20,71 +20,7 @@ exports[`AddLodgingInfo should match the snapshot when loading 1`] = `
         }
       }
     >
-      <View>
-        <Text
-          style={
-            Object {
-              "color": "white",
-              "fontSize": 30,
-              "paddingVertical": 25,
-              "textAlign": "center",
-            }
-          }
-        >
-          Add Lodging
-        </Text>
-      </View>
-      <Text
-        style={
-          Object {
-            "color": "white",
-            "fontSize": 20,
-            "marginBottom": 5,
-            "marginLeft": 20,
-          }
-        }
-      >
-        Country
-      </Text>
-      <View
-        style={
-          Object {
-            "backgroundColor": "white",
-            "borderColor": "white",
-            "borderRadius": 8,
-            "borderStyle": "solid",
-            "borderWidth": 1,
-            "color": "white",
-            "height": 60,
-            "marginBottom": 20,
-            "marginLeft": 15,
-            "padding": 10,
-            "width": 350,
-          }
-        }
-      >
-        <TextInput
-          allowFontScaling={true}
-          maxLength={20}
-          onBlur={[Function]}
-          onChangeText={[Function]}
-          placeholder="Enter Country of Stay..."
-          placeholderTextColor="black"
-          rejectResponderTermination={true}
-          style={
-            Object {
-              "alignItems": "center",
-              "backgroundColor": "white",
-              "color": "black",
-              "flex": 1,
-              "fontSize": 18,
-              "marginLeft": 10,
-            }
-          }
-          underlineColorAndroid="transparent"
-          value=""
-        />
-      </View>
+      <View />
       <Text
         style={
           Object {
