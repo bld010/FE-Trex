@@ -29,7 +29,20 @@ export default class MyWanderersTrips extends Component {
       return (
          <TouchableOpacity key={index + trip.name} style={styles.tripButton}>
           <Text style={styles.text} key={trip.name}>{trip.name}</Text>
+          {trip.legs.length && this.generateLegs(trip.legs)}
           </TouchableOpacity>
+      )
+    })
+  }
+
+  generateLegs = (legs) => {
+    return legs.map((leg,index) => {
+      return (
+        <View style={styles.legBorder}>
+          <Text style={styles.legHeader}>Leg {index + 1 }</Text>
+          <Text style={styles.leg}>{leg.startLocation} to {leg.endLocation}</Text>
+          <Text style={styles.leg}>{leg.startDate} through {leg.endDate} </Text>
+        </View>
       )
     })
   }
@@ -85,11 +98,23 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'flex-start'
   }, 
+  legHeader: {
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  legBorder: {
+    borderWidth: 1,
+    borderColor: '#84183B',
+    borderRadius: 8,
+    width: 'auto',
+    textAlign: 'center',
+    padding: 10
+  },
   text: {
     color: '#84183B',
-    marginVertical: 40,
+    marginVertical: 10,
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 30,
     width: 'auto'
   }, 
   title: {
@@ -97,12 +122,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 10
   }, 
+  leg: {
+    color: '#84183B',
+    marginVertical: 10,
+    textAlign: 'center',
+    fontSize: 15,
+    width: 'auto'
+  },
   tripButton: {
-    borderWidth: 1,
+    borderWidth: 3,
     borderColor: '#84183B',
     borderRadius: 8,
     marginVertical: 10,
-    height: 100,
     color: '#84183B'
   }
 });
