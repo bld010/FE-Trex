@@ -75,10 +75,7 @@ class Lodging extends Component {
           <View>
            {lodgings.length > 0 && this.displayLodging()}
            {error !== '' && <Text style={styles.text}>{error}</Text>}
-           {lodgings.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
-
           </View>    
-
 
         </ScrollView>
 

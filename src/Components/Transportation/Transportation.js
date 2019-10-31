@@ -74,8 +74,6 @@ class Transportation extends Component {
           <View>
            {transports.length > 0 && this.generateTransportationElements()}
            {error !== '' && <Text style={styles.text}>{error}</Text>}
-           {transports.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
-         
           </View>    
         
 
