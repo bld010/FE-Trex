@@ -1,4 +1,3 @@
-
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import Home from './Home/Home';
@@ -18,8 +17,10 @@ import MyWandererTrips from './MyWanderersTrips/MyWanderersTrips';
 import WandererDashboard from './WandererDashboard/WandererDashboard';
 import MyWanderer from './MyWanderer/MyWanderer';
 import FollowerMessageHistory from './FollowerMessageHistory/FollowerMessageHistory';
+import Lodging from './Lodging/Lodging'
 import Follower from '../Components/Follower/Follower';
 import Transportation from './Transportation/Transportation'
+
 
 const RootStack = createStackNavigator({
   Home: {
@@ -162,6 +163,14 @@ const RootStack = createStackNavigator({
     screen: FollowerMessageHistory,
     navigationOptions: {
       headerBackTitle: 'Message History',
+      headerTransparent: true,
+      headerBackTitleStyle: { color: 'white'} 
+    }
+  },
+  Lodging: {
+    screen: Lodging,
+    navigationOptions: {
+      headerBackTitle: 'Lodging',
       headerTransparent: true,
       headerBackTitleStyle: { color: 'white'} 
     }

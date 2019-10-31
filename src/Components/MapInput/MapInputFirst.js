@@ -10,7 +10,6 @@ export default class MapInputFirst extends React.Component {
     super(props);
   }
   render() {
-    console.log(this.props)
     return (
       <View style={{ paddingTop: 20, flex: 1 }}>
         <GooglePlacesAutocomplete

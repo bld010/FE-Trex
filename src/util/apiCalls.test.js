@@ -8,6 +8,7 @@ import {
   deleteTrip,
   deleteLeg, 
   fetchFollowers,
+  postNewLodging,
   fetchWanderersIncomingNotifications,
   fetchTransport,
   postNewTransport,
@@ -1490,9 +1491,9 @@ describe('apiCalls', () => {
       mockFetch.mockImplementation(() => {
         return Promise.reject(Error('There was an error marking your message as read'))
       })
-
       await expect(markMessageRead(4)).rejects.toEqual(Error('There was an error marking your message as read'))
     })
+
 
     it('should return an error if status is not ok (SAD)', async () => {
       mockFetch.mockImplementation(() => {
