@@ -135,5 +135,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginVertical: 10,
     color: '#84183B'
-  }
+  },
+  
 });

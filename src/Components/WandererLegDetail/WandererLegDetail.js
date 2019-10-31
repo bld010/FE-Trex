@@ -6,9 +6,6 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity,
-  TextInput,
-  Keyboard,
   Image
 } from "react-native";
 import wandererSpinner from '../../../assets/wanderer_spinner.gif';
@@ -54,6 +51,7 @@ export default class WandererLegDetail extends Component {
 
   generateLodgingElements = () => {
     return this.state.lodgings.map((lodging) => {
+      console.log(lodging)
       return (
         <View style={styles.borderContainer}>
           <Text style={styles.headerText}>{lodging.name} details</Text>
@@ -61,26 +59,26 @@ export default class WandererLegDetail extends Component {
           <Text style={styles.text}>Arriving {lodging.arrivalDate}</Text>
           <Text style={styles.text}>Leaving {lodging.departureDate}</Text>
         </View>
-    )
-      })
+      )
+    })
   }
 
   generateTransportationElements = () => {
     return this.state.transportations.map((transport) => {
+      console.log(transport)
       return (
         <View style={styles.borderContainer}>
           <Text style={styles.headerText}>{transport.mode} details</Text>
           <Text style={styles.text}>Depart {transport.departureCity} at {transport.departureTime}</Text>
           <Text style={styles.text}>Arrive {transport.arrivalCity} at {transport.arrivalTime}</Text>
         </View>
-    )
-      })
+      )
+    })
   }
   
   render() {
     const {navigate} = this.props.navigation;
     const { leg, error, transportations, lodgings } = this.state
-
     return (
       <View style={styles.container}> 
 
@@ -88,17 +86,23 @@ export default class WandererLegDetail extends Component {
 
         <ScrollView>
           <Text style={styles.title}>Leg Detail</Text>
-          <Text style={styles.title}>{leg.name}</Text>
+          <View style={styles.container}>
+            <Text style={styles.subhead}>{leg.startLocation} to {leg.endLocation}</Text>
+            <Text style={styles.text}>{leg.startDate} through {leg.endDate}</Text>
+          </View>
+
+        <View style={styles.container}>
 
         {error !== '' && <Text style={styles.text}>{error}</Text>}
         {transportations.length === 0 && lodgings.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
         {error === '' && transportations.length == 0 && lodgings.length == 0 && 
         <Image alt={'Loading...'} style={styles.loading} source={wandererSpinner} />
         }
-
+        <Text style={styles.title}>Lodging</Text>
         {lodgings === [] && this.generateLodgingElements()}
+        <Text style={styles.title}>Transportation</Text>
         {transportations === [] && this.generateTransportationElements()}
-
+        </View>
         </ScrollView>
 
         <FollowerFooter navigate={navigate}/>
@@ -115,31 +119,46 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'flex-start'
   }, 
+  subhead: {
+    fontSize: 22,
+    color: '#84183B',
+    borderColor: '#84183B',
+    borderWidth: 1,
+    borderRadius: 8,
+    textAlign: 'center'
+  }, 
   text: {
-    color: 'white',
-    marginVertical: 40,
+    color: '#84183B',
+    marginVertical: 10,
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 16,
     width: 'auto'
   }, 
   title: {
     fontSize: 30,
     textAlign: 'center',
-    color: 'black'
+    color: '#84183B'
   }, 
-  button: {
-    borderColor: 'white',
+  borderContainer: {
+    borderColor: '#84183B',
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: 'solid',
-    width: 'auto',
-    height: 60,
-    margin: 20,
-    fontSize: 30,
-    padding: 10,
-    color: 'white',
+    width: 330,
+    color: '#84183B',
+    marginLeft: 20,
+    marginVertical: 10,
+    marginBottom: 10,
+    height: 240
+  },
+  headerText: {
+    color: '#84183B',
+    marginVertical: 10,
     textAlign: 'center',
-    backgroundColor: '#84183B',
-    alignItems: 'stretch'
-  }
+    fontSize: 30,
+    width: 'auto',
+    textAlign: 'center',
+    borderBottomColor: 'white',
+    borderBottomWidth: 1,
+  },
 });
