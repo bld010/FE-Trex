@@ -140,7 +140,7 @@ export default class MyWanderer extends Component {
               <Text style={styles.buttonText} onPress={this.handleNewMessage}>Check In</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.sideBySideButton}>
-              <Text style={styles.buttonText} onPress={() => navigate('MyWandererTrips')}>Trips</Text>
+              <Text style={styles.buttonText} onPress={() => navigate('MyWandererTrips', {wanderer: this.state.wanderer})}>Trips</Text>
             </TouchableOpacity>
           </View>
           
