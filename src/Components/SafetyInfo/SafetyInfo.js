@@ -34,7 +34,10 @@ export default class SafetyInfo extends Component {
         <WandererHeader/>
         <ScrollView>
         <Text style={styles.title}>Your Location: France</Text>
+        <Text style={styles.title}>Health Information:</Text>
         <Text style={styles.title}>{this.state.safety.healthInfo}</Text>
+        <Text style={styles.title}>Vaccine Information:</Text>
+        <Text style={styles.title}>{this.state.safety.vaccineInfo}</Text>
         </ScrollView>
         <WandererFooter navigate={navigate}/>
       </View>
