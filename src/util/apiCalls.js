@@ -625,15 +625,40 @@ export const fetchFollowersIncomingNotifications = async (follower_id) => {
   }
 }
 
-//https://api.darksky.net/forecast/0123456789abcdef9876543210fedcba/48.8566,2.3522
+export const fetchSafety = async (legId) => {
 
-export const getWeather = () => {
-  return fetch("https://api.darksky.net/forecast/0123456789abcdef9876543210fedcba/48.8566,2.3522").then(response => {
-    if (!response.ok) {
-      throw Error("Error Fetching Weather");
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
     }
-    return response.json();
-  }).catch(error => {
-    throw(Error(error.message))
-  })
-};
+  }
+
+  let queryParams = `{
+    currentLocationInformation(latitude: 43.69973, longitude: 7.25649) {
+      id
+      code
+      hasAdvisoryWarning
+      passportInfo
+      visaInfo
+      vaccineInfo
+      healthInfo
+      transitInfo
+    }
+  }`
+  let url = `https://secret-cliffs-17751.herokuapp.com/graphql?query=${queryParams}`
+  
+  try {
+    let resp = await fetch(url, options)
+    if (!resp.ok) {
+      throw new Error('There was an error fetching your transport details')
+    }
+
+    let data = await resp.json();
+    let transportations = data.data.leg.transportations;
+    return transportations;
+
+  } catch (error) {
+    throw error
+  }
+}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -12,10 +12,12 @@ export default class Weather extends Component {
   constructor() {
     super() 
     this.state = {
-
+      weather: []
     }
   }
+
   render() {
+    console.log(this.state.weather)
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Insert Weather Here</Text>
