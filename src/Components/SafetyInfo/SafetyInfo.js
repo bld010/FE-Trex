@@ -4,17 +4,19 @@ import {
   Text, 
   View, 
   ScrollView,
-  TouchableOpacity 
+  Image 
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
-import {fetchSafety} from '../../util/apiCalls'
+import {fetchSafety} from '../../util/apiCalls';
+import wandererSpinner from '../../../assets/wanderer_spinner.gif';
 
 export default class SafetyInfo extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      safety: []
+      safety: [],
+      error: ''
     }
   }
   componentDidMount = async() => {
@@ -22,12 +24,12 @@ export default class SafetyInfo extends Component {
       let safety = await fetchSafety()
       this.setState({safety})
     } catch (error) {
-      this.setState({error: 'There was an error fetching your tranportation'})
+      this.setState({error: 'There was an error fetching your safety information'})
     }
   }
 
   render() {
-    console.log(this.state.safety)
+    
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
@@ -36,13 +38,35 @@ export default class SafetyInfo extends Component {
         <Text style={styles.title}>Your Location:</Text>
         <Text style={styles.text}>France</Text>
         <Text style={styles.title}>Health Information:</Text>
+        
+
+        {this.state.error === '' && this.state.safety.length == 0 &&
+          <>
+            <Image alt={'Loading...'} style={styles.loading} source={wandererSpinner} />
+          </>
+        }
+
         <Text style={styles.text}>{this.state.safety.healthInfo}</Text>
         <Text style={styles.title}>Vaccine Information:</Text>
+
+        {this.state.error === '' && this.state.safety.length == 0 &&
+          <>
+            <Image alt={'Loading...'} style={styles.loading} source={wandererSpinner} />
+          </>
+        }
+
         <Text style={styles.text}>{this.state.safety.vaccineInfo}</Text>
         <Text style={styles.title}>Passport Information:</Text>
+
+        {this.state.error === '' && this.state.safety.length == 0 &&
+          <>
+            <Image alt={'Loading...'} style={styles.loading} source={wandererSpinner} />
+          </>
+        }
+
         <Text style={styles.text}>{this.state.safety.passportInfo}</Text>
         </ScrollView>
-        <WandererFooter navigate={navigate}/>
+        <WandererFooter navigate={navigate} userId={this.props.navigation.getParam('userId')} />
       </View>
     )
   }
@@ -70,5 +94,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
     alignItems: 'stretch',
     justifyContent: 'flex-start'
+  },
+  loading: {
+    width: 100,
+    height: 100,
+    alignSelf: 'center',
+    color: 'white'
   }
 })
