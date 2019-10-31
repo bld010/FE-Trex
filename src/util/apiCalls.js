@@ -625,4 +625,15 @@ export const fetchFollowersIncomingNotifications = async (follower_id) => {
   }
 }
 
-//https://api.darksky.net/forecast/0123456789abcdef9876543210fedcba/42.3601,-71.0589
+//https://api.darksky.net/forecast/0123456789abcdef9876543210fedcba/48.8566,2.3522
+
+export const getWeather = () => {
+  return fetch("https://api.darksky.net/forecast/0123456789abcdef9876543210fedcba/48.8566,2.3522").then(response => {
+    if (!response.ok) {
+      throw Error("Error Fetching Weather");
+    }
+    return response.json();
+  }).catch(error => {
+    throw(Error(error.message))
+  })
+};
