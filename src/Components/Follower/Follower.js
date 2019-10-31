@@ -21,8 +21,17 @@ export default class Follower extends Component {
       readMessages: null,
       latitude: null,
       longitude: null,
-      error: ''
+      error: '',
+      checkInVerification: false
     }
+  }
+
+  showCheckInVerification = () => {
+    this.setState({ checkInVerification: true})
+
+    setTimeout(() => {
+      this.setState({ checkInVerification: false})
+    }, 5000)
   }
 
   sendNewMessage = async () => {
@@ -39,6 +48,7 @@ export default class Follower extends Component {
       let sentMessage = await sendWandererMessage(message)
       this.setState({ error: '' })
       this.reQueryAllMessages();
+      this.showCheckInVerification();
     } catch (error) {
       this.setState({ error: 'There was an error sending your message'})
     }
@@ -135,6 +145,12 @@ export default class Follower extends Component {
           <Text style={styles.followerName}>{this.state.follower.name}</Text>
           {!this.state.messages.length && <Text style={styles.text}>No Messages Found</Text>}
 
+          {this.state.checkInVerification && 
+            <View style={styles.messageContainer}>
+              <Text style={styles.message}>Check In Sent</Text>
+            </View>
+          }
+
           {this.state.messages.length !== 0 && 
             <>
               {this.state.unreadMessages !== null && 
@@ -159,6 +175,8 @@ export default class Follower extends Component {
             style={styles.button}>
             <Text style={styles.text}>Send Check-In</Text>
           </TouchableOpacity>
+
+
         </ScrollView>
         <WandererFooter navigate={navigate} userId={this.state.userId}/>
 
@@ -247,5 +265,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 8
+  },
+  messageContainer: {
+    display: 'flex',
+    flex: 1,
+    width: 400,
+    height: 'auto',
+    marginVertical: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8,
+    padding: 20,
+    alignSelf: 'center'
   }
 })
