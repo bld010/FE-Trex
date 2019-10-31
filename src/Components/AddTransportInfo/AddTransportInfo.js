@@ -165,10 +165,11 @@ export default class AddTransportInfo extends Component {
             <Text style={styles.title}>Add Transportation</Text>
             </View>
             <View>
-            <Text style={styles.label}>Mode of Travel</Text>
             </View>
+            <Text style={styles.text}>Mode of Travel</Text>
+            <View style={styles.form}>
               <TextInput
-              style={styles.inputMode}
+              style={styles.input}
               placeholder={
               this.state.mode || 'Enter Mode of Travel...'
               }
@@ -177,11 +178,12 @@ export default class AddTransportInfo extends Component {
               value={this.state.mode}
               onBlur={Keyboard.dismiss}
             />
+            </View>
             <Text style={styles.label}>Start Destination</Text>
             <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
             <Text style={styles.label}>End Destination</Text>
             <MapInputSecond handlerSecondInput={this.handlerSecondInput.bind(this)} />
-            <Text style={styles.text}>Travel Times</Text>
+            <Text style={styles.text}>Departure Date</Text>
             <DatePicker
               style={{ width: 370, height: 65 }}
               date={this.state.departureTime}
@@ -219,6 +221,7 @@ export default class AddTransportInfo extends Component {
                 this.setState({ departureTime: date });
               }}
             />
+            <Text style={styles.text}>Arrival Date</Text>
               <DatePicker
               style={{ width: 370, height: 65 }}
               date={this.state.arrivalTime}
@@ -290,14 +293,6 @@ const styles = StyleSheet.create({
   buttonBackground: {
     backgroundColor: "#000000",
   },
-  inputMode: {
-    backgroundColor: 'white',
-    color: 'black',
-    fontSize: 22,
-    flex: 1,
-    alignItems: 'center',
-    marginLeft: 10
-  },
   title: {
     textAlign: 'center',
     fontSize: 30,
@@ -311,21 +306,22 @@ const styles = StyleSheet.create({
     paddingVertical: 15
   },
   input: {
-    backgroundColor: 'black',
-    color: 'white',
+    backgroundColor: "white",
+    color: "black",
     fontSize: 18,
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     marginLeft: 10
   },
   form: {
-    borderColor: 'white',
+    backgroundColor: "white",
+    borderColor: "white",
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: 'solid',
+    borderStyle: "solid",
     height: 60,
     width: 350,
-    color: 'white',
+    color: "white",
     padding: 10,
     marginLeft: 15,
     marginBottom: 20
@@ -363,9 +359,8 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'white',
-    fontSize: 25,
+    fontSize: 18,
     textAlign: 'center',
-    marginVertical: 15
   },
     deleteButton: {
       backgroundColor: 'red'
