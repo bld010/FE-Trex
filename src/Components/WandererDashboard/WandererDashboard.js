@@ -26,7 +26,7 @@ export default class WandererDashboard extends Component {
     <WandererHeader />
     <ScrollView>
       <View style={styles.topContainer}>
-      <Text style={styles.textEmergency}>Emergency Call</Text>
+      <Text style={styles.textEmergency}>112</Text>
       <Weather />
       </View>
       <Map />
