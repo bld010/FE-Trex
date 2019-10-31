@@ -19,7 +19,8 @@ class Lodging extends Component {
       leg: this.props.navigation.getParam('leg'),
       lodgings: [],
       error: '',
-      existingLegId: this.props.navigation.getParam('existingLegId') || null
+      existingLegId: this.props.navigation.getParam('existingLegId') || null,
+      userId: this.props.navigation.getParam('userId'),
      }
   }
 
