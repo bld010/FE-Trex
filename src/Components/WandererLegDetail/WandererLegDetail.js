@@ -44,20 +44,17 @@ export default class WandererLegDetail extends Component {
 
   componentDidMount = async () => {
     let transportations = await this.gatherTransportation()
-    console.log(tranportations)
     this.setState({ transportations })
     let lodgings = await this.gatherLodging()
-    console.log(lodgings)
     this.setState({ lodgings })
   }
 
   generateLodgingElements = () => {
     return this.state.lodgings.map((lodging) => {
-      console.log(lodging)
       return (
         <View style={styles.borderContainer}>
-          <Text style={styles.headerText}>{lodging.name} details</Text>
-          <Text style={styles.text}>City {lodging.city}</Text>
+          <Text style={styles.headerText}>{lodging.name}</Text>
+          <Text style={styles.text}>City: {lodging.city}</Text>
           <Text style={styles.text}>Arriving {lodging.arrivalDate}</Text>
           <Text style={styles.text}>Leaving {lodging.departureDate}</Text>
         </View>
@@ -67,7 +64,6 @@ export default class WandererLegDetail extends Component {
 
   generateTransportationElements = () => {
     return this.state.transportations.map((transport) => {
-      console.log(transport)
       return (
         <View style={styles.borderContainer}>
           <Text style={styles.headerText}>{transport.mode} details</Text>

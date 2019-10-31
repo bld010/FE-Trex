@@ -89,7 +89,6 @@ export default class MyWanderer extends Component {
     
     try {
       let newMessage = await sendWandererMessage(message_body)
-      console.log(newMessage)
       this.setState({ error: ''})
       this.showCheckInVerification();
     } catch (error) {
