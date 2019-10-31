@@ -72,7 +72,7 @@ export class MyTrips extends Component {
             }
           </View>
           <TouchableOpacity style={styles.addTripButton}>
-            <Text style={styles.text} onPress={() => navigate('TripForm', {userId: this.state.userId})}>Add a New Trip</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('TripForm', {userId: this.state.userId})}>Add a New Trip</Text>
           </TouchableOpacity>
         </ScrollView>
   
@@ -85,9 +85,6 @@ export class MyTrips extends Component {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 30
-  }, 
   container: {
     flex: 1,
     backgroundColor: '#000000',
@@ -98,29 +95,50 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     textAlign: 'center',
-    paddingVertical: 10,
-    fontSize: 20
+    paddingVertical: 5,
+    fontSize: 24
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
+    paddingVertical: 5,
+    fontSize: 24,
+    fontWeight: '600'
   },
   title: {
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 40,
     color: 'white',
-    paddingVertical: 10
+    paddingVertical: 16
   },
   tripButton: {
-    borderWidth: 1,
     borderColor: 'white',
+    borderWidth: 1,
     borderRadius: 8,
-    marginVertical: 10
+    borderStyle: 'solid',
+    width: 'auto',
+    height: 60,
+    margin: 10,
+    fontSize: 30,
+    padding: 10,
+    color: 'white',
+    textAlign: 'center',
+    alignItems: 'stretch'
   },
   addTripButton: {
     backgroundColor: '#1C4263',
+    borderColor: 'white',
     borderWidth: 1,
-    borderColor: 'white', 
-    color: 'white',
     borderRadius: 8,
-    backgroundColor: '#1C4263',
-    marginBottom: 10
+    borderStyle: 'solid',
+    width: 'auto',
+    height: 60,
+    margin: 10,
+    fontSize: 30,
+    padding: 10,
+    color: 'white',
+    textAlign: 'center',
+    alignItems: 'stretch'
   }
 })
 
