@@ -26,7 +26,6 @@ export default class MessageHistory extends Component {
   }
 
   generateMessagesElements = () => {
-    console.log('wtf')
 
     let readMessages = this.state.messages.filter(message => message.unread === false)
   

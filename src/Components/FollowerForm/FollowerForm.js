@@ -105,7 +105,7 @@ export default class FollowerForm extends Component {
               />
             </View>
           {this.state.error !== '' && 
-            <Text style={styles.error}>{this.state.error}</Text>
+            <Text style={styles.errorText}>{this.state.error}</Text>
           }
           <TouchableOpacity onPress={this.handleSave}>
             <Text style={styles.button}>Save</Text>
@@ -178,10 +178,10 @@ const styles = StyleSheet.create({
     color: "white",
     marginBottom: 5
   },
-  error: {
-    color: 'white',
-    fontSize: 25,
+  errorText: {
+    color: 'red',
     textAlign: 'center',
-    marginVertical: 15
+    paddingVertical: 5,
+    fontSize: 24
   }
 });

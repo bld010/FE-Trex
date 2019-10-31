@@ -23,7 +23,8 @@ export default class Weather extends Component {
       <View style={styles.container}>
         <View style={styles.text}>
         <Text style={styles.weatherText}>Paris</Text>
-        <Image  style={{width: 130, height: 130, marginLeft: 30}} source={{uri: 'https://cdn3.iconfinder.com/data/icons/picons-weather/57/15_heavy_rain-512.png'}}/>
+        <Image  style={{width: 120, height: 110, marginLeft: 30}} source={{uri: 'https://cdn3.iconfinder.com/data/icons/picons-weather/57/15_heavy_rain-512.png'}}/>
+        <Text style={styles.weatherText}>54°</Text>
         <Text style={styles.weatherText}>Rainy</Text>
         </View>
       </View>
@@ -48,6 +49,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     fontWeight: '600',
-    marginVertical: 5
+    marginVertical: 4
   }
 });

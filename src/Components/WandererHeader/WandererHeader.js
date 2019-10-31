@@ -30,9 +30,9 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#1C4263',
     color: 'white',
-    paddingLeft: 10,
     textAlign: 'center',
-    fontSize: 40,
+    fontSize: 50,
     height: 60,
+    fontWeight: '600'
   }
 })

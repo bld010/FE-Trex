@@ -225,9 +225,9 @@ exports[`AddLodgingInfo should match the snapshot when loading 1`] = `
       <Text
         style={
           Object {
-            "color": "white",
-            "fontSize": 25,
-            "marginVertical": 15,
+            "color": "red",
+            "fontSize": 24,
+            "paddingVertical": 5,
             "textAlign": "center",
           }
         }

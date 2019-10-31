@@ -2,7 +2,7 @@
 
 exports[`Weather should match the snapshot when loading 1`] = `
 <View>
-  <Text
+  <View
     style={
       Object {
         "borderColor": "white",
@@ -10,15 +10,66 @@ exports[`Weather should match the snapshot when loading 1`] = `
         "borderStyle": "solid",
         "borderWidth": 1,
         "color": "white",
-        "fontSize": 20,
         "height": 200,
-        "marginVertical": 15,
-        "textAlign": "center",
-        "width": 190,
+        "marginRight": 10,
+        "marginVertical": 19,
+        "width": 180,
       }
     }
   >
-    Insert Weather Here
-  </Text>
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 18,
+          "fontWeight": "600",
+          "marginVertical": 4,
+          "textAlign": "center",
+        }
+      }
+    >
+      Paris
+    </Text>
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn3.iconfinder.com/data/icons/picons-weather/57/15_heavy_rain-512.png",
+        }
+      }
+      style={
+        Object {
+          "height": 110,
+          "marginLeft": 30,
+          "width": 120,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 18,
+          "fontWeight": "600",
+          "marginVertical": 4,
+          "textAlign": "center",
+        }
+      }
+    >
+      54°
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 18,
+          "fontWeight": "600",
+          "marginVertical": 4,
+          "textAlign": "center",
+        }
+      }
+    >
+      Rainy
+    </Text>
+  </View>
 </View>
 `;

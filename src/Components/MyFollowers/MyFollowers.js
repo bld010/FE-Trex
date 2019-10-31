@@ -87,9 +87,9 @@ export class MyFollowers extends Component {
             }
             {this.state.followers.length === 0 && <Text style={styles.text}>Loading ...</Text>}
             {this.state.followers.length > 0 && this.state.messages !== null && this.generateFollowersElements()}
-            {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
+            {this.state.error !== '' && <Text style={styles.errorText}>{this.state.error}</Text>}
             <TouchableOpacity style={styles.addFollowerButton}>
-              <Text style={styles.text} onPress={() => navigate('FollowerForm', {userId: this.state.userId})}>Add a New Follower</Text>
+              <Text style={styles.buttonText} onPress={() => navigate('FollowerForm', {userId: this.state.userId})}>Add a New Follower</Text>
             </TouchableOpacity>
           </ScrollView>
           <WandererFooter navigate={navigate} userId={this.state.userId}/>
@@ -100,7 +100,7 @@ export class MyFollowers extends Component {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 30
+    fontSize: 34
   }, 
   container: {
     flex: 1,
@@ -112,8 +112,15 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     textAlign: 'center',
-    paddingVertical: 10,
-    fontSize: 20
+    paddingVertical: 6,
+    fontSize: 22
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
+    paddingVertical: 6,
+    fontSize: 24,
+    fontWeight: '600'
   },
   title: {
     textAlign: 'center',
@@ -123,28 +130,38 @@ const styles = StyleSheet.create({
   },
   addFollowerButton: {
     backgroundColor: '#1C4263',
+    borderColor: 'white',
     borderWidth: 1,
-    borderColor: 'white', 
-    color: 'white',
     borderRadius: 8,
-    backgroundColor: '#1C4263',
-    marginVertical: 30
+    borderStyle: 'solid',
+    width: 'auto',
+    height: 60,
+    margin: 10,
+    fontSize: 30,
+    padding: 10,
+    color: 'white',
+    textAlign: 'center',
+    alignItems: 'stretch'
   },
   followerButton: {
-    backgroundColor: '#1C4263',
+    borderColor: 'white',
     borderWidth: 1,
-    borderColor: 'white', 
-    color: 'white',
     borderRadius: 8,
-    backgroundColor: '#1C4263',
-    marginVertical: 10,
-    marginHorizontal: 20
+    borderStyle: 'solid',
+    width: 'auto',
+    height: 60,
+    margin: 10,
+    fontSize: 30,
+    padding: 10,
+    color: 'white',
+    textAlign: 'center',
+    alignItems: 'stretch'
   },
-  error: {
+  errorText: {
     color: 'red',
     textAlign: 'center',
-    paddingVertical: 10,
-    fontSize: 20
+    paddingVertical: 5,
+    fontSize: 24
   },
   loading: {
     width: 100,

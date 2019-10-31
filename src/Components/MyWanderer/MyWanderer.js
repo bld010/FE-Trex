@@ -89,7 +89,6 @@ export default class MyWanderer extends Component {
     
     try {
       let newMessage = await sendWandererMessage(message_body)
-      console.log(newMessage)
       this.setState({ error: ''})
       this.showCheckInVerification();
     } catch (error) {
@@ -125,7 +124,7 @@ export default class MyWanderer extends Component {
           <Text style={styles.headerText}>{this.state.wanderer.name}</Text>
 
           <Text style={styles.text}>Unread Messages</Text>
-          {unreadMessages.length === 0 && <Text style={styles.error}>No messages found</Text>}
+          {unreadMessages.length === 0 && <Text style={styles.errorText}>No messages found</Text>}
 
           {this.state.readVerification === true && 
           
@@ -140,7 +139,7 @@ export default class MyWanderer extends Component {
               <Text style={styles.buttonText} onPress={this.handleNewMessage}>Check In</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.sideBySideButton}>
-              <Text style={styles.buttonText} onPress={() => navigate('MyWandererTrips')}>Trips</Text>
+              <Text style={styles.buttonText} onPress={() => navigate('MyWandererTrips', {wanderer: this.state.wanderer})}>Trips</Text>
             </TouchableOpacity>
           </View>
           
@@ -243,11 +242,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "#84183B"
   },
-  error: {
+  errorText: {
     color: 'red',
-    fontSize: 25,
     textAlign: 'center',
-    marginVertical: 15
+    paddingVertical: 5,
+    fontSize: 24
   },
   buttonText: {
     fontSize: 20,

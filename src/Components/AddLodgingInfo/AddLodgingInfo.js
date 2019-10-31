@@ -235,7 +235,7 @@ export default class AddLodgingInfo extends Component {
             />
 
             {this.state.error !== "" && (
-              <Text style={styles.error}>{this.state.error}</Text>
+              <Text style={styles.errorText}>{this.state.error}</Text>
             )}
 
             <TouchableOpacity onPress={this.handleSave}>
@@ -325,11 +325,11 @@ const styles = StyleSheet.create({
     marginVertical: -10,
     color: "white"
   },
-  error: {
-    color: "white",
-    fontSize: 25,
-    textAlign: "center",
-    marginVertical: 15
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    paddingVertical: 5,
+    fontSize: 24
   },
   deleteButton: {
     borderColor: "white",
