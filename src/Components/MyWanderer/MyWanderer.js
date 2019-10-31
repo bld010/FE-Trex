@@ -103,9 +103,6 @@ export default class MyWanderer extends Component {
           }
           {this.generateUnreadMessagesElements()}
 
-
-          {/* fire update of list on FollowerDashboard? */}
-
           <View style={styles.sideBySideContainer}>
           <TouchableOpacity style={styles.sideBySideButton}>
             <Text style={styles.buttonText} onPress={() => navigate('DefaultFollowerMessages')}>Message</Text>
@@ -114,9 +111,18 @@ export default class MyWanderer extends Component {
             <Text style={styles.buttonText} onPress={() => navigate('MyWandererTrips')}>Trips</Text>
           </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.messageHistoryButton} onPress={() => navigate('FollowerMessageHistory')}>
-            <Text style={styles.buttonText}>Message History</Text>
-          </TouchableOpacity>
+          
+          {/* hide the message history button unless there are actually messages */}
+          {this.state.messages.length > 0 && 
+          <TouchableOpacity 
+            style={styles.messageHistoryButton} 
+            onPress={() => navigate('MessageHistory', {messages: this.props.navigation.getParam('messages'), wanderer: this.props.navigation.getParam('wanderer')})}
+          >
+              <Text style={styles.buttonText}>Message History</Text>
+          
+            </TouchableOpacity>
+
+            }
         </ScrollView>
         <FollowerFooter navigate={navigate} userId={this.state.userId} />
       </View>
