@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
   }, 
   buttonText: {
     fontSize: 20,
+    fontWeight: '600',
     color: "white",
     textAlign: "center",
     paddingVertical: 10
@@ -134,8 +135,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: "solid",
-    height: 60,
-    margin: 20,
+    height: 64,
+    margin: 10,
     fontSize: 30,
     padding: 10,
     color: "white",

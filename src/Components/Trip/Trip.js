@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: 'white',
     textAlign: 'center',
-    paddingVertical: 10
+    paddingVertical: 6
   },
   sideButtonText: {
     fontSize: 22,
