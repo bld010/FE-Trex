@@ -65,7 +65,7 @@ class Lodging extends Component {
       <WandererHeader />
 
         <ScrollView>
-          <Text style={styles.title}>Leg Lodging Detail</Text>
+          <Text style={styles.title}>Lodging</Text>
           <Text style={styles.text}>Leg: {leg.startLocation} - {leg.endLocation}</Text>
 
           <TouchableOpacity>
@@ -95,9 +95,9 @@ const styles = StyleSheet.create({
   }, 
   title: {
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 40,
     color: 'white',
-    paddingVertical: 10
+    paddingVertical: 16
   },
   button: {
     borderColor: 'white',
