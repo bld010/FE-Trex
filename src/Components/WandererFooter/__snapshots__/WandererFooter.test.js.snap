@@ -16,46 +16,58 @@ exports[`WandererFooter should match the snapshot when loading 1`] = `
     activeOpacity={0.2}
     onPress={[Function]}
   >
-    <Text
-      style={
+    <Image
+      source={
         Object {
-          "color": "white",
-          "fontSize": 20,
+          "uri": "https://cdn3.iconfinder.com/data/icons/flat-03-business-marketing/91/Business_Marketing_131-256.png",
         }
       }
-    >
-      Trips
-    </Text>
+      style={
+        Object {
+          "backgroundColor": "#1C4263",
+          "height": 40,
+          "width": 40,
+        }
+      }
+    />
   </TouchableOpacity>
   <TouchableOpacity
     activeOpacity={0.2}
     onPress={[Function]}
   >
-    <Text
-      style={
+    <Image
+      source={
         Object {
-          "color": "white",
-          "fontSize": 20,
+          "uri": "https://cdn2.iconfinder.com/data/icons/leto-blue-customer-support/64/__hand_help_information_support_service-256.png",
         }
       }
-    >
-      Safety
-    </Text>
+      style={
+        Object {
+          "backgroundColor": "#1C4263",
+          "height": 40,
+          "width": 50,
+        }
+      }
+    />
   </TouchableOpacity>
   <TouchableOpacity
     activeOpacity={0.2}
     onPress={[Function]}
   >
-    <Text
-      style={
+    <Image
+      source={
         Object {
-          "color": "white",
-          "fontSize": 20,
+          "uri": "https://cdn2.iconfinder.com/data/icons/leto-blue-web-marketing-content-3/64/_-02-256.png",
         }
       }
-    >
-      Followers
-    </Text>
+      style={
+        Object {
+          "backgroundColor": "#1C4263",
+          "height": 40,
+          "width": 50,
+        }
+      }
+    />
   </TouchableOpacity>
 </View>
 `;

@@ -169,7 +169,7 @@ export default class Follower extends Component {
               }
             </>
           }
-          {this.state.error !== '' && <Text style={styles.error}>{this.state.error}</Text>}
+          {this.state.error !== '' && <Text style={styles.errorText}>{this.state.error}</Text>}
           <TouchableOpacity 
             onPress={this.sendNewMessage}
             style={styles.button}>
@@ -209,11 +209,11 @@ const styles = StyleSheet.create({
     color: 'white',
     paddingVertical: 10
   },
-  error: {
+  errorText: {
     color: 'red',
     textAlign: 'center',
-    paddingVertical: 10,
-    fontSize: 20
+    paddingVertical: 5,
+    fontSize: 24
   }, 
   sideBySide: {
     flex: 1,

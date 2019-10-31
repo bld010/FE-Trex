@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 
 export default class WandererFooter extends Component {
   constructor(props) {
@@ -17,17 +17,17 @@ export default class WandererFooter extends Component {
             
             onPress={() => this.props.navigate('MyTrips', { userId: this.state.userId})}
             >
-              <Text style={styles.footerText}>Trips</Text>
+            <Image style={{width: 40, height: 40, backgroundColor: '#1C4263'}} source={{uri: 'https://cdn3.iconfinder.com/data/icons/flat-03-business-marketing/91/Business_Marketing_131-256.png'}}/>
             </TouchableOpacity>
             <TouchableOpacity
             onPress={() => this.props.navigate('SafetyInfo')}
             >
-              <Text style={styles.footerText}>Safety</Text>
+            <Image style={{width: 50, height: 40, backgroundColor: '#1C4263'}} source={{uri: 'https://cdn2.iconfinder.com/data/icons/leto-blue-customer-support/64/__hand_help_information_support_service-256.png'}}/>
             </TouchableOpacity>
             <TouchableOpacity
             
             onPress={() => this.props.navigate('MyFollowers', { userId: this.state.userId})}>
-              <Text style={styles.footerText}>Followers</Text>
+              <Image style={{width: 50, height: 40, backgroundColor: '#1C4263'}} source={{uri: 'https://cdn2.iconfinder.com/data/icons/leto-blue-web-marketing-content-3/64/_-02-256.png'}}/>
             </TouchableOpacity>
 
           </View>

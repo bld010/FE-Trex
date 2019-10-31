@@ -27,40 +27,57 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
         Add Transportation
       </Text>
     </View>
-    <View>
-      <Text
-        style={
-          Object {
-            "color": "white",
-            "fontSize": 20,
-            "marginBottom": -22,
-            "marginLeft": 20,
-          }
-        }
-      >
-        Mode of Travel
-      </Text>
-    </View>
-    <TextInput
-      allowFontScaling={true}
-      onBlur={[Function]}
-      onChangeText={[Function]}
-      placeholder="Enter Mode of Travel..."
-      placeholderTextColor="black"
-      rejectResponderTermination={true}
+    <View />
+    <Text
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "white",
-          "color": "black",
-          "flex": 1,
-          "fontSize": 22,
-          "marginLeft": 10,
+          "color": "white",
+          "fontSize": 20,
+          "marginLeft": 20,
+          "paddingVertical": 15,
         }
       }
-      underlineColorAndroid="transparent"
-      value=""
-    />
+    >
+      Mode of Travel
+    </Text>
+    <View
+      style={
+        Object {
+          "backgroundColor": "white",
+          "borderColor": "white",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "color": "white",
+          "height": 60,
+          "marginBottom": 20,
+          "marginLeft": 15,
+          "padding": 10,
+          "width": 350,
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        placeholder="Enter Mode of Travel..."
+        placeholderTextColor="black"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "white",
+            "color": "black",
+            "flex": 1,
+            "fontSize": 18,
+            "marginLeft": 10,
+          }
+        }
+        underlineColorAndroid="transparent"
+        value=""
+      />
+    </View>
     <Text
       style={
         Object {
@@ -101,7 +118,7 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
         }
       }
     >
-      Travel Times
+      Departure Date
     </Text>
     <DatePicker
       TouchableComponent={[Function]}
@@ -159,6 +176,18 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
         }
       }
     />
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 20,
+          "marginLeft": 20,
+          "paddingVertical": 15,
+        }
+      }
+    >
+      Arrival Date
+    </Text>
     <DatePicker
       TouchableComponent={[Function]}
       allowFontScaling={true}
@@ -218,9 +247,9 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
     <Text
       style={
         Object {
-          "color": "white",
-          "fontSize": 25,
-          "marginVertical": 15,
+          "color": "red",
+          "fontSize": 24,
+          "paddingVertical": 5,
           "textAlign": "center",
         }
       }

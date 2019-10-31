@@ -45,9 +45,9 @@ class Lodging extends Component {
       return (
         <View style={styles.borderContainer}>
           <Text style={styles.headerText}>{lodging.name} details</Text>
-          <Text style={styles.text}>City {lodging.city}</Text>
-          <Text style={styles.text}>Arriving {lodging.arrivalDate}</Text>
-          <Text style={styles.text}>Leaving {lodging.departureDate}</Text>
+          <Text style={styles.text}>City:  {lodging.city}</Text>
+          <Text style={styles.text}>Arriving :  {lodging.arrivalDate}</Text>
+          <Text style={styles.text}>Leaving:  {lodging.departureDate}</Text>
           <TouchableOpacity key={index + lodging.id} style={styles.tripButton}>
             <Text onPress={() => navigate('AddLodgingInfo', {leg: this.state.leg, legId: this.state.leg.id, lodgingId: lodging.id, lodging: lodging})} style={styles.text} key={lodging.id}>Edit Lodging</Text>
           </TouchableOpacity>
@@ -65,8 +65,8 @@ class Lodging extends Component {
       <WandererHeader />
 
         <ScrollView>
-          <Text style={styles.title}>Leg Lodging Detail</Text>
-          <Text style={styles.text}>Leg: {leg.startLocation} - {leg.endLocation}</Text>
+          <Text style={styles.title}>Lodging</Text>
+          <Text style={styles.text}>{leg.startLocation} - {leg.endLocation}</Text>
 
           <TouchableOpacity>
             <Text onPress={() => navigate('AddLodgingInfo', {legId: leg.id})} style={styles.button}>Add Lodging</Text>
@@ -75,10 +75,7 @@ class Lodging extends Component {
           <View>
            {lodgings.length > 0 && this.displayLodging()}
            {error !== '' && <Text style={styles.text}>{error}</Text>}
-           {lodgings.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
-
           </View>    
-
 
         </ScrollView>
 
@@ -98,9 +95,9 @@ const styles = StyleSheet.create({
   }, 
   title: {
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 40,
     color: 'white',
-    paddingVertical: 10
+    paddingVertical: 16
   },
   button: {
     borderColor: 'white',
@@ -121,7 +118,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginVertical: 10,
     textAlign: 'center',
-    fontSize: 15,
+    fontSize: 20,
     width: 'auto',
     textAlign: 'center'
   },
@@ -142,7 +139,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginVertical: 10,
     marginBottom: 10,
-    height: 240
+    height: 250
   },
   headerText: {
     color: 'white',
@@ -153,38 +150,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderBottomColor: 'white',
     borderBottomWidth: 1,
-  }, 
-  buttonText: {
-    fontSize: 20,
-    color: "white",
-    textAlign: "center",
-    paddingVertical: 10
-  },
-  sideBySideButton: {
-    width: 170,
-    borderColor: "white",
-    borderWidth: 1,
-    borderRadius: 8,
-    borderStyle: "solid",
-    height: 60,
-    margin: 20,
-    fontSize: 30,
-    padding: 10,
-    color: "white",
-    textAlign: "center",
-    backgroundColor: "#1C4263",
-    alignItems: "stretch"
-  },
-  sideBySideContainer: {
-    flex: 1,
-    backgroundColor: "#000000",
-    flexDirection: "row",
-    justifyContent: "space-around"
   },
   tripButton: {
     borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 8,
+    borderTopColor: 'white',
+    backgroundColor: "#1C4263",
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+    height: 49,
     marginVertical: 10
   },
 });

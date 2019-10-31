@@ -25,13 +25,13 @@ export default class Home extends Component {
       <View style={styles.container}>
         <WandererHeader />
         <ScrollView>
-          <Text style={styles.text}>Welcome to Trex</Text>
+          <Text style={styles.title}>Welcome to Trex</Text>
             <Text style={styles.text}>I am a ...</Text>
-            <TouchableOpacity onPress={() => navigate('WandererDashboard', {userId: this.state.wanderer_userId})}>
-              <Text style={styles.button}>Wanderer</Text>
+            <TouchableOpacity style={styles.button} onPress={() => navigate('WandererDashboard', {userId: this.state.wanderer_userId})}>
+              <Text style={styles.buttonText}>Wanderer</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigate('FollowerDashboard', {userId: this.state.follower_userId})}>
-              <Text style={styles.followerButton}>Follower</Text>
+            <TouchableOpacity style={styles.followerButton} onPress={() => navigate('FollowerDashboard', {userId: this.state.follower_userId})}>
+              <Text style={styles.buttonText}>Follower</Text>
             </TouchableOpacity>
         </ScrollView>
     </View>
@@ -49,6 +49,12 @@ const styles = StyleSheet.create({
     marginVertical: 40,
     textAlign: "center",
     fontSize: 30
+  },
+  title: {
+    color: "white",
+    marginVertical: 40,
+    textAlign: "center",
+    fontSize: 45
   },
   button: {
     borderColor: "white",
@@ -77,5 +83,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "#84183B",
     alignItems: "stretch"
+  },
+  buttonText: {
+    fontSize: 30,
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 4,
+    fontWeight: '600'
   }
 });

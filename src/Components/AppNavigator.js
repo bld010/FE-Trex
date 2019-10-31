@@ -7,7 +7,7 @@ import Trip from './Trip/Trip';
 import LegForm from './LegForm/LegForm';
 import MyFollowers from './MyFollowers/MyFollowers';
 import FollowerForm from './FollowerForm/FollowerForm';
-import { SafetyInfo } from './SafetyInfo/SafetyInfo';
+import SafetyInfo from './SafetyInfo/SafetyInfo';
 import AddLodgingInfo from './AddLodgingInfo/AddLodgingInfo';
 import AddTransportInfo from './AddTransportInfo/AddTransportInfo';
 import { Leg } from './Leg/Leg';

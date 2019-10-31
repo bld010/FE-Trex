@@ -40,7 +40,7 @@ export const Leg = (props) => {
             <Text style={styles.buttonText} onPress={() => navigate('Transportation', { leg, userId: props.navigation.getParam('userId') })}>Transportation</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('Lodging', {leg, userId: props.navigation.getParam('userId')})}>Add Lodging</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('Lodging', {leg, userId: props.navigation.getParam('userId')})}>Lodging</Text>
           </TouchableOpacity>
         </View>
         <View>
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
   }, 
   buttonText: {
     fontSize: 20,
+    fontWeight: '600',
     color: "white",
     textAlign: "center",
     paddingVertical: 10
@@ -134,8 +135,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: "solid",
-    height: 60,
-    margin: 20,
+    height: 64,
+    margin: 10,
     fontSize: 30,
     padding: 10,
     color: "white",

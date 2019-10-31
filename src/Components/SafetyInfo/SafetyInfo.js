@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { 
   StyleSheet, 
   Text, 
@@ -8,27 +8,63 @@ import {
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
+import {fetchSafety} from '../../util/apiCalls'
 
-export function SafetyInfo(props) {
+export default class SafetyInfo extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      safety: []
+    }
+  }
+  componentDidMount = async() => {
+    try {
+      let safety = await fetchSafety()
+      this.setState({safety})
+    } catch (error) {
+      this.setState({error: 'There was an error fetching your tranportation'})
+    }
+  }
 
-    const {navigate} = props.navigation;
-
-
+  render() {
+    console.log(this.state.safety)
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <WandererHeader/>
         <ScrollView>
-        <Text style={styles.title}>HOLA</Text>
+        <Text style={styles.title}>Your Location:</Text>
+        <Text style={styles.text}>France</Text>
+        <Text style={styles.title}>Health Information:</Text>
+        <Text style={styles.text}>{this.state.safety.healthInfo}</Text>
+        <Text style={styles.title}>Vaccine Information:</Text>
+        <Text style={styles.text}>{this.state.safety.vaccineInfo}</Text>
+        <Text style={styles.title}>Passport Information:</Text>
+        <Text style={styles.text}>{this.state.safety.passportInfo}</Text>
         </ScrollView>
         <WandererFooter navigate={navigate}/>
       </View>
     )
+  }
 }
+
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 30
+    fontSize: 24,
+    color: 'white',
+    textAlign: 'center',
+    marginVertical: 15,
   }, 
+  text: {
+    fontSize: 20,
+    color: 'white',
+    textAlign: 'center',
+    marginBottom: 15,
+    marginVertical: 15,
+    width: 330,
+    marginLeft: 20
+  },
   container: {
     flex: 1,
     backgroundColor: '#000000',

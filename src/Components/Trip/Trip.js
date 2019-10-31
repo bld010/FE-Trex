@@ -67,10 +67,10 @@ class Trip extends Component {
             <View style={styles.container}>
             <View style={styles.sideBySideContainer}>
             <TouchableOpacity style={styles.sideBySideButton}>
-              <Text onPress={() => navigate('LegForm' , {tripId: id, userId: this.state.userId})} style={styles.buttonText}>Add A Leg <Text style={styles.plus}>+</Text> </Text>
+              <Text onPress={() => navigate('LegForm' , {tripId: id, userId: this.state.userId})} style={styles.sideButtonText}>Add A Leg <Text style={styles.plus}>+</Text> </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.sideBySideButton}>
-              <Text style={styles.buttonText} onPress={() => navigate('TripForm', {trip: this.state.trip, userId: this.state.userId})}>Edit Trip</Text>
+              <Text style={styles.sideButtonText} onPress={() => navigate('TripForm', {trip: this.state.trip, userId: this.state.userId})}>Edit Trip</Text>
             </TouchableOpacity>
             </View>
           </View>
@@ -126,10 +126,17 @@ const styles = StyleSheet.create({
     alignItems: 'stretch'
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 22,
     color: 'white',
     textAlign: 'center',
-    paddingVertical: 10
+    paddingVertical: 6
+  },
+  sideButtonText: {
+    fontSize: 22,
+    color: 'white',
+    textAlign: 'center',
+    paddingVertical: 6,
+    fontWeight: '600'
   },
   text: {
     color: 'white',
