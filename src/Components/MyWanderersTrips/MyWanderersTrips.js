@@ -15,7 +15,7 @@ export default class MyWanderersTrips extends Component {
   constructor() {
     super() 
     this.state = {
-
+      trips: 
     }
   }
   render() {
