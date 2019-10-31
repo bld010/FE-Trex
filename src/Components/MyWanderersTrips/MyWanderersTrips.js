@@ -10,7 +10,7 @@ import {
   Image
 } from "react-native";
 import { fetchMyTrips } from '../../util/apiCalls';
-import wandererSpinner from '../../../assets/wanderer_spinner.gif';
+import followerSpinner from '../../../assets/wanderer_spinner.gif';
 
 
 export default class MyWanderersTrips extends Component {
@@ -74,7 +74,7 @@ export default class MyWanderersTrips extends Component {
             {error !== '' && <Text style={styles.text}>{error}</Text>}
             {trips.length === 0 && error === '' && <Text style={styles.text}>Loading ...</Text>}
             {error === '' && trips.length == 0 &&
-              <Image alt={'Loading...'} style={styles.loading} source={wandererSpinner} />
+              <Image alt={'Loading...'} style={styles.loading} source={followerSpinner} />
             }
           </View>
 
@@ -136,5 +136,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     color: '#84183B'
   },
-  
+  loading: {
+    width: 100,
+    height: 100,
+    alignSelf: 'center'
+  }
 });
