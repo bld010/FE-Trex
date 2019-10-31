@@ -121,6 +121,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#1C4263',
     marginBottom: 10
+  }, 
+  loading: {
+    alignSelf: 'center'
   }
 })
 
