@@ -31,7 +31,7 @@ export default class WandererDashboard extends Component {
         <View style={styles.textEmergency}>
         <Text style={styles.text}> Call Emergency Number</Text>
           <Text style={styles.textNum}>112</Text>
-          <Image  style={{width: 45, height: 45, marginLeft: 60, backgroundColor: 'red'}} source={{uri: 'https://cdn4.iconfinder.com/data/icons/ui-outline-1-of-5/100/ui_outline_2-18-512.png'}}/>
+          <Image  style={{width: 45, height: 45, marginLeft: 60, backgroundColor: 'red'}} source={{uri: 'https://cdn2.iconfinder.com/data/icons/leto-most-searched-mix-3/64/__call_phone_ring-512.png'}}/>
       </View>
         </TouchableOpacity>
       <Weather />
