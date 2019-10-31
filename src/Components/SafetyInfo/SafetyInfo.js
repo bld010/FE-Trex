@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
-import {fetchSafety} from '../../util/apiCalls'
+import {fetchSafety} from '../../util/apiCalls';
+import { wandererSpinner } from '../../../assets/wanderer_spinner.gif';
 
 export default class SafetyInfo extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ export default class SafetyInfo extends Component {
       let safety = await fetchSafety()
       this.setState({safety})
     } catch (error) {
-      this.setState({error: 'There was an error fetching your tranportation'})
+      this.setState({error: 'There was an error fetching your safety'})
     }
   }
 
@@ -35,11 +36,14 @@ export default class SafetyInfo extends Component {
         <ScrollView>
         <Text style={styles.title}>Your Location: France</Text>
         <Text style={styles.title}>Health Information:</Text>
-        <Text style={styles.title}>{this.state.safety.healthInfo}</Text>
+        
+        <Text style={styles.text}>{this.state.safety.healthInfo}</Text>
         <Text style={styles.title}>Vaccine Information:</Text>
-        <Text style={styles.title}>{this.state.safety.vaccineInfo}</Text>
+
+        <Text style={styles.text}>{this.state.safety.vaccineInfo}</Text>
         <Text style={styles.title}>Passport Information:</Text>
-        <Text style={styles.title}>{this.state.safety.passportInfo}</Text>
+
+        <Text style={styles.text}>{this.state.safety.passportInfo}</Text>
         </ScrollView>
         <WandererFooter navigate={navigate}/>
       </View>
@@ -58,5 +62,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
     alignItems: 'stretch',
     justifyContent: 'flex-start'
+  },
+  loading: {
+    width: 100,
+    height: 100,
+    alignSelf: 'center'
   }
 })
