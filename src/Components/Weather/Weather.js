@@ -5,7 +5,8 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  Image
 } from "react-native";
 
 export default class Weather extends Component {
@@ -20,7 +21,11 @@ export default class Weather extends Component {
     console.log(this.state.weather)
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Insert Weather Here</Text>
+        <View style={styles.text}>
+        <Text style={styles.weatherText}>Paris</Text>
+        <Image  style={{width: 130, height: 130, marginLeft: 30}} source={{uri: 'https://cdn3.iconfinder.com/data/icons/picons-weather/57/15_heavy_rain-512.png'}}/>
+        <Text style={styles.weatherText}>Rainy</Text>
+        </View>
       </View>
     )
   }
@@ -35,8 +40,13 @@ const styles = StyleSheet.create({
     color: 'white',
     height: 200,
     marginVertical: 15,
-    textAlign: 'center',
-    fontSize: 20,
     width: 190
+  },
+  weatherText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '600',
+    marginVertical: 5
   }
 });
