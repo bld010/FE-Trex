@@ -27,11 +27,9 @@ export default class MyWanderersTrips extends Component {
     const {navigate} = this.props.navigation;
     return this.state.trips.map((trip, index) => {
       return (
-        <View style={styles.trip}>
          <TouchableOpacity key={index + trip.name} style={styles.tripButton}>
           <Text style={styles.text} key={trip.name}>{trip.name}</Text>
           </TouchableOpacity>
-          </View>
       )
     })
   }
@@ -58,7 +56,7 @@ export default class MyWanderersTrips extends Component {
         <ScrollView>
           <Text style={styles.title}>{this.state.wanderer.name}'s Trips</Text>
 
-          <View>
+          <View style={styles.container}>
 
             {trips.length > 0 && this.generateTripElements()}
             {error !== '' && <Text style={styles.text}>{error}</Text>}
@@ -87,50 +85,24 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'flex-start'
   }, 
-  trip: {
-    backgroundColor: '#84183B'
-  }
-  borderContainer: {
-    borderColor: '#84183B',
-    borderWidth: 1,
-    borderRadius: 8,
-    borderStyle: 'solid',
-    width: 330,
-    marginLeft: 20,
-    marginVertical: 10,
-    marginBottom: 10,
-    height: 240
-  },
   text: {
-    color: 'white',
+    color: '#84183B',
     marginVertical: 40,
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 20,
     width: 'auto'
   }, 
   title: {
     fontSize: 30,
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingVertical: 10
   }, 
   tripButton: {
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: '#84183B',
     borderRadius: 8,
-    marginVertical: 10
-  },
-  button: {
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 8,
-    borderStyle: 'solid',
-    width: 'auto',
-    height: 60,
-    margin: 20,
-    fontSize: 30,
-    padding: 10,
-    color: 'white',
-    textAlign: 'center',
-    backgroundColor: '#84183B',
-    alignItems: 'stretch'
+    marginVertical: 10,
+    height: 100,
+    color: '#84183B'
   }
 });
