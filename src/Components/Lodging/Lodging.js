@@ -12,7 +12,7 @@ import { withNavigationFocus } from 'react-navigation';
 import { fetchLodging } from '../../util/apiCalls'
 
 
-class Lodging extends Component {
+export class Lodging extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +43,7 @@ class Lodging extends Component {
     const {navigate} = this.props.navigation;
     return this.state.lodgings.map((lodging, index) => {
       return (
-        <View style={styles.borderContainer}>
+        <View key={index} style={styles.borderContainer}>
           <Text style={styles.headerText}>{lodging.name} details</Text>
           <Text style={styles.text}>City:  {lodging.city}</Text>
           <Text style={styles.text}>Arriving :  {lodging.arrivalDate}</Text>
@@ -69,7 +69,7 @@ class Lodging extends Component {
           <Text style={styles.text}>{leg.startLocation} - {leg.endLocation}</Text>
 
           <TouchableOpacity>
-            <Text onPress={() => navigate('AddLodgingInfo', {legId: leg.id})} style={styles.button}>Add Lodging</Text>
+            <Text onPress={() => navigate('AddLodgingInfo', {legId: leg.id, userId: this.state.userId})} style={styles.button}>Add Lodging</Text>
             </TouchableOpacity>
 
           <View>
@@ -79,7 +79,7 @@ class Lodging extends Component {
 
         </ScrollView>
 
-        <WandererFooter navigate={navigate} />
+        <WandererFooter navigate={navigate} userId={this.state.userId} />
         </View>
     )
   }

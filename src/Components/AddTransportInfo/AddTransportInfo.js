@@ -180,9 +180,9 @@ export default class AddTransportInfo extends Component {
             />
             </View>
             <Text style={styles.label}>Start Destination</Text>
-            <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
+            <MapInputFirst inputValue={this.state.departureCity} handlerFirstInput={this.handlerFirstInput.bind(this)} />
             <Text style={styles.label}>End Destination</Text>
-            <MapInputSecond handlerSecondInput={this.handlerSecondInput.bind(this)} />
+            <MapInputSecond inputValue={this.state.arrivalCity} handlerSecondInput={this.handlerSecondInput.bind(this)} />
             <Text style={styles.text}>Departure Date</Text>
             <DatePicker
               style={{ width: 370, height: 65 }}

@@ -144,7 +144,7 @@ export default class AddLodgingInfo extends Component {
             </View>
             <Text style={styles.labelCity}>City</Text>
             <MapInputFirst
-              handlerFirstInput={this.handlerFirstInput.bind(this)}
+              inputValue={this.state.city} handlerFirstInput={this.handlerFirstInput.bind(this)}
             />
             <Text style={styles.label}>Name</Text>
             <View style={styles.form}>

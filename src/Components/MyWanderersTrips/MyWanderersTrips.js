@@ -38,7 +38,7 @@ export default class MyWanderersTrips extends Component {
     const {navigate} = this.props.navigation;
     return legs.map((leg,index) => {
       return (
-        <TouchableOpacity onPress={() => navigate('WandererLegDetail', { leg })} style={styles.legBorder}>
+        <TouchableOpacity key={index} onPress={() => navigate('WandererLegDetail', { leg })} style={styles.legBorder}>
           <Text style={styles.legHeader}>Leg {index + 1 }</Text>
           <Text style={styles.leg}>{leg.startLocation} to {leg.endLocation}</Text>
           <Text style={styles.leg}>{leg.startDate} through {leg.endDate} </Text>

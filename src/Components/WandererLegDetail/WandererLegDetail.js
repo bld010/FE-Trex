@@ -50,9 +50,9 @@ export default class WandererLegDetail extends Component {
   }
 
   generateLodgingElements = () => {
-    return this.state.lodgings.map((lodging) => {
+    return this.state.lodgings.map((lodging, index) => {
       return (
-        <View style={styles.borderContainer}>
+        <View key={index} style={styles.borderContainer}>
           <Text style={styles.headerText}>{lodging.name}</Text>
           <Text style={styles.text}>City: {lodging.city}</Text>
           <Text style={styles.text}>Arriving {lodging.arrivalDate}</Text>
@@ -63,9 +63,9 @@ export default class WandererLegDetail extends Component {
   }
 
   generateTransportationElements = () => {
-    return this.state.transportations.map((transport) => {
+    return this.state.transportations.map((transport, index) => {
       return (
-        <View style={styles.borderContainer}>
+        <View key={index} style={styles.borderContainer}>
           <Text style={styles.headerText}>{transport.mode} details</Text>
           <Text style={styles.text}>Depart {transport.departureCity} at {transport.departureTime}</Text>
           <Text style={styles.text}>Arrive {transport.arrivalCity} at {transport.arrivalTime}</Text>
