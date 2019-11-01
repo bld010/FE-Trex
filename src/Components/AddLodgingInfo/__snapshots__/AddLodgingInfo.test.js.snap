@@ -36,6 +36,7 @@ exports[`AddLodgingInfo should match the snapshot when loading 1`] = `
       </Text>
       <MapInputFirst
         handlerFirstInput={[Function]}
+        inputValue=""
       />
       <Text
         style={
