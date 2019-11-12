@@ -41,7 +41,6 @@ export class Transportation extends Component {
   };
 
   generateTransportationElements = () => {
-    console.log('in the element map', this.transport)
     const { navigate } = this.props.navigation;
     return this.state.transports.map((transport, index) => {
       return (
@@ -80,8 +79,6 @@ export class Transportation extends Component {
 
   render() {
     const { leg, error, transports } = this.state;
-    console.log('transports', transports)
-    console.log('leg', leg)
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
