@@ -14,6 +14,7 @@ export const Leg = (props) => {
   const {navigate} = props.navigation;
   let { startLocation, endLocation, startDate, endDate} = props.navigation.getParam('leg')
   let  tripId  = props.navigation.getParam('tripId')
+  let userId = props.navigation.getParam('userId')
   let leg = props.navigation.getParam('leg')
   return (
       <View style={styles.container}>
@@ -37,10 +38,10 @@ export const Leg = (props) => {
           </View>
             <View style={styles.sideBySideContainer}>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('Transportation', { leg, userId: props.navigation.getParam('userId') })}>Transportation</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('Transportation', { leg, userId })}>Transportation</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideBySideButton}>
-            <Text style={styles.buttonText} onPress={() => navigate('Lodging', {leg, userId: props.navigation.getParam('userId')})}>Lodging</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('Lodging', {leg, userId })}>Lodging</Text>
           </TouchableOpacity>
         </View>
         <View>

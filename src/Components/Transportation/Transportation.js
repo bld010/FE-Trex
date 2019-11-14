@@ -105,8 +105,8 @@ export class Transportation extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-          <View>
-            {transports.length > 0 && this.generateTransportationElements()}
+          <View> 
+            {transports.length > 0 && transports[0] !== null && this.generateTransportationElements()}
             {error !== "" && <Text style={styles.text}>{error}</Text>}
           </View>
         </ScrollView>
