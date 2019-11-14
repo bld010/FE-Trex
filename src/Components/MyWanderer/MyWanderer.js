@@ -20,7 +20,8 @@ export default class MyWanderer extends Component {
       messages: this.props.navigation.getParam('messages') || [],
       readVerification: false,
       checkInVerification: false,
-      error: ''
+      error: '',
+      unreadMessageElements: null
     }
   }
 
@@ -113,6 +114,14 @@ export default class MyWanderer extends Component {
     }, 5000)
   }
 
+  componentDidMount =  () => {
+    setTimeout(() => {
+      let unreadMessageElements = this.generateUnreadMessagesElements();
+  
+      this.setState({ unreadMessageElements: unreadMessageElements })
+    }, 2000)
+  }
+
   render() {
     const {navigate} = this.props.navigation;
 
@@ -132,7 +141,8 @@ export default class MyWanderer extends Component {
               <Text style={styles.message}>Marked as Read</Text>
             </View>
           }
-          {this.generateUnreadMessagesElements()}
+          {this.state.unreadMessageElements !== null && this.state.unreadMessageElements}
+          {this.state.unreadMessageElements === null && <Text>Loading unread messages ...</Text>}
 
           <View style={styles.sideBySideContainer}>
             <TouchableOpacity style={styles.sideBySideButton}>
