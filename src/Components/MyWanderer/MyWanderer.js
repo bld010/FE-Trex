@@ -4,11 +4,13 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from "react-native";
 import FollowerHeader from '../FollowerHeader/FollowerHeader';
 import FollowerFooter from '../FollowerFooter/FollowerFooter';
 import MessageMap from '../MessageMap/MessageMap';
+import followerSpinner from '../../../assets/follower_spinner.gif';
 import { fetchWanderersIncomingNotifications, markMessageRead, sendWandererMessage } from '../../util/apiCalls';
 
 export default class MyWanderer extends Component {
@@ -142,7 +144,7 @@ export default class MyWanderer extends Component {
             </View>
           }
           {this.state.unreadMessageElements !== null && this.state.unreadMessageElements}
-          {this.state.unreadMessageElements === null && <Text>Loading unread messages ...</Text>}
+          {this.state.unreadMessageElements === null && <Image alt={'Loading...'} style={styles.loading} source={followerSpinner} />}
 
           <View style={styles.sideBySideContainer}>
             <TouchableOpacity style={styles.sideBySideButton}>
@@ -294,5 +296,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
     margin: 20
+  },
+  loading: {
+    width: 100,
+    height: 100,
+    alignSelf: 'center',
   }
 });
