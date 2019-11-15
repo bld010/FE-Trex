@@ -7,6 +7,7 @@ exports[`WandererHeader should match the snapshot when loading 1`] = `
       Object {
         "backgroundColor": "#1C4263",
         "flex": 0,
+        "padding": 5,
       }
     }
   />
@@ -17,7 +18,8 @@ exports[`WandererHeader should match the snapshot when loading 1`] = `
         "color": "white",
         "fontSize": 50,
         "fontWeight": "600",
-        "height": 60,
+        "height": 70,
+        "padding": 15,
         "textAlign": "center",
       }
     }
