@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import MapView from "react-native-maps";
 import {
   StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  TextInput,
+  Platform,
   Dimensions
 } from "react-native";
 
@@ -71,7 +67,14 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start"
   },
   mapStyle: {
-    width: Dimensions.get("window").width,
-    height: 380
+    ...Platform.select({
+      ios: {
+        height: 380
+      },
+      android: {
+        height: 365,
+        marginVertical: 20
+      }
+    })
   }
 });
