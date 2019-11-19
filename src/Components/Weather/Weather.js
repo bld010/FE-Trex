@@ -3,10 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
-  TouchableOpacity,
-  TextInput,
-  Image
+  Image,
+  Platform
 } from "react-native";
 
 export default class Weather extends Component {
@@ -39,10 +37,23 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderStyle: 'solid',
     color: 'white',
-    height: 200,
-    marginVertical: 19,
-    width: 180,
-    marginRight: 10
+    // height: 200,
+    // marginVertical: 19,
+    // width: 180,
+    // marginRight: 10
+    ...Platform.select({
+      ios: {
+        height: 200,
+        width: 180,
+        marginVertical: 19,
+        marginRight: 10
+      },
+      android: {
+        height: 240,
+        width: 190,
+        marginRight: 10
+      }
+    })
   },
   weatherText: {
     color: 'white',

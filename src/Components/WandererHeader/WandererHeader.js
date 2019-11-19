@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { 
   StyleSheet, 
   Text, 
-  View, 
-  TouchableOpacity,
-  SafeAreaView
+  SafeAreaView,
+  Platform
 } from 'react-native';
 
 export default class WandererHeader extends Component {
@@ -32,7 +31,17 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 50,
-    height: 60,
-    fontWeight: '600'
+    fontWeight: '600',
+    ...Platform.select({
+      ios: {
+        marginVertical: 0,
+        height: 60,
+      },
+      android: {
+        marginVertical: 50,
+        height: 65,
+        marginBottom: 20
+      },
+    }),
   }
 })

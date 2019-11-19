@@ -4,7 +4,8 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from "react-native";
 
 import WandererHeader from "../WandererHeader/WandererHeader";
