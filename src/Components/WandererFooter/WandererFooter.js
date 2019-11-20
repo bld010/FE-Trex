@@ -20,7 +20,7 @@ export default class WandererFooter extends Component {
             <Image style={{width: 40, height: 40, backgroundColor: '#1C4263'}} source={{uri: 'https://cdn3.iconfinder.com/data/icons/flat-03-business-marketing/91/Business_Marketing_131-256.png'}}/>
             </TouchableOpacity>
             <TouchableOpacity
-            onPress={() => this.props.navigate('SafetyInfo')}
+            onPress={() => this.props.navigate('SafetyInfo', { userId: this.state.userId})}
             >
             <Image style={{width: 50, height: 40, backgroundColor: '#1C4263'}} source={{uri: 'https://cdn2.iconfinder.com/data/icons/leto-blue-customer-support/64/__hand_help_information_support_service-256.png'}}/>
             </TouchableOpacity>

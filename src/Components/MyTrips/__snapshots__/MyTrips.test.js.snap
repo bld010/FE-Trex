@@ -17,8 +17,8 @@ exports[`MyTrips should match the snapshot when loading 1`] = `
       style={
         Object {
           "color": "white",
-          "fontSize": 30,
-          "paddingVertical": 10,
+          "fontSize": 40,
+          "paddingVertical": 16,
           "textAlign": "center",
         }
       }
@@ -29,9 +29,9 @@ exports[`MyTrips should match the snapshot when loading 1`] = `
       <Text
         style={
           Object {
-            "color": "white",
-            "fontSize": 20,
-            "paddingVertical": 10,
+            "color": "red",
+            "fontSize": 24,
+            "paddingVertical": 5,
             "textAlign": "center",
           }
         }
@@ -45,18 +45,30 @@ exports[`MyTrips should match the snapshot when loading 1`] = `
             "testUri": "../../../assets/wanderer_spinner.gif",
           }
         }
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
       />
     </View>
     <TouchableOpacity
       activeOpacity={0.2}
       style={
         Object {
+          "alignItems": "stretch",
           "backgroundColor": "#1C4263",
           "borderColor": "white",
           "borderRadius": 8,
+          "borderStyle": "solid",
           "borderWidth": 1,
           "color": "white",
-          "marginBottom": 10,
+          "fontSize": 30,
+          "height": 60,
+          "margin": 10,
+          "padding": 10,
+          "textAlign": "center",
+          "width": "auto",
         }
       }
     >
@@ -65,8 +77,9 @@ exports[`MyTrips should match the snapshot when loading 1`] = `
         style={
           Object {
             "color": "white",
-            "fontSize": 20,
-            "paddingVertical": 10,
+            "fontSize": 24,
+            "fontWeight": "600",
+            "paddingVertical": 5,
             "textAlign": "center",
           }
         }
@@ -98,8 +111,8 @@ exports[`MyTrips should match the snapshot when trips array is populated 1`] = `
       style={
         Object {
           "color": "white",
-          "fontSize": 30,
-          "paddingVertical": 10,
+          "fontSize": 40,
+          "paddingVertical": 16,
           "textAlign": "center",
         }
       }
@@ -112,10 +125,18 @@ exports[`MyTrips should match the snapshot when trips array is populated 1`] = `
         key="0Paris"
         style={
           Object {
+            "alignItems": "stretch",
             "borderColor": "white",
             "borderRadius": 8,
+            "borderStyle": "solid",
             "borderWidth": 1,
-            "marginVertical": 10,
+            "color": "white",
+            "fontSize": 30,
+            "height": 60,
+            "margin": 10,
+            "padding": 10,
+            "textAlign": "center",
+            "width": "auto",
           }
         }
       >
@@ -125,8 +146,8 @@ exports[`MyTrips should match the snapshot when trips array is populated 1`] = `
           style={
             Object {
               "color": "white",
-              "fontSize": 20,
-              "paddingVertical": 10,
+              "fontSize": 24,
+              "paddingVertical": 5,
               "textAlign": "center",
             }
           }
@@ -139,10 +160,18 @@ exports[`MyTrips should match the snapshot when trips array is populated 1`] = `
         key="1Rome"
         style={
           Object {
+            "alignItems": "stretch",
             "borderColor": "white",
             "borderRadius": 8,
+            "borderStyle": "solid",
             "borderWidth": 1,
-            "marginVertical": 10,
+            "color": "white",
+            "fontSize": 30,
+            "height": 60,
+            "margin": 10,
+            "padding": 10,
+            "textAlign": "center",
+            "width": "auto",
           }
         }
       >
@@ -152,8 +181,8 @@ exports[`MyTrips should match the snapshot when trips array is populated 1`] = `
           style={
             Object {
               "color": "white",
-              "fontSize": 20,
-              "paddingVertical": 10,
+              "fontSize": 24,
+              "paddingVertical": 5,
               "textAlign": "center",
             }
           }
@@ -166,12 +195,19 @@ exports[`MyTrips should match the snapshot when trips array is populated 1`] = `
       activeOpacity={0.2}
       style={
         Object {
+          "alignItems": "stretch",
           "backgroundColor": "#1C4263",
           "borderColor": "white",
           "borderRadius": 8,
+          "borderStyle": "solid",
           "borderWidth": 1,
           "color": "white",
-          "marginBottom": 10,
+          "fontSize": 30,
+          "height": 60,
+          "margin": 10,
+          "padding": 10,
+          "textAlign": "center",
+          "width": "auto",
         }
       }
     >
@@ -180,8 +216,9 @@ exports[`MyTrips should match the snapshot when trips array is populated 1`] = `
         style={
           Object {
             "color": "white",
-            "fontSize": 20,
-            "paddingVertical": 10,
+            "fontSize": 24,
+            "fontWeight": "600",
+            "paddingVertical": 5,
             "textAlign": "center",
           }
         }

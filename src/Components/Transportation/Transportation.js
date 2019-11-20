@@ -11,7 +11,7 @@ import WandererHeader from "../WandererHeader/WandererHeader";
 import { withNavigationFocus } from "react-navigation";
 import { fetchTransport } from "../../util/apiCalls";
 
-class Transportation extends Component {
+export class Transportation extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +44,7 @@ class Transportation extends Component {
     const { navigate } = this.props.navigation;
     return this.state.transports.map((transport, index) => {
       return (
-        <View style={styles.borderContainer}>
+        <View key={index} style={styles.borderContainer}>
           <Text style={styles.headerText}>{transport.mode} details</Text>
           <Text style={styles.text}>
             Depart {transport.departureCity} on {transport.departureTime}
@@ -96,7 +96,7 @@ class Transportation extends Component {
                 onPress={() =>
                   navigate("AddTransportInfo", {
                     legId: leg.id,
-                    userId: this.state.userId
+                    userId: this.state.userId,
                   })
                 }
                 style={styles.button}
@@ -105,8 +105,8 @@ class Transportation extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-          <View>
-            {transports.length > 0 && this.generateTransportationElements()}
+          <View> 
+            {transports.length > 0 && transports[0] !== null && this.generateTransportationElements()}
             {error !== "" && <Text style={styles.text}>{error}</Text>}
           </View>
         </ScrollView>

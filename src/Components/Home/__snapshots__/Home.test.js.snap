@@ -15,7 +15,7 @@ exports[`Home should match the snapshot when loading 1`] = `
       style={
         Object {
           "color": "white",
-          "fontSize": 30,
+          "fontSize": 45,
           "marginVertical": 40,
           "textAlign": "center",
         }
@@ -38,21 +38,30 @@ exports[`Home should match the snapshot when loading 1`] = `
     <TouchableOpacity
       activeOpacity={0.2}
       onPress={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#1C4263",
+          "borderColor": "white",
+          "borderRadius": 8,
+          "borderWidth": 1,
+          "color": "white",
+          "fontSize": 30,
+          "height": 60,
+          "margin": 20,
+          "padding": 10,
+          "textAlign": "center",
+          "width": "auto",
+        }
+      }
     >
       <Text
         style={
           Object {
-            "backgroundColor": "#1C4263",
-            "borderColor": "white",
-            "borderRadius": 8,
-            "borderWidth": 1,
             "color": "white",
             "fontSize": 30,
-            "height": 60,
-            "margin": 20,
-            "padding": 10,
+            "fontWeight": "600",
+            "paddingVertical": 4,
             "textAlign": "center",
-            "width": "auto",
           }
         }
       >
@@ -62,23 +71,32 @@ exports[`Home should match the snapshot when loading 1`] = `
     <TouchableOpacity
       activeOpacity={0.2}
       onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "stretch",
+          "backgroundColor": "#84183B",
+          "borderColor": "white",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "color": "white",
+          "fontSize": 30,
+          "height": 60,
+          "margin": 20,
+          "padding": 10,
+          "textAlign": "center",
+          "width": "auto",
+        }
+      }
     >
       <Text
         style={
           Object {
-            "alignItems": "stretch",
-            "backgroundColor": "#84183B",
-            "borderColor": "white",
-            "borderRadius": 8,
-            "borderStyle": "solid",
-            "borderWidth": 1,
             "color": "white",
             "fontSize": 30,
-            "height": 60,
-            "margin": 20,
-            "padding": 10,
+            "fontWeight": "600",
+            "paddingVertical": 4,
             "textAlign": "center",
-            "width": "auto",
           }
         }
       >

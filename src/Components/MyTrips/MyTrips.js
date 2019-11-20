@@ -145,6 +145,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 5,
     fontSize: 24
+  }, 
+  loading: {
+    alignSelf: 'center'
   }
 })
 

@@ -4,11 +4,13 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from "react-native";
 import FollowerHeader from '../FollowerHeader/FollowerHeader';
 import FollowerFooter from '../FollowerFooter/FollowerFooter';
 import MessageMap from '../MessageMap/MessageMap';
+import followerSpinner from '../../../assets/follower_spinner.gif';
 import { fetchWanderersIncomingNotifications, markMessageRead, sendWandererMessage } from '../../util/apiCalls';
 
 export default class MyWanderer extends Component {
@@ -20,7 +22,8 @@ export default class MyWanderer extends Component {
       messages: this.props.navigation.getParam('messages') || [],
       readVerification: false,
       checkInVerification: false,
-      error: ''
+      error: '',
+      unreadMessageElements: null
     }
   }
 
@@ -113,6 +116,14 @@ export default class MyWanderer extends Component {
     }, 5000)
   }
 
+  componentDidMount =  () => {
+    setTimeout(() => {
+      let unreadMessageElements = this.generateUnreadMessagesElements();
+  
+      this.setState({ unreadMessageElements: unreadMessageElements })
+    }, 2000)
+  }
+
   render() {
     const {navigate} = this.props.navigation;
 
@@ -132,7 +143,8 @@ export default class MyWanderer extends Component {
               <Text style={styles.message}>Marked as Read</Text>
             </View>
           }
-          {this.generateUnreadMessagesElements()}
+          {this.state.unreadMessageElements !== null && this.state.unreadMessageElements}
+          {this.state.unreadMessageElements === null && <Image alt={'Loading...'} style={styles.loading} source={followerSpinner} />}
 
           <View style={styles.sideBySideContainer}>
             <TouchableOpacity style={styles.sideBySideButton}>
@@ -284,5 +296,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
     margin: 20
+  },
+  loading: {
+    width: 100,
+    height: 100,
+    alignSelf: 'center',
   }
 });

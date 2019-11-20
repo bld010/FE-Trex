@@ -10,10 +10,11 @@ export default class MapInputFirst extends React.Component {
     super(props);
   }
   render() {
+    
     return (
       <View style={{ paddingTop: 20, flex: 1 }}>
         <GooglePlacesAutocomplete
-          placeholder="Search..."
+          placeholder={this.props.inputValue || 'Search ...'}
           placeholderTextColor='black'
           minLength={2} // minimum length of text to search
           autoFocus={false}

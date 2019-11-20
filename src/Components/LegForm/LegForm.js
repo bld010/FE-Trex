@@ -156,9 +156,9 @@ export default class LegForm extends Component {
           </View>
           <View>
       <Text style={styles.label}>Start Destination</Text>
-          <MapInputFirst handlerFirstInput={this.handlerFirstInput.bind(this)} />
+          <MapInputFirst inputValue={this.state.startLocation} handlerFirstInput={this.handlerFirstInput.bind(this)} />
           <Text style={styles.label}>End Destination</Text>
-          <MapInputSecond handlerSecondInput={this.handlerSecondInput.bind(this)} />
+          <MapInputSecond inputValue={this.state.endLocation} handlerSecondInput={this.handlerSecondInput.bind(this)} />
           </View>
           <Text style={styles.text}>Start Date</Text>
           <DatePicker

@@ -8,7 +8,7 @@ Trex, your safe travel application, allows users to travel the world all while k
 
 Install [Expo Client](https://expo.io/tools#client) on your mobile device.
 
-Visit [Trex's deployed application]() using your mobile device and when prompted open the application with Expo.
+Visit [Trex's deployed application](https://exp.host/@briannadelvalle/Trex) using your mobile device and when prompted open the application with Expo.
 
 ### Developer Setup
 
@@ -81,17 +81,35 @@ Our team utilized a [GitHub project board](https://github.com/bld010/FE-Trex/pro
 
 ## Screenshots
 
-### Wanderer Homepage
-![]()
+### Dashboard
+![](https://user-images.githubusercontent.com/38546045/67953789-b5f10700-fbe7-11e9-9475-de1a13a14493.png)
 
-### Wanderer User Flow
-![]()
+### Wanderer Homepage
+![](https://user-images.githubusercontent.com/38546045/67954084-3a438a00-fbe8-11e9-8f8f-596aa9e53875.png)
+
+### Wanderer My Trips
+![](https://user-images.githubusercontent.com/38546045/67954214-737bfa00-fbe8-11e9-92ea-679b52f2b6e6.png)
+
+### Wanderer Add New Trip
+![](https://user-images.githubusercontent.com/38546045/67954291-9a3a3080-fbe8-11e9-9f8c-a91800fdc49f.png)
+
+### Wanderer New Trip Added
+![](https://user-images.githubusercontent.com/38546045/67954370-c05fd080-fbe8-11e9-83b8-c6b9f0f358f4.png)
+
+### Wanderer Add Leg
+![](https://user-images.githubusercontent.com/38546045/67954525-087ef300-fbe9-11e9-8f54-8f07ec2325b4.pn)
+
+### Wanderer Add Transportation
+![](https://user-images.githubusercontent.com/38546045/67954404-d53c6400-fbe8-11e9-8049-4d2d021539eb.png)
+
+### Wanderer Add Lodging
+![](https://user-images.githubusercontent.com/38546045/67954439-e38a8000-fbe8-11e9-8a43-459efeaa130b.png)
 
 ### Follower Homepage
-![]()
+![](https://user-images.githubusercontent.com/38546045/67954711-4e3bbb80-fbe9-11e9-8e03-2c4d1b2216f4.png)
 
-### Follower User Flow
-![]()
+### Follower Messages
+![](https://user-images.githubusercontent.com/38546045/67954745-5a277d80-fbe9-11e9-9196-30b815de6f58.png)
 
 
 

@@ -22,24 +22,68 @@ exports[`WandererDashboard should match the snapshot when loading 1`] = `
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "borderColor": "white",
-            "borderRadius": 8,
-            "borderStyle": "solid",
-            "borderWidth": 1,
-            "color": "white",
-            "fontSize": 20,
-            "height": 200,
-            "marginVertical": 15,
-            "textAlign": "center",
-            "width": 170,
-          }
-        }
+      <TouchableOpacity
+        activeOpacity={0.2}
       >
-        Emergency Call
-      </Text>
+        <View
+          style={
+            Object {
+              "backgroundColor": "red",
+              "borderColor": "white",
+              "borderRadius": 8,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "color": "white",
+              "height": 200,
+              "marginLeft": 10,
+              "marginVertical": 20,
+              "textAlign": "center",
+              "width": 160,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "white",
+                "fontSize": 18,
+                "marginVertical": 10,
+                "textAlign": "center",
+                "width": "auto",
+              }
+            }
+          >
+             Call Emergency Number
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "white",
+                "fontSize": 70,
+                "fontWeight": "700",
+                "textAlign": "center",
+              }
+            }
+          >
+            112
+          </Text>
+          <Image
+            source={
+              Object {
+                "uri": "https://cdn2.iconfinder.com/data/icons/leto-most-searched-mix-3/64/__call_phone_ring-512.png",
+              }
+            }
+            style={
+              Object {
+                "backgroundColor": "red",
+                "height": 45,
+                "marginLeft": 60,
+                "width": 45,
+              }
+            }
+          />
+        </View>
+      </TouchableOpacity>
       <Weather />
     </View>
     <Map />

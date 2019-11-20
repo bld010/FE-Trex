@@ -10,7 +10,6 @@ export default class Weather extends Component {
   }
 
   render() {
-    console.log(this.state.weather);
     return (
       <View style={styles.container}>
         <View style={styles.text}>

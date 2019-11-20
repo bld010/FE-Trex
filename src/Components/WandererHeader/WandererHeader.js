@@ -24,7 +24,8 @@ export default class WandererHeader extends Component {
 const styles = StyleSheet.create({
   top: {
     backgroundColor: '#1C4263',
-    flex: 0
+    flex: 0,
+    padding: 5
   },
   header: {
     backgroundColor: '#1C4263',
