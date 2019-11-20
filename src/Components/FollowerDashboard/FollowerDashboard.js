@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     padding: 10,
     color: "white",
     textAlign: "center",
-    backgroundColor: "#84183B",
+    backgroundColor: '#1C4263',
     alignItems: "stretch"
   },
   buttonText: {
