@@ -40,7 +40,7 @@ export default class MyWanderersTrips extends Component {
     return legs.map((leg,index) => {
       return (
         <TouchableOpacity key={index} onPress={() => navigate('WandererLegDetail', { leg })} style={styles.legBorder}>
-          <TextInput style={styles.legHeader}>Leg {index + 1 }</TextInput>
+          <TextInput editable={false} style={styles.legHeader}>Leg {index + 1 }</TextInput>
           <Text style={styles.leg}>{leg.startLocation} to {leg.endLocation}</Text>
           <Text style={styles.leg}>{leg.startDate} through {leg.endDate} </Text>
         </TouchableOpacity>      
