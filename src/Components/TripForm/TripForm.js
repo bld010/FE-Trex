@@ -148,7 +148,7 @@ class TripForm extends Component {
             <TextInput
               style={styles.input}
               placeholder={
-                (this.state.trip && this.state.name) || 'Enter Trip Name...'
+                (this.state.trip && this.state.name) || 'Enter Trip Name'
               }
               placeholderTextColor='black'
               onChangeText={name => this.setState({ name })}
@@ -175,18 +175,20 @@ class TripForm extends Component {
                 marginLeft: 15,
                 color: "black",
                 backgroundColor: 'white',
-                height: 60,
+                height: 40,
                 borderRadius: 8,
                 borderWidth: 1,
                 borderColor: "white",
               },
               dateText: {
-                fontSize: 22,
+                fontSize: 20,
                 color: "black",
+                marginRight: 120
               },
               placeholderText: {
-                fontSize: 22,
-                color: "black"
+                fontSize: 20,
+                color: "black",
+                marginRight: 120
               }
             }}
             onDateChange={date => {
@@ -212,18 +214,20 @@ class TripForm extends Component {
                 marginLeft: 15,
                 color: "black",
                 backgroundColor: 'white',
-                height: 60,
+                height: 40,
                 borderRadius: 8,
                 borderWidth: 1,
                 borderColor: "white",
               },
               dateText: {
-                fontSize: 22,
+                fontSize: 20,
                 color: "black",
+                marginRight: 120
               },
               placeholderText: {
-                fontSize: 22,
-                color: "black"
+                fontSize: 20,
+                color: "black",
+                marginRight: 120
               }
             }}
             onDateChange={date => {
@@ -286,7 +290,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: 'white',
     color: 'black',
-    fontSize: 22,
+    fontSize: 20,
     flex: 1,
     alignItems: 'center',
     marginLeft: 10
@@ -297,22 +301,23 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: 'solid',
-    height: 60,
+    height: 40,
     width: 350,
     color: 'white',
     padding: 10,
     marginLeft: 15,
-    marginBottom: 10
+    marginBottom: 22
   },
   text: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: 'white',
-    paddingVertical: 12
+    marginBottom: 5
+    // paddingVertical: 8
   },
   label: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: 'white',
     marginBottom: 5
   },
@@ -329,10 +334,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 26,
     color: 'white',
     textAlign: 'center',
-    paddingVertical: 10
+    paddingVertical: 4
   },
   button: {
     borderColor: '#768DA1',
@@ -350,9 +355,9 @@ const styles = StyleSheet.create({
     alignItems: 'stretch'
   },
   sideBySideButton: {
-    width: 170,
-    borderColor: '#768DA1',
-    borderWidth: 1,
+    width: 160,
+    borderColor: 'white',
+    borderWidth: 2,
     borderRadius: 8,
     borderStyle: 'solid',
     height: 60,
