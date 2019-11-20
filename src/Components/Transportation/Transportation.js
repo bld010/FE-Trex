@@ -47,11 +47,11 @@ export class Transportation extends Component {
       return (
         <View key={index} style={styles.borderContainer}>
           <TextInput editable={false} style={styles.headerText}>{transport.mode} Details</TextInput>
-          <Text style={styles.text}>Depart</Text>
+          <Text style={styles.buttonText}>Depart</Text>
           <Text style={styles.text}>
            {transport.departureCity} on {transport.departureTime}
           </Text>
-          <Text style={styles.text}>Arrive</Text>
+          <Text style={styles.buttonText}>Arrive</Text>
           <Text style={styles.text}>
            {transport.arrivalCity} on {transport.arrivalTime}
           </Text>
@@ -69,7 +69,7 @@ export class Transportation extends Component {
                   userId: this.state.userId
                 })
               }
-              style={styles.text}
+              style={styles.buttonText}
               key={transport.id}
             >
               Edit Transportation Info
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderColor: 'white',
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 8,
     borderStyle: 'solid',
     width: 'auto',
@@ -156,6 +156,14 @@ const styles = StyleSheet.create({
     width: "auto",
     textAlign: "center"
   },
+  buttonText: {
+    color: "white",
+    marginVertical: 10,
+    textAlign: "center",
+    fontSize: 26,
+    width: "auto",
+    textAlign: "center"
+  },
   dateText: {
     color: "white",
     marginVertical: 10,
@@ -173,7 +181,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginVertical: 10,
     marginBottom: 10,
-    height: 298
+    height: 320
   },
   headerText: {
     color: "white",
@@ -184,10 +192,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     borderBottomColor: "white",
     borderBottomWidth: 1,
-    marginBottom: 8
+    paddingBottom: 5
   },
   tripButton: {
-    borderWidth: 2,
+    borderWidth: 1,
     borderTopColor: "white",
     backgroundColor: "#1C4263",
     borderBottomLeftRadius: 8,

@@ -300,7 +300,6 @@ const styles = StyleSheet.create({
     height: 40,
     width: 350,
     color: 'white',
-    padding: 10,
     marginLeft: 15,
     marginBottom: 22
   },

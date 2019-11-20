@@ -138,10 +138,7 @@ export default class AddLodgingInfo extends Component {
         <WandererHeader />
         <ScrollView>
           <View style={styles.inputContainer}>
-            <View>
-            {this.state.lodging === null &&<Text style={styles.title}>Add Lodging</Text>}
-            {this.state.lodging && <Text style={styles.title}>Edit Lodging</Text>}
-            </View>
+            <Text style={styles.headerText}>Add Lodging</Text>
             <Text style={styles.labelCity}>City</Text>
             <MapInputFirst
               inputValue={this.state.city} handlerFirstInput={this.handlerFirstInput.bind(this)}
@@ -177,17 +174,17 @@ export default class AddLodgingInfo extends Component {
                   marginLeft: 15,
                   color: "black",
                   backgroundColor: "white",
-                  height: 60,
+                  height: 40,
                   borderRadius: 8,
                   borderWidth: 1,
                   borderColor: "white"
                 },
                 dateText: {
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "black"
                 },
                 placeholderText: {
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "black"
                 }
               }}
@@ -195,7 +192,7 @@ export default class AddLodgingInfo extends Component {
                 this.setState({ arrivalDate: date });
               }}
             />
-            <Text style={styles.text}>End of Stay</Text>
+            <Text style={styles.endText}>End of Stay</Text>
             <DatePicker
               style={{ width: 370, height: 65 }}
               date={this.state.departureDate}
@@ -215,17 +212,18 @@ export default class AddLodgingInfo extends Component {
                   marginLeft: 15,
                   color: "black",
                   backgroundColor: "white",
-                  height: 60,
+                  height: 40,
                   borderRadius: 8,
                   borderWidth: 1,
-                  borderColor: "white"
+                  borderColor: "white",
+                  marginVertical: -10
                 },
                 dateText: {
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "black"
                 },
                 placeholderText: {
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "black"
                 }
               }}
@@ -262,7 +260,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start"
   },
   inputContainer: {
-    marginTop: 15
+    marginTop: 25
   },
   title: {
     textAlign: "center",
@@ -272,54 +270,66 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: "white",
-    paddingVertical: 15
+    paddingVertical: 15,
+    marginBottom: -8,
+    marginVertical: -20
+  },
+  endText: {
+    marginLeft: 20,
+    fontSize: 26,
+    color: "white",
+    paddingVertical: 15,
+    marginBottom: -8,
+    marginVertical: -25
   },
   input: {
-    backgroundColor: "white",
-    color: "black",
-    fontSize: 18,
+    backgroundColor: 'white',
+    color: 'black',
+    fontSize: 20,
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
     marginLeft: 10
   },
   form: {
-    backgroundColor: "white",
-    borderColor: "white",
+    backgroundColor: 'white',
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: "solid",
-    height: 60,
+    borderStyle: 'solid',
+    height: 40,
     width: 350,
-    color: "white",
-    padding: 10,
+    color: 'white',
     marginLeft: 15,
-    marginBottom: 20
+    marginBottom: 22
   },
   button: {
-    borderColor: "white",
-    borderWidth: 1,
+    borderColor: 'white',
+    borderWidth: 2,
     borderRadius: 8,
-    borderStyle: "solid",
-    width: "auto",
+    borderStyle: 'solid',
+    width: 'auto',
     height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
-    color: "white",
-    textAlign: "center",
-    backgroundColor: "#1C4263"
+    color: 'white',
+    textAlign: 'center',
+    backgroundColor: '#1C4263',
+    alignItems: 'stretch',
+    marginVertical: -20
   },
   label: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: "white",
-    marginBottom: 5
+    marginBottom: 5,
+    marginVertical: -15
   },
   labelCity: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: "white",
     marginBottom: -22,
     marginVertical: -10,
@@ -349,5 +359,11 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     paddingVertical: 10
+  },
+  headerText: {
+    textAlign: 'center',
+    fontSize: 32,
+    color: 'white',
+    marginBottom: 20
   }
 });
