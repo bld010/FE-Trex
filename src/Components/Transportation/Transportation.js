@@ -4,7 +4,8 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from "react-native";
 import WandererFooter from "../WandererFooter/WandererFooter";
 import WandererHeader from "../WandererHeader/WandererHeader";
@@ -45,12 +46,14 @@ export class Transportation extends Component {
     return this.state.transports.map((transport, index) => {
       return (
         <View key={index} style={styles.borderContainer}>
-          <Text style={styles.headerText}>{transport.mode} details</Text>
+          <TextInput editable={false} style={styles.headerText}>{transport.mode} Details</TextInput>
+          <Text style={styles.text}>Depart</Text>
           <Text style={styles.text}>
-            Depart {transport.departureCity} on {transport.departureTime}
+           {transport.departureCity} on {transport.departureTime}
           </Text>
+          <Text style={styles.text}>Arrive</Text>
           <Text style={styles.text}>
-            Arrive {transport.arrivalCity} on {transport.arrivalTime}
+           {transport.arrivalCity} on {transport.arrivalTime}
           </Text>
           <TouchableOpacity
             key={index + transport.id}
@@ -170,7 +173,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginVertical: 10,
     marginBottom: 10,
-    height: 254
+    height: 298
   },
   headerText: {
     color: "white",
@@ -180,15 +183,16 @@ const styles = StyleSheet.create({
     width: "auto",
     textAlign: "center",
     borderBottomColor: "white",
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    marginBottom: 8
   },
   tripButton: {
-    borderWidth: 1,
+    borderWidth: 2,
     borderTopColor: "white",
     backgroundColor: "#1C4263",
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
-    height: 49,
+    height: 55,
     marginVertical: 10
   }
 });
