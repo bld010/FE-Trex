@@ -90,6 +90,10 @@ export class Transportation extends Component {
             {leg.startLocation} - {leg.endLocation}
           </Text>
 
+          <View> 
+            {transports.length > 0 && transports[0] !== null && this.generateTransportationElements()}
+            {error !== "" && <Text style={styles.text}>{error}</Text>}
+          </View>
           <View>
             <TouchableOpacity>
               <Text
@@ -104,10 +108,6 @@ export class Transportation extends Component {
                 Add Transportation
               </Text>
             </TouchableOpacity>
-          </View>
-          <View> 
-            {transports.length > 0 && transports[0] !== null && this.generateTransportationElements()}
-            {error !== "" && <Text style={styles.text}>{error}</Text>}
           </View>
         </ScrollView>
 
