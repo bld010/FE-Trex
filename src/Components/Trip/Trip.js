@@ -65,6 +65,9 @@ class Trip extends Component {
             <Text style={styles.dateText}>{startDate} to {endDate}</Text>
           </View>
             <View style={styles.container}>
+            <View>
+            {this.state.trip.legs && this.generateLegElements()}
+          </View>
             <View style={styles.sideBySideContainer}>
             <TouchableOpacity style={styles.sideBySideButton}>
               <Text onPress={() => navigate('LegForm' , {tripId: id, userId: this.state.userId})} style={styles.sideButtonText}>Add A Leg <Text style={styles.plus}>+</Text> </Text>
@@ -74,9 +77,7 @@ class Trip extends Component {
             </TouchableOpacity>
             </View>
           </View>
-          <View>
-            {this.state.trip.legs && this.generateLegElements()}
-          </View>
+          
           
         </ScrollView>
 
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginVertical: 10,
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 22,
     width: 'auto',
     textAlign: 'center'
   },
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
   sideBySideButton: {
     width: 160,
     borderColor: 'white',
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 8,
     borderStyle: 'solid',
     height: 60,
@@ -203,7 +204,9 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     backgroundColor: '#1C4263',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    flex: 1,
+
   },
   plus: {
     color: '#84183B',

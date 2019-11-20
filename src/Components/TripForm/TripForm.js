@@ -182,13 +182,11 @@ class TripForm extends Component {
               },
               dateText: {
                 fontSize: 20,
-                color: "black",
-                marginRight: 120
+                color: "black"
               },
               placeholderText: {
                 fontSize: 20,
-                color: "black",
-                marginRight: 120
+                color: "black"
               }
             }}
             onDateChange={date => {
@@ -221,13 +219,11 @@ class TripForm extends Component {
               },
               dateText: {
                 fontSize: 20,
-                color: "black",
-                marginRight: 120
+                color: "black"
               },
               placeholderText: {
                 fontSize: 20,
-                color: "black",
-                marginRight: 120
+                color: "black"
               }
             }}
             onDateChange={date => {
@@ -276,7 +272,7 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     borderColor: "white",
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 8,
     borderStyle: "solid",
     width: "auto",
@@ -313,7 +309,6 @@ const styles = StyleSheet.create({
     fontSize: 26,
     color: 'white',
     marginBottom: 5
-    // paddingVertical: 8
   },
   label: {
     marginLeft: 20,
@@ -337,11 +332,12 @@ const styles = StyleSheet.create({
     fontSize: 26,
     color: 'white',
     textAlign: 'center',
-    paddingVertical: 4
+    paddingVertical: 4,
+    fontWeight: '600'
   },
   button: {
-    borderColor: '#768DA1',
-    borderWidth: 1,
+    borderColor: 'white',
+    borderWidth: 2,
     borderRadius: 8,
     borderStyle: 'solid',
     width: 'auto',
@@ -367,7 +363,8 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     backgroundColor: '#1C4263',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    flex: 1
   }
 });
 
