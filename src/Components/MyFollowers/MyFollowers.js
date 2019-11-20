@@ -155,7 +155,8 @@ const styles = StyleSheet.create({
     padding: 10,
     color: 'white',
     textAlign: 'center',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    backgroundColor: '#84183B'
   },
   errorText: {
     color: 'red',
