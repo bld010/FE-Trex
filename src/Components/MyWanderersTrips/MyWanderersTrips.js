@@ -7,7 +7,8 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  Image
+  Image,
+  TextInput
 } from "react-native";
 import { fetchMyTrips } from '../../util/apiCalls';
 import followerSpinner from '../../../assets/wanderer_spinner.gif';
@@ -39,7 +40,7 @@ export default class MyWanderersTrips extends Component {
     return legs.map((leg,index) => {
       return (
         <TouchableOpacity key={index} onPress={() => navigate('WandererLegDetail', { leg })} style={styles.legBorder}>
-          <Text style={styles.legHeader}>Leg {index + 1 }</Text>
+          <TextInput editable={false} style={styles.legHeader}>Leg {index + 1 }</TextInput>
           <Text style={styles.leg}>{leg.startLocation} to {leg.endLocation}</Text>
           <Text style={styles.leg}>{leg.startDate} through {leg.endDate} </Text>
         </TouchableOpacity>      
@@ -95,23 +96,30 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     alignItems: 'stretch',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   }, 
   legHeader: {
-    fontSize: 18,
+    fontSize: 22,
     textAlign: 'center',
-    color: '#84183B'
+    color: '#84183B',
+    borderBottomColor: '#84183B',
+    borderBottomWidth: 1,
+    paddingBottom: 10
   },
   legBorder: {
     borderWidth: 1,
     borderColor: '#84183B',
     borderRadius: 8,
-    width: 'auto',
+    width: 300,
     textAlign: 'center',
-    padding: 10
+    padding: 10,
+    marginLeft: 20,
+    backgroundColor: 'white',
+    marginVertical: 10,
+    marginBottom: 10
   },
   text: {
-    color: '#84183B',
+    color: 'white',
     marginVertical: 10,
     textAlign: 'center',
     fontSize: 30,
@@ -134,7 +142,11 @@ const styles = StyleSheet.create({
     borderColor: '#84183B',
     borderRadius: 8,
     marginVertical: 10,
-    color: '#84183B'
+    color: '#84183B',
+    width: 350,
+    marginLeft: 10,
+    backgroundColor: '#84183B',
+    paddingBottom: 20
   },
   loading: {
     width: 100,

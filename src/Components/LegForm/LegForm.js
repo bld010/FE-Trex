@@ -179,18 +179,18 @@ export default class LegForm extends Component {
               marginLeft: 15,
               color: "black",
               backgroundColor: 'white',
-              height: 60,
+              height: 40,
               borderRadius: 8,
               borderWidth: 1,
               borderColor: "white",
-              marginVertical: -20
+              marginVertical: -10
             },
             dateText: {
-              fontSize: 22,
+              fontSize: 20,
               color: "black",
             },
             placeholderText: {
-              fontSize: 22,
+              fontSize: 20,
               color: "black"
             }
           }}
@@ -215,17 +215,17 @@ export default class LegForm extends Component {
               marginLeft: 15,
               color: "black",
               backgroundColor: 'white',
-              height: 60,
+              height: 40,
               borderRadius: 8,
               borderWidth: 1,
-              borderColor: "white",
+              borderColor: "white"
             },
             dateText: {
-              fontSize: 22,
+              fontSize: 20,
               color: "black",
             },
             placeholderText: {
-              fontSize: 22,
+              fontSize: 20,
               color: "black"
             }
           }}
@@ -257,19 +257,19 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    fontSize: 30,
+    fontSize: 34,
     color: "white",
     paddingVertical: 25
   },
   text: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: "white",
-    paddingVertical: 15
+    marginBottom: 5
   },
   deleteButton: {
     borderColor: "white",
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 8,
     borderStyle: "solid",
     width: "auto",
@@ -286,12 +286,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: "solid",
-    height: 60,
+    height: 40,
     width: 350,
     color: 'black',
     padding: 10,
     marginLeft: 15,
-    marginBottom: 10,
     position: 'absolute'
   },
   sideBySideContainer: {
@@ -302,13 +301,13 @@ const styles = StyleSheet.create({
   },
   button: {
     borderColor: "white",
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 8,
     borderStyle: "solid",
     width: "auto",
     height: 60,
     margin: 20,
-    fontSize: 30,
+    fontSize: 32,
     padding: 10,
     color: "white",
     textAlign: "center",
@@ -316,7 +315,7 @@ const styles = StyleSheet.create({
   },
   label: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: "white",
     marginBottom: -22
   },

@@ -42,14 +42,14 @@ export default class MapInputFirst extends React.Component {
               borderBottomWidth:0,
               width: 350,
               marginLeft: 15,
-              marginBottom: 34
+              marginBottom: 30
             },
             textInput: {
               marginLeft: 0,
               marginRight: 0,
-              height: 60,
+              height: 40,
               color: 'black',
-              fontSize: 22
+              fontSize: 20
             },
             description: {
               color: 'white',

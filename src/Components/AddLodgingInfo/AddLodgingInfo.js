@@ -138,10 +138,7 @@ export default class AddLodgingInfo extends Component {
         <WandererHeader />
         <ScrollView>
           <View style={styles.inputContainer}>
-            <View>
-            {this.state.lodging === null &&<Text style={styles.title}>Add Lodging</Text>}
-            {this.state.lodging && <Text style={styles.title}>Edit Lodging</Text>}
-            </View>
+            <Text style={styles.headerText}>Add Lodging</Text>
             <Text style={styles.labelCity}>City</Text>
             <MapInputFirst
               inputValue={this.state.city} handlerFirstInput={this.handlerFirstInput.bind(this)}
@@ -177,17 +174,17 @@ export default class AddLodgingInfo extends Component {
                   marginLeft: 15,
                   color: "black",
                   backgroundColor: "white",
-                  height: 60,
+                  height: 40,
                   borderRadius: 8,
                   borderWidth: 1,
                   borderColor: "white"
                 },
                 dateText: {
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "black"
                 },
                 placeholderText: {
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "black"
                 }
               }}
@@ -195,7 +192,7 @@ export default class AddLodgingInfo extends Component {
                 this.setState({ arrivalDate: date });
               }}
             />
-            <Text style={styles.text}>End of Stay</Text>
+            <Text style={styles.endText}>End of Stay</Text>
             <DatePicker
               style={{ width: 370, height: 65 }}
               date={this.state.departureDate}
@@ -215,17 +212,18 @@ export default class AddLodgingInfo extends Component {
                   marginLeft: 15,
                   color: "black",
                   backgroundColor: "white",
-                  height: 60,
+                  height: 40,
                   borderRadius: 8,
                   borderWidth: 1,
-                  borderColor: "white"
+                  borderColor: "white",
+                  marginVertical: -10
                 },
                 dateText: {
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "black"
                 },
                 placeholderText: {
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "black"
                 }
               }}
@@ -242,12 +240,12 @@ export default class AddLodgingInfo extends Component {
               <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
           </View>
-        </ScrollView>
         {this.props.navigation.getParam('lodging') && 
           <TouchableOpacity style={styles.deleteButton} onPress={this.removeLodging}>
           <Text style={styles.buttonText}>Delete Lodging</Text>
           </TouchableOpacity>
           }
+        </ScrollView>
         <WandererFooter navigate={navigate} userId={this.state.userId} />
       </View>
     );
@@ -262,64 +260,78 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start"
   },
   inputContainer: {
-    marginTop: 15
+    marginTop: 25
   },
   title: {
-    textAlign: "center",
-    fontSize: 30,
-    color: "white",
-    paddingVertical: 25
+    textAlign: 'center',
+    fontSize: 32,
+    color: 'white',
+    paddingVertical: 25,
+    marginBottom: 10
   },
   text: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: "white",
-    paddingVertical: 15
+    paddingVertical: 15,
+    marginBottom: -8,
+    marginVertical: -12
+  },
+  endText: {
+    marginLeft: 20,
+    fontSize: 26,
+    color: "white",
+    paddingVertical: 15,
+    marginBottom: -8,
+    marginVertical: -15
   },
   input: {
-    backgroundColor: "white",
-    color: "black",
-    fontSize: 18,
+    backgroundColor: 'white',
+    color: 'black',
+    fontSize: 20,
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
     marginLeft: 10
   },
   form: {
-    backgroundColor: "white",
-    borderColor: "white",
+    backgroundColor: 'white',
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: "solid",
-    height: 60,
+    borderStyle: 'solid',
+    height: 40,
     width: 350,
-    color: "white",
-    padding: 10,
+    color: 'white',
     marginLeft: 15,
-    marginBottom: 20
+    marginBottom: 22
   },
   button: {
-    borderColor: "white",
-    borderWidth: 1,
+    borderColor: 'white',
+    borderWidth: 2,
     borderRadius: 8,
-    borderStyle: "solid",
-    width: "auto",
+    borderStyle: 'solid',
+    width: 'auto',
     height: 60,
     margin: 20,
     fontSize: 30,
     padding: 10,
-    color: "white",
-    textAlign: "center",
-    backgroundColor: "#1C4263"
+    color: 'white',
+    textAlign: 'center',
+    backgroundColor: '#1C4263',
+    alignItems: 'stretch',
+    marginVertical: -20,
+    marginBottom: 20
   },
   label: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: "white",
-    marginBottom: 5
+    marginBottom: 5,
+    marginVertical: -5
   },
   labelCity: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: "white",
     marginBottom: -22,
     marginVertical: -10,
@@ -333,7 +345,7 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     borderColor: "white",
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 8,
     borderStyle: "solid",
     width: "auto",
@@ -342,12 +354,18 @@ const styles = StyleSheet.create({
     padding: 10,
     color: "white",
     textAlign: "center",
-    backgroundColor: "red"
+    backgroundColor: "red",
   },
   buttonText: {
     fontSize: 20,
     color: "white",
     textAlign: "center",
     paddingVertical: 10
+  },
+  headerText: {
+    textAlign: 'center',
+    fontSize: 32,
+    color: 'white',
+    marginBottom: 20
   }
 });

@@ -52,8 +52,10 @@ export default class WandererLegDetail extends Component {
   generateLodgingElements = () => {
     return this.state.lodgings.map((lodging, index) => {
       return (
-        <View key={index} style={styles.borderContainer}>
+        <View style={styles.borderContainer}>
+        <View style={styles.roundedCorners}>
           <Text style={styles.headerText}>{lodging.name}</Text>
+          </View>
           <Text style={styles.text}>City: {lodging.city}</Text>
           <Text style={styles.text}>Arriving {lodging.arrivalDate}</Text>
           <Text style={styles.text}>Leaving {lodging.departureDate}</Text>
@@ -98,8 +100,8 @@ export default class WandererLegDetail extends Component {
         } */}
         <Text style={styles.title}>Lodging</Text>
         {lodgings.length > 0 && this.generateLodgingElements()}
-        <Text style={styles.title}>Transportation</Text>
-        {transportations.lenght > 0 && this.generateTransportationElements()}
+        {/* <Text style={styles.title}>Transportation</Text>
+        {transportations.lenght > 0 && this.generateTransportationElements()} */}
         </View>
         </ScrollView>
 
@@ -120,22 +122,21 @@ const styles = StyleSheet.create({
   subhead: {
     fontSize: 22,
     color: '#84183B',
-    borderColor: '#84183B',
-    borderWidth: 1,
-    borderRadius: 8,
     textAlign: 'center'
   }, 
   text: {
     color: '#84183B',
     marginVertical: 10,
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 22,
     width: 'auto'
   }, 
   title: {
-    fontSize: 30,
+    fontSize: 32,
     textAlign: 'center',
-    color: '#84183B'
+    color: '#84183B',
+    marginVertical: 20,
+    marginBottom: 20
   }, 
   borderContainer: {
     borderColor: '#84183B',
@@ -147,10 +148,10 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginVertical: 10,
     marginBottom: 10,
-    height: 240
+    height: 210
   },
   headerText: {
-    color: '#84183B',
+    color: 'white',
     marginVertical: 10,
     textAlign: 'center',
     fontSize: 30,
@@ -159,4 +160,9 @@ const styles = StyleSheet.create({
     borderBottomColor: 'white',
     borderBottomWidth: 1,
   },
+  roundedCorners: {
+    borderTopRightRadius: 8,
+    borderTopLeftRadius: 8,
+    backgroundColor: "#84183B",
+  }
 });

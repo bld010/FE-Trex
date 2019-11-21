@@ -70,7 +70,7 @@ export default class FollowerForm extends Component {
             <View style={styles.form}>
               <TextInput
                 style={styles.input}
-                placeholder="Enter Followers Name..."
+                placeholder="Enter Followers Name"
                 placeholderTextColor="black"
                 maxLength={20}
                 onBlur={Keyboard.dismiss}
@@ -82,7 +82,7 @@ export default class FollowerForm extends Component {
             <View style={styles.form}>
               <TextInput
                 style={styles.input}
-                placeholder="Enter Followers Email..."
+                placeholder="Enter Followers Email"
                 placeholderTextColor="black"
                 maxLength={20}
                 onBlur={Keyboard.dismiss}
@@ -94,7 +94,7 @@ export default class FollowerForm extends Component {
             <View style={styles.form}>
               <TextInput
                 style={styles.input}
-                placeholder="Enter Followers Phone Number..."
+                placeholder="Enter Followers Phone Number"
                 placeholderTextColor="black"
                 maxLength={20}
                 onBlur={Keyboard.dismiss}
@@ -133,14 +133,14 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: "white",
     paddingVertical: 12
   },
   input: {
     backgroundColor: "white",
     color: "black",
-    fontSize: 18,
+    fontSize: 20,
     flex: 1,
     alignItems: "center",
     marginLeft: 10
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: "solid",
-    height: 60,
+    height: 40,
     width: 350,
     color: "white",
     padding: 10,
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   },
   label: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: "white",
     marginBottom: 5
   },

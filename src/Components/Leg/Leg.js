@@ -26,12 +26,16 @@ export const Leg = (props) => {
           <View>
             <Text style={styles.text}>{leg.name}</Text>
             <View style={styles.borderContainer}>
+            <View style={styles.roundedCorners}>
             <Text style={styles.headerText}>Start Location</Text>
+            </View>
             <Text style={styles.text}>{startLocation}</Text>
             <Text style={styles.dateText}>{startDate}</Text>
             </View>
             <View style={styles.borderContainer}>
+            <View style={styles.roundedCorners}>
             <Text style={styles.headerText}>End Location</Text>
+            </View>
             <Text style={styles.text}>{endLocation}</Text>
             <Text style={styles.dateText}>{endDate}</Text>
             </View>
@@ -67,7 +71,7 @@ const styles = StyleSheet.create({
   }, 
   button: {
     borderColor: 'white',
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 8,
     borderStyle: 'solid',
     width: 'auto',
@@ -109,13 +113,10 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: 'white',
-    marginVertical: 10,
+    paddingVertical: 10,
     textAlign: 'center',
     fontSize: 30,
-    width: 'auto',
-    textAlign: 'center',
-    borderBottomColor: 'white',
-    borderBottomWidth: 1,
+    textAlign: 'center'
   },
   sideBySideContainer: {
     flex: 1,
@@ -133,17 +134,23 @@ const styles = StyleSheet.create({
   sideBySideButton: {
     width: 170,
     borderColor: "white",
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 8,
     borderStyle: "solid",
     height: 64,
-    margin: 10,
+    margin: 14,
     fontSize: 30,
     padding: 10,
     color: "white",
     textAlign: "center",
     backgroundColor: "#1C4263",
-    alignItems: "stretch"
+    alignItems: "stretch",
+    flex: 1
+  },
+  roundedCorners: {
+    borderTopRightRadius: 8,
+    borderTopLeftRadius: 8,
+    backgroundColor: "#1C4263",
   }
 });
 

@@ -4,7 +4,8 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from "react-native";
 import WandererFooter from "../WandererFooter/WandererFooter";
 import WandererHeader from "../WandererHeader/WandererHeader";
@@ -45,12 +46,14 @@ export class Transportation extends Component {
     return this.state.transports.map((transport, index) => {
       return (
         <View key={index} style={styles.borderContainer}>
-          <Text style={styles.headerText}>{transport.mode} details</Text>
+          <TextInput editable={false} style={styles.headerText}>{transport.mode} Details</TextInput>
+          <Text style={styles.buttonText}>Depart</Text>
           <Text style={styles.text}>
-            Depart {transport.departureCity} on {transport.departureTime}
+           {transport.departureCity} on {transport.departureTime}
           </Text>
+          <Text style={styles.buttonText}>Arrive</Text>
           <Text style={styles.text}>
-            Arrive {transport.arrivalCity} on {transport.arrivalTime}
+           {transport.arrivalCity} on {transport.arrivalTime}
           </Text>
           <TouchableOpacity
             key={index + transport.id}
@@ -66,7 +69,7 @@ export class Transportation extends Component {
                   userId: this.state.userId
                 })
               }
-              style={styles.text}
+              style={styles.buttonText}
               key={transport.id}
             >
               Edit Transportation Info
@@ -90,6 +93,10 @@ export class Transportation extends Component {
             {leg.startLocation} - {leg.endLocation}
           </Text>
 
+          <View> 
+            {transports.length > 0 && transports[0] !== null && this.generateTransportationElements()}
+            {error !== "" && <Text style={styles.text}>{error}</Text>}
+          </View>
           <View>
             <TouchableOpacity>
               <Text
@@ -104,10 +111,6 @@ export class Transportation extends Component {
                 Add Transportation
               </Text>
             </TouchableOpacity>
-          </View>
-          <View> 
-            {transports.length > 0 && transports[0] !== null && this.generateTransportationElements()}
-            {error !== "" && <Text style={styles.text}>{error}</Text>}
           </View>
         </ScrollView>
 
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderColor: 'white',
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 8,
     borderStyle: 'solid',
     width: 'auto',
@@ -153,6 +156,14 @@ const styles = StyleSheet.create({
     width: "auto",
     textAlign: "center"
   },
+  buttonText: {
+    color: "white",
+    marginVertical: 10,
+    textAlign: "center",
+    fontSize: 26,
+    width: "auto",
+    textAlign: "center"
+  },
   dateText: {
     color: "white",
     marginVertical: 10,
@@ -170,7 +181,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginVertical: 10,
     marginBottom: 10,
-    height: 254
+    height: 320
   },
   headerText: {
     color: "white",
@@ -180,7 +191,8 @@ const styles = StyleSheet.create({
     width: "auto",
     textAlign: "center",
     borderBottomColor: "white",
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    paddingBottom: 5
   },
   tripButton: {
     borderWidth: 1,
@@ -188,7 +200,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#1C4263",
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
-    height: 49,
+    height: 55,
     marginVertical: 10
   }
 });

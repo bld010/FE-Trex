@@ -274,9 +274,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#84183B',
-    borderRadius: 8,
+    // borderWidth: 1,
+    // borderColor: '#84183B',
+    // borderRadius: 8,
     padding: 20,
     alignSelf: 'center'
   },

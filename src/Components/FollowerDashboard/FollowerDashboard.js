@@ -133,12 +133,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderStyle: "solid",
     height: 60,
-    margin: 20,
+    margin: 10,
     fontSize: 30,
     padding: 10,
     color: "white",
     textAlign: "center",
-    backgroundColor: "#84183B",
+    backgroundColor: '#1C4263',
     alignItems: "stretch"
   },
   buttonText: {

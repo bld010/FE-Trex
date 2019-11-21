@@ -4,7 +4,8 @@ import {
   Text, 
   View, 
   ScrollView,
-  TouchableOpacity 
+  TouchableOpacity,
+  TextInput 
 } from 'react-native';
 import WandererFooter from '../WandererFooter/WandererFooter';
 import WandererHeader from '../WandererHeader/WandererHeader';
@@ -44,7 +45,7 @@ export class Lodging extends Component {
     return this.state.lodgings.map((lodging, index) => {
       return (
         <View key={index} style={styles.borderContainer}>
-          <Text style={styles.headerText}>{lodging.name} details</Text>
+          <TextInput editable={false} style={styles.headerText}>{lodging.name} Details</TextInput>
           <Text style={styles.text}>City:  {lodging.city}</Text>
           <Text style={styles.text}>Arriving :  {lodging.arrivalDate}</Text>
           <Text style={styles.text}>Leaving:  {lodging.departureDate}</Text>
@@ -68,14 +69,14 @@ export class Lodging extends Component {
           <Text style={styles.title}>Lodging</Text>
           <Text style={styles.text}>{leg.startLocation} - {leg.endLocation}</Text>
 
-          <TouchableOpacity>
-            <Text onPress={() => navigate('AddLodgingInfo', {legId: leg.id, userId: this.state.userId})} style={styles.button}>Add Lodging</Text>
-            </TouchableOpacity>
 
           <View>
            {lodgings.length > 0 && this.displayLodging()}
            {error !== '' && <Text style={styles.text}>{error}</Text>}
           </View>    
+          <TouchableOpacity>
+            <Text onPress={() => navigate('AddLodgingInfo', {legId: leg.id, userId: this.state.userId})} style={styles.button}>Add Lodging</Text>
+            </TouchableOpacity>
 
         </ScrollView>
 
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginVertical: 10,
     marginBottom: 10,
-    height: 250
+    height: 260
   },
   headerText: {
     color: 'white',
@@ -150,6 +151,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderBottomColor: 'white',
     borderBottomWidth: 1,
+    paddingBottom: 10
   },
   tripButton: {
     borderWidth: 1,

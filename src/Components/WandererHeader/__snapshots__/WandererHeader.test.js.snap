@@ -18,8 +18,8 @@ exports[`WandererHeader should match the snapshot when loading 1`] = `
         "color": "white",
         "fontSize": 50,
         "fontWeight": "600",
-        "height": 70,
-        "padding": 15,
+        "height": 60,
+        "marginVertical": 0,
         "textAlign": "center",
       }
     }

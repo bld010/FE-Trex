@@ -18,7 +18,8 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
         style={
           Object {
             "color": "white",
-            "fontSize": 30,
+            "fontSize": 32,
+            "marginBottom": 10,
             "paddingVertical": 25,
             "textAlign": "center",
           }
@@ -32,8 +33,10 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
       style={
         Object {
           "color": "white",
-          "fontSize": 20,
+          "fontSize": 26,
+          "marginBottom": -10,
           "marginLeft": 20,
+          "marginVertical": -15,
           "paddingVertical": 15,
         }
       }
@@ -49,10 +52,9 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
           "borderStyle": "solid",
           "borderWidth": 1,
           "color": "white",
-          "height": 60,
-          "marginBottom": 20,
+          "height": 40,
+          "marginBottom": 22,
           "marginLeft": 15,
-          "padding": 10,
           "width": 350,
         }
       }
@@ -70,7 +72,7 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
             "backgroundColor": "white",
             "color": "black",
             "flex": 1,
-            "fontSize": 18,
+            "fontSize": 20,
             "marginLeft": 10,
           }
         }
@@ -82,7 +84,7 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
       style={
         Object {
           "color": "white",
-          "fontSize": 20,
+          "fontSize": 26,
           "marginBottom": -22,
           "marginLeft": 20,
         }
@@ -98,7 +100,7 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
       style={
         Object {
           "color": "white",
-          "fontSize": 20,
+          "fontSize": 26,
           "marginBottom": -22,
           "marginLeft": 20,
         }
@@ -114,8 +116,10 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
       style={
         Object {
           "color": "white",
-          "fontSize": 20,
+          "fontSize": 26,
+          "marginBottom": -10,
           "marginLeft": 20,
+          "marginVertical": -15,
           "paddingVertical": 15,
         }
       }
@@ -140,17 +144,17 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
             "borderRadius": 8,
             "borderWidth": 1,
             "color": "black",
-            "height": 60,
+            "height": 40,
             "marginLeft": 15,
             "marginVertical": -20,
           },
           "dateText": Object {
             "color": "black",
-            "fontSize": 22,
+            "fontSize": 20,
           },
           "placeholderText": Object {
             "color": "black",
-            "fontSize": 22,
+            "fontSize": 20,
           },
         }
       }
@@ -182,8 +186,10 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
       style={
         Object {
           "color": "white",
-          "fontSize": 20,
+          "fontSize": 26,
+          "marginBottom": -10,
           "marginLeft": 20,
+          "marginVertical": -15,
           "paddingVertical": 15,
         }
       }
@@ -208,17 +214,17 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
             "borderRadius": 8,
             "borderWidth": 1,
             "color": "black",
-            "height": 60,
+            "height": 40,
             "marginLeft": 15,
             "marginVertical": -20,
           },
           "dateText": Object {
             "color": "black",
-            "fontSize": 22,
+            "fontSize": 20,
           },
           "placeholderText": Object {
             "color": "black",
-            "fontSize": 22,
+            "fontSize": 20,
           },
         }
       }
@@ -272,6 +278,8 @@ exports[`AddTransportInfo should match the snapshot when loading 1`] = `
             "fontSize": 30,
             "height": 60,
             "margin": 20,
+            "marginBottom": 20,
+            "marginVertical": -15,
             "padding": 10,
             "textAlign": "center",
             "width": "auto",

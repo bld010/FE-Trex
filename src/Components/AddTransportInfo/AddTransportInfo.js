@@ -202,18 +202,18 @@ export default class AddTransportInfo extends Component {
                   marginLeft: 15,
                   color: "black",
                   backgroundColor: 'white',
-                  height: 60,
+                  height: 40,
                   borderRadius: 8,
                   borderWidth: 1,
                   borderColor: "white",
                   marginVertical: -20
                 },
                 dateText: {
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "black",
                 },
                 placeholderText: {
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "black"
                 }
               }}
@@ -240,18 +240,18 @@ export default class AddTransportInfo extends Component {
                   marginLeft: 15,
                   color: "black",
                   backgroundColor: 'white',
-                  height: 60,
+                  height: 40,
                   borderRadius: 8,
                   borderWidth: 1,
                   borderColor: "white",
                   marginVertical: -20
                 },
                 dateText: {
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "black",
                 },
                 placeholderText: {
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "black"
                 }
               }}
@@ -295,36 +295,38 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 32,
     color: 'white',
-    paddingVertical: 25
+    paddingVertical: 25,
+    marginBottom: 10
   },
   text: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: 'white',
-    paddingVertical: 15
+    paddingVertical: 15,
+    marginBottom: -10,
+    marginVertical: -15
   },
   input: {
-    backgroundColor: "white",
-    color: "black",
-    fontSize: 18,
+    backgroundColor: 'white',
+    color: 'black',
+    fontSize: 20,
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
     marginLeft: 10
   },
   form: {
-    backgroundColor: "white",
-    borderColor: "white",
+    backgroundColor: 'white',
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
-    borderStyle: "solid",
-    height: 60,
+    borderStyle: 'solid',
+    height: 40,
     width: 350,
-    color: "white",
-    padding: 10,
+    color: 'white',
     marginLeft: 15,
-    marginBottom: 20
+    marginBottom: 22
   },
   textInput: {
     backgroundColor: 'white',
@@ -349,13 +351,16 @@ const styles = StyleSheet.create({
     padding: 10,
     color: 'white',
     textAlign: 'center',
-    backgroundColor: '#1C4263'
+    backgroundColor: '#1C4263',
+    marginVertical: -15,
+    marginBottom: 20
   },
   label: {
     marginLeft: 20,
-    fontSize: 20,
+    fontSize: 26,
     color: 'white',
-    marginBottom: -22
+    marginBottom: -22,
+    // marginVertical: -10
   },
   errorText: {
     color: 'red',
@@ -364,7 +369,8 @@ const styles = StyleSheet.create({
     fontSize: 24
   },
     deleteButton: {
-      backgroundColor: 'red'
+      backgroundColor: 'red',
+      marginVertical: 10
   },
 });
 
